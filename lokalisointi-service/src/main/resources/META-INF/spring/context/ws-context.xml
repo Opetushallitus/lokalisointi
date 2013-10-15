@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:jaxws="http://cxf.apache.org/jaxws"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:beans="http://www.springframework.org/schema/beans"
+       xmlns:jaxrs="http://cxf.apache.org/jaxrs"
+       xmlns:cxf="http://cxf.apache.org/core"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd
+       http://cxf.apache.org/jaxws http://cxf.apache.org/schemas/jaxws.xsd
+       http://cxf.apache.org/jaxrs http://cxf.apache.org/schemas/jaxrs.xsd
+       http://cxf.apache.org/core  http://cxf.apache.org/schemas/core.xsd">
+
+    <import resource="classpath:META-INF/cxf/cxf.xml" />
+    <import resource="classpath:META-INF/cxf/cxf-servlet.xml" />
+
+    <bean id="lokalisointiResource" class="fi.vm.sa"/>
+
+    <bean id="tarjontaAdminService" class="fi.vm.sade.tarjonta.service.impl.TarjontaAdminServiceImpl"/>
+    <bean id="tarjontaPublicService" class="fi.vm.sade.tarjonta.service.impl.TarjontaPublicServiceImpl"/>
+
+    <bean id="tarjontaPublicationRESTService" class="fi.vm.sade.tarjonta.service.impl.TarjontaPublicationRESTService"/>
+    <bean id="tarjontaExceptionMapper" class="fi.vm.sade.tarjonta.service.impl.TarjontaPublicationExceptionMapper"/>
+
+    <beans:bean id="tarjontaHakuResource" class="fi.vm.sade.tarjonta.service.impl.resources.HakuResourceImpl"/>
+    <bean id="tarjontaHakukohdeResource" class="fi.vm.sade.tarjonta.service.impl.resources.HakukohdeResourceImpl"/>
+    <bean id="tarjontaKomoResource" class="fi.vm.sade.tarjonta.service.impl.resources.KomoResourceImpl" />
+    <bean id="tarjontaKomotoResource" class="fi.vm.sade.tarjonta.service.impl.resources.KomotoResourceImpl" />
+    <bean id="tarjontaKoulutusResource" class="fi.vm.sade.tarjonta.service.impl.resources.KoulutusResourceImpl" />
+    <bean id="tarjontaLocalisationResource" class="fi.vm.sade.tarjonta.service.impl.resources.LocalisationResourceImpl" />
+    <bean id="tarjontaTilaResource" class="fi.vm.sade.tarjonta.service.impl.resources.TilaResourceImpl" />
+    <bean id="yhteyshenkiloResource" class="fi.vm.sade.tarjonta.service.impl.resources.YhteyshenkiloResourceImpl" />
+
+    <!--
+      Needed to convert wsdl generated dtos to json. (no @XmlRootElement annotation)
+    -->
+    <bean id="tarjontaObjectMapper" class="org.codehaus.jackson.map.ObjectMapper"/>
+    <bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+        <property name="targetObject" ref="tarjontaObjectMapper"/>
+        <property name="targetMethod" value="configure"/>
+        <property name="arguments">
+            <util:list>
+                <util:constant static-field="org.codehaus.jackson.map.SerializationConfig.Feature.INDENT_OUTPUT"/>
+                <util:constant static-field="java.lang.Boolean.TRUE"/>
+            </util:list>
+        </property>
+    </bean>
+    <bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+        <property name="targetObject" ref="tarjontaObjectMapper"/>
+        <property name="targetMethod" value="configure"/>
+        <property name="arguments">
+            <util:list>
+                <util:constant static-field="org.codehaus.jackson.map.SerializationConfig.Feature.WRITE_NULL_PROPERTIES"/>
+                <util:constant static-field="java.lang.Boolean.FALSE"/>
+            </util:list>
+        </property>
+    </bean>
+    <bean id="tarjontaJacksonJsonProvider" class="org.codehaus.jackson.jaxrs.JacksonJsonProvider">
+        <property name="mapper" ref="tarjontaObjectMapper"/>
+    </bean>
+
+    <!-- CORS (cross domain) support for rest services -->
+    <bean id="cors-filter" class="org.apache.cxf.rs.security.cors.CrossOriginResourceSharingFilter"/>
+    <!--     <bean id="hakukohdeSolrConverter" class="fi.vm.sade.tarjonta.service.search.HakukohdeToSolrInputDocumentFunction" ></bean>
+       <bean id="koulutusSolrConverter" class="fi.vm.sade.tarjonta.service.search.KoulutusmoduuliToteutusToSolrInputDocumentFunction" ></bean>
+    -->
+    <!--
+        REST Services
+    -->
+    <jaxrs:server id="tarjontaPublicationREST" address="/rest">
+        <jaxrs:serviceBeans>
+            <ref bean="tarjontaPublicationRESTService" />
+            <ref bean="tarjontaHakuResource" />
+            <ref bean="tarjontaHakukohdeResource" />
+            <ref bean="tarjontaKomoResource"/>
+            <ref bean="tarjontaKomotoResource"/>
+            <ref bean="indexerResource"/>
+            <ref bean="tarjontaKoulutusResource"/>
+            <ref bean="tarjontaLocalisationResource"/>
+            <ref bean="tarjontaTilaResource"/>
+            <ref bean="yhteyshenkiloResource"/>
+        </jaxrs:serviceBeans>
+        <jaxrs:providers>
+            <ref bean="cors-filter" />
+<!--             <ref bean="tarjontaExceptionMapper"/> -->
+            <ref bean="tarjontaJacksonJsonProvider" />
+        </jaxrs:providers>
+    </jaxrs:server>
+
+    <jaxws:endpoint xmlns="http://cxf.apache.org/jaxws" address="/services/tarjontaAdminService" implementor="#tarjontaAdminService" serviceName="tns:TarjontaAdminService" xmlns:tns="http://service.tarjonta.sade.vm.fi/"/>
+    <jaxws:endpoint xmlns="http://cxf.apache.org/jaxws" address="/services/tarjontaPublicService" implementor="#tarjontaPublicService" serviceName="tns:TarjontaPublicService" xmlns:tns="http://service.tarjonta.sade.vm.fi/"/>
+
+</beans>

@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>fi.vm.sade.lokalisointi</groupId>
+    <artifactId>lokalisointi-service</artifactId>
+    <packaging>war</packaging>
+    <name>Lokalisointi :: Service</name>
+
+    <parent>
+        <artifactId>pom</artifactId>
+        <groupId>fi.vm.sade.lokalisointi</groupId>
+        <version>6.3-SNAPSHOT</version>
+    </parent>
+
+    <properties>
+        <deploy.to.server>tomcat</deploy.to.server>
+        <webapp.port>8094</webapp.port>
+        <skipDbDiagramGenerate>false</skipDbDiagramGenerate>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>fi.vm.sade.lokalisointi</groupId>
+            <artifactId>lokalisointi-api</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>fi.vm.sade.generic</groupId>
+            <artifactId>generic-common</artifactId>
+            <version>${generic.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>fi.vm.sade.generic</groupId>
+            <artifactId>dependencies-service</artifactId>
+            <version>${generic.version}</version>
+            <type>pom</type>
+            <exclusions>
+                <exclusion>
+                    <artifactId>slf4j-log4j12</artifactId>
+                    <groupId>org.slf4j</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <dependency>
+            <groupId>fi.vm.sade.log</groupId>
+            <artifactId>log-client</artifactId>
+            <version>${log.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.owasp.antisamy</groupId>
+            <artifactId>antisamy</artifactId>
+            <version>${antisamy.version}</version>
+            <!-- autentikaatiossa excludaavat xerceksen, pitäisikö tässäkin? -->
+        </dependency>
+
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>javax</groupId>
+            <artifactId>javaee-web-api</artifactId>
+            <version>6.0</version>
+            <scope>provided</scope>
+        </dependency>
+
+
+        <dependency>
+            <groupId>com.mysema.querydsl</groupId>
+            <artifactId>querydsl-apt</artifactId>
+            <version>3.1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.mysema.querydsl</groupId>
+            <artifactId>querydsl-jpa</artifactId>
+            <version>3.1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.mysema.querydsl</groupId>
+            <artifactId>querydsl-codegen</artifactId>
+            <version>3.1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.mysema.querydsl</groupId>
+            <artifactId>querydsl-core</artifactId>
+            <version>3.1.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.cxf</groupId>
+            <artifactId>cxf-rt-rs-security-cors</artifactId>
+            <version>2.6.1</version>
+        </dependency>
+        <dependency>
+            <groupId>fi.vm.sade.auth</groupId>
+            <artifactId>authentication-api</artifactId>
+            <version>${authentication.api.version}</version>
+        </dependency>
+
+
+        <dependency>
+            <groupId>fi.vm.sade.generic</groupId>
+            <artifactId>generic-test-support</artifactId>
+            <scope>test</scope>
+            <exclusions>
+                <exclusion>
+                    <artifactId>slf4j-log4j12</artifactId>
+                    <groupId>org.slf4j</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-all</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>fi.vm.sade.generic</groupId>
+            <artifactId>dbunit-support</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+
+        <dependency>
+            <groupId>org.hsqldb</groupId>
+            <artifactId>hsqldb</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+    </dependencies>
+
+    <build>
+        <plugins>
+
+            <plugin>
+                <groupId>com.mysema.maven</groupId>
+                <artifactId>maven-apt-plugin</artifactId>
+                <version>1.0</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>process</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>target/generated-sources/java</outputDirectory>
+                            <processor>com.mysema.query.apt.jpa.JPAAnnotationProcessor</processor>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+
+            <plugin>
+                <groupId>de.smartics.maven.plugin</groupId>
+                <artifactId>hibernate4-maven-plugin</artifactId>
+                <version>0.1.1</version>
+                <executions>
+                    <execution>
+                        <id>export</id>
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>hbm2ddl</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <unitName>tarjonta</unitName>
+                    <createOutputFile>${project.build.directory}/hibernate3/sql/schema.ddl</createOutputFile>
+                    <dropOutputFile>${project.build.directory}/hibernate3/sql/drop.ddl</dropOutputFile>
+                </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.hibernate</groupId>
+                        <artifactId>hibernate-core</artifactId>
+                        <version>${hibernate.version}</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>org.hibernate</groupId>
+                        <artifactId>hibernate-ehcache</artifactId>
+                        <version>${hibernate.version}</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
+        </plugins>
+    </build>
+
+
+    <pluginRepositories>
+        <pluginRepository>
+            <id>smartics</id>
+            <url>http://www.smartics.eu/nexus/content/groups/public-group</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </pluginRepository>
+    </pluginRepositories>
+
+</project>
