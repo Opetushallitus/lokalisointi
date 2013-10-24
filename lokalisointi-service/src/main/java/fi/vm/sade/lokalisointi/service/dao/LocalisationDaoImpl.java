@@ -14,24 +14,22 @@
  */
 package fi.vm.sade.lokalisointi.service.dao;
 
+import com.mysema.query.jpa.impl.JPAQuery;
+import com.mysema.query.types.EntityPath;
 import fi.vm.sade.generic.dao.AbstractJpaDAOImpl;
 import fi.vm.sade.lokalisointi.service.model.Localisation;
 import java.util.List;
+import org.springframework.stereotype.Repository;
 
 /**
  *
  * @author mlyly
  */
+@Repository
 public class LocalisationDaoImpl extends AbstractJpaDAOImpl<Localisation, Long> implements LocalisationDao {
 
     @Override
     public List<Localisation> findBy(String category, String locale, String keyPrefix) {
-
-
-
-
-
-
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -48,6 +46,10 @@ public class LocalisationDaoImpl extends AbstractJpaDAOImpl<Localisation, Long> 
     @Override
     public boolean delete(Localisation localisation) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    protected JPAQuery from(EntityPath<?>... o) {
+        return new JPAQuery(getEntityManager()).from(o);
     }
 
 }

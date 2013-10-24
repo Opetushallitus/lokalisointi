@@ -64,14 +64,6 @@
         </dependency>
 
         <dependency>
-            <groupId>javax</groupId>
-            <artifactId>javaee-web-api</artifactId>
-            <version>6.0</version>
-            <scope>provided</scope>
-        </dependency>
-
-
-        <dependency>
             <groupId>com.mysema.querydsl</groupId>
             <artifactId>querydsl-apt</artifactId>
             <version>3.1.0</version>
@@ -161,7 +153,6 @@
                 </executions>
             </plugin>
 
-
             <plugin>
                 <groupId>de.smartics.maven.plugin</groupId>
                 <artifactId>hibernate4-maven-plugin</artifactId>
@@ -176,7 +167,7 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <unitName>tarjonta</unitName>
+                    <unitName>lokalisointi</unitName>
                     <createOutputFile>${project.build.directory}/hibernate3/sql/schema.ddl</createOutputFile>
                     <dropOutputFile>${project.build.directory}/hibernate3/sql/drop.ddl</dropOutputFile>
                 </configuration>
@@ -193,6 +184,7 @@
                     </dependency>
                 </dependencies>
             </plugin>
+
         </plugins>
     </build>
 
