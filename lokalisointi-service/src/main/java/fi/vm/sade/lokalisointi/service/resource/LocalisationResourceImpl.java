@@ -35,7 +35,7 @@ public class LocalisationResourceImpl implements LocalisationResource {
     private LocalisationDao localisationDao;
 
     @Override
-    public List<LocalisationRDTO> getLocalisations(String category, String locale, String keyPrefix) {
+    public List<LocalisationRDTO> getLocalisations(LocalisationRDTO query) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

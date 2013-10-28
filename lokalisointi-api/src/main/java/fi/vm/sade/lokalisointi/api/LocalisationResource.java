@@ -30,23 +30,21 @@ import javax.ws.rs.core.MediaType;
  *
  * @author mlyly
  */
-@Path("/localisation")
+@Path("/v1/localisation")
 public interface LocalisationResource {
 
     /**
      * Loads ALL localisations with given prefix (if any).
      *
-     * @param category Category, ex. "Tarjonta"
-     * @param locale select by locale, ex. "kieli_fi"
-     * @param keyPrefix Key prefix, "error."
+     * @param query "Localisation object" that can be used in query, ie. "category", "locale", "key", etc.
      * @return list of matched localisations
      */
     @GET
     @Produces(MediaType.APPLICATION_JSON + ";charset=UTF-8")
-    public List<LocalisationRDTO> getLocalisations(@QueryParam("category") String category, @QueryParam("locale") String locale, @QueryParam("keyPrefix") String keyPrefix);
+    public List<LocalisationRDTO> getLocalisations(@QueryParam("") LocalisationRDTO query);
 
     /**
-     * Update exisiting loclaisation.
+     * Update exisiting localisation.
      *
      * @param data
      * @return

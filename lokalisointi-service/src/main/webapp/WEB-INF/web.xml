@@ -17,6 +17,7 @@
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
     </listener>
 
+<!--
     <listener>
         <listener-class>org.jasig.cas.client.session.SingleSignOutHttpSessionListener</listener-class>
     </listener>
@@ -31,16 +32,6 @@
         <servlet-name>cxf</servlet-name>
         <url-pattern>/*</url-pattern>
     </servlet-mapping>
-
-    <filter>
-        <filter-name>springFilterProxy</filter-name>
-        <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
-        <init-param>
-            <!-- filter to be proxied is defined in enricing-context.xml -->
-            <param-name>targetBeanName</param-name>
-            <param-value>tarjontaEnrichingFilter</param-value>
-        </init-param>
-    </filter>
 
     <filter>
         <filter-name>springSecurityFilterChain</filter-name>
@@ -66,10 +57,11 @@
         <filter-name>springFilterProxy</filter-name>
         <url-pattern>/rest/publication/export-rich</url-pattern>
     </filter-mapping>
+-->
 
     <resource-ref>
         <description>postgreSQL datasource</description>
-        <res-ref-name>jdbc/tarjonta</res-ref-name>
+        <res-ref-name>jdbc/lokalisointi</res-ref-name>
         <res-type>javax.sql.DataSource</res-type>
         <res-auth>Container</res-auth>
     </resource-ref>

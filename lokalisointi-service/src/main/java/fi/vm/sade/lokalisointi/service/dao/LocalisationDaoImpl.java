@@ -16,9 +16,13 @@ package fi.vm.sade.lokalisointi.service.dao;
 
 import com.mysema.query.jpa.impl.JPAQuery;
 import com.mysema.query.types.EntityPath;
+import com.mysema.query.types.expr.BooleanExpression;
 import fi.vm.sade.generic.dao.AbstractJpaDAOImpl;
 import fi.vm.sade.lokalisointi.service.model.Localisation;
+import fi.vm.sade.lokalisointi.service.model.QLocalisation;
 import java.util.List;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -28,24 +32,62 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class LocalisationDaoImpl extends AbstractJpaDAOImpl<Localisation, Long> implements LocalisationDao {
 
+    private static final Logger LOG = LoggerFactory.getLogger(LocalisationDaoImpl.class);
+
     @Override
     public List<Localisation> findBy(String category, String locale, String keyPrefix) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        LOG.info("findBy({}, {}, {})", new Object[] {category, locale, keyPrefix});
+
+        QLocalisation qLocalisation = QLocalisation.localisation;
+
+        JPAQuery q = from(qLocalisation);
+
+        // What is good 1=1 expression in Mysema?
+        BooleanExpression whereExpr = qLocalisation.id.ne(-1L);
+
+        whereExpr = (category != null) ? qLocalisation.category.eq(category) : whereExpr;
+        whereExpr = (locale != null) ? qLocalisation.language.eq(locale) : whereExpr;
+        whereExpr = (keyPrefix != null) ? qLocalisation.key.eq(keyPrefix) : whereExpr;
+
+        List<Localisation> ll = q.where(whereExpr).list(qLocalisation);
+
+        LOG.info(" --> result = {}", ll);
+
+        return ll;
     }
 
     @Override
     public Localisation findOne(String category, String key, String locale) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        LOG.info("findOne()");
+
+        List<Localisation> ll = findBy(category, locale, key);
+        if (ll.size() == 1) {
+            return ll.get(0);
+        } else {
+            return null;
+        }
     }
 
     @Override
     public Localisation save(Localisation localisation) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        LOG.info("save({})", localisation);
+
+        if (localisation.getId() != null) {
+            super.update(localisation);
+        } else {
+            localisation = super.insert(localisation);
+        }
+
+        return localisation;
     }
 
     @Override
     public boolean delete(Localisation localisation) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        LOG.info("delete({})", localisation);
+
+        super.remove(localisation);
+
+        return true;
     }
 
     protected JPAQuery from(EntityPath<?>... o) {

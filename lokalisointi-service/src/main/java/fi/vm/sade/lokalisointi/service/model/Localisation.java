@@ -39,7 +39,7 @@ import org.hibernate.annotations.Type;
 @Table(name = "localisation", uniqueConstraints = {
     @UniqueConstraint(columnNames = {"xcategory", "xlanguage", "xkey"})
 })
-@EntityListeners(XssFilterListener.class)
+// @EntityListeners(XssFilterListener.class)
 public class Localisation extends BaseEntity {
 
     @Column(name = "xcategory", nullable = false, length = 32)
@@ -54,7 +54,7 @@ public class Localisation extends BaseEntity {
     @Lob
     @Type(type = "org.hibernate.type.TextType")
     @Basic(fetch = FetchType.EAGER)
-    @FilterXss
+    // @FilterXss
     @Column(name = "xvalue")
     private String value;
 

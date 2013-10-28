@@ -1,5 +1,5 @@
 
-    create table localisation (
+create table localisation (
         id int8 not null unique,
         version int8 not null,
         accessed timestamp not null,
@@ -14,6 +14,6 @@
         xvalue text,
         primary key (id),
         unique (xcategory, xlanguage, xkey)
-    );
+);
 
-    create sequence hibernate_sequence;
+create sequence hibernate_sequence;
