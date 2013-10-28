@@ -32,6 +32,10 @@
         <priority value="INFO"/>
     </category>
 
+    <category name="org.apache.cxf">
+        <priority value="INFO"/>
+    </category>
+
     <root>
         <appender-ref ref="CONSOLE"/>
     </root>
