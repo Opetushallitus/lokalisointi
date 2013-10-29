@@ -49,7 +49,7 @@ public class LocalisationResourceImpl implements LocalisationResource {
         List<Localisation> l = null;
 
         if (query != null) {
-            l = localisationDao.findBy(query.getCategory(), query.getLocale(), query.getKey());
+            l = localisationDao.findBy(query.getId(), query.getCategory(), query.getKey(), query.getLocale());
         } else {
             l = localisationDao.findAll();
         }
@@ -65,7 +65,7 @@ public class LocalisationResourceImpl implements LocalisationResource {
             throw new NotFoundException("Invalud null input for update!");
         }
 
-        Localisation t = localisationDao.findOne(data.getCategory(), data.getKey(), data.getLocale());
+        Localisation t = localisationDao.findOne(data.getId(), data.getCategory(), data.getKey(), data.getLocale());
         update(t, data);
 
         return convert(t);
@@ -74,7 +74,7 @@ public class LocalisationResourceImpl implements LocalisationResource {
     @Override
     public LocalisationRDTO updateLocalisationAccessed(LocalisationRDTO data) {
 
-        Localisation l = localisationDao.findOne(data.getCategory(), data.getKey(), data.getLocale());
+        Localisation l = localisationDao.findOne(data.getId(), data.getCategory(), data.getKey(), data.getLocale());
         if (l != null) {
             l.setAccessed(new Date());
             l = localisationDao.save(l);
@@ -86,7 +86,7 @@ public class LocalisationResourceImpl implements LocalisationResource {
     @Override
     public LocalisationRDTO createLocalisation(LocalisationRDTO data) {
 
-        Localisation t = localisationDao.findOne(data.getCategory(), data.getKey(), data.getLocale());
+        Localisation t = localisationDao.findOne((Long) null, data.getCategory(), data.getKey(), data.getLocale());
 
         if (t == null) {
             t = new Localisation();
@@ -121,7 +121,7 @@ public class LocalisationResourceImpl implements LocalisationResource {
     public LocalisationRDTO deleteLocalisation(LocalisationRDTO data) {
         LocalisationRDTO result = null;
 
-        Localisation l = localisationDao.findOne(data.getCategory(), data.getKey(), data.getLocale());
+        Localisation l = localisationDao.findOne(data.getId(), data.getCategory(), data.getKey(), data.getLocale());
         if (l != null) {
             result = convert(l);
             localisationDao.remove(l);
@@ -149,6 +149,7 @@ public class LocalisationResourceImpl implements LocalisationResource {
 
         LocalisationRDTO t = new LocalisationRDTO();
 
+        t.setId(s.getId());
         t.setAccessed(s.getAccessed());
         t.setCategory(s.getCategory());
         t.setCreated(s.getCreated());
@@ -167,6 +168,14 @@ public class LocalisationResourceImpl implements LocalisationResource {
         if (t == null) {
             throw new NotFoundException("Cannot find localisation for: " + data);
         }
+
+        if (data.getId() != null) {
+            // Update exact match by id... So that we can edit cat/key/locale too :)
+            t.setCategory(data.getCategory());
+            t.setKey(data.getKey());
+            t.setLanguage(data.getLocale());
+        }
+
 
         t.setAccessed(new Date());
 

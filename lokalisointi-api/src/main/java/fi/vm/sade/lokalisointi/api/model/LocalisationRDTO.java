@@ -42,6 +42,7 @@ public class LocalisationRDTO implements Serializable {
 
     public static final String DEFAULT_CATEGORY = "NONE";
 
+    private Long _id;
     private Date _created = new Date();
     private String _createdBy;
     private Date _modified = new Date();
@@ -57,6 +58,14 @@ public class LocalisationRDTO implements Serializable {
     @Override
     public String toString() {
         return "LocalisationRDTO[category=" + getCategory() + ", key=" + getKey() + ", locale=" + getLocale() + "]";
+    }
+
+    public Long getId() {
+        return _id;
+    }
+
+    public void setId(Long id) {
+        this._id = id;
     }
 
     public Date getCreated() {

@@ -36,19 +36,25 @@ public class LocalisationDaoImpl extends AbstractJpaDAOImpl<Localisation, Long> 
     private static final Logger LOG = LoggerFactory.getLogger(LocalisationDaoImpl.class);
 
     @Override
-    public List<Localisation> findBy(String category, String locale, String keyPrefix) {
-        LOG.info("findBy({}, {}, {})", new Object[] {category, locale, keyPrefix});
+    public List<Localisation> findBy(Long id, String category, String key, String locale) {
+        LOG.info("findBy({}, {}, {}, {})", new Object[] {id, category, key, locale});
 
         QLocalisation qLocalisation = QLocalisation.localisation;
 
         JPAQuery q = from(qLocalisation);
 
         // What is good 1=1 expression in Mysema?
-        BooleanExpression whereExpr = qLocalisation.id.ne(-1L);
+        BooleanExpression whereExpr = qLocalisation.id.ne(Long.MAX_VALUE);
 
-        whereExpr = (category != null && !category.equals(LocalisationRDTO.DEFAULT_CATEGORY)) ? whereExpr.and(qLocalisation.category.eq(category)) : whereExpr;
-        whereExpr = (locale != null) ? whereExpr.and(qLocalisation.language.eq(locale)) : whereExpr;
-        whereExpr = (keyPrefix != null) ? whereExpr.and(qLocalisation.key.eq(keyPrefix)) : whereExpr;
+        if (id != null) {
+            // Search by ID
+            whereExpr = qLocalisation.id.eq(id);
+        } else {
+            // Search by key, cat, lang
+            whereExpr = (category != null && !category.equals(LocalisationRDTO.DEFAULT_CATEGORY)) ? whereExpr.and(qLocalisation.category.eq(category)) : whereExpr;
+            whereExpr = (key != null) ? whereExpr.and(qLocalisation.key.eq(key)) : whereExpr;
+            whereExpr = (locale != null) ? whereExpr.and(qLocalisation.language.eq(locale)) : whereExpr;
+        }
 
         List<Localisation> ll = q.where(whereExpr).list(qLocalisation);
 
@@ -58,13 +64,16 @@ public class LocalisationDaoImpl extends AbstractJpaDAOImpl<Localisation, Long> 
     }
 
     @Override
-    public Localisation findOne(String category, String key, String locale) {
-        LOG.info("findOne()");
+    public Localisation findOne(Long id, String category, String key, String locale) {
+        LOG.info("findOne({}, {}, {}, {})", new Object[] {id, category, key, locale});
 
-        List<Localisation> ll = findBy(category, locale, key);
+        List<Localisation> ll = findBy(id, category, key, locale);
         if (ll.size() == 1) {
             return ll.get(0);
         } else {
+            if (ll.size() > 1) {
+                LOG.warn("findOne() found MORE THAT ONE! {}, {}, {}, {}", new Object[] {id, category, key, locale});
+            }
             return null;
         }
     }

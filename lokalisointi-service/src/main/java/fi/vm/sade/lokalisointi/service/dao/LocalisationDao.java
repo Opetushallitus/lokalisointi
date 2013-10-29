@@ -27,22 +27,24 @@ public interface LocalisationDao extends JpaDAO<Localisation, Long> {
     /**
      * Find localisations.
      *
-     * @param category
-     * @param locale
-     * @param keyPrefix
-     * @return
-     */
-    List<Localisation> findBy(String category, String locale, String keyPrefix);
-
-    /**
-     * Find by "primarey" keys.
-     *
+     * @param id
      * @param category
      * @param key
      * @param locale
      * @return
      */
-    Localisation findOne(String category, String key, String locale);
+    List<Localisation> findBy(Long id, String category, String key, String locale);
+
+    /**
+     * Find by "primary" keys.
+     *
+     * @param id
+     * @param category
+     * @param key
+     * @param locale
+     * @return
+     */
+    Localisation findOne(Long id, String category, String key, String locale);
 
     /**
      * Insert or update.
