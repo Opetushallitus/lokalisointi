@@ -22,7 +22,9 @@
         location="classpath:lokalisointi-service.properties, file:///${user.home:''}/oph-configuration/common.properties, file:///${user.home:''}/oph-configuration/lokalisointi-service.properties"
         ignore-resource-not-found="true" properties-ref="defaultProps"/>
 
+<!--
     <import resource="file:///${user.home:''}/oph-configuration/security-context-backend.xml"/>
+-->
 
     <context:annotation-config />
     <context:component-scan base-package="fi.vm.sade.lokalisointi" />
