@@ -1,0 +1,490 @@
+/* app css stylesheet */
+
+.nav, .pagination, .carousel a {
+    cursor: pointer;
+}
+
+
+.table-light-gray{
+	background-color: rgba(248,248,248,1);
+}
+
+.table-dark-gray{
+	background-color: rgba(112,112,112,1)
+}
+
+.table-active{
+    background-color: rgba(255,0,0,1);
+}
+
+.gridStyle {
+    border: 1px solid rgb(212,212,212);
+    width: 500px;
+    height: 200px;
+}
+
+.float-left {
+	float:left;
+}
+
+.valintakoe-modal {
+    width:900px;
+    margin-left:-450px
+}
+
+.float-right {
+	float:right;
+}
+
+.display-block {
+	display:block;
+}
+
+label {
+	display:inline;
+}
+
+/* latauspylpyrä (kokosivu) */
+
+div#ajax-loader {
+	font-size:24px;
+	background-color:#ffffff;
+	opacity:0.75;
+	z-index:10000;
+}
+
+div#ajax-loader.max {
+	position:fixed;
+	left:0;
+	right:0;
+	top:0;
+	bottom:0;
+}
+
+div#ajax-loader.max div {
+	position: absolute;
+	margin-left:50%;
+	width:50%;
+	height:100%;
+}
+
+div#ajax-loader.max img {
+	position:absolute;
+	left:-16px;
+	bottom:55%;
+	display:block;
+}
+
+div#ajax-loader.max span {
+	position:absolute;
+	width:200px;
+	left:-100px;
+	top:55%;
+	display:block;
+	text-align:center;
+}
+
+/* pienempi latauspylpyrä */
+div#ajax-loader.min {
+	position:fixed;
+	bottom:0;
+	width:100%;
+	height:48px;
+	text-align:center;
+	padding-top:8px;
+	padding-bottom:8px;
+}
+
+div#ajax-loader.min div {
+	width:100%;
+}
+
+div#ajax-loader.min img {
+	display:inline;
+	position:relative;
+}
+
+div#ajax-loader.min span {
+	display:inline;
+	position:relative;
+}
+
+
+/* sivupalkki */
+
+footer {
+	clear:both;
+}
+
+#tarjonta-body {
+	position:relative;
+	margin-top:20px;
+}
+
+.wsidebar-left {
+	min-height:100%;
+	top:0;
+	width:220px;
+	left:20px;
+	position:relative;
+	float:left;
+}
+
+.wsidebar-main {
+	margin-left:300px;
+	padding-right:20px;
+}
+
+/* tabset korjaus */
+.wsidebar-main .nav {
+    min-height:38px;
+    display:block;
+}
+
+.wsidebar-main .nav-tabs:after, .wsidebar-main .nav-pills:after {
+    clear: right;
+    display:block;
+}
+
+/* organisaatiohaku */
+
+div#orgSearch {
+	margin-bottom:20px;
+}
+
+div#orgSearchResults > ul > li {
+	padding-left:0;
+}
+
+/* tarjonnan hakunäkymä */
+
+div#searchSpec {
+	height:96px;
+	position:relative;
+	min-width:960px;
+}
+
+div#searchSpec > div.title {
+}
+
+div#searchSpec > div.title > span {
+	font-size:150%;
+	font-weight:bold;
+}
+
+div#searchSpec > table.spec {
+	position:absolute;
+	right:0;
+	bottom:0;
+	max-width:80%;
+}
+
+div#searchSpec > table.spec th {
+	text-align:left;
+	font-weight:normal;
+	padding-right:1em;
+}
+
+div#searchSpec > table.spec td.controls {
+	vertical-align:top;
+	padding-left:1em;
+}
+
+div#searchSpec > table.spec select {
+	width:100%;
+
+}
+
+div#searchSpec > div.search {
+	position:absolute;
+	left:0;
+	bottom:0;
+	width:20%;
+}
+
+div#searchSpec > div.search > input {
+	width:100%;
+	position:relative;
+	top:-1px;
+}
+
+div#searchResults div.controls {
+	margin-bottom:30px;
+}
+
+div#searchResults input.selectAll {
+	margin-left:23px;
+}
+
+div#searchResults input.selectAll + label {
+	position:relative;
+	top:0.25em;
+	margin-left:0.25em;
+}
+
+div#searchResults table {
+	width:100%;
+}
+
+/*div#searchResults table.loading > tbody {
+	display:none;
+}*/
+
+div#searchResults table tr.header th.nimi {
+	min-width:50%;
+}
+div#searchResults table tr.header th.tila {
+	min-width:75px;
+}
+div#searchResults table tr.header th.hakukausi {
+	min-width:90px;
+}
+div#searchResults table tr.header th.koulutuslaji {
+	min-width:120px;
+}
+div#searchResults table tr.header th.hakutapa {
+	min-width:120px;
+}
+div#searchResults table tr.header th.aloituspaikat {
+	min-width:90px;
+}
+
+div#searchResults table tr.header th {
+	padding-left:0.5em;
+	cursor:default;
+}
+
+div#searchResults table input[type=checkbox] {
+	margin-right:10px;
+	position:relative;
+	top:-0.25em;
+}
+
+div#searchResults table tbody td, div#searchResults table tbody th {
+	cursor:pointer;
+}
+
+div#searchResults table tbody.tresult tr:hover td, div#searchResults table tbody.tresult tr:hover th {
+	background-color:#f0f0f0;
+}
+
+div#searchResults table tbody.tresult td + td {
+	border-left: 1px solid #d0d0d0;
+	padding-left:0.5em;
+}
+
+div#searchResults table th {
+	font-weight:normal;
+	text-align:left;
+}
+
+div#searchResults table td a {
+	font-weight:bold;
+}
+
+div#searchResults table td input[type=checkbox] {
+	margin-left:40px;
+}
+
+div#searchResults table td img {
+	margin-right:10px;
+}
+
+
+/* avoin taulukkorivi */
+div#searchResults table tbody img.unfolded {
+	display:none;
+}
+
+/* suljettu taulukkorivi */
+div#searchResults table tbody.folded img.folded {
+	display:none;
+}
+div#searchResults table tbody.folded img.unfolded {
+	display:inline-block;
+}
+
+div#searchResults table tbody.folded tr.tresult {
+	display:none;
+}
+
+div#deleteDialog .subject {
+	font-weight:bold;
+}
+
+/* Tarjonnan tarkastelunäkymät / yleiset */
+
+.label-right {
+    text-align: right;
+}
+
+
+/*
+ * partials/kk/review/
+ */
+.collapseHeader {
+    display: inline;
+    cursor: pointer;
+}
+
+.collapseHeader:before {
+    display: inline;
+    content: '► ';
+}
+.collapseHeader.isOpen:before{
+    content: '▼ ';
+}
+
+/* select-tutkinto-ohjelma */
+div.tarjonta-dialog .modal-body {
+	max-height: 80%;
+}
+
+div#select-tutkinto-ohjelma .gridStyle, div#select-tutkinto-ohjelma select {
+	width:100%;
+}
+
+div#select-tutkinto-ohjelma .modal-body input[type=text] {
+	position:relative;
+	top: 5px;
+}
+
+div#select-tutkinto-ohjelma .gridStyle {
+	height:180px;
+}
+
+div#select-tutkinto-ohjelma .noResults {
+	height:182px;
+}
+
+table#luo-koulutus-dialogi td{
+/* 	height: 200px;
+*/
+	max-height: 200px;
+ 	overflow: auto;
+	vertical-align: top;
+	width: 50%;
+}
+
+/* koulutuksen muokkaus/luonti */
+
+div#editKoulutus {
+	margin:20px;
+}
+
+table.tarjontaForm {
+	width:100%;
+}
+
+table.tarjontaForm tr > th {
+	vertical-align: top;
+	text-align: right;
+	width:20%;
+	font-weight:normal;
+	padding-bottom:10px;
+}
+
+table.tarjontaForm tr td {
+	vertical-align: top;
+	width:45%;
+	padding-left:20px;
+}
+
+table.tarjontaForm tr td+td {
+	width:35%;
+	vertical-align: bottom;
+}
+
+table.tarjontaForm tr td.help {
+	font-size:90%;
+	color:#606060;
+	font-style:italic;
+	padding-bottom:15px;
+	
+}
+
+table.tarjontaForm tr.padding td {
+	height:30px;
+}
+
+table.tarjontaForm table {
+	width:100%;	
+}
+
+table.tarjontaForm table td {
+	padding:0 15px 0 0;
+	width:80%;
+}
+
+table.tarjontaForm table th {
+	width:20%;
+	text-align:left;
+}
+
+table.tarjontaForm table input {
+	width:100%;	
+}
+
+table.tarjontaForm input.wide, table.tarjontaForm select.wide {
+	width:100%;
+}
+
+table.tarjontaForm input.thin, table.tarjontaForm select.thin {
+	width:101px;
+}
+
+table.tarjontaForm tr.primary th {
+	font-weight:bold;
+}
+
+table.tarjontaForm tr.primary th+td+td {
+	vertical-align: top;
+	padding-top:2px;
+}
+
+table.tarjontaForm tr.info td+td {
+	vertical-align:top;
+}
+
+table.tarjontaForm tr th:after {
+	display:inline-block;
+	content: ' ';
+	width:0.5em;
+}
+
+table.tarjontaForm tr.required th:after {
+	display:inline-block;
+	content: '*';
+	width:0.5em;
+	color:#ff0000;	
+}
+
+table.tarjontaForm tr.required table th:after {
+	display: none;
+}
+
+
+table.tarjontaForm table.checklist, table.tarjontaForm table.checklist td {
+	width:auto;
+	padding:0 1em 0 0;
+}
+
+table.checklist {
+	margin-bottom:1em;
+}
+
+table.tarjontaForm p.error {
+	color:#ff0000;
+}
+
+table.tarjontaForm p.error:before {
+	content: url('../img/icon-error.png');
+	margin-right:0.5em;
+	position:relative;
+	vertical-align: baseline;
+}
+
+/* firefox-bootstrap-glow-korjaus */
+input:invalid,textarea:invalid,select:invalid {
+	box-shadow: 0 0 6px rgba(0,0,0,0.075);
+}
