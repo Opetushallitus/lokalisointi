@@ -14,7 +14,7 @@
 
     <properties>
         <deploy.to.server>tomcat</deploy.to.server>
-        <webapp.port>8094</webapp.port>
+        <webapp.port>8319</webapp.port>
         <skipDbDiagramGenerate>false</skipDbDiagramGenerate>
     </properties>
 
