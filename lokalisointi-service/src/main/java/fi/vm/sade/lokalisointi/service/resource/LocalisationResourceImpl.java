@@ -65,14 +65,10 @@ public class LocalisationResourceImpl implements LocalisationResource {
             throw new NotFoundException("Invalud null input for update!");
         }
 
-        Localisation l = convert(data);
-        if (l.getId() == null) {
-            throw new NotFoundException("Localisation not found: " + data.getCategory() + ", " + data.getKey() + ", " + data.getLocale());
-        }
+        Localisation t = localisationDao.findOne(data.getCategory(), data.getKey(), data.getLocale());
+        update(t, data);
 
-        l = localisationDao.save(l);
-
-        return convert(l);
+        return convert(t);
     }
 
     @Override
@@ -90,12 +86,35 @@ public class LocalisationResourceImpl implements LocalisationResource {
     @Override
     public LocalisationRDTO createLocalisation(LocalisationRDTO data) {
 
-        Localisation l = convert(data);
-        if (l.getId() == null) {
-            l = localisationDao.save(l);
+        Localisation t = localisationDao.findOne(data.getCategory(), data.getKey(), data.getLocale());
+
+        if (t == null) {
+            t = new Localisation();
+
+            t.setCreated(new Date());
+            t.setModified(new Date());
+            t.setAccessed(new Date());
+
+            // TODO set created by
+            t.setCreatedBy("NA");
+
+            t.setCategory(data.getCategory());
+            t.setKey(data.getKey());
+            t.setLanguage(data.getLocale());
+            t.setAccessed(new Date());
+
+            // TODO set modified by
+            t.setModifiedBy("NA");
+
+            t.setDescription(data.getDescription());
+            t.setValue(data.getValue());
+            localisationDao.save(t);
+
+        } else {
+            throw new NotFoundException("Localisation should not have been found: " + data);
         }
 
-        return convert(l);
+        return convert(t);
     }
 
     @Override
@@ -144,29 +163,18 @@ public class LocalisationResourceImpl implements LocalisationResource {
         return t;
     }
 
-    private Localisation convert(LocalisationRDTO s) {
-        if (s == null) {
-            return null;
-        }
-
-        Localisation t = localisationDao.findOne(s.getCategory(), s.getKey(), s.getLocale());
-
+    private void update(Localisation t, LocalisationRDTO data) {
         if (t == null) {
-            t = new Localisation();
+            throw new NotFoundException("Cannot find localisation for: " + data);
         }
 
-        t.setAccessed(s.getAccessed());
-        t.setCategory(s.getCategory());
-        t.setCreated(s.getCreated());
-        t.setCreatedBy(s.getCreatedBy());
-        t.setDescription(s.getDescription());
-        t.setKey(s.getKey());
-        t.setLanguage(s.getLocale());
-        t.setModified(s.getModified());
-        t.setModifiedBy(s.getModifiedBy());
-        t.setValue(s.getValue());
+        t.setAccessed(new Date());
 
-        return t;
+        // TODO set modified by
+        t.setModifiedBy("NA");
+
+        t.setDescription(data.getDescription());
+        t.setValue(data.getValue());
     }
 
 }

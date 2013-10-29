@@ -40,19 +40,24 @@ import java.util.Date;
  */
 public class LocalisationRDTO implements Serializable {
 
-    private static final String DEFAULT_CATEGORY = "NONE";
+    public static final String DEFAULT_CATEGORY = "NONE";
 
-    private Date _created;
+    private Date _created = new Date();
     private String _createdBy;
-    private Date _modified;
+    private Date _modified = new Date();
     private String _modifiedBy;
-    private Date _accessed;
+    private Date _accessed = new Date();
 
-    private String _category;
+    private String _category = DEFAULT_CATEGORY;
     private String _locale;
     private String _key;
     private String _value;
     private String _description;
+
+    @Override
+    public String toString() {
+        return "LocalisationRDTO[category=" + getCategory() + ", key=" + getKey() + ", locale=" + getLocale() + "]";
+    }
 
     public Date getCreated() {
         return _created;

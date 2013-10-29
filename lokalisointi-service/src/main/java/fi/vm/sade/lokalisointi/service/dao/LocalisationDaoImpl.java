@@ -18,6 +18,7 @@ import com.mysema.query.jpa.impl.JPAQuery;
 import com.mysema.query.types.EntityPath;
 import com.mysema.query.types.expr.BooleanExpression;
 import fi.vm.sade.generic.dao.AbstractJpaDAOImpl;
+import fi.vm.sade.lokalisointi.api.model.LocalisationRDTO;
 import fi.vm.sade.lokalisointi.service.model.Localisation;
 import fi.vm.sade.lokalisointi.service.model.QLocalisation;
 import java.util.List;
@@ -45,9 +46,9 @@ public class LocalisationDaoImpl extends AbstractJpaDAOImpl<Localisation, Long> 
         // What is good 1=1 expression in Mysema?
         BooleanExpression whereExpr = qLocalisation.id.ne(-1L);
 
-        whereExpr = (category != null) ? qLocalisation.category.eq(category) : whereExpr;
-        whereExpr = (locale != null) ? qLocalisation.language.eq(locale) : whereExpr;
-        whereExpr = (keyPrefix != null) ? qLocalisation.key.eq(keyPrefix) : whereExpr;
+        whereExpr = (category != null && !category.equals(LocalisationRDTO.DEFAULT_CATEGORY)) ? whereExpr.and(qLocalisation.category.eq(category)) : whereExpr;
+        whereExpr = (locale != null) ? whereExpr.and(qLocalisation.language.eq(locale)) : whereExpr;
+        whereExpr = (keyPrefix != null) ? whereExpr.and(qLocalisation.key.eq(keyPrefix)) : whereExpr;
 
         List<Localisation> ll = q.where(whereExpr).list(qLocalisation);
 

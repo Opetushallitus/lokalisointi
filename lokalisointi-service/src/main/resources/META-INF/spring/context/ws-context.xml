@@ -41,6 +41,16 @@
             </util:list>
         </property>
     </bean>
+    <bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+        <property name="targetObject" ref="lokalisointiObjectMapper"/>
+        <property name="targetMethod" value="configure"/>
+        <property name="arguments">
+            <util:list>
+                <util:constant static-field="org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES"/>
+                <util:constant static-field="java.lang.Boolean.FALSE"/>
+            </util:list>
+        </property>
+    </bean>
     <bean id="lokalisointiJacksonJsonProvider" class="org.codehaus.jackson.jaxrs.JacksonJsonProvider">
         <property name="mapper" ref="lokalisointiObjectMapper"/>
     </bean>
