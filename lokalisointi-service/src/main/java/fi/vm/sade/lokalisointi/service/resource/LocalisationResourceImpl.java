@@ -60,7 +60,7 @@ public class LocalisationResourceImpl implements LocalisationResource {
     }
 
     @Override
-    public LocalisationRDTO updateLocalisation(LocalisationRDTO data) {
+    public LocalisationRDTO updateLocalisation(Long id, LocalisationRDTO data) {
         LOG.info("updateLocalisation({})", data);
         if (data == null) {
             throw new NotFoundException("Invalud null input for update!");
@@ -73,7 +73,7 @@ public class LocalisationResourceImpl implements LocalisationResource {
     }
 
     @Override
-    public LocalisationRDTO updateLocalisationAccessed(LocalisationRDTO data) {
+    public LocalisationRDTO updateLocalisationAccessed(Long id, LocalisationRDTO data) {
         LOG.info("updateLocalisationAccessed({})", data);
 
         Localisation l = localisationDao.findOne(data.getId(), data.getCategory(), data.getKey(), data.getLocale());
@@ -86,7 +86,7 @@ public class LocalisationResourceImpl implements LocalisationResource {
     }
 
     @Override
-    public LocalisationRDTO createLocalisation(LocalisationRDTO data) {
+    public LocalisationRDTO createLocalisation(Long id, LocalisationRDTO data) {
         LOG.info("createLocalisation({})", data);
 
         Localisation t = localisationDao.findOne((Long) null, data.getCategory(), data.getKey(), data.getLocale());

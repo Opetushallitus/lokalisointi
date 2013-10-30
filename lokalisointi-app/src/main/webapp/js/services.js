@@ -20,15 +20,11 @@ app.factory('Localisations', function($log, $resource, globalConfig) {
 
     globalConfig.env.localisations = [];
 
-    var uri = globalConfig.env.lokalisointiRestUrl;
+    var uri = globalConfig.env.lokalisointiRestUrl + "/:id";
 
     $log.info("Localisations() - uri = ", uri);
 
-    return $resource(uri, {}, {
-        delete: {
-            method: 'DELETE',
-            headers: {'Content-Type': 'application/json; charset=UTF-8'}
-        },
+    return $resource(uri, {id : "@id"}, {
         update: {
             method: 'PUT',
             headers: {'Content-Type': 'application/json; charset=UTF-8'}

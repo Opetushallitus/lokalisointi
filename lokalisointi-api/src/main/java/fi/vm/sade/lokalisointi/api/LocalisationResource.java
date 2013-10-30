@@ -47,45 +47,50 @@ public interface LocalisationResource {
     /**
      * Update exisiting localisation.
      *
+     * @param id
      * @param data
      * @return
      */
     @PUT
     @Produces(MediaType.APPLICATION_JSON + ";charset=UTF-8")
     @Consumes(MediaType.APPLICATION_JSON + ";charset=UTF-8")
-    public LocalisationRDTO updateLocalisation(LocalisationRDTO data);
+    @Path("{id}")
+    public LocalisationRDTO updateLocalisation(@PathParam("id") Long id, LocalisationRDTO data);
 
     /**
      * Update last accessed timestamp.
      *
+     * @param id
      * @param data
      * @return
      */
     @PUT
-    @Path("access")
+    @Path("{id}/access")
     @Produces(MediaType.APPLICATION_JSON + ";charset=UTF-8")
     @Consumes(MediaType.APPLICATION_JSON + ";charset=UTF-8")
-    public LocalisationRDTO updateLocalisationAccessed(LocalisationRDTO data);
+    public LocalisationRDTO updateLocalisationAccessed(@PathParam("id") Long id, LocalisationRDTO data);
 
     /**
      * Creates new localisation.
      *
+     * @param id
      * @param data
      * @return
      */
     @POST
     @Produces(MediaType.APPLICATION_JSON + ";charset=UTF-8")
     @Consumes(MediaType.APPLICATION_JSON + ";charset=UTF-8")
-    public LocalisationRDTO createLocalisation(LocalisationRDTO data);
+    @Path("{id}")
+    public LocalisationRDTO createLocalisation(@PathParam("id") Long id, LocalisationRDTO data);
 
     /**
      * Deletes a localisation.
      *
-     * @param data
+     * @param id
      * @return
      */
     @DELETE
-    @Path("{id}")
     @Produces(MediaType.APPLICATION_JSON + ";charset=UTF-8")
+    @Path("{id}")
     public LocalisationRDTO deleteLocalisation(@PathParam("id") Long id);
 }
