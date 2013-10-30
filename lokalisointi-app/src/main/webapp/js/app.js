@@ -29,42 +29,98 @@ angular.module('app',
 
 angular.module('app').value("globalConfig", window.CONFIG);
 
-//
-// Routing
-//
-angular.module('app').controller('AppRoutingCtrl', function($scope, $route, $routeParams, $log) {
+/**
+ * Main controller to manage translations.
+ */
+angular.module('app').controller('AppCtrl', ['$scope', '$q', '$log', '$modal', 'LocalisationService',
+    function($scope, $q, $log, $modal, LocalisationService) {
 
-    $log.debug("app.AppRoutingCtrl()");
+        $log.info("AppCtrl()");
 
-    $scope.count = 0;
+        $scope.model = {
+            localisations: LocalisationService.getTranslations(),
+            filterCategory: "tarjonta",
+            filterLocale: "fi",
+            filterKey: "",
+            filterValue: ""
+        };
 
-    var render = function() {
-        $log.debug("app.AppRoutingCtrl.render()");
+        $scope.filterCategoryWithCategory = function(item) {
+            var result = ($scope.model.filterCategory === undefined) || item.category === undefined || (item.category.indexOf($scope.model.filterCategory) != -1);
+            // $log.info("filterCategoryWithCategory()", result);
+            return result;
+        };
 
-        var renderAction = $route.current.action;
-        var renderPath = renderAction ? renderAction.split(".") : [];
+        $scope.filterKeyWithKey = function(item) {
+            var result = ($scope.model.filterKey === undefined) || item.key === undefined || (item.key.indexOf($scope.model.filterKey) != -1);
+            // $log.info("filterKeyWithKey()", result);
+            return result;
+        };
 
-        // Store the values in the model.
-        $scope.renderAction = renderAction;
-        $scope.renderPath = renderPath;
-        $scope.routeParams = $routeParams ? $routeParams : {};
-        $scope.count++;
+        $scope.filterLocaleWithLocale = function(item) {
+            var result = ($scope.model.filterLocale === undefined) || item.locale === undefined || (item.locale.indexOf($scope.model.filterLocale) != -1);
+            // $log.info("filterLocaleWithLocale()", result);
+            return result;
+        };
 
-        $log.debug("  renderAction: ", $scope.renderAction);
-        $log.debug("  renderPath: ", $scope.renderPath);
-        $log.debug("  routeParams: ", $scope.routeParams);
-        $log.debug("  count: ", $scope.count);
-    };
+        $scope.filterValueWithValue = function(item) {
+            var result = ($scope.model.filterValue === undefined) || item.value === undefined || (item.value.indexOf($scope.model.filterValue) != -1);
+            // $log.info("filterValueWithValue()", result);
+            return result;
+        };
 
-    $scope.$on(
-            "$routeChangeSuccess",
-            function($currentRoute, $previousRoute) {
-                $log.debug("app.AppRoutingCtrl.$routeChangeSuccess : from, to = ", $currentRoute, $previousRoute);
-                render();
+        $scope.doFilter = new function() {
+            return function(item) {
+                var result = true;
+                result = result && $scope.filterCategoryWithCategory(item);
+                result = result && $scope.filterKeyWithKey(item);
+                result = result && $scope.filterLocaleWithLocale(item);
+                result = result && $scope.filterValueWithValue(item);
+
+                result = item.uiChanged || result;
+
+                // $log.info("doFilter() -------------> ", result);
+
+                return result;
             }
-    );
+        };
 
-});
+        $scope.reloadData = function() {
+            $log.info("reloadData()");
+            LocalisationService.reload().then(function(data) {
+                $scope.model.localisations = data;
+            });
+        };
+
+        $scope.saveAllModified = function() {
+            $log.info("saveAllModified()", $scope.localisationsForm);
+
+            for (var i = 0; i < $scope.model.localisations.length; i++) {
+                var item = $scope.model.localisations[i];
+
+                if (item.uiDelete) {
+                    $log.info("  -- DELETE:", item);
+                    item.$delete({id : item.id});
+                    item.uiDelete = false;
+                    item.uiChanged = false;
+                }
+
+                if (item.uiChanged) {
+                    $log.info("  -- SAVE:", item);
+                    item.$update();
+                }
+            }
+
+            $scope.localisationsForm.$setPristine();
+        };
+
+        $scope.createNew = function() {
+            $log.info("createNew()");
+        };
+
+        // Trigger reload
+        $scope.reloadData();
+    }]);
 
 
 //

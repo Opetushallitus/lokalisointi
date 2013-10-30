@@ -14,4 +14,93 @@
  */
 
 
-angular.module('app.services', []);
+var app = angular.module('app.services', ['ngResource']);
+
+app.factory('Localisations', function($log, $resource, globalConfig) {
+
+    globalConfig.env.localisations = [];
+
+    var uri = globalConfig.env.lokalisointiRestUrl;
+
+    $log.info("Localisations() - uri = ", uri);
+
+    return $resource(uri, {}, {
+        delete: {
+            method: 'DELETE',
+            headers: {'Content-Type': 'application/json; charset=UTF-8'}
+        },
+        update: {
+            method: 'PUT',
+            headers: {'Content-Type': 'application/json; charset=UTF-8'}
+        },
+        save: {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json; charset=UTF-8'}
+        }
+    });
+
+});
+
+app.service('LocalisationService', function($log, $q, Localisations, globalConfig) {
+    $log.log("LocalisationService()");
+
+    this.delete = function(entry) {
+        $log.info("delete()", entry);
+
+        var deferred = $q.defer();
+
+        Localisations.delete(entry, function(data, status, headers, config) {
+            $log.info("  delete() - OK", data, status, headers, config);
+            deferred.resolve(entry);
+        }, function(data, status, headers, config) {
+            $log.error("  delete() - ERROR", data, status, headers, config, entry);
+            deferred.reject(entry);
+        });
+
+        return deferred.promise;
+    };
+
+    this.save = function(entry) {
+        $log.info("save()", entry);
+
+        var deferred = $q.defer();
+
+        // Try to save to the server
+        Localisations.save(entry, function(data, status, headers, config) {
+            $log.info("  save() - OK", data, status, headers, config);
+            deferred.resolve(entry);
+        }, function(data, status, headers, config) {
+            $log.error("  save() - ERROR", data, status, headers, config, entry);
+            deferred.reject(entry);
+        });
+
+        return deferred.promise;
+    };
+
+    this.reload = function() {
+        $log.info("reload()");
+
+        var deferred = $q.defer();
+
+        Localisations.query({}, function(data) {
+            $log.log("  reload() - successfull", data);
+            globalConfig.env.localisations = data;
+            deferred.resolve(data);
+        }, function(data) {
+            $log.error("  reload() - FAILED", data);
+            globalConfig.env.localisations = [];
+            deferred.reject(data);
+        });
+
+        return deferred.promise;
+    };
+
+    this.getTranslations = function() {
+        $log.info("getTranslations()");
+        return globalConfig.env.localisations;
+    };
+
+    // Initial load of translations
+    // this.reload();
+
+});
