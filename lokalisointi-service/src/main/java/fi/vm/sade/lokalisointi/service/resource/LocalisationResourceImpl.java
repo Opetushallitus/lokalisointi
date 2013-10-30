@@ -61,6 +61,7 @@ public class LocalisationResourceImpl implements LocalisationResource {
 
     @Override
     public LocalisationRDTO updateLocalisation(LocalisationRDTO data) {
+        LOG.info("updateLocalisation({})", data);
         if (data == null) {
             throw new NotFoundException("Invalud null input for update!");
         }
@@ -73,6 +74,7 @@ public class LocalisationResourceImpl implements LocalisationResource {
 
     @Override
     public LocalisationRDTO updateLocalisationAccessed(LocalisationRDTO data) {
+        LOG.info("updateLocalisationAccessed({})", data);
 
         Localisation l = localisationDao.findOne(data.getId(), data.getCategory(), data.getKey(), data.getLocale());
         if (l != null) {
@@ -85,6 +87,7 @@ public class LocalisationResourceImpl implements LocalisationResource {
 
     @Override
     public LocalisationRDTO createLocalisation(LocalisationRDTO data) {
+        LOG.info("createLocalisation({})", data);
 
         Localisation t = localisationDao.findOne((Long) null, data.getCategory(), data.getKey(), data.getLocale());
 
@@ -118,10 +121,11 @@ public class LocalisationResourceImpl implements LocalisationResource {
     }
 
     @Override
-    public LocalisationRDTO deleteLocalisation(LocalisationRDTO data) {
+    public LocalisationRDTO deleteLocalisation(Long id) {
+        LOG.info("deleteLocalisation({})", id);
         LocalisationRDTO result = null;
 
-        Localisation l = localisationDao.findOne(data.getId(), data.getCategory(), data.getKey(), data.getLocale());
+        Localisation l = localisationDao.findOne(id, null, null, null);
         if (l != null) {
             result = convert(l);
             localisationDao.remove(l);
