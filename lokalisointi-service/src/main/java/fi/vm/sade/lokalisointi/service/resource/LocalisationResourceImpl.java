@@ -26,6 +26,7 @@ import org.apache.cxf.jaxrs.cors.CrossOriginResourceSharing;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
@@ -34,7 +35,7 @@ import org.springframework.transaction.annotation.Transactional;
  * @author mlyly
  */
 @Transactional(readOnly = false)
-@CrossOriginResourceSharing(allowAllOrigins = true)
+// @CrossOriginResourceSharing
 public class LocalisationResourceImpl implements LocalisationResource {
 
     private static final Logger LOG = LoggerFactory.getLogger(LocalisationResourceImpl.class);
@@ -42,6 +43,7 @@ public class LocalisationResourceImpl implements LocalisationResource {
     @Autowired
     private LocalisationDao localisationDao;
 
+    @Secured({"ROLE_APP_OID_CRUD"})
     @Override
     public List<LocalisationRDTO> getLocalisations(LocalisationRDTO query) {
         LOG.info("getLocalisations({})", query);
@@ -59,6 +61,7 @@ public class LocalisationResourceImpl implements LocalisationResource {
         return result;
     }
 
+    @Secured({"ROLE_APP_LOKALISOINTI_READ_UPDATE"})
     @Override
     public LocalisationRDTO updateLocalisation(Long id, LocalisationRDTO data) {
         LOG.info("updateLocalisation({})", data);
@@ -72,6 +75,7 @@ public class LocalisationResourceImpl implements LocalisationResource {
         return convert(t);
     }
 
+    @Secured({"ROLE_APP_LOKALISOINTI_READ_UPDATE"})
     @Override
     public LocalisationRDTO updateLocalisationAccessed(Long id, LocalisationRDTO data) {
         LOG.info("updateLocalisationAccessed({})", data);
@@ -85,8 +89,10 @@ public class LocalisationResourceImpl implements LocalisationResource {
         return convert(l);
     }
 
+    // TODO should be logged in but can have any role...
+    // @Secured({"ROLE_APP_LOKALISOINTI_READ_UPDATE"})
     @Override
-    public LocalisationRDTO createLocalisation(Long id, LocalisationRDTO data) {
+    public LocalisationRDTO createLocalisation(LocalisationRDTO data) {
         LOG.info("createLocalisation({})", data);
 
         Localisation t = localisationDao.findOne((Long) null, data.getCategory(), data.getKey(), data.getLocale());
@@ -109,6 +115,10 @@ public class LocalisationResourceImpl implements LocalisationResource {
             // TODO set modified by
             t.setModifiedBy("NA");
 
+            // NOTE do not accept any data in creation since it is not "trusted" used created :)
+            t.setDescription(null);
+            t.setValue("[" + t.getCategory() + "-" + t.getKey() + "-" + t.getLanguage() + "]");
+
             t.setDescription(data.getDescription());
             t.setValue(data.getValue());
             localisationDao.save(t);
@@ -120,6 +130,7 @@ public class LocalisationResourceImpl implements LocalisationResource {
         return convert(t);
     }
 
+    @Secured({"ROLE_APP_LOKALISOINTI_CRUD"})
     @Override
     public LocalisationRDTO deleteLocalisation(Long id) {
         LOG.info("deleteLocalisation({})", id);

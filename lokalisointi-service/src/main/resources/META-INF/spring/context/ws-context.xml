@@ -56,7 +56,10 @@
     </bean>
 
     <!-- CORS (cross domain) support for rest services -->
-    <bean id="cors-filter" class="org.apache.cxf.rs.security.cors.CrossOriginResourceSharingFilter"/>
+    <bean id="cors-filter" class="org.apache.cxf.rs.security.cors.CrossOriginResourceSharingFilter">
+        <property name="allowCredentials" value="true"/>
+        <property name="allowOrigins" value="http://localhost:8080"/>
+    </bean>
 
     <!--
         REST Services
