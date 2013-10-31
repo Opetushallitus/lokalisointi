@@ -25,12 +25,19 @@ app.factory('Localisations', function($log, $resource, globalConfig) {
     $log.info("Localisations() - uri = ", uri);
 
     return $resource(uri, {id : "@id"}, {
+        query: {
+            method: 'GET',
+            withCredentials: true,
+            isArray: true
+        },
         update: {
             method: 'PUT',
+            withCredentials: true,
             headers: {'Content-Type': 'application/json; charset=UTF-8'}
         },
         save: {
             method: 'POST',
+            withCredentials: true,
             headers: {'Content-Type': 'application/json; charset=UTF-8'}
         }
     });

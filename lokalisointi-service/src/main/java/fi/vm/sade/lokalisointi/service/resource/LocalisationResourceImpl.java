@@ -27,6 +27,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
@@ -35,15 +36,22 @@ import org.springframework.transaction.annotation.Transactional;
  * @author mlyly
  */
 @Transactional(readOnly = false)
-// @CrossOriginResourceSharing
+// @CrossOriginResourceSharing -- CONFIGURED IN SPRING (ws-context.xml)
 public class LocalisationResourceImpl implements LocalisationResource {
+
+//    private static final String ROLE_READ = "ROLE_APP_LOKALISOINTI_READ";
+//    private static final String ROLE_UPDATE = "ROLE_APP_LOKALISOINTI_READ_UPDATE";
+//    private static final String ROLE_CRUD = "ROLE_APP_LOKALISOINTI_CRUD";
+    private static final String ROLE_READ = "ROLE_APP_OID_READ";
+    private static final String ROLE_UPDATE = "ROLE_APP_OID_READ_UPDATE";
+    private static final String ROLE_CRUD = "ROLE_APP_OID_CRUD";
 
     private static final Logger LOG = LoggerFactory.getLogger(LocalisationResourceImpl.class);
 
     @Autowired
     private LocalisationDao localisationDao;
 
-    @Secured({"ROLE_APP_OID_CRUD"})
+    @Secured({ROLE_READ})
     @Override
     public List<LocalisationRDTO> getLocalisations(LocalisationRDTO query) {
         LOG.info("getLocalisations({})", query);
@@ -61,7 +69,7 @@ public class LocalisationResourceImpl implements LocalisationResource {
         return result;
     }
 
-    @Secured({"ROLE_APP_LOKALISOINTI_READ_UPDATE"})
+    @Secured({ROLE_UPDATE})
     @Override
     public LocalisationRDTO updateLocalisation(Long id, LocalisationRDTO data) {
         LOG.info("updateLocalisation({})", data);
@@ -75,7 +83,7 @@ public class LocalisationResourceImpl implements LocalisationResource {
         return convert(t);
     }
 
-    @Secured({"ROLE_APP_LOKALISOINTI_READ_UPDATE"})
+    @Secured({ROLE_UPDATE})
     @Override
     public LocalisationRDTO updateLocalisationAccessed(Long id, LocalisationRDTO data) {
         LOG.info("updateLocalisationAccessed({})", data);
@@ -90,7 +98,7 @@ public class LocalisationResourceImpl implements LocalisationResource {
     }
 
     // TODO should be logged in but can have any role...
-    // @Secured({"ROLE_APP_LOKALISOINTI_READ_UPDATE"})
+    @Secured({ROLE_READ})
     @Override
     public LocalisationRDTO createLocalisation(LocalisationRDTO data) {
         LOG.info("createLocalisation({})", data);
@@ -130,7 +138,7 @@ public class LocalisationResourceImpl implements LocalisationResource {
         return convert(t);
     }
 
-    @Secured({"ROLE_APP_LOKALISOINTI_CRUD"})
+    @Secured({ROLE_CRUD})
     @Override
     public LocalisationRDTO deleteLocalisation(Long id) {
         LOG.info("deleteLocalisation({})", id);
@@ -191,7 +199,6 @@ public class LocalisationResourceImpl implements LocalisationResource {
             t.setLanguage(data.getLocale());
         }
 
-
         t.setAccessed(new Date());
 
         // TODO set modified by
@@ -199,6 +206,12 @@ public class LocalisationResourceImpl implements LocalisationResource {
 
         t.setDescription(data.getDescription());
         t.setValue(data.getValue());
+    }
+
+
+
+    private String getCurrentUserName() {
+        return "NA";
     }
 
 }

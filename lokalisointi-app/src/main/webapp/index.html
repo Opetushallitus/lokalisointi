@@ -56,6 +56,10 @@
 
     <body data-ng-controller="AppCtrl">
 
+        <div ng-repeat="msg in model.info">
+            {{msg | json }}
+        </div>
+
         <div class="container-fluid">
 
             <form name="localisationsForm" novalidate>

@@ -42,7 +42,8 @@ angular.module('app').controller('AppCtrl', ['$scope', '$q', '$log', '$modal', '
             filterCategory: "tarjonta",
             filterLocale: "fi",
             filterKey: "",
-            filterValue: ""
+            filterValue: "",
+            info: []
         };
 
         $scope.filterCategoryWithCategory = function(item) {
@@ -89,33 +90,60 @@ angular.module('app').controller('AppCtrl', ['$scope', '$q', '$log', '$modal', '
             $log.info("reloadData()");
             LocalisationService.reload().then(function(data) {
                 $scope.model.localisations = data;
+            }, function(aa, bb, cc, dd) {
+                $scope.model.info.push({status: "ERROR", aa: aa, bb: bb, cc: cc, dd: dd});
             });
         };
 
         $scope.saveAllModified = function() {
             $log.info("saveAllModified()", $scope.localisationsForm);
 
+            var promises = [];
+
             for (var i = 0; i < $scope.model.localisations.length; i++) {
                 var item = $scope.model.localisations[i];
 
                 if (item.uiDelete) {
                     $log.info("  -- DELETE:", item);
-                    item.$delete({id : item.id});
+                    promises.push(
+                            item.$delete({id: item.id}, function() {
+                                $scope.pushResult({status: "OK"});
+                            }, function(aa, bb, cc, dd, ee) {
+                                $scope.pushResult({status: "ERROR", aa: aa, bb: bb, cc: cc, dd: dd, ee: ee});
+                            }));
                     item.uiDelete = false;
                     item.uiChanged = false;
                 }
 
                 if (item.uiChanged) {
                     $log.info("  -- SAVE:", item);
-                    item.$update();
+                    promises.push(
+                            item.$update(function(data, headers) {
+                                $scope.pushResult({status: "OK", data: data, headers: headers});
+                            }, function(data, headers, xxx) {
+                                $scope.pushResult({statusx: "ERROR", datax: data, headersx: headers, xxx : xxx});
+                            }));
                 }
             }
 
             $scope.localisationsForm.$setPristine();
+
+            // Trigger reload, ONLY AFTER WAITING UPDATES TO FINNISH - please, $q.all().then ....
+            // $scope.reloadData();
+
+            $q.all(promises).then(function() {
+                $log.info("  all operations completed... reload data.");
+                $scope.reloadData();
+            });
+
         };
 
         $scope.createNew = function() {
             $log.info("createNew()");
+        };
+
+        $scope.pushResult = function(info) {
+            $scope.model.info.push(info);
         };
 
         // Trigger reload
