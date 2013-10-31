@@ -73,15 +73,13 @@ public interface LocalisationResource {
     /**
      * Creates new localisation.
      *
-     * @param id
      * @param data
      * @return
      */
     @POST
     @Produces(MediaType.APPLICATION_JSON + ";charset=UTF-8")
     @Consumes(MediaType.APPLICATION_JSON + ";charset=UTF-8")
-    @Path("{id}")
-    public LocalisationRDTO createLocalisation(@PathParam("id") Long id, LocalisationRDTO data);
+    public LocalisationRDTO createLocalisation(LocalisationRDTO data);
 
     /**
      * Deletes a localisation.
