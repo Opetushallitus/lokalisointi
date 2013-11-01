@@ -9,7 +9,7 @@
     <parent>
         <artifactId>pom</artifactId>
         <groupId>fi.vm.sade.lokalisointi</groupId>
-        <version>6.3-SNAPSHOT</version>
+        <version>7.1-SNAPSHOT</version>
     </parent>
 
     <properties>
