@@ -14,6 +14,7 @@
  */
 package fi.vm.sade.lokalisointii.util;
 
+import java.util.Locale;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -62,6 +63,10 @@ public class LokalisointiMessageSourceTest {
     @Test
     public void testResolveCode() {
         LOG.info("testResolveCode() -- {}", messageSource);
+
+        String value1 = messageSource.getMessage("test.key", null, Locale.ENGLISH);
+        LOG.info("  value1 = {}", value1);
+
     }
 
 }

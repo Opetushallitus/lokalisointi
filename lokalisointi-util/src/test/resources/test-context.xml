@@ -2,12 +2,14 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context"
-       xmlns:aop="http://www.springframework.org/schema/aop" xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:util="http://www.springframework.org/schema/util"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
-        http://www.springframework.org/schema/context
-        http://www.springframework.org/schema/context/spring-context.xsd
-       http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+        http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
 
+    <!-- "Normal" message source config -->
     <!--
         <bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
             <property name="basename" value="classpath:i18n/messages"/>
@@ -16,19 +18,32 @@
         </bean>
     -->
 
+    <bean id="defaultProps" class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+        <property name="properties">
+            <util:properties local-override="true">
+                <!--                <prop key="lokalisointi-service.rest.url">https://itest-virkailija.oph.ware.fi/lokalisointi-service/rest/v1/localisation</prop> -->
+                <prop key="lokalisointi-service.rest.url">http://luokka.hard.ware.fi:8319/lokalisointi-service/rest/v1/localisation</prop>
+            </util:properties>
+        </property>
+    </bean>
+
     <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="properties" ref="defaultProps"/>
         <property name="ignoreResourceNotFound" value="true" />
         <property name="locations">
             <list>
-                <value>classpath:app.properties</value>
-                <value>classpath:app-${my-project-profile}.properties</value>
+                <value>classpath:this-is-test.properties</value>
+                <value>classpath:this-is-test-too.properties</value>
             </list>
         </property>
     </bean>
 
-
+    <!--
+      Message source configuration using more dynamic service managed properties.
+    -->
     <bean id="messageSource" class="fi.vm.sade.lokalisointii.util.LokalisointiMessageSource">
-        <property name="" value="${lokalisointi-service.rest.url}"/>
+        <property name="category" value="tarjonta"/>
+        <property name="serviceUrl" value="${lokalisointi-service.rest.url}"/>
         <property name="useCodeAsDefaultMessage" value="true" />
     </bean>
 
