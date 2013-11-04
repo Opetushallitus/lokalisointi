@@ -8,15 +8,27 @@
         http://www.springframework.org/schema/context/spring-context.xsd
        http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
 
-<!--
-    <bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
-        <property name="basename" value="classpath:i18n/messages"/>
-        <property name="defaultEncoding" value="UTF-8"/>
-        <property name="useCodeAsDefaultMessage" value="true" />
+    <!--
+        <bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+            <property name="basename" value="classpath:i18n/messages"/>
+            <property name="defaultEncoding" value="UTF-8"/>
+            <property name="useCodeAsDefaultMessage" value="true" />
+        </bean>
+    -->
+
+    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="ignoreResourceNotFound" value="true" />
+        <property name="locations">
+            <list>
+                <value>classpath:app.properties</value>
+                <value>classpath:app-${my-project-profile}.properties</value>
+            </list>
+        </property>
     </bean>
--->
+
 
     <bean id="messageSource" class="fi.vm.sade.lokalisointii.util.LokalisointiMessageSource">
+        <property name="" value="${lokalisointi-service.rest.url}"/>
         <property name="useCodeAsDefaultMessage" value="true" />
     </bean>
 

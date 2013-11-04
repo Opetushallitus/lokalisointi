@@ -27,8 +27,8 @@
         <module>lokalisointi-app</module>
         <module>lokalisointi-service</module>
         <module>lokalisointi-api</module>
-    <module>lokalisointi-util</module>
-  </modules>
+<!--        <module>lokalisointi-util</module>  -->
+   </modules>
 
     <repositories>
         <repository>
