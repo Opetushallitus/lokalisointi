@@ -42,9 +42,6 @@ public class LocalisationResourceImpl implements LocalisationResource {
     private static final String ROLE_READ = "ROLE_APP_LOKALISOINTI_READ";
     private static final String ROLE_UPDATE = "ROLE_APP_LOKALISOINTI_READ_UPDATE";
     private static final String ROLE_CRUD = "ROLE_APP_LOKALISOINTI_CRUD";
-//    private static final String ROLE_READ = "ROLE_APP_OID_READ";
-//    private static final String ROLE_UPDATE = "ROLE_APP_OID_READ_UPDATE";
-//    private static final String ROLE_CRUD = "ROLE_APP_OID_CRUD";
 
     private static final Logger LOG = LoggerFactory.getLogger(LocalisationResourceImpl.class);
 
@@ -97,12 +94,12 @@ public class LocalisationResourceImpl implements LocalisationResource {
         return convert(l);
     }
 
-//    // TODO should be logged in but can have any role...
-//    @Secured({ROLE_READ})
+//    @Secured({ROLE_CRUD})
     @Override
     public LocalisationRDTO createLocalisation(LocalisationRDTO data) {
         LOG.info("createLocalisation({})", data);
 
+        // Just require logged in user so that we can create missing translations in any application VIA angualr apps too
         if (SecurityContextHolder.getContext() == null
                 || SecurityContextHolder.getContext().getAuthentication() == null
                 || SecurityContextHolder.getContext().getAuthentication().isAuthenticated() == false) {
