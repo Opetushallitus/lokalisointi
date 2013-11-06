@@ -23,6 +23,8 @@ import fi.vm.sade.lokalisointi.service.model.Localisation;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import javax.ws.rs.WebApplicationException;
+import javax.ws.rs.core.Response;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,22 +50,27 @@ public class LocalisationResourceImpl implements LocalisationResource {
     @Autowired
     private LocalisationDao localisationDao;
 
-    @Secured({ROLE_READ})
+    // @Secured({ROLE_READ})
     @Override
     public List<LocalisationRDTO> getLocalisations(LocalisationRDTO query) {
         LOG.info("getLocalisations({})", query);
 
-        List<Localisation> l;
+        try {
+            List<Localisation> l;
 
-        if (query != null) {
-            l = localisationDao.findBy(query.getId(), query.getCategory(), query.getKey(), query.getLocale());
-        } else {
-            l = localisationDao.findAll();
+            if (query != null) {
+                l = localisationDao.findBy(query.getId(), query.getCategory(), query.getKey(), query.getLocale());
+            } else {
+                l = localisationDao.findAll();
+            }
+
+            List<LocalisationRDTO> result = convert(l);
+            LOG.info("  --> result = {}", result);
+            return result;
+        } catch (Throwable ex) {
+            LOG.error("failed", ex);
+            throw new WebApplicationException(ex);
         }
-
-        List<LocalisationRDTO> result = convert(l);
-        LOG.info("  --> result = {}", result);
-        return result;
     }
 
     @Secured({ROLE_UPDATE})
@@ -71,13 +78,17 @@ public class LocalisationResourceImpl implements LocalisationResource {
     public LocalisationRDTO updateLocalisation(Long id, LocalisationRDTO data) {
         LOG.info("updateLocalisation({})", data);
         if (data == null) {
-            throw new NotFoundException("Invalud null input for update!");
+            throw new NotFoundException("Invalid null input for update!");
         }
 
-        Localisation t = localisationDao.findOne(data.getId(), data.getCategory(), data.getKey(), data.getLocale());
-        update(t, data);
-
-        return convert(t);
+        try {
+            Localisation t = localisationDao.findOne(data.getId(), data.getCategory(), data.getKey(), data.getLocale());
+            update(t, data);
+            return convert(t);
+        } catch (Throwable ex) {
+            LOG.error("failed", ex);
+            throw new WebApplicationException(ex, Response.Status.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @Secured({ROLE_UPDATE})
@@ -85,13 +96,18 @@ public class LocalisationResourceImpl implements LocalisationResource {
     public LocalisationRDTO updateLocalisationAccessed(Long id, LocalisationRDTO data) {
         LOG.info("updateLocalisationAccessed({})", data);
 
-        Localisation l = localisationDao.findOne(data.getId(), data.getCategory(), data.getKey(), data.getLocale());
-        if (l != null) {
-            l.setAccessed(new Date());
-            l = localisationDao.save(l);
-        }
+        try {
+            Localisation l = localisationDao.findOne(data.getId(), data.getCategory(), data.getKey(), data.getLocale());
+            if (l != null) {
+                l.setAccessed(new Date());
+                l = localisationDao.save(l);
+            }
 
-        return convert(l);
+            return convert(l);
+        } catch (Throwable ex) {
+            LOG.error("failed", ex);
+            throw new WebApplicationException(ex, Response.Status.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @Override
@@ -105,52 +121,63 @@ public class LocalisationResourceImpl implements LocalisationResource {
             throw new MessageException("NOT AUTHORIZED, only logged in users can create (initial) translations.");
         }
 
-        Localisation t = localisationDao.findOne((Long) null, data.getCategory(), data.getKey(), data.getLocale());
+        try {
 
-        if (t == null) {
-            t = new Localisation();
+            Localisation t = localisationDao.findOne((Long) null, data.getCategory(), data.getKey(), data.getLocale());
 
-            t.setCreated(new Date());
-            t.setCreatedBy(getCurrentUserName());
+            if (t == null) {
+                t = new Localisation();
 
-            t.setModified(new Date());
-            t.setModifiedBy(getCurrentUserName());
+                t.setCreated(new Date());
+                t.setCreatedBy(getCurrentUserName());
 
-            t.setAccessed(new Date());
+                t.setModified(new Date());
+                t.setModifiedBy(getCurrentUserName());
 
-            t.setCategory(data.getCategory());
-            t.setKey(data.getKey());
-            t.setLanguage(data.getLocale());
-            t.setAccessed(new Date());
+                t.setAccessed(new Date());
 
-            // NOTE do not accept any data in creation since it is not "trusted" used created :)
-            t.setDescription(null);
-            t.setValue("[" + t.getCategory() + "-" + t.getKey() + "-" + t.getLanguage() + "]");
+                t.setCategory(data.getCategory());
+                t.setKey(data.getKey());
+                t.setLanguage(data.getLocale());
+                t.setAccessed(new Date());
 
-            t.setDescription(data.getDescription());
-            t.setValue(data.getValue());
-            localisationDao.save(t);
+                // NOTE do not accept any data in creation since it is not "trusted" used created :)
+                t.setDescription(null);
+                t.setValue("[" + t.getCategory() + "-" + t.getKey() + "-" + t.getLanguage() + "]");
 
-        } else {
-            throw new NotFoundException("Localisation should not have been found: " + data);
+                t.setDescription(data.getDescription());
+                t.setValue(data.getValue());
+                localisationDao.save(t);
+
+            } else {
+                throw new NotFoundException("Localisation should not have been found: " + data);
+            }
+
+            return convert(t);
+        } catch (Throwable ex) {
+            LOG.error("failed", ex);
+            throw new WebApplicationException(ex, Response.Status.INTERNAL_SERVER_ERROR);
         }
-
-        return convert(t);
     }
 
     @Secured({ROLE_CRUD})
     @Override
     public LocalisationRDTO deleteLocalisation(Long id) {
         LOG.info("deleteLocalisation({})", id);
-        LocalisationRDTO result = null;
+        try {
+            LocalisationRDTO result = null;
 
-        Localisation l = localisationDao.findOne(id, null, null, null);
-        if (l != null) {
-            result = convert(l);
-            localisationDao.remove(l);
+            Localisation l = localisationDao.findOne(id, null, null, null);
+            if (l != null) {
+                result = convert(l);
+                localisationDao.remove(l);
+            }
+
+            return result;
+        } catch (Throwable ex) {
+            LOG.error("failed", ex);
+            throw new WebApplicationException(ex, Response.Status.INTERNAL_SERVER_ERROR);
         }
-
-        return result;
     }
 
     private List<LocalisationRDTO> convert(List<Localisation> l) {
