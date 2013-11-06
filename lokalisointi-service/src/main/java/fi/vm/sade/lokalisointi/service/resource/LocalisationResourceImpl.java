@@ -48,12 +48,12 @@ public class LocalisationResourceImpl implements LocalisationResource {
     @Autowired
     private LocalisationDao localisationDao;
 
-//    @Secured({ROLE_READ})
+    @Secured({ROLE_READ})
     @Override
     public List<LocalisationRDTO> getLocalisations(LocalisationRDTO query) {
         LOG.info("getLocalisations({})", query);
 
-        List<Localisation> l = null;
+        List<Localisation> l;
 
         if (query != null) {
             l = localisationDao.findBy(query.getId(), query.getCategory(), query.getKey(), query.getLocale());
@@ -94,12 +94,11 @@ public class LocalisationResourceImpl implements LocalisationResource {
         return convert(l);
     }
 
-//    @Secured({ROLE_CRUD})
     @Override
     public LocalisationRDTO createLocalisation(LocalisationRDTO data) {
         LOG.info("createLocalisation({})", data);
 
-        // Just require logged in user so that we can create missing translations in any application VIA angualr apps too
+        // Just require logged in user so that we can create missing translations in any application, VIA angualr apps too
         if (SecurityContextHolder.getContext() == null
                 || SecurityContextHolder.getContext().getAuthentication() == null
                 || SecurityContextHolder.getContext().getAuthentication().isAuthenticated() == false) {

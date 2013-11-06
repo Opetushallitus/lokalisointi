@@ -4,7 +4,7 @@
 
     <groupId>fi.vm.sade.lokalisointi</groupId>
     <artifactId>pom</artifactId>
-    <version>7.1-SNAPSHOT</version>
+    <version>8.0-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>Lokalisointi :: Parent</name>
 
@@ -44,4 +44,12 @@
         </repository>
     </repositories>
 
+    <pluginRepositories>
+      <pluginRepository>
+	<id>oph-sade-artifactory</id>
+        <name>oph-sade-artifactory-releases</name>
+        <url>http://penaali.hard.ware.fi/artifactory/libs-3rd-party</url>
+      </pluginRepository>
+    </pluginRepositories>
+    
 </project>
