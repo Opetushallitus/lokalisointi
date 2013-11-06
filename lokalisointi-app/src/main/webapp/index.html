@@ -39,10 +39,7 @@
 
         <script src="js/shared/loading.js"></script>
 
-        <script src="js/filters.js"></script>
-        <script src="js/directives.js"></script>
         <script src="js/services.js"></script>
-        <script src="js/controllers.js"></script>
         <script src="js/app.js"></script>
 
         <script src="lib/ui-bootstrap-tpls-0.6.0.js"></script>
@@ -56,15 +53,31 @@
 
     <body data-ng-controller="AppCtrl">
 
-        <div ng-repeat="msg in model.info">
-            {{msg | json }}
+        <div class="container" data-ng-if="model.info.length > 0">
+            <div data-ng-repeat="msg in model.info" data-ng-switch="msg.status">
+                <div data-ng-switch-when="OK" class="alert alert-success">
+                    <a class="close" data-dismiss="alert" data-ng-click="deleteMessage(msg)">×</a>
+                    OK
+                    {{ timedDeleteMessage(msg) }}
+                </div>
+                <div data-ng-switch-when="ERROR" class="alert alert-error">
+                    <a class="close" data-dismiss="alert" data-ng-click="deleteMessage(msg)">×</a>
+                    ERROR
+                    <pre>{{msg| json }}</pre>
+                </div>
+                <div data-ng-switch-default class="alert alert-info">
+                    <a class="close" data-dismiss="alert" data-ng-click="deleteMessage(msg)">×</a>
+                    INFO
+                    <pre>{{msg| json }}</pre>
+                </div>
+            </div>
         </div>
 
         <div class="container-fluid">
 
             <form name="localisationsForm" novalidate>
-                <div class="btn btn-primary" ng-click="reloadData()">Lataa käännökset uudelleen</div>
-                <div class="btn btn-primary" ng-click="saveAllModified()" ng-disabled="localisationsForm.$pristine">Tallenna kaikki muuttuneet</div>
+                <div class="btn btn-primary" data-ng-click="reloadData()">Lataa käännökset uudelleen</div>
+                <div class="btn btn-primary" data-ng-click="saveAllModified()" data-ng-disabled="localisationsForm.$pristine">Tallenna kaikki muuttuneet</div>
 
                 <table>
                     <tr>
@@ -74,10 +87,10 @@
 
                     <tr>
                         <td>-</td>
-                        <td><input type="text" ng-model="model.filterCategory" placeholder="Kategoria filtteri"></td>
-                        <td><input type="text" ng-model="model.filterKey" placeholder="Avain filtteri"></td>
-                        <td><input type="text" ng-model="model.filterLocale" placeholder="Locale filtteri" ></td>
-                        <td><input type="text" ng-model="model.filterValue" placeholder="Arvo filtteri" ></td>
+                        <td><input type="text" data-ng-model="model.filterCategory" placeholder="Kategoria filtteri"></td>
+                        <td><input type="text" data-ng-model="model.filterKey" placeholder="Avain filtteri"></td>
+                        <td><input type="text" data-ng-model="model.filterLocale" placeholder="Locale filtteri" ></td>
+                        <td><input type="text" data-ng-model="model.filterValue" placeholder="Arvo filtteri" ></td>
                     </tr>
 
                     <tr>
@@ -88,12 +101,12 @@
                         <th>Value</th>
                     </tr>
 
-                    <tr ng-repeat="l in model.localisations| filter: doFilter | orderBy: l.key" ng-class="{uiChanged: l.uiChanged}">
-                        <td><input type="checkbox" ng-model="l.uiDelete" ng-change="l.uiChanged = true"></td>
-                        <td><input type="text" ng-model="l.category" required ng-change="l.uiChanged = true"></td>
-                        <td><input type="text" ng-model="l.key" required ng-change="l.uiChanged = true"></td>
-                        <td><input type="text" ng-model="l.locale" required ng-change="l.uiChanged = true"></td>
-                        <td><textarea ng-model="l.value" ng-change="l.uiChanged = true" cols="10"></textarea></td>
+                    <tr data-ng-repeat="l in model.localisations| filter: doFilter | orderBy: l.key" data-ng-class="{uiChanged: l.uiChanged}">
+                        <td><input type="checkbox" data-ng-model="l.uiDelete" data-ng-change="l.uiChanged = true"></td>
+                        <td><input type="text" data-ng-model="l.category" required data-ng-change="l.uiChanged = true"></td>
+                        <td><input type="text" data-ng-model="l.key" required data-ng-change="l.uiChanged = true"></td>
+                        <td><input type="text" data-ng-model="l.locale" required data-ng-change="l.uiChanged = true"></td>
+                        <td><textarea data-ng-model="l.value" data-ng-change="l.uiChanged = true" cols="10"></textarea></td>
                     </tr>
                 </table>
 

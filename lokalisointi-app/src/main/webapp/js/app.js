@@ -15,10 +15,7 @@
 
 angular.module('app',
         [
-            'app.directives',
-            'app.filters',
             'app.services',
-            'app.controllers',
             'loading',
             'ngRoute',
             'ngResource',
@@ -44,6 +41,24 @@ angular.module('app').controller('AppCtrl', ['$scope', '$q', '$log', '$modal', '
             filterKey: "",
             filterValue: "",
             info: []
+        };
+
+        $scope.deleteMessage = function(msg) {
+            $log.info("deleteMessage()", msg);
+
+            var arr = $scope.model.info;
+            for (var i = arr.length; i--; ) {
+                if (arr[i] === msg) {
+                    arr.splice(i, 1);
+                }
+            }
+        };
+
+        $scope.timedDeleteMessage = function(msg) {
+            setTimeout(function() {
+                $scope.deleteMessage(msg);
+                $scope.$digest();
+            }, 3000);
         };
 
         $scope.filterCategoryWithCategory = function(item) {
@@ -121,7 +136,7 @@ angular.module('app').controller('AppCtrl', ['$scope', '$q', '$log', '$modal', '
                             item.$update(function(data, headers) {
                                 $scope.pushResult({status: "OK", data: data, headers: headers});
                             }, function(data, headers, xxx) {
-                                $scope.pushResult({statusx: "ERROR", datax: data, headersx: headers, xxx : xxx});
+                                $scope.pushResult({status: "ERROR", data: data, headers: headers, xxx: xxx});
                             }));
                 }
             }
