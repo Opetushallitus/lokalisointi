@@ -12,12 +12,9 @@
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  */
-
 package fi.vm.sade.lokalisointi.service;
 
 import fi.vm.sade.generic.healthcheck.SpringAwareHealthCheckServlet;
-
-
 
 /**
  *
