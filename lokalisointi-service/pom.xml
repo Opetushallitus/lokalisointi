@@ -95,6 +95,12 @@
             <version>${authentication.api.version}</version>
         </dependency>
 
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>2.2.4</version>
+            <type>jar</type>
+        </dependency>
 
         <dependency>
             <groupId>fi.vm.sade.generic</groupId>
@@ -123,7 +129,6 @@
             <artifactId>dbunit-support</artifactId>
             <scope>test</scope>
         </dependency>
-
 
         <dependency>
             <groupId>org.hsqldb</groupId>

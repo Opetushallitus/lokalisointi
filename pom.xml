@@ -18,7 +18,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.build.resourceEncoding>UTF-8</project.build.resourceEncoding>
 
-        <generic.version>7.0-SNAPSHOT</generic.version>
+        <generic.version>8.0-SNAPSHOT</generic.version>
         <log.version>7.0-SNAPSHOT</log.version>
 	<authentication.api.version>7.0-SNAPSHOT</authentication.api.version>
     </properties>
