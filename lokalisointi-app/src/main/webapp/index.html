@@ -81,7 +81,7 @@
 
                 <table>
                     <tr>
-                        <th colspan="4">Näytetään {{(model.localisations| filter: doFilter).length}}
+                        <th colspan="6">Näytetään {{(model.localisations| filter: doFilter).length}}
                             / {{model.localisations.length}} käännöstekstistä</th>
                     </tr>
 
@@ -91,14 +91,16 @@
                         <td><input type="text" data-ng-model="model.filterKey" placeholder="Avain filtteri"></td>
                         <td><input type="text" data-ng-model="model.filterLocale" placeholder="Locale filtteri" ></td>
                         <td><input type="text" data-ng-model="model.filterValue" placeholder="Arvo filtteri" ></td>
+                        <td>-</td>
                     </tr>
 
                     <tr>
                         <th>[POISTA]</th>
-                        <th>Category</th>
-                        <th>Key</th>
-                        <th>Locale</th>
-                        <th>Value</th>
+                        <th>Kategoria</th>
+                        <th>Avain</th>
+                        <th>Kieli</th>
+                        <th>Arvo</th>
+                        <th>Kuvaus</th>
                     </tr>
 
                     <tr data-ng-repeat="l in model.localisations| filter: doFilter | orderBy: l.key" data-ng-class="{uiChanged: l.uiChanged}">
@@ -107,6 +109,7 @@
                         <td><input type="text" data-ng-model="l.key" required data-ng-change="l.uiChanged = true"></td>
                         <td><input type="text" data-ng-model="l.locale" required data-ng-change="l.uiChanged = true"></td>
                         <td><textarea data-ng-model="l.value" data-ng-change="l.uiChanged = true" cols="10"></textarea></td>
+                        <td><textarea data-ng-model="l.description" data-ng-change="l.uiChanged = true" cols="10"></textarea></td>
                     </tr>
                 </table>
 

@@ -36,6 +36,10 @@
         <priority value="INFO"/>
     </category>
 
+    <category name="fi.vm.sade.security">
+        <priority value="INFO"/>
+    </category>
+
     <root>
         <appender-ref ref="CONSOLE"/>
     </root>
