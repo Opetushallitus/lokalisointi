@@ -32,12 +32,12 @@ input:invalid,textarea:invalid,select:invalid {
 }
 
 // .ng-pristine { border:1px solid Gold; }
-.ng-dirty.ng-valid { border:1px solid Green; }
-.ng-dirty.ng-invalid { border:1px solid Red; }
-.ng-dirty.ng-valid ~ span.ok { color:green; display:inline; }
-.ng-dirty.ng-invalid ~ span.ko { color:red; display:inline; }
+// .ng-dirty.ng-valid { border:1px solid Green; }
+// .ng-dirty.ng-invalid { border:1px solid Red; }
+// .ng-dirty.ng-valid ~ span.ok { color:green; display:inline; }
+// .ng-dirty.ng-invalid ~ span.ko { color:red; display:inline; }
 
-tr.uiChanged { background-color: #9999ff}
+tr.uiChanged { background-color: #ccf0ed}
 
 table tr  td {vertical-align: top;}
 
