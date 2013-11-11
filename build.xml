@@ -43,21 +43,16 @@
                keyfile="${ssh.keyfile}" passphrase="${ssh.keypass}" verbose="true">
 			
 			<!-- deploy lates from local maven repo -->
-			<fileset dir="${maven.repo}/fi/vm/sade/lokalisointi/lokalisointi-service/${pom.version}">
-				<include name="*.war"/>
-			</fileset>
-			<fileset dir="${maven.repo}/fi/vm/sade/lokalisointi/lokalisointi-app/${pom.version}">
+			<fileset dir="${maven.repo}/fi/vm/sade/lokalisointi/lokalisointi/${pom.version}">
 				<include name="*.war"/>
 			</fileset>
 		</scp>
 
-		<echo>unzip lokalisointi-service.war</echo>
+		<echo>unzip lokalisointi.war</echo>
         <sshexec command="
-				mkdir ${tomcat.home}/webapps/lokalisointi-service;
-				mkdir ${tomcat.home}/webapps/lokalisointi-app;
+				mkdir ${tomcat.home}/webapps/lokalisointi;
 				
-				unzip -qo -d${tomcat.home}/webapps/lokalisointi-service ${tomcat.home}/webapps/lokalisointi-service*.war;
-				unzip -qo -d${tomcat.home}/webapps/lokalisointi-app ${tomcat.home}/webapps/lokalisointi-app*.war;
+				unzip -qo -d${tomcat.home}/webapps/lokalisointi ${tomcat.home}/webapps/lokalisointi*.war;
 				
 				rm -rf ${tomcat.home}/webapps/*.war;
 				"
@@ -77,18 +72,14 @@
 		<echo>Wait for service http-url</echo>
 		<waitfor maxwait="30000" checkevery="500" >
 			<and>
-			<http url="http://${tomcat-host}:${tomcat-port}/lokalisointi-service"/>
-			<http url="http://${tomcat-host}:${tomcat-port}/lokalisointi-app"/>
+			<http url="http://${tomcat-host}:${tomcat-port}/lokalisointi"/>
 			</and>
 		</waitfor>
 		<fail message="App did not come up.  Check your log files, fix and try again.  Good Luck :-).">     
 			<condition>
 				<or>
 					<not>
-						<http url="http://${tomcat-host}:${tomcat-port}/lokalisointi-service" />
-					</not>
-					<not>
-						<http url="http://${tomcat-host}:${tomcat-port}/lokalisointi-app" />
+						<http url="http://${tomcat-host}:${tomcat-port}/lokalisointi" />
 					</not>
 				</or>
 			</condition>
