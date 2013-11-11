@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="fi">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="Lokalisointi">
+        <meta name="author" content="Opetushallitus">
+        <title>Lokalisointi</title>
+
+        <script src="lib/jquery-1.10.2.min.js"></script>
+        <script src="lib/jquery-ui.min.js"></script>
+
+        <!--
+          Environment configuration file(s): ext/* - development only - see actual values from service filters.
+        -->
+        <script src="ext/js/env-configuration.js"></script>
+
+        <!--
+        Application configuration file(s):
+        -->
+        <script src="js/app-configuration.js"></script>
+        <!--
+         Developer configuration file(s):
+        -->
+        <script src="dev/dev-configuration.js"></script>
+
+        <!--
+        Angular, see version.txt for version.
+        -->
+        <script src="lib/angular/angular.js"></script>
+        <script src="lib/angular/angular-resource.js"></script>
+        <script src="lib/angular/angular-route.js"></script>
+        <script src="lib/angular/angular-sanitize.js"></script>
+        <script src="lib/angular/angular-animate.js"></script>
+
+        <script src="lib/underscore/underscore.js"></script>
+        <script src="lib/tinymce/tinymce.min.js"></script>
+        <script src="lib/ui-angular-tinymce.js"></script>
+
+        <script src="js/shared/loading.js"></script>
+
+        <script src="js/services.js"></script>
+        <script src="js/app.js"></script>
+
+        <script src="lib/ui-bootstrap-tpls-0.6.0.js"></script>
+
+        <link href="lib/bootstrap-combined.min.css" rel="stylesheet">
+        <link href="css/virkailija.css" rel="stylesheet"/>
+        <link href="css/app.css" rel="stylesheet"/>
+
+        <script type="text/javascript" src="/virkailija-raamit/apply-raamit.js"></script>
+    </head>
+
+    <body data-ng-controller="AppCtrl">
+
+        <div class="container" data-ng-if="model.info.length > 0">
+            <div data-ng-repeat="msg in model.info" data-ng-switch="msg.status">
+                <div data-ng-switch-when="OK" class="alert alert-success">
+                    <a class="close" data-dismiss="alert" data-ng-click="deleteMessage(msg)">×</a>
+                    OK
+                    {{ timedDeleteMessage(msg) }}
+                </div>
+                <div data-ng-switch-when="ERROR" class="alert alert-error">
+                    <a class="close" data-dismiss="alert" data-ng-click="deleteMessage(msg)">×</a>
+                    ERROR
+                    <pre>{{msg| json }}</pre>
+                </div>
+                <div data-ng-switch-default class="alert alert-info">
+                    <a class="close" data-dismiss="alert" data-ng-click="deleteMessage(msg)">×</a>
+                    INFO
+                    <pre>{{msg| json }}</pre>
+                </div>
+            </div>
+        </div>
+
+        <div class="container-fluid">
+
+            <form name="localisationsForm" novalidate>
+                <div class="btn btn-primary" data-ng-click="reloadData()">Lataa käännökset uudelleen</div>
+                <div class="btn btn-primary" data-ng-click="saveAllModified()" data-ng-disabled="localisationsForm.$pristine">Tallenna kaikki muuttuneet</div>
+
+                <table>
+                    <tr>
+                        <th colspan="6">Näytetään {{(model.localisations| filter: doFilter).length}}
+                            / {{model.localisations.length}} käännöstekstistä</th>
+                    </tr>
+
+                    <tr>
+                        <td>-</td>
+                        <td><input type="text" data-ng-model="model.filterCategory" placeholder="Kategoria filtteri"></td>
+                        <td><input type="text" data-ng-model="model.filterKey" placeholder="Avain filtteri"></td>
+                        <td><input type="text" data-ng-model="model.filterLocale" placeholder="Locale filtteri" ></td>
+                        <td><input type="text" data-ng-model="model.filterValue" placeholder="Arvo filtteri" ></td>
+                        <td>--</td>
+                    </tr>
+
+                    <tr>
+                        <th>[POISTA]</th>
+                        <th>Kategoria</th>
+                        <th>Avain</th>
+                        <th>Kieli</th>
+                        <th>Arvo</th>
+                        <th>Kuvaus</th>
+                    </tr>
+
+                    <tr data-ng-repeat="l in model.localisations| filter: doFilter | orderBy: l.key" data-ng-class="{uiChanged: l.uiChanged}">
+                        <td><input type="checkbox" data-ng-model="l.uiDelete" data-ng-change="l.uiChanged = true"></td>
+                        <td><input type="text" data-ng-model="l.category" required data-ng-change="l.uiChanged = true"></td>
+                        <td><input type="text" data-ng-model="l.key" required data-ng-change="l.uiChanged = true"></td>
+                        <td><input type="text" data-ng-model="l.locale" required data-ng-change="l.uiChanged = true"></td>
+                        <td><textarea data-ng-model="l.value" data-ng-change="l.uiChanged = true" cols="10"></textarea></td>
+                        <td><textarea data-ng-model="l.description" data-ng-change="l.uiChanged = true" cols="10"></textarea></td>
+                    </tr>
+                </table>
+
+            </form>
+
+        </div>
+
+        <div data-ng-controller="LoadingCtrl"
+             data-ng-show="loading"
+             id="ajax-loader"
+             class="{{ isModal() ? 'max' : 'min'}}">
+            <div>
+                <img alt="Ladataan..." src="img/ajax-loader-big.gif" />
+                <span>Ladataan...</span>
+            </div>
+        </div>
+
+        <script>
+                var init_counter = 0;
+                var initFunction = function(id, xhr, status) {
+                    init_counter--;
+
+                    console.log("Got ready signal from: " + id);
+                    console.log("  status = ", status);
+                    console.log("  xhr = ", xhr);
+
+                    if (init_counter > 0) {
+                        console.log("Got ready signal from: '" + id + "' -- still waiting for " + init_counter + " requests.");
+                    } else {
+                        console.log("OK! That was the last request, init the app!");
+
+                        angular.element(document).ready(function() {
+                            angular.module('myApp', ['app']);
+                            angular.bootstrap(document, ['myApp']);
+                        });
+                    }
+                };
+
+
+                //
+                // Get current users authorisation info (/cas/myroles)
+                //
+                console.log("** Loading authentication info; from: ", window.CONFIG.env.casUrl);
+                init_counter++;
+                jQuery.ajax(window.CONFIG.env.casUrl, {
+                    dataType: "json",
+                    success: function(xhr, status) {
+                        window.CONFIG.env["cas.myroles"] = xhr;
+                        initFunction("AUTHENTICATION", xhr, status);
+                    },
+                    error: function(xhr, status) {
+                        window.CONFIG.env["cas.myroles"] = [];
+                        initFunction("AUTHENTICATION FAILED", xhr, status);
+                    }
+                });
+
+//                //
+//                // Preloadt application localisation
+//                //
+//                var localisationUrl = window.CONFIG.env.lokalisointiRestUrl;
+//                console.log("** Loading localisation info; from: ", localisationUrl);
+//                init_counter++;
+//                jQuery.ajax(localisationUrl, {
+//                    dataType: "json",
+//                    complete: function(xhr, status) {
+//                        window.CONFIG.env["localisations"] = xhr.responseJSON;
+//                        initFunction("localisations", xhr, status);
+//                    },
+//                    error: function(xhr, status) {
+//                        window.CONFIG.env["localisations"] = [];
+//                        initFunction("localisations FAILED", xhr, status);
+//                    }
+//                });
+        </script>
+
+    </body>
+</html>

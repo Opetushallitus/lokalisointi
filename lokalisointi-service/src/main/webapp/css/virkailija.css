@@ -1,0 +1,135 @@
+/* TYYLIKIRJASTO VIRKAILIJAN TYÖPÖYTÄKÄYTTÖLIITTYMÄÄ VARTEN */
+/* Täydentää bootstrap 2.3.1 css tyylejä */
+/* Tämä tyylikirjasto ladataan bootstrap versio 2.3.1 tyylitiedoston jälkeen */
+
+/* NAPPULAT */
+
+/* normaalikokoinen perusnappula */
+.btn {
+	color:#333333;
+border-radius: 3px;
+border-color: rgb(146, 204, 224);
+font-size: 13px;
+background-color: rgb(210, 236, 245);
+text-shadow: none; 
+background-image: none;
+-webkit-box-shadow:inset 1px 1px 1px rgba(223,242,248,1.0);
+   -moz-box-shadow:inset 1px 1px 1px rgba(223,242,248,1.0);
+        box-shadow:inset 1px 1px 1px rgba(223,242,248,1.0);    
+}
+
+/* */
+.btn:hover,
+.btn:focus,
+.btn:active,
+.btn.active,
+.btn.disabled,
+.btn[disabled] {
+  text-shadow: none;
+  background-image: none;
+  border-color: rgb( 89, 174, 202 );
+  border-radius: 3px;
+  background-color: rgb(159, 219, 240);
+  color:#333333;
+}   
+
+/* alaspainettu nappula, varjostusmaski */
+.btn.active,
+.btn:active  {
+  background-image: none;
+  outline: 0;
+  -webkit-box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.15);
+     -moz-box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.15);
+          box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.15);
+}
+
+/* Inaktiivinen nappula*/
+.btn.disabled,
+.btn[disabled] {
+  cursor: default;
+  color: #333333;    
+  background-image:url("../img/disabled-pat.png");
+  background-repeat: repeat;
+  border: 1px solid #ababab;
+  box-shadow: none;    
+}
+
+/* iso nappula*/
+.btn-large {
+  padding: 11px 19px;
+  font-size: 13px;
+  background-color: #d2ecf5;
+  -webkit-border-radius: 3px;
+     -moz-border-radius: 3px;
+          border-radius: 3px;
+}
+
+/* primary-nappula */
+.btn-primary {
+  color: #333333;
+  text-shadow: none;
+  background-color: #feba00;
+  background-image: none;
+  border: 1px solid #dea300;
+  -webkit-box-shadow:inset 1px 1px 1px rgba(253, 237, 193,1.0);
+     -moz-box-shadow:inset 1px 1px 1px rgba(253, 237, 193,1.0);
+          box-shadow:inset 1px 1px 1px rgba(253, 237, 193,1.0);    
+  }
+
+/* primary-nappula, hover ja active*/
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary:active,
+.btn-primary.active,
+.btn-primary.disabled,
+.btn-primary[disabled]  {
+  color: #333333;
+  background-color: #e99f00;
+  border-color:#c69100;
+  -webkit-box-shadow:inset 1px 1px 1px rgba(253, 237, 193, 1.0);
+     -moz-box-shadow:inset 1px 1px 1px rgba(253, 237, 193, 1.0);
+          box-shadow:inset 1px 1px 1px rgba(253, 237, 193, 1.0);
+}
+
+/* alaspainettu primary-nappula, varjostusmaski */
+.btn-primary:active,
+.btn-primary.active {
+  -webkit-box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.15);
+     -moz-box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.15);
+          box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.15);    
+}
+
+/* muutetaan inaktiivisen nappulan ääriviiva harmaaksi ja poistetaan sisävarjostus */
+.btn-primary.disabled,
+.btn-primary[disabled] {
+  border-color:#ababab;
+  box-shadow: none;
+}
+
+body {
+  font-size: 13px;
+}
+
+h1 {
+  font-size: 28px;
+}
+
+h2 {
+  font-size: 22px;
+}
+
+h3 {
+  font-size: 18px;
+}
+
+h4 {
+  font-size: 16px;
+}
+
+h5 {
+  font-size: 13px;
+}
+
+h6 {
+  font-size: 12px;
+}
