@@ -24,7 +24,6 @@
     </properties>
 
     <modules>
-        <module>lokalisointi-app</module>
         <module>lokalisointi-service</module>
         <module>lokalisointi-api</module>
         <module>lokalisointi-util</module>
