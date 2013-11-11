@@ -2,9 +2,9 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>fi.vm.sade.lokalisointi</groupId>
-    <artifactId>lokalisointi-service</artifactId>
+    <artifactId>lokalisointi</artifactId>
     <packaging>war</packaging>
-    <name>Lokalisointi :: Service</name>
+    <name>Lokalisointi :: Lokalisointi</name>
 
     <parent>
         <artifactId>pom</artifactId>
