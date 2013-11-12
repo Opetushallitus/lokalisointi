@@ -45,7 +45,8 @@ public interface LocalisationResource {
     public List<LocalisationRDTO> getLocalisations(@QueryParam("") LocalisationRDTO query);
 
     /**
-     * Update exisiting localisation.
+     * Update exisiting localisation. If a localisation is found via ID the it is updated - otherwise
+     * a localisation is searched with category, key and locale and is´ only one is found then its value + description is updated.
      *
      * @param id
      * @param data

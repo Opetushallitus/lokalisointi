@@ -46,7 +46,7 @@ public class LocalisationDaoImpl extends AbstractJpaDAOImpl<Localisation, Long> 
         // What is good 1=1 expression in Mysema?
         BooleanExpression whereExpr = qLocalisation.id.ne(Long.MAX_VALUE);
 
-        if (id != null) {
+        if (id != null && id >= 0) {
             // Search by ID
             whereExpr = qLocalisation.id.eq(id);
         } else {

@@ -121,8 +121,10 @@ public class LocalisationResourceImpl implements LocalisationResource {
             throw new MessageException("NOT AUTHORIZED, only logged in users can create (initial) translations.");
         }
 
-        try {
+        Throwable failure = null;
 
+        try {
+            // Find already existing? (shoud not be found)
             Localisation t = localisationDao.findOne((Long) null, data.getCategory(), data.getKey(), data.getLocale());
 
             if (t == null) {
@@ -147,8 +149,9 @@ public class LocalisationResourceImpl implements LocalisationResource {
 
                 t.setDescription(data.getDescription());
                 t.setValue(data.getValue());
-                localisationDao.save(t);
 
+                // Save it
+                localisationDao.save(t);
             } else {
                 throw new NotFoundException("Localisation should not have been found: " + data);
             }

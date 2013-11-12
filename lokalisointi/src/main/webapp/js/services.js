@@ -24,7 +24,7 @@ app.factory('Localisations', function($log, $resource, globalConfig) {
 
     $log.info("Localisations() - uri = ", uri);
 
-    return $resource(uri, {id : "@id"}, {
+    return $resource(uri, {id: "@id"}, {
         query: {
             method: 'GET',
             withCredentials: true,
@@ -52,13 +52,15 @@ app.service('LocalisationService', function($log, $q, Localisations, globalConfi
 
         var deferred = $q.defer();
 
-        Localisations.delete(entry, function(data, status, headers, config) {
-            $log.info("  delete() - OK", data, status, headers, config);
-            deferred.resolve(entry);
-        }, function(data, status, headers, config) {
-            $log.error("  delete() - ERROR", data, status, headers, config, entry);
-            deferred.reject(entry);
-        });
+        Localisations.delete(entry,
+                function(data, status, headers, config) {
+                    $log.info("  delete() - OK", data, status, headers, config);
+                    deferred.resolve(entry);
+                },
+                function(data, status, headers, config) {
+                    $log.error("  delete() - ERROR", data, status, headers, config, entry);
+                    deferred.reject(entry);
+                });
 
         return deferred.promise;
     };
@@ -69,13 +71,52 @@ app.service('LocalisationService', function($log, $q, Localisations, globalConfi
         var deferred = $q.defer();
 
         // Try to save to the server
-        Localisations.save(entry, function(data, status, headers, config) {
-            $log.info("  save() - OK", data, status, headers, config);
-            deferred.resolve(entry);
-        }, function(data, status, headers, config) {
-            $log.error("  save() - ERROR", data, status, headers, config, entry);
-            deferred.reject(entry);
-        });
+        Localisations.save(entry,
+                function(data, status, headers, config) {
+                    $log.info("  save() - OK", data, status, headers, config);
+
+                    // OK - this is a new entry - so update the values to be correct
+                    data.category = entry.category;
+                    data.key = entry.key;
+                    data.locale = entry.locale;
+                    data.value = entry.value;
+                    data.description = entry.description;
+
+                    // And update it then
+                    Localisations.update(data,
+                            function(data2, status2, headers2, config2) {
+                                $log.info("  save() - OK - update() - OK", data2, status2, headers2, config2);
+                                deferred.resolve(entry);
+                            },
+                            function(data2, status2, headers2, config2) {
+                                $log.info("  save() - OK - update() - ERROR", data2, status2, headers2, config2);
+                                deferred.reject(entry);
+                            });
+
+                },
+                function(data, status, headers, config) {
+                    $log.info("  save() - ERROR, try to update still :)", data, status, headers, config, entry);
+
+                    // "insert" failed - maybe existing translation - try to update
+                    data = {}
+                    data.id = -1;
+                    data.category = entry.category;
+                    data.key = entry.key;
+                    data.locale = entry.locale;
+                    data.value = entry.value;
+                    data.description = entry.description;
+
+                    // And update it then
+                    Localisations.update(data,
+                            function(data2, status2, headers2, config2) {
+                                $log.info("  save() - ERROR - update() - OK", data2, status2, headers2, config2);
+                                deferred.resolve(entry);
+                            },
+                            function(data2, status2, headers2, config2) {
+                                $log.info("  save() - ERROR - update - ERROR", data2, status2, headers2, config2);
+                                deferred.reject(entry);
+                            });
+                });
 
         return deferred.promise;
     };
@@ -85,15 +126,17 @@ app.service('LocalisationService', function($log, $q, Localisations, globalConfi
 
         var deferred = $q.defer();
 
-        Localisations.query({}, function(data) {
-            $log.log("  reload() - successfull", data);
-            globalConfig.env.localisations = data;
-            deferred.resolve(data);
-        }, function(data) {
-            $log.error("  reload() - FAILED", data);
-            globalConfig.env.localisations = [];
-            deferred.reject(data);
-        });
+        Localisations.query({},
+                function(data) {
+                    $log.log("  reload() - successfull", data);
+                    globalConfig.env.localisations = data;
+                    deferred.resolve(data);
+                },
+                function(data) {
+                    $log.error("  reload() - FAILED", data);
+                    globalConfig.env.localisations = [];
+                    deferred.reject(data);
+                });
 
         return deferred.promise;
     };

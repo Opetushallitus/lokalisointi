@@ -194,7 +194,8 @@ angular.module('app').controller('AppCtrl:TransferController', ['$scope', '$log'
 
         $scope.model = {
             // Reppu by default
-            copyFrom: "https://test-virkailija.oph.ware.fi/lokalisointi/cxf/rest/v1/localisation",
+            // copyFrom: "https://test-virkailija.oph.ware.fi/lokalisointi/cxf/rest/v1/localisation",
+            copyFrom: "localisations.json",
             result: ""
         };
 
@@ -210,40 +211,38 @@ angular.module('app').controller('AppCtrl:TransferController', ['$scope', '$log'
             $resource($scope.model.copyFrom).query({},
 
                     // OK, translations loaded
-                    function(data) {
-                        console.log("SUCCESS : " + data);
+                    function(data, status, headers, config) {
+                        console.log("SUCCESS : ", data);
+                        $scope.model.result = "OK, käännökset luettu, käsittelen...";
 
-//                        // Loop over and access all translations so that undefined will be created
-//                        for (var i = 0; i < data.length; i++) {
-//                            var l = data[i];
-//                            LocalisationService.tl(l.key, l.locale);
-//                        }
-//
-//                        $scope.model.result = "Käännökset luettu, odota hetki...";
-//
-//                        var updateCount = 0;
-//
-//                        // Update values, reserve 10s for this
-//                        setTimeout(function() {
-//                            // Loop over and update values
-//                            for (var i = 0; i < data.length; i++) {
-//                                var l = data[i];
-//
-//                                LocalisationService.update(l).then(function () {
-//                                    updateCount++;
-//                                    $scope.model.result = "Päivitän... " + updateCount + " / " + data.length;
-//                                });
-//                            }
-//
-//                            // Update values
-//                            setTimeout(function() {
-//                                $modalInstance.close();
-//                            }, 10000);
-//                        }, 5000);
+                        var errorCount = 0;
+                        var updateCount = 0;
+
+                        // Loop over and access all translations so that undefined will be created
+                        for (var i = 0; i < data.length; i++) {
+                            var l = data[i];
+                            $log.info("  processing: " + i + " - ", l);
+
+                            LocalisationService.save(l).then(
+                                    function(newEntry) {
+                                        updateCount++;
+                                        $log.info("  updated: " + updateCount);
+                                        $scope.model.result = "Päivitän: " + updateCount + " / " + data.length + " -- errors = " + errorCount;
+                                    },
+                                    function(reason) {
+                                        $log.error("  save failed: ", l, reason);
+                                        errorCount++;
+                                        $scope.model.result = "Päivitän: " + updateCount + " / " + data.length + " -- errors = " + errorCount;
+                                    });
+                        }
+
+                        setTimeout(function() {
+                            $modalInstance.close();
+                        }, 10000);
                     },
-                    function() {
-                        console.log("ERROR");
-                        $scope.model.result = "FAILED!";
+                    function(data, status, headers, config) {
+                        console.log("ERROR", data, status, headers, config);
+                        $scope.model.result = "Hups, käännösten lataaminen epäonnistui!";
                     });
         };
 

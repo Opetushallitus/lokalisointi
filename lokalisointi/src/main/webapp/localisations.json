@@ -1,0 +1,17 @@
+[ {
+  "key" : "test.three",
+  "locale" : "sv",
+  "value" : "test 3 sv AAA",
+  "category" : "tarjonta"
+}, {
+  "key" : "test.three",
+  "locale" : "fi",
+  "value" : "test 3 fi AAA",
+  "category" : "tarjonta"
+}, {
+  "key" : "test.three",
+  "locale" : "en",
+  "value" : "test 3 en AAA",
+  "category" : "tarjonta",
+  "description" : "test description test three 3 en"
+} ]

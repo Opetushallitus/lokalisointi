@@ -79,6 +79,7 @@
                 <div class="btn btn-primary" data-ng-click="reloadData()">Lataa käännökset uudelleen</div>
                 <div class="btn btn-primary" data-ng-click="saveAllModified()" data-ng-disabled="localisationsForm.$pristine">Tallenna kaikki muuttuneet</div>
                 <div class="btn btn-primary" ng-click="openDialog()">Kopiointi</div>
+                <a href="/lokalisointi/cxf/rest/v1/localisation">Lataa (Save Link As...)</a>
 
                 <table>
                     <tr>
@@ -104,11 +105,16 @@
                         <th>Kuvaus</th>
                     </tr>
 
-                    <tr data-ng-repeat="l in model.localisations| filter: doFilter | orderBy: l.key" data-ng-class="{uiChanged: l.uiChanged}">
+                    <tr data-ng-repeat="l in model.localisations| filter: doFilter | orderBy: ['category', 'key', 'locale']" data-ng-class="{uiChanged: l.uiChanged}">
                         <td><input type="checkbox" data-ng-model="l.uiDelete" data-ng-change="l.uiChanged = true"></td>
+                        <td>{{ l.category }}</td>
+                        <td>{{ l.key }}</td>
+                        <td>{{ l.locale }}</td>
+<!--
                         <td><input type="text" data-ng-model="l.category" required data-ng-change="l.uiChanged = true"></td>
                         <td><input type="text" data-ng-model="l.key" required data-ng-change="l.uiChanged = true"></td>
                         <td><input type="text" data-ng-model="l.locale" required data-ng-change="l.uiChanged = true"></td>
+-->
                         <td><textarea data-ng-model="l.value" data-ng-change="l.uiChanged = true" cols="10"></textarea></td>
                         <td><textarea data-ng-model="l.description" data-ng-change="l.uiChanged = true" cols="10"></textarea></td>
                     </tr>
