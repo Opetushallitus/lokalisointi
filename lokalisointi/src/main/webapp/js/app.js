@@ -161,13 +161,96 @@ angular.module('app').controller('AppCtrl', ['$scope', '$q', '$log', '$modal', '
             $scope.model.info.push(info);
         };
 
+        /**
+         * Copy from uri to current environment.
+         *
+         * @returns {undefined}
+         */
+        $scope.openDialog = function() {
+
+            var modalInstance = $modal.open({
+                scope: $scope,
+                templateUrl: 'localisationTransferDialog.html',
+                controller: 'AppCtrl:TransferController'
+            });
+
+        };
+
+
+
+
         // Trigger reload
         $scope.reloadData();
     }]);
 
 
+
+
+/**
+ * Transferring localisations from one environment to another.
+ */
+angular.module('app').controller('AppCtrl:TransferController', ['$scope', '$log', '$resource', 'LocalisationService', '$modalInstance',
+    function($scope, $log, $resource, LocalisationService, $modalInstance) {
+
+        $scope.model = {
+            // Reppu by default
+            copyFrom: "https://test-virkailija.oph.ware.fi/lokalisointi/cxf/rest/v1/localisation",
+            result: ""
+        };
+
+        $scope.transferDialogCancel = function() {
+            $log.info("transferDialogCancel()" + $modalInstance);
+            $modalInstance.close();
+        };
+
+        $scope.transferDialogOk = function() {
+            $log.info("transferDialogOk()" + $modalInstance);
+
+            // Get data
+            $resource($scope.model.copyFrom).query({},
+
+                    // OK, translations loaded
+                    function(data) {
+                        console.log("SUCCESS : " + data);
+
+//                        // Loop over and access all translations so that undefined will be created
+//                        for (var i = 0; i < data.length; i++) {
+//                            var l = data[i];
+//                            LocalisationService.tl(l.key, l.locale);
+//                        }
 //
-// "Production" mode
+//                        $scope.model.result = "Käännökset luettu, odota hetki...";
+//
+//                        var updateCount = 0;
+//
+//                        // Update values, reserve 10s for this
+//                        setTimeout(function() {
+//                            // Loop over and update values
+//                            for (var i = 0; i < data.length; i++) {
+//                                var l = data[i];
+//
+//                                LocalisationService.update(l).then(function () {
+//                                    updateCount++;
+//                                    $scope.model.result = "Päivitän... " + updateCount + " / " + data.length;
+//                                });
+//                            }
+//
+//                            // Update values
+//                            setTimeout(function() {
+//                                $modalInstance.close();
+//                            }, 10000);
+//                        }, 5000);
+                    },
+                    function() {
+                        console.log("ERROR");
+                        $scope.model.result = "FAILED!";
+                    });
+        };
+
+    }]);
+
+//
+// "Production" mode?
 //
 angular.module('app').config(function($logProvider) {
     $logProvider.debugEnabled(true);
