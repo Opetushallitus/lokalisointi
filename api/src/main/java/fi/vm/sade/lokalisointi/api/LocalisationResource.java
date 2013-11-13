@@ -35,6 +35,16 @@ import javax.ws.rs.core.MediaType;
 public interface LocalisationResource {
 
     /**
+     * This method is for development purposes so that developer can authorize via CAS if needed.
+     *
+     * @return
+     */
+    @GET
+    @Produces(MediaType.TEXT_PLAIN)
+    @Path("/authorize")
+    public String authorize();
+
+    /**
      * Loads ALL localisations with given prefix (if any).
      *
      * @param query "Localisation object" that can be used in query, ie. "category", "locale", "key", etc.
