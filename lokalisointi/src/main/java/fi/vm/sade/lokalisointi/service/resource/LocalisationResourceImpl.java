@@ -50,6 +50,14 @@ public class LocalisationResourceImpl implements LocalisationResource {
     @Autowired
     private LocalisationDao localisationDao;
 
+    @Secured({ROLE_READ})
+    @Override
+    public String authorize() {
+        LOG.info("authorize()");
+        return getCurrentUserName();
+    }
+
+
     // @Secured({ROLE_READ})
     @Override
     public List<LocalisationRDTO> getLocalisations(LocalisationRDTO query) {
