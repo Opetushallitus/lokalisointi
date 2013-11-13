@@ -1,6 +1,6 @@
 #!/bin/sh
 #update angular libs
-version=1.2.0-rc.3
+version=1.2.0
 files=`ls *.js`
 
 echo files:$files
