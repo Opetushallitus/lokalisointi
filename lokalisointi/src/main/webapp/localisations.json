@@ -1,4001 +1,2051 @@
 [ {
-  "value" : "Organisations typ",
-  "key" : "organisaatiohaku.organisaatiotyypit.prompt",
-  "locale" : "sv",
-  "created" : 1384332982103,
-  "category" : "tarjonta",
-  "accessed" : 1384333220298,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384333220298,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Staten",
-  "key" : "tarjonta.hakutulokset.tila",
-  "locale" : "sv",
-  "created" : 1384332982196,
-  "category" : "tarjonta",
-  "accessed" : 1384333528722,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384333528722,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Transfer eller kopie",
-  "key" : "tarjonta.toiminnot.siirra_tai_kopioi",
-  "locale" : "sv",
-  "created" : 1384332982192,
-  "category" : "tarjonta",
-  "accessed" : 1384333528724,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384333528724,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "test one en",
-  "key" : "test.one",
-  "locale" : "en",
-  "created" : 1383741193340,
-  "category" : "tarjonta",
-  "accessed" : 1383825489888,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1383825489888,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "test one fix",
-  "key" : "test.one",
-  "locale" : "fi",
-  "created" : 1383741094746,
-  "category" : "tarjonta",
-  "accessed" : 1384332943441,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332943441,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Sökninstyp",
-  "key" : "tarjonta.hakutulokset.hakutapa",
-  "locale" : "sv",
-  "created" : 1384332981933,
-  "category" : "tarjonta",
-  "accessed" : 1384333528723,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384333528723,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Gör ny sökningstargetten",
-  "key" : "tarjonta.toiminnot.luo_uusi_hakukohde",
-  "locale" : "sv",
-  "created" : 1384332982081,
-  "category" : "tarjonta",
-  "accessed" : 1384333528730,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384333528730,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Hakukausi",
-  "key" : "tarjonta.hakutulokset.hakukausi",
-  "locale" : "fi",
-  "created" : 1384332981837,
-  "category" : "tarjonta",
-  "accessed" : 1384332984034,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332984034,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Visa också planerat",
-  "key" : "organisaatiohaku.label.nayta.myos.suunnitellut",
-  "locale" : "sv",
-  "created" : 1384332981693,
-  "category" : "tarjonta",
-  "accessed" : 1384333220272,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384333220272,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "staten",
-  "key" : "tarjonta.haku.tila",
-  "locale" : "sv",
-  "created" : 1384332981754,
-  "category" : "tarjonta",
-  "accessed" : 1384333528592,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384333528592,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Maksullisuustieto vaaditaan",
   "key" : "koulutus.edit.maksullisuus.required",
   "locale" : "fi",
-  "created" : 1384332981577,
-  "category" : "tarjonta",
-  "accessed" : 1384332983851,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332983851,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
+  "value" : "[koulutus.edit.maksullisuus.required fi]",
+  "category" : "tarjonta"
 }, {
-  "value" : "[tarjonta.mkt.valiste_lisattava_kieli fi]",
-  "key" : "tarjonta.mkt.valiste_lisattava_kieli",
-  "locale" : "fi",
-  "created" : 1384332981650,
-  "category" : "tarjonta",
-  "accessed" : 1384332983886,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332983886,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "[organisaatiotyyppi.oppilaitos sv]",
-  "key" : "organisaatiotyyppi.oppilaitos",
-  "locale" : "sv",
-  "created" : 1384332981719,
-  "category" : "tarjonta",
-  "accessed" : 1384332983954,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332983954,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "[tarjonta.poistovahvistus.otsikko.null fi]",
-  "key" : "tarjonta.poistovahvistus.otsikko.null",
-  "locale" : "fi",
-  "created" : 1384332981754,
-  "category" : "tarjonta",
-  "accessed" : 1384332983991,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332983991,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Kyllä",
-  "key" : "yes",
-  "locale" : "fi",
-  "created" : 1384332982739,
-  "category" : "tarjonta",
-  "accessed" : 1384332984902,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332984902,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Töm",
-  "key" : "organisaatiohaku.button.tyhjenna",
-  "locale" : "sv",
-  "created" : 1384332981913,
-  "category" : "tarjonta",
-  "accessed" : 1384333220274,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384333220274,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Selekt allt",
-  "key" : "tarjonta.toiminnot.valitse_kaikki",
-  "locale" : "sv",
-  "created" : 1384332981718,
-  "category" : "tarjonta",
-  "accessed" : 1384333528624,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384333528624,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Loppukoevaatimukset",
-  "key" : "koulutus.edit.LOPPUKOEVAATIMUKSET.title",
-  "locale" : "fi",
-  "created" : 1384332981585,
-  "category" : "tarjonta",
-  "accessed" : 1384332983848,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332983848,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Lisätietoa opetuskielistä",
-  "key" : "koulutus.edit.lisatietoa_opetuskielista.title",
-  "locale" : "fi",
-  "created" : 1384332981651,
-  "category" : "tarjonta",
-  "accessed" : 1384332983888,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332983888,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Koulutuksen tavoitteet",
-  "key" : "koulutus.edit.tavoitteet.title",
-  "locale" : "fi",
-  "created" : 1384332981689,
-  "category" : "tarjonta",
-  "accessed" : 1384332983926,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332983926,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "[tarjonta.haku.poistaOrgValinta sv]",
-  "key" : "tarjonta.haku.poistaOrgValinta",
-  "locale" : "sv",
-  "created" : 1384332981750,
-  "category" : "tarjonta",
-  "accessed" : 1384332983992,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332983992,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "[tarjonta.haku.alkamisVuosi sv]",
-  "key" : "tarjonta.haku.alkamisVuosi",
-  "locale" : "sv",
-  "created" : 1384332981872,
-  "category" : "tarjonta",
-  "accessed" : 1384332984049,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332984049,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Jatko-opintomahdollisuudet",
-  "key" : "koulutus.edit.JATKOOPINTO_MAHDOLLISUUDET.title",
-  "locale" : "fi",
-  "created" : 1384332981898,
-  "category" : "tarjonta",
-  "accessed" : 1384332984065,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332984065,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "[tarjonta.poistovahvistus.ohje.null fi]",
-  "key" : "tarjonta.poistovahvistus.ohje.null",
-  "locale" : "fi",
-  "created" : 1384332981968,
-  "category" : "tarjonta",
-  "accessed" : 1384332984132,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332984132,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo",
-  "key" : "koulutus.edit.lisatietoa_opetuskielista.help",
-  "locale" : "fi",
-  "created" : 1384332981588,
-  "category" : "tarjonta",
-  "accessed" : 1384332983848,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332983848,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "euroa lukuvuodessa",
-  "key" : "koulutus.edit.maksullisuus.euroa_lukuvuodessa",
-  "locale" : "fi",
-  "created" : 1384332981652,
-  "category" : "tarjonta",
-  "accessed" : 1384332983890,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332983890,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Printta raporten",
-  "key" : "tarjonta.haku.tulosta_raportti",
-  "locale" : "sv",
-  "created" : 1384332981814,
-  "category" : "tarjonta",
-  "accessed" : 1384333528625,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384333528625,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Töm",
-  "key" : "tarjonta.haku.tyhjenna",
-  "locale" : "sv",
-  "created" : 1384332982002,
-  "category" : "tarjonta",
-  "accessed" : 1384333528678,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384333528678,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Pätevyys",
-  "key" : "koulutus.edit.patevyys.title",
-  "locale" : "fi",
-  "created" : 1384332981382,
-  "category" : "tarjonta",
-  "accessed" : 1384332983812,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332983812,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Hakukohteen muokkaaminen",
-  "key" : "hakukohde.edit.header.title",
-  "locale" : "fi",
-  "created" : 1384332981581,
-  "category" : "tarjonta",
-  "accessed" : 1384332983843,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332983843,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Kansainvälistyminen",
-  "key" : "koulutus.edit.kansainvalistuminen.title",
-  "locale" : "fi",
-  "created" : 1384332981648,
-  "category" : "tarjonta",
-  "accessed" : 1384332983888,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332983888,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Sijoittuminen työelämään",
-  "key" : "koulutus.edit.sijoittuminen_tyoelamaan.title",
-  "locale" : "fi",
-  "created" : 1384332981688,
-  "category" : "tarjonta",
-  "accessed" : 1384332983927,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332983927,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "[tarjonta.haku.alkamisKausi sv]",
-  "key" : "tarjonta.haku.alkamisKausi",
-  "locale" : "sv",
-  "created" : 1384332981708,
-  "category" : "tarjonta",
-  "accessed" : 1384332983964,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332983964,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "[tarjonta.tila.result fi]",
-  "key" : "tarjonta.tila.result",
-  "locale" : "fi",
-  "created" : 1384332981749,
-  "category" : "tarjonta",
-  "accessed" : 1384332983990,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332983990,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo",
-  "key" : "koulutus.edit.koulutuksen_rakenne.help",
-  "locale" : "fi",
-  "created" : 1384332981806,
-  "category" : "tarjonta",
-  "accessed" : 1384332984025,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332984025,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Nej",
-  "key" : "no",
-  "locale" : "sv",
-  "created" : 1384332981938,
-  "category" : "tarjonta",
-  "accessed" : 1384333220276,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384333220276,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Visa också avsläppade",
-  "key" : "organisaatiohaku.label.nayta.myos.lakkautetut",
-  "locale" : "sv",
-  "created" : 1384332981723,
-  "category" : "tarjonta",
-  "accessed" : 1384333220278,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384333220278,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Sök",
-  "key" : "tarjonta.haku.hae",
-  "locale" : "sv",
-  "created" : 1384332982001,
-  "category" : "tarjonta",
-  "accessed" : 1384333528722,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384333528722,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Avbörjaplatserna",
-  "key" : "tarjonta.hakutulokset.aloituspaikat",
-  "locale" : "sv",
-  "created" : 1384332981876,
-  "category" : "tarjonta",
-  "accessed" : 1384333528726,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384333528726,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo",
-  "key" : "koulutus.edit.jatkoopinto_mahdollisuudet.help",
-  "locale" : "fi",
-  "created" : 1384332981646,
-  "category" : "tarjonta",
-  "accessed" : 1384332983896,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332983896,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "[tarjonta.tila.PERUTTU sv]",
-  "key" : "tarjonta.tila.PERUTTU",
-  "locale" : "sv",
-  "created" : 1384332981687,
-  "category" : "tarjonta",
-  "accessed" : 1384332983925,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332983925,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Osoite",
-  "key" : "tarjonta.hakukohde.valintakoe.listaus.liitteen.osoite",
-  "locale" : "fi",
-  "created" : 1384332981836,
-  "category" : "tarjonta",
-  "accessed" : 1384332984042,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332984042,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "TODO ohjeteksti",
-  "key" : "koulutus.edit.ARVIOINTIKRITEERIT.help",
-  "locale" : "fi",
-  "created" : 1384332981939,
-  "category" : "tarjonta",
-  "accessed" : 1384332984119,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332984119,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo",
-  "key" : "koulutus.edit.tavoitteet.help",
-  "locale" : "fi",
-  "created" : 1384332982007,
-  "category" : "tarjonta",
-  "accessed" : 1384332984179,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332984179,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "OK",
-  "key" : "ok",
-  "locale" : "fi",
-  "created" : 1384332983162,
-  "category" : "tarjonta",
-  "accessed" : 1384332985290,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332985290,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Tekstsökning...",
-  "key" : "organisaatiohaku.tekstihaku.placeholder",
-  "locale" : "sv",
-  "created" : 1384332981689,
-  "category" : "tarjonta",
-  "accessed" : 1384333220274,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384333220274,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Sök",
-  "key" : "organisaatiohaku.button.hae",
-  "locale" : "sv",
-  "created" : 1384332981755,
-  "category" : "tarjonta",
-  "accessed" : 1384333220284,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384333220284,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "No",
-  "key" : "no",
-  "locale" : "en",
-  "created" : 1384332982003,
-  "category" : "tarjonta",
-  "accessed" : 1384333220296,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384333220296,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "TODO ohjeteksti",
   "key" : "koulutus.edit.SISALTO.help",
   "locale" : "fi",
-  "created" : 1384332981542,
-  "category" : "tarjonta",
-  "accessed" : 1384332983822,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332983822,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Maksullisuus",
-  "key" : "koulutus.edit.MAKSULLISUUS.title",
-  "locale" : "fi",
-  "created" : 1384332981555,
-  "category" : "tarjonta",
-  "accessed" : 1384332983839,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332983839,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Tavoitteet",
-  "key" : "koulutus.edit.TAVOITTEET.title",
-  "locale" : "fi",
-  "created" : 1384332981577,
-  "category" : "tarjonta",
-  "accessed" : 1384332983852,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332983852,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
   "value" : "TODO ohjeteksti",
+  "category" : "tarjonta"
+}, {
   "key" : "koulutus.edit.KUVAILEVAT_TIEDOT.help",
   "locale" : "fi",
-  "created" : 1384332981588,
-  "category" : "tarjonta",
-  "accessed" : 1384332983862,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332983862,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Pääaineen valinta",
-  "key" : "koulutus.edit.paaaineen_valinta.title",
-  "locale" : "fi",
-  "created" : 1384332981634,
-  "category" : "tarjonta",
-  "accessed" : 1384332983892,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332983892,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "[tarjonta.hakutulos.hakukohteet sv]",
-  "key" : "tarjonta.hakutulos.hakukohteet",
-  "locale" : "sv",
-  "created" : 1384332981730,
-  "category" : "tarjonta",
-  "accessed" : 1384332983965,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332983965,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "[tarjonta.hakutulokset.koulutuslaji sv]",
-  "key" : "tarjonta.hakutulokset.koulutuslaji",
-  "locale" : "sv",
-  "created" : 1384332981863,
-  "category" : "tarjonta",
-  "accessed" : 1384332984036,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332984036,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
   "value" : "TODO ohjeteksti",
-  "key" : "koulutus.edit.PATEVYYS.help",
-  "locale" : "fi",
-  "created" : 1384332981877,
-  "category" : "tarjonta",
-  "accessed" : 1384332984062,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332984062,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Määrittelemätön",
-  "key" : "tarjonta.tila.undefined",
-  "locale" : "fi",
-  "created" : 1384332981930,
-  "category" : "tarjonta",
-  "accessed" : 1384332984094,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332984094,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "TODO ohjeteksti",
-  "key" : "koulutus.edit.JATKOOPINTO_MAHDOLLISUUDET.help",
-  "locale" : "fi",
-  "created" : 1384332981967,
-  "category" : "tarjonta",
-  "accessed" : 1384332984141,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332984141,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Lisätietoa opetuskielistä",
-  "key" : "koulutus.edit.LISATIETOA_OPETUSKIELISTA.title",
-  "locale" : "fi",
-  "created" : 1384332981973,
-  "category" : "tarjonta",
-  "accessed" : 1384332984157,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332984157,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Lisää uusi liite",
-  "key" : "tarjonta.hakukohde.liite.listaus.uusi.liite",
-  "locale" : "fi",
-  "created" : 1384332982164,
-  "category" : "tarjonta",
-  "accessed" : 1384332984307,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332984307,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Hakukohteeseen ei ole liitetty koulutuksia.",
-  "key" : "tarjonta.linkit.eohje.hakukohde",
-  "locale" : "fi",
-  "created" : 1384332982169,
-  "category" : "tarjonta",
-  "accessed" : 1384332984330,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332984330,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Olet tarkastelemassa <b>{0}</b> joka on sidottu organisaatioon <i>{1}</i>",
-  "key" : "koulutus.review.murupolku",
-  "locale" : "fi",
-  "created" : 1384332982328,
-  "category" : "tarjonta",
-  "accessed" : 1384332984493,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332984493,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Koulutuksen rakenne",
-  "key" : "koulutus.edit.KOULUTUKSEN_RAKENNE.title",
-  "locale" : "fi",
-  "created" : 1384332982364,
-  "category" : "tarjonta",
-  "accessed" : 1384332984512,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332984512,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Vaativuustaso",
-  "key" : "koulutus.review.perustiedot.vaativuustaso",
-  "locale" : "fi",
-  "created" : 1384332981671,
-  "category" : "tarjonta",
-  "accessed" : 1384332983924,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332983924,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "[tarjonta.hakutulokset.kausi sv]",
-  "key" : "tarjonta.hakutulokset.kausi",
-  "locale" : "sv",
-  "created" : 1384332981722,
-  "category" : "tarjonta",
-  "accessed" : 1384332983962,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332983962,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Peruttu",
-  "key" : "koulutus.tila.PERUTTU",
-  "locale" : "fi",
-  "created" : 1384332982195,
-  "category" : "tarjonta",
-  "accessed" : 1384332984347,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332984347,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "EQF-luokitus",
-  "key" : "koulutus.edit.eqf-luokitus",
-  "locale" : "fi",
-  "created" : 1384332982218,
-  "category" : "tarjonta",
-  "accessed" : 1384332984368,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332984368,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Puhelinnumero",
-  "key" : "koulutus.edit.ects-koordinaattori.phone",
-  "locale" : "fi",
-  "created" : 1384332982228,
-  "category" : "tarjonta",
-  "accessed" : 1384332984389,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332984389,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "X",
-  "key" : "tarjonta.hakukohde.valintakoe.listaus.valintakoe.poista",
-  "locale" : "fi",
-  "created" : 1384332982255,
-  "category" : "tarjonta",
-  "accessed" : 1384332984411,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332984411,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "(Päivitetty {0}, päivittäjä {1})",
-  "key" : "koulutus.review.updateStatus",
-  "locale" : "fi",
-  "created" : 1384332982281,
-  "category" : "tarjonta",
-  "accessed" : 1384332984442,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332984442,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Yhteistyö muiden toimijoiden kanssa",
-  "key" : "koulutus.edit.YHTEISTYO_MUIDEN_TOIMIJOIDEN_KANSSA.title",
-  "locale" : "fi",
-  "created" : 1384332982338,
-  "category" : "tarjonta",
-  "accessed" : 1384332984493,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332984493,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Olet luomassa <b>tutkintoon johtavaa koulutusta</b> organisaatiolle <b>{0}</b>",
-  "key" : "koulutus.edit.header.KORKEAKOULUTUS",
-  "locale" : "fi",
-  "created" : 1384332982352,
-  "category" : "tarjonta",
-  "accessed" : 1384332984518,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332984518,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo",
-  "key" : "koulutus.edit.kansainvalistuminen.help",
-  "locale" : "fi",
-  "created" : 1384332982397,
-  "category" : "tarjonta",
-  "accessed" : 1384332984541,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332984541,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Ammatillinen peruskoulutus",
-  "key" : "koulutusaste.AMMATILLINEN_PERUSKOULUTUS",
-  "locale" : "fi",
-  "created" : 1384332982463,
-  "category" : "tarjonta",
-  "accessed" : 1384332984569,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332984569,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Tyhjennä",
-  "key" : "organisaatiohaku.button.tyhjenna",
-  "locale" : "fi",
-  "created" : 1384332982462,
-  "category" : "tarjonta",
-  "accessed" : 1384332984579,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332984579,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Kopioitu",
-  "key" : "tarjonta.tila.KOPIOITU",
-  "locale" : "fi",
-  "created" : 1384332982494,
-  "category" : "tarjonta",
-  "accessed" : 1384332984600,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332984600,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Hae",
-  "key" : "tarjonta.haku.hae",
-  "locale" : "fi",
-  "created" : 1384332982493,
-  "category" : "tarjonta",
-  "accessed" : 1384332984622,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332984622,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Huomaa, että opetuskielistä voi antaa lisätietoa Koulutuksen kuvailevat tiedot -välilehdellä",
-  "key" : "koulutus.edit.opetuskielet.help",
-  "locale" : "fi",
-  "created" : 1384332982549,
-  "category" : "tarjonta",
-  "accessed" : 1384332984663,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332984663,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Tulosta raportti",
-  "key" : "tarjonta.haku.tulosta_raportti",
-  "locale" : "fi",
-  "created" : 1384332982570,
-  "category" : "tarjonta",
-  "accessed" : 1384332984682,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332984682,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Hakukohteet",
-  "key" : "tarjonta.hakutulos.hakukohteet",
-  "locale" : "fi",
-  "created" : 1384332982601,
-  "category" : "tarjonta",
-  "accessed" : 1384332984710,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332984710,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "ECTS-koordinaattori",
-  "key" : "koulutus.edit.ects-koordinaattori.name",
-  "locale" : "fi",
-  "created" : 1384332982628,
-  "category" : "tarjonta",
-  "accessed" : 1384332984731,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332984731,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Opetusmuodot",
-  "key" : "koulutus.edit.opetusmuodot",
-  "locale" : "fi",
-  "created" : 1384332982656,
-  "category" : "tarjonta",
-  "accessed" : 1384332984754,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332984754,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Jatka",
-  "key" : "luoKoulutusDialogi.jatka",
-  "locale" : "fi",
-  "created" : 1384332982678,
-  "category" : "tarjonta",
-  "accessed" : 1384332984795,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332984795,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Ok",
-  "key" : "tarjonta.hakukohde.valintakoe.modal.ok",
-  "locale" : "fi",
-  "created" : 1384332982678,
-  "category" : "tarjonta",
-  "accessed" : 1384332984818,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332984818,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Hakukohteen nimi",
-  "key" : "kk.hakukohde.hakukohdenimi",
-  "locale" : "fi",
-  "created" : 1384332982718,
-  "category" : "tarjonta",
-  "accessed" : 1384332984886,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332984886,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Yhteyshenkilö voi olla myös opinto- tai hakutoimisto",
-  "key" : "koulutus.edit.contactPerson.help",
-  "locale" : "fi",
-  "created" : 1384332982757,
-  "category" : "tarjonta",
-  "accessed" : 1384332984944,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332984944,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Liitteen kuvaus",
-  "key" : "tarjonta.hakukohde.liite.listaus.liitteen.kuvaus",
-  "locale" : "fi",
-  "created" : 1384332982793,
-  "category" : "tarjonta",
-  "accessed" : 1384332984955,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332984955,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Haluatko varmasti poistaa koulutuksen:",
-  "key" : "tarjonta.poistovahvistus.ohje.koulutus",
-  "locale" : "fi",
-  "created" : 1384332982834,
-  "category" : "tarjonta",
-  "accessed" : 1384332985023,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332985023,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Ammattinimikkeet",
-  "key" : "koulutus.review.kuvailevatTiedot.ammattinimikkeet",
-  "locale" : "fi",
-  "created" : 1384332982870,
-  "category" : "tarjonta",
-  "accessed" : 1384332985046,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332985046,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Koulutukseen ei ole liitetty hakukohteita.",
-  "key" : "tarjonta.linkit.eohje.koulutus",
-  "locale" : "fi",
-  "created" : 1384332982888,
-  "category" : "tarjonta",
-  "accessed" : 1384332985062,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332985062,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Aloituspaikat",
-  "key" : "tarjonta.hakutulokset.aloituspaikat",
-  "locale" : "fi",
-  "created" : 1384332982901,
-  "category" : "tarjonta",
-  "accessed" : 1384332985075,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332985075,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Kansainvälisyys",
-  "key" : "koulutus.review.kuvailevatTiedot.kansainvalisyys",
-  "locale" : "fi",
-  "created" : 1384332982908,
-  "category" : "tarjonta",
-  "accessed" : 1384332985088,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332985088,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Yhteyshenkilö(t)",
-  "key" : "koulutus.review.perustiedot.yhteyshenkilo",
-  "locale" : "fi",
-  "created" : 1384332982927,
-  "category" : "tarjonta",
-  "accessed" : 1384332985097,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332985097,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Pohjakoulutusvaatimukset",
-  "key" : "kk.edit.pohjakoulutusvaatimus",
-  "locale" : "fi",
-  "created" : 1384332982957,
-  "category" : "tarjonta",
-  "accessed" : 1384332985120,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332985120,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Koulutuksen sisältö",
-  "key" : "koulutus.review.kuvailevatTiedot.sisaltoKoulutus",
-  "locale" : "fi",
-  "created" : 1384332982960,
-  "category" : "tarjonta",
-  "accessed" : 1384332985129,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332985129,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Hakukohteet",
-  "key" : "koulutus.review.hakukohteet.otsikko",
-  "locale" : "fi",
-  "created" : 1384332982960,
-  "category" : "tarjonta",
-  "accessed" : 1384332985138,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332985138,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Tutkintonimike on pakollinen",
-  "key" : "koulutus.edit.tutkintonimike.required",
-  "locale" : "fi",
-  "created" : 1384332982993,
-  "category" : "tarjonta",
-  "accessed" : 1384332985164,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332985164,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Haut",
-  "key" : "kk.hakukohde.haut",
-  "locale" : "fi",
-  "created" : 1384332983023,
-  "category" : "tarjonta",
-  "accessed" : 1384332985181,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332985181,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Tutkinto",
-  "key" : "koulutus.review.perustiedot.tutkinto",
-  "locale" : "fi",
-  "created" : 1384332983031,
-  "category" : "tarjonta",
-  "accessed" : 1384332985194,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332985194,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Olet valitsemassa organisaatiota...",
-  "key" : "selectOrganisaatio.kuvaus",
-  "locale" : "fi",
-  "created" : 1384332983082,
-  "category" : "tarjonta",
-  "accessed" : 1384332985203,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332985203,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo",
-  "key" : "koulutus.edit.yhteistyo_muiden_toimijoiden_kanssa.help",
-  "locale" : "fi",
-  "created" : 1384332981805,
-  "category" : "tarjonta",
-  "accessed" : 1384332984033,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332984033,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "TODO ohjeteksti",
-  "key" : "koulutus.edit.KOULUTUSOHJELMAN_VALINTA.help",
-  "locale" : "fi",
-  "created" : 1384332981891,
-  "category" : "tarjonta",
-  "accessed" : 1384332984063,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332984063,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Pääaineen valinta",
-  "key" : "koulutus.edit.PAAAINEEN_VALINTA.title",
-  "locale" : "fi",
-  "created" : 1384332981903,
-  "category" : "tarjonta",
-  "accessed" : 1384332984075,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332984075,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Kuva",
-  "key" : "koulutus.edit.kuva.title",
-  "locale" : "fi",
-  "created" : 1384332981912,
-  "category" : "tarjonta",
-  "accessed" : 1384332984085,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332984085,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "TODO ohjeteksti",
-  "key" : "koulutus.edit.KANSAINVALISTYMINEN.help",
-  "locale" : "fi",
-  "created" : 1384332981939,
-  "category" : "tarjonta",
-  "accessed" : 1384332984097,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332984097,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "TODO ohjeteksti",
-  "key" : "koulutus.edit.SIJOITTUMINEN_TYOELAMAAN.help",
-  "locale" : "fi",
-  "created" : 1384332981945,
-  "category" : "tarjonta",
-  "accessed" : 1384332984134,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332984134,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "[tarjonta.tila.JULKAISTU sv]",
-  "key" : "tarjonta.tila.JULKAISTU",
-  "locale" : "sv",
-  "created" : 1384332981975,
-  "category" : "tarjonta",
-  "accessed" : 1384332984147,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332984147,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "TODO ohjeteksti",
-  "key" : "koulutus.edit.LOPPUKOEVAATIMUKSET.help",
-  "locale" : "fi",
-  "created" : 1384332982044,
-  "category" : "tarjonta",
-  "accessed" : 1384332984193,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332984193,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Liitä toiseen organisaatioon",
-  "key" : "luoKoulutusDialogi.liitaToiseenOrganisaatioon'",
-  "locale" : "fi",
-  "created" : 1384332982029,
-  "category" : "tarjonta",
-  "accessed" : 1384332984203,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332984203,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo",
-  "key" : "koulutus.edit.jatkoopinto_mahdollisuudet.title",
-  "locale" : "fi",
-  "created" : 1384332982044,
-  "category" : "tarjonta",
-  "accessed" : 1384332984213,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332984213,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "[tarjonta.linkit.eohje.null fi]",
-  "key" : "tarjonta.linkit.eohje.null",
-  "locale" : "fi",
-  "created" : 1384332982069,
-  "category" : "tarjonta",
-  "accessed" : 1384332984219,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332984219,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "TODO ohjeteksti",
-  "key" : "koulutus.edit.TAVOITTEET.help",
-  "locale" : "fi",
-  "created" : 1384332982081,
-  "category" : "tarjonta",
-  "accessed" : 1384332984231,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332984231,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "[tarjonta.tila.LUONNOS sv]",
-  "key" : "tarjonta.tila.LUONNOS",
-  "locale" : "sv",
-  "created" : 1384332982087,
-  "category" : "tarjonta",
-  "accessed" : 1384332984243,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332984243,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "TODO ohjeteksti",
-  "key" : "koulutus.edit.KOULUTUKSEN_RAKENNE.help",
-  "locale" : "fi",
-  "created" : 1384332982104,
-  "category" : "tarjonta",
-  "accessed" : 1384332984251,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332984251,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Kuvailevat tiedot",
-  "key" : "koulutus.edit.KUVAILEVAT_TIEDOT.title",
-  "locale" : "fi",
-  "created" : 1384332982133,
-  "category" : "tarjonta",
-  "accessed" : 1384332984271,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332984271,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Liiteet",
-  "key" : "kk.hakukohde.liitteet",
-  "locale" : "fi",
-  "created" : 1384332982165,
-  "category" : "tarjonta",
-  "accessed" : 1384332984308,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332984308,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Kuvauskieli",
-  "key" : "tarjonta.hakukohde.liite.modal.kuvauskieli",
-  "locale" : "fi",
-  "created" : 1384332982165,
-  "category" : "tarjonta",
-  "accessed" : 1384332984341,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332984341,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Hae",
-  "key" : "selectTutkintoOhjelma.hae",
-  "locale" : "fi",
-  "created" : 1384332982228,
-  "category" : "tarjonta",
-  "accessed" : 1384332984392,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332984392,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Remove",
-  "key" : "kk.review.poista",
-  "locale" : "en",
-  "created" : 1384332982254,
-  "category" : "tarjonta",
-  "accessed" : 1384332984415,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332984415,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Annulera",
-  "key" : "kk.review.poista",
-  "locale" : "sv",
-  "created" : 1384332982275,
-  "category" : "tarjonta",
-  "accessed" : 1384332984428,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332984428,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Jatka",
-  "key" : "selectTutkintoOhjelma.jatka",
-  "locale" : "fi",
-  "created" : 1384332982302,
-  "category" : "tarjonta",
-  "accessed" : 1384332984447,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332984447,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Koulutuksen nimi",
-  "key" : "kk.hakukohde.koulutuksen.nimi",
-  "locale" : "fi",
-  "created" : 1384332982323,
-  "category" : "tarjonta",
-  "accessed" : 1384332984483,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332984483,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Tutkintonimike",
-  "key" : "koulutus.edit.tutkintonimike",
-  "locale" : "fi",
-  "created" : 1384332982398,
-  "category" : "tarjonta",
-  "accessed" : 1384332984524,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332984524,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Tutkinto-ohjelman tunniste",
-  "key" : "koulutus.edit.tutkinto-ohjelman-tunniste",
-  "locale" : "fi",
-  "created" : 1384332982393,
-  "category" : "tarjonta",
-  "accessed" : 1384332984541,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332984541,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Kuvaus",
-  "key" : "tarjonta.hakukohde.liite.modal.kuvaus",
-  "locale" : "fi",
-  "created" : 1384332982433,
-  "category" : "tarjonta",
-  "accessed" : 1384332984567,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332984567,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Linkki opetussuunnitelmaan",
-  "key" : "koulutus.review.perustiedot.linkkiOpetussuunnitelmaan",
-  "locale" : "fi",
-  "created" : 1384332982444,
-  "category" : "tarjonta",
-  "accessed" : 1384332984584,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332984584,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Valitse kaikki",
-  "key" : "tarjonta.toiminnot.valitse_kaikki",
-  "locale" : "fi",
-  "created" : 1384332982466,
-  "category" : "tarjonta",
-  "accessed" : 1384332984595,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332984595,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Poista organisaatiovalinta",
-  "key" : "tarjonta.haku.poistaOrgValinta",
-  "locale" : "fi",
-  "created" : 1384332982524,
-  "category" : "tarjonta",
-  "accessed" : 1384332984629,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332984629,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Tutkinto on pakollinen",
-  "key" : "koulutus.edit.tutkinto.required",
-  "locale" : "fi",
-  "created" : 1384332982554,
-  "category" : "tarjonta",
-  "accessed" : 1384332984654,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332984654,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Hae organisaatioita",
-  "key" : "organisaatiohaku.tekstihaku.placeholder",
-  "locale" : "fi",
-  "created" : 1384332982549,
-  "category" : "tarjonta",
-  "accessed" : 1384332984662,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332984662,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Opintojen laajuus",
-  "key" : "koulutus.edit.opintojen-laajuus",
-  "locale" : "fi",
-  "created" : 1384332982573,
-  "category" : "tarjonta",
-  "accessed" : 1384332984684,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332984684,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Lisää kieli",
-  "key" : "koulutus.edit.lisaa-kieli",
-  "locale" : "fi",
-  "created" : 1384332982595,
-  "category" : "tarjonta",
-  "accessed" : 1384332984716,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332984716,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Tutkinto",
-  "key" : "koulutus.edit.tutkinto",
-  "locale" : "fi",
-  "created" : 1384332982616,
-  "category" : "tarjonta",
-  "accessed" : 1384332984726,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332984726,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Peruttu",
-  "key" : "tarjonta.tila.PERUTTU",
-  "locale" : "fi",
-  "created" : 1384332982655,
-  "category" : "tarjonta",
-  "accessed" : 1384332984749,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332984749,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Poista",
-  "key" : "tarjonta.hakukohde.liite.listaus.poista",
-  "locale" : "fi",
-  "created" : 1384332982689,
-  "category" : "tarjonta",
-  "accessed" : 1384332984849,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332984849,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Lisätietoja valintakokeesta",
-  "key" : "tarjonta.hakukohde.valintakoe.listaus.valintakokeen.lisatiedot",
-  "locale" : "fi",
-  "created" : 1384332982707,
-  "category" : "tarjonta",
-  "accessed" : 1384332984873,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332984873,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo",
-  "key" : "koulutus.edit.paaaineen_valinta.help",
-  "locale" : "fi",
-  "created" : 1384332981838,
-  "category" : "tarjonta",
-  "accessed" : 1384332984033,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332984033,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "TODO ohjeteksti",
-  "key" : "koulutus.edit.YHTEISTYO_MUIDEN_TOIMIJOIDEN_KANSSA.help",
-  "locale" : "fi",
-  "created" : 1384332981890,
-  "category" : "tarjonta",
-  "accessed" : 1384332984064,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332984064,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Ammattinimikkeet",
-  "key" : "koulutus.edit.ammattinimikkeet.title",
-  "locale" : "fi",
-  "created" : 1384332981966,
-  "category" : "tarjonta",
-  "accessed" : 1384332984133,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332984133,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Koulutuksen alkamispvm",
-  "key" : "koulutus.edit.koulutuksen-alkamispvm",
-  "locale" : "fi",
-  "created" : 1384332981972,
-  "category" : "tarjonta",
-  "accessed" : 1384332984153,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332984153,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "ei",
-  "key" : "no",
-  "locale" : "fi",
-  "created" : 1384332982010,
-  "category" : "tarjonta",
-  "accessed" : 1384332984198,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332984198,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Pätevyys",
-  "key" : "koulutus.edit.PATEVYYS.title",
-  "locale" : "fi",
-  "created" : 1384332982042,
-  "category" : "tarjonta",
-  "accessed" : 1384332984214,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332984214,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "[organisaatiotyyppi.koulutustoimija sv]",
-  "key" : "organisaatiotyyppi.koulutustoimija",
-  "locale" : "sv",
-  "created" : 1384332982107,
-  "category" : "tarjonta",
-  "accessed" : 1384332984251,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332984251,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Painotus",
-  "key" : "koulutus.edit.PAINOTUS.title",
-  "locale" : "fi",
-  "created" : 1384332982112,
-  "category" : "tarjonta",
-  "accessed" : 1384332984268,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332984268,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Hinta",
-  "key" : "koulutus.edit.maksullisuus.hinta",
-  "locale" : "fi",
-  "created" : 1384332982134,
-  "category" : "tarjonta",
-  "accessed" : 1384332984285,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332984285,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Koulutusaste",
-  "key" : "koulutus.edit.koulutusaste",
-  "locale" : "fi",
-  "created" : 1384332982144,
-  "category" : "tarjonta",
-  "accessed" : 1384332984310,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332984310,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo",
-  "key" : "koulutus.edit.patevyys.help",
-  "locale" : "fi",
-  "created" : 1384332982191,
-  "category" : "tarjonta",
-  "accessed" : 1384332984331,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332984331,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Takaisin",
-  "key" : "koulutus.edit.takaisin",
-  "locale" : "fi",
-  "created" : 1384332982199,
-  "category" : "tarjonta",
-  "accessed" : 1384332984362,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332984362,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Suunniteltu kesto",
-  "key" : "koulutus.edit.suunniteltu-kesto",
-  "locale" : "fi",
-  "created" : 1384332982221,
-  "category" : "tarjonta",
-  "accessed" : 1384332984379,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332984379,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Sähköpostiosoite",
-  "key" : "koulutus.edit.yhteyshenkilo.email",
-  "locale" : "fi",
-  "created" : 1384332982235,
-  "category" : "tarjonta",
-  "accessed" : 1384332984397,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332984397,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Kopioi",
-  "key" : "koulutus.review.kopioi",
-  "locale" : "fi",
-  "created" : 1384332982253,
-  "category" : "tarjonta",
-  "accessed" : 1384332984416,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332984416,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Pätevyys",
-  "key" : "koulutus.review.kuvailevatTiedot.patevyys",
-  "locale" : "fi",
-  "created" : 1384332982297,
-  "category" : "tarjonta",
-  "accessed" : 1384332984440,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332984440,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Postiosoite",
-  "key" : "tarjonta.hakukohde.label.oletus.postisoite",
-  "locale" : "fi",
-  "created" : 1384332982322,
-  "category" : "tarjonta",
-  "accessed" : 1384332984486,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332984486,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "[tarjonta.linkit.otsikko.null fi]",
-  "key" : "tarjonta.linkit.otsikko.null",
-  "locale" : "fi",
-  "created" : 1384332982366,
-  "category" : "tarjonta",
-  "accessed" : 1384332984522,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332984522,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Kopioi",
-  "key" : "copy",
-  "locale" : "fi",
-  "created" : 1384332982398,
-  "category" : "tarjonta",
-  "accessed" : 1384332984545,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332984545,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Valitse koulutus",
-  "key" : "luoKoulutsDialogi.koulutus",
-  "locale" : "fi",
-  "created" : 1384332982427,
-  "category" : "tarjonta",
-  "accessed" : 1384332984564,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332984564,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Oppilaitos",
-  "key" : "organisaatiotyyppi.oppilaitos",
-  "locale" : "fi",
-  "created" : 1384332982490,
-  "category" : "tarjonta",
-  "accessed" : 1384332984601,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332984601,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Luo uusi koulutus",
-  "key" : "tarjonta.toiminnot.luo_uusi_koulutus",
-  "locale" : "fi",
-  "created" : 1384332982503,
-  "category" : "tarjonta",
-  "accessed" : 1384332984624,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332984624,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Koulutus",
-  "key" : "koulutus.edit.koulutuskoodi",
-  "locale" : "fi",
-  "created" : 1384332982532,
-  "category" : "tarjonta",
-  "accessed" : 1384332984656,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332984656,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Organisaatiotyyppi",
-  "key" : "organisaatiohaku.organisaatiotyypit.prompt",
-  "locale" : "fi",
-  "created" : 1384332982574,
-  "category" : "tarjonta",
-  "accessed" : 1384332984691,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332984691,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Alkamiskausi",
-  "key" : "tarjonta.haku.alkamisKausi",
-  "locale" : "fi",
-  "created" : 1384332982596,
-  "category" : "tarjonta",
-  "accessed" : 1384332984705,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332984705,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Opetuskielet",
-  "key" : "koulutus.edit.opetuskielet",
-  "locale" : "fi",
-  "created" : 1384332982634,
-  "category" : "tarjonta",
-  "accessed" : 1384332984758,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332984758,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Tutkinto-ohjelman nimi on se koulutuksen nimi, joka näytetään hakijalle Opintopolku.fi -palvelussa.",
-  "key" : "koulutus.edit.lisaa-kieli.help",
-  "locale" : "fi",
-  "created" : 1384332982660,
-  "category" : "tarjonta",
-  "accessed" : 1384332984793,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332984793,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Tehtävänimike",
-  "key" : "koulutus.edit.yhteyshenkilo.title",
-  "locale" : "fi",
-  "created" : 1384332982689,
-  "category" : "tarjonta",
-  "accessed" : 1384332984818,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332984818,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Huomaa, että koulutuksen maksullisuutta voi kuvata tarkemmin Koulutuksen kuvailevat tiedot -välilehdellä",
-  "key" : "koulutus.edit.opintojenMaksullisuus.help",
-  "locale" : "fi",
-  "created" : 1384332982704,
-  "category" : "tarjonta",
-  "accessed" : 1384332984842,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332984842,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Valintakokeen nimi",
-  "key" : "tarjonta.hakukohde.valintakoe.modal.valintakoenimi",
-  "locale" : "fi",
-  "created" : 1384332982718,
-  "category" : "tarjonta",
-  "accessed" : 1384332984888,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332984888,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Lisätietoa opetuskielistä",
-  "key" : "koulutus.review.kuvailevatTiedot.lisatietoaOpetuskielista",
-  "locale" : "fi",
-  "created" : 1384332982845,
-  "category" : "tarjonta",
-  "accessed" : 1384332985039,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332985039,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Pohjakoulutusvaatimus on pakollinen",
-  "key" : "koulutus.edit.pohjakoulutusvaatimus.required",
-  "locale" : "fi",
-  "created" : 1384332982903,
-  "category" : "tarjonta",
-  "accessed" : 1384332985085,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332985085,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Käytetään järjestelmän valintapalvelua",
-  "key" : "kk.hakukohde.kaytetaanJarjestelmanValintaPalvelua",
-  "locale" : "fi",
-  "created" : 1384332982926,
-  "category" : "tarjonta",
-  "accessed" : 1384332985100,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332985100,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Organisaatio",
-  "key" : "koulutus.review.perustiedot.organisaatio",
-  "locale" : "fi",
-  "created" : 1384332982938,
-  "category" : "tarjonta",
-  "accessed" : 1384332985121,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332985121,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "[tarjonta.hakutulos.koulutukset sv]",
-  "key" : "tarjonta.hakutulos.koulutukset",
-  "locale" : "sv",
-  "created" : 1384332982008,
-  "category" : "tarjonta",
-  "accessed" : 1384332984187,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332984187,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Arviointikriteerit",
-  "key" : "koulutus.edit.ARVIOINTIKRITEERIT.title",
-  "locale" : "fi",
-  "created" : 1384332982075,
-  "category" : "tarjonta",
-  "accessed" : 1384332984220,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332984220,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Sijoittuminen työelämään",
-  "key" : "koulutus.edit.SIJOITTUMINEN_TYOELAMAAN.title",
-  "locale" : "fi",
-  "created" : 1384332982107,
-  "category" : "tarjonta",
-  "accessed" : 1384332984244,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332984244,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Tunnisteena voidaan käyttää korkeakoulun omaa yksilöivää tunnistetta tai virallista koulutusohjelmakoodia",
-  "key" : "koulutus.edit.tutkinto-ohjelman-tunniste.help",
-  "locale" : "fi",
-  "created" : 1384332982135,
-  "category" : "tarjonta",
-  "accessed" : 1384332984281,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332984281,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Peruuta",
-  "key" : "selectTutkintoOhjelma.peruuta",
-  "locale" : "fi",
-  "created" : 1384332982139,
-  "category" : "tarjonta",
-  "accessed" : 1384332984292,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332984292,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Tekstihaku",
-  "key" : "selectTutkintoOhjelma.tekstihaku",
-  "locale" : "fi",
-  "created" : 1384332982168,
-  "category" : "tarjonta",
-  "accessed" : 1384332984306,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332984306,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Lisää",
-  "key" : "tarjonta.hakukohde.valintakoe.modal.ajankohta.lisaa",
-  "locale" : "fi",
-  "created" : 1384332982244,
-  "category" : "tarjonta",
-  "accessed" : 1384332984393,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332984393,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Jatka",
-  "key" : "koulutus.edit.tallenna.jatka",
-  "locale" : "fi",
-  "created" : 1384332982265,
-  "category" : "tarjonta",
-  "accessed" : 1384332984415,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332984415,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Hakukohteet",
-  "key" : "tarjonta.linkit.otsikko.koulutus",
-  "locale" : "fi",
-  "created" : 1384332982303,
-  "category" : "tarjonta",
-  "accessed" : 1384332984442,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332984442,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "TODO ohjeteksti",
-  "key" : "koulutus.edit.PAAAINEEN_VALINTA.help",
-  "locale" : "fi",
-  "created" : 1384332982323,
-  "category" : "tarjonta",
-  "accessed" : 1384332984491,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332984491,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Toimipiste",
-  "key" : "organisaatiotyyppi.toimipiste",
-  "locale" : "fi",
-  "created" : 1384332982367,
-  "category" : "tarjonta",
-  "accessed" : 1384332984510,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332984510,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Olet luomassa <b>tutkintoon johtavaa koulutusta</b> organisaatiolle <b>{0}</b>",
-  "key" : "koulutus.edit.header.AMMATTIKORKEAKOULUTUS",
-  "locale" : "fi",
-  "created" : 1384332982410,
-  "category" : "tarjonta",
-  "accessed" : 1384332984553,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332984553,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Peruuta",
-  "key" : "koulutus.review.peruuta",
-  "locale" : "fi",
-  "created" : 1384332982444,
-  "category" : "tarjonta",
-  "accessed" : 1384332984568,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332984568,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Luo uusi hakukohde",
-  "key" : "tarjonta.toiminnot.luo_uusi_hakukohde",
-  "locale" : "fi",
-  "created" : 1384332982472,
-  "category" : "tarjonta",
-  "accessed" : 1384332984603,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332984603,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Koulutusala",
-  "key" : "koulutus.edit.koulutusala",
-  "locale" : "fi",
-  "created" : 1384332982528,
-  "category" : "tarjonta",
-  "accessed" : 1384332984622,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332984622,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Valmis",
-  "key" : "tarjonta.tila.VALMIS",
-  "locale" : "fi",
-  "created" : 1384332982536,
-  "category" : "tarjonta",
-  "accessed" : 1384332984657,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332984657,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Oppisopimustoimipiste",
-  "key" : "organisaatiotyyppi.oppisopimustoimipiste",
-  "locale" : "fi",
-  "created" : 1384332982540,
-  "category" : "tarjonta",
-  "accessed" : 1384332984668,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332984668,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Oppilaitostyyppi",
-  "key" : "organisaatiohaku.oppilaitostyypit.prompt",
-  "locale" : "fi",
-  "created" : 1384332982557,
-  "category" : "tarjonta",
-  "accessed" : 1384332984682,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332984682,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Koulutusohjelma",
-  "key" : "koulutus.edit.koulutusohjelma",
-  "locale" : "fi",
-  "created" : 1384332982603,
-  "category" : "tarjonta",
-  "accessed" : 1384332984715,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332984715,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Laajuuden tulee vastata valittua koulutusta",
-  "key" : "koulutus.edit.opintojen-laajuus.help",
-  "locale" : "fi",
-  "created" : 1384332982621,
-  "category" : "tarjonta",
-  "accessed" : 1384332984730,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332984730,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Koulutustoimija",
-  "key" : "organisaatiotyyppi.koulutustoimija",
-  "locale" : "fi",
-  "created" : 1384332982659,
-  "category" : "tarjonta",
-  "accessed" : 1384332984752,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332984752,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Ajankohta",
-  "key" : "tarjonta.hakukohde.valintakoe.modal.ajankohta.aika",
-  "locale" : "fi",
-  "created" : 1384332982706,
-  "category" : "tarjonta",
-  "accessed" : 1384332984846,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332984846,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Tutkintonimike",
-  "key" : "koulutus.review.perustiedot.tutkintonimike",
-  "locale" : "fi",
-  "created" : 1384332982737,
-  "category" : "tarjonta",
-  "accessed" : 1384332984899,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332984899,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Pääaineen valinta",
-  "key" : "koulutus.review.kuvailevatTiedot.paaaineenValinta",
-  "locale" : "fi",
-  "created" : 1384332982755,
-  "category" : "tarjonta",
-  "accessed" : 1384332984932,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332984932,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Hakijoille ilmoitettavat aloituspaikat",
-  "key" : "kk.hakukohde.hakijoilleilmoitettavataloituspaikat",
-  "locale" : "fi",
-  "created" : 1384332982799,
-  "category" : "tarjonta",
-  "accessed" : 1384332984959,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332984959,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Opintoala",
-  "key" : "kk.edit.opintoala",
-  "locale" : "fi",
-  "created" : 1384332982808,
-  "category" : "tarjonta",
-  "accessed" : 1384332984977,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332984977,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "EQF-luokitus",
-  "key" : "kk.edit.eqf-luokitus",
-  "locale" : "fi",
-  "created" : 1384332982815,
-  "category" : "tarjonta",
-  "accessed" : 1384332984987,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332984987,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Ajankohta",
-  "key" : "tarjonta.hakukohde.valintakoe.modal.ajankohta.table.aika",
-  "locale" : "fi",
-  "created" : 1384332982845,
-  "category" : "tarjonta",
-  "accessed" : 1384332985024,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332985024,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Tila",
-  "key" : "tarjonta.hakutulokset.tila",
-  "locale" : "fi",
-  "created" : 1384332982859,
-  "category" : "tarjonta",
-  "accessed" : 1384332985034,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332985034,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Valintakokeet",
-  "key" : "kk.hakukohde.valintakokeet",
-  "locale" : "fi",
-  "created" : 1384332982875,
-  "category" : "tarjonta",
-  "accessed" : 1384332985047,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332985047,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Opetuskieli",
-  "key" : "koulutus.review.perustiedot.opetuskieli",
-  "locale" : "fi",
-  "created" : 1384332982891,
-  "category" : "tarjonta",
-  "accessed" : 1384332985079,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332985079,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Liitä toiseen organisaatioon",
-  "key" : "luoKoulutusDialogi.liitaToiseenOrganisaatioon",
-  "locale" : "fi",
-  "created" : 1384332982935,
-  "category" : "tarjonta",
-  "accessed" : 1384332985124,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332985124,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Opetusmuodot",
-  "key" : "kk.edit.opetusmuodot",
-  "locale" : "fi",
-  "created" : 1384332982961,
-  "category" : "tarjonta",
-  "accessed" : 1384332985134,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332985134,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Liitteen toimitusosoite",
-  "key" : "tarjonta.hakukohde.liite.modal.toimitusosoite",
-  "locale" : "fi",
-  "created" : 1384332982982,
-  "category" : "tarjonta",
-  "accessed" : 1384332985145,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332985145,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Valitse tutkinto-ohjelma",
-  "key" : "selectTutkintoOhjelma.dialogTitle",
-  "locale" : "fi",
-  "created" : 1384332982986,
-  "category" : "tarjonta",
-  "accessed" : 1384332985155,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332985155,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Peruuta",
-  "key" : "luoKoulutusDialogi.peruuta",
-  "locale" : "fi",
-  "created" : 1384332983090,
-  "category" : "tarjonta",
-  "accessed" : 1384332985220,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332985220,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Koulutuksen sisältö",
-  "key" : "koulutus.edit.sisalto.title",
-  "locale" : "fi",
-  "created" : 1384332982036,
-  "category" : "tarjonta",
-  "accessed" : 1384332984195,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332984195,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "TODO ohjeteksti",
-  "key" : "koulutus.edit.LISATIETOA_OPETUSKIELISTA.help",
-  "locale" : "fi",
-  "created" : 1384332982053,
-  "category" : "tarjonta",
-  "accessed" : 1384332984213,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332984213,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Sisältö",
-  "key" : "koulutus.edit.SISALTO.title",
-  "locale" : "fi",
-  "created" : 1384332982074,
-  "category" : "tarjonta",
-  "accessed" : 1384332984246,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332984246,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Kansainvälistyminen",
-  "key" : "koulutus.edit.KANSAINVALISTYMINEN.title",
-  "locale" : "fi",
-  "created" : 1384332982110,
-  "category" : "tarjonta",
-  "accessed" : 1384332984267,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332984267,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Vaihda koulutus",
-  "key" : "koulutus.edit.muokkaaTutkinto",
-  "locale" : "fi",
-  "created" : 1384332982134,
-  "category" : "tarjonta",
-  "accessed" : 1384332984278,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332984278,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Muokkaa",
-  "key" : "tarjonta.hakukohde.valintakoe.listaus.valintakoe.muokkaa",
-  "locale" : "fi",
-  "created" : 1384332982161,
-  "category" : "tarjonta",
-  "accessed" : 1384332984302,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332984302,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Koulutuksen maksullisuus",
-  "key" : "koulutus.edit.maksullisuus.title",
-  "locale" : "fi",
-  "created" : 1384332982191,
-  "category" : "tarjonta",
-  "accessed" : 1384332984347,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332984347,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Luo uusi koulutus valitsemalla alasvetovalkosta jotakin kivaa.",
-  "key" : "selectTutkintoOhjelma.kuvaus",
-  "locale" : "fi",
-  "created" : 1384332982220,
-  "category" : "tarjonta",
-  "accessed" : 1384332984381,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332984381,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Näytä hakukohteet",
-  "key" : "tarjonta.toiminnot.koulutus.linkit",
-  "locale" : "fi",
-  "created" : 1384332982273,
-  "category" : "tarjonta",
-  "accessed" : 1384332984418,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332984418,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Opintojen laajuus",
-  "key" : "koulutus.review.perustiedot.opintojenLaajuus",
-  "locale" : "fi",
-  "created" : 1384332982295,
-  "category" : "tarjonta",
-  "accessed" : 1384332984446,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332984446,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "TODO ohjeteksti",
-  "key" : "koulutus.edit.TUTKIMUKSEN_PAINOPISTEET.help",
-  "locale" : "fi",
-  "created" : 1384332982332,
-  "category" : "tarjonta",
-  "accessed" : 1384332984488,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332984488,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Teemat",
-  "key" : "koulutus.edit.teemat",
-  "locale" : "fi",
-  "created" : 1384332982404,
-  "category" : "tarjonta",
-  "accessed" : 1384332984540,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332984540,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Koulutukset",
-  "key" : "tarjonta.hakutulos.koulutukset",
-  "locale" : "fi",
-  "created" : 1384332982493,
-  "category" : "tarjonta",
-  "accessed" : 1384332984603,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332984603,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Koulutus luodaan seuraaviin organisaatioihin:",
-  "key" : "luoKoulutusDialogi.koulutusLuodaanSeuraaviinOrganisaatioihin",
-  "locale" : "fi",
-  "created" : 1384332982514,
-  "category" : "tarjonta",
-  "accessed" : 1384332984627,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332984627,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Kaikki",
-  "key" : "tarjonta.haku.kaikki",
-  "locale" : "fi",
-  "created" : 1384332982578,
-  "category" : "tarjonta",
-  "accessed" : 1384332984686,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332984686,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Julkaistu",
-  "key" : "tarjonta.tila.JULKAISTU",
-  "locale" : "fi",
-  "created" : 1384332982603,
-  "category" : "tarjonta",
-  "accessed" : 1384332984708,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332984708,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Luonnos",
-  "key" : "tarjonta.tila.LUONNOS",
-  "locale" : "fi",
-  "created" : 1384332982635,
-  "category" : "tarjonta",
-  "accessed" : 1384332984732,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332984732,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Koulutuksen yhteyshenkilö",
-  "key" : "koulutus.edit.yhteyshenkilo.name",
-  "locale" : "fi",
-  "created" : 1384332982634,
-  "category" : "tarjonta",
-  "accessed" : 1384332984748,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332984748,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Lisätietoja",
-  "key" : "tarjonta.hakukohde.valintakoe.modal.ajankohta.lisatieto",
-  "locale" : "fi",
-  "created" : 1384332983303,
-  "category" : "tarjonta",
-  "accessed" : 1384332985391,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332985391,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "oid / tila / tyyppi",
-  "key" : "koulutus.review.perustiedot.oidTilaTyyppi",
-  "locale" : "fi",
-  "created" : 1384332983313,
-  "category" : "tarjonta",
-  "accessed" : 1384332985410,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332985410,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Toimitettava mennessä",
-  "key" : "tarjonta.hakukohde.liite.modal.toimitettavaMennessa",
-  "locale" : "fi",
-  "created" : 1384332983528,
-  "category" : "tarjonta",
-  "accessed" : 1384332985577,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332985577,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Opetuskielet",
-  "key" : "koulutus.review.perustiedot.opetuskielet",
-  "locale" : "fi",
-  "created" : 1384332983528,
-  "category" : "tarjonta",
-  "accessed" : 1384332985595,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332985595,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Valitsemaasi toimintoa ei ole <i>vielä</i> toteutettu",
-  "key" : "notImplemented.description",
-  "locale" : "fi",
-  "created" : 1384332983670,
-  "category" : "tarjonta",
-  "accessed" : 1384332985686,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332985686,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Varmista valitun koulutuksen poistaminen",
-  "key" : "koulutus.review.poista.confirm.title",
-  "locale" : "fi",
-  "created" : 1384332983656,
-  "category" : "tarjonta",
-  "accessed" : 1384332985707,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332985707,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Koulutuksen alkamispäivä",
-  "key" : "kk.edit.koulutuksen-alkamispvm",
-  "locale" : "fi",
-  "created" : 1384332983707,
-  "category" : "tarjonta",
-  "accessed" : 1384332985728,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332985728,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Siirrä osaksi toista koulutusta",
-  "key" : "koulutus.review.siirra.osaksi",
-  "locale" : "fi",
-  "created" : 1384332983709,
-  "category" : "tarjonta",
-  "accessed" : 1384332985737,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332985737,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Koulutusohjelman valinta",
-  "key" : "koulutus.review.kuvailevatTiedot.koulutusohjelmanValinta",
-  "locale" : "fi",
-  "created" : 1384332983732,
-  "category" : "tarjonta",
-  "accessed" : 1384332985758,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332985758,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Kuvaus",
-  "key" : "tarjonta.hakukohde.valintakoe.modal.kuvaus",
-  "locale" : "fi",
-  "created" : 1384332983753,
-  "category" : "tarjonta",
-  "accessed" : 1384332985805,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332985805,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Voidaan toimittaa myös sähköisesti",
-  "key" : "tarjonta.hakukohde.liite.modal.voidaanToimittaaSahkoisesti",
-  "locale" : "fi",
-  "created" : 1384332983759,
-  "category" : "tarjonta",
-  "accessed" : 1384332985874,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332985874,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Avskapa nytt studie",
-  "key" : "tarjonta.toiminnot.luo_uusi_koulutus",
-  "locale" : "sv",
-  "created" : 1384332982372,
-  "category" : "tarjonta",
-  "accessed" : 1384333528751,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384333528751,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Tutkinto-ohjelma ja tunniste",
-  "key" : "koulutus.review.perustiedot.tutkintoOhjelmaJaTunniste",
-  "locale" : "fi",
-  "created" : 1384332982426,
-  "category" : "tarjonta",
-  "accessed" : 1384332984543,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332984543,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Muu osoite",
-  "key" : "tarjonta.hakukohde.label.muu.osoite",
-  "locale" : "fi",
-  "created" : 1384332982432,
-  "category" : "tarjonta",
-  "accessed" : 1384332984566,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332984566,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Koulutuksen kuvailevat tiedot",
-  "key" : "koulutus.edit.lisatiedot",
-  "locale" : "fi",
-  "created" : 1384332982492,
-  "category" : "tarjonta",
-  "accessed" : 1384332984599,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332984599,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Tallenna valmiina",
-  "key" : "koulutus.edit.tallenna.valmis",
-  "locale" : "fi",
-  "created" : 1384332982527,
-  "category" : "tarjonta",
-  "accessed" : 1384332984625,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332984625,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Koulutuksen maksullisuus",
-  "key" : "koulutus.edit.maksullisuus",
-  "locale" : "fi",
-  "created" : 1384332982582,
-  "category" : "tarjonta",
-  "accessed" : 1384332984689,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332984689,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Tyhjennä",
-  "key" : "tarjonta.haku.tyhjenna",
-  "locale" : "fi",
-  "created" : 1384332982581,
-  "category" : "tarjonta",
-  "accessed" : 1384332984709,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332984709,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Opintoala",
-  "key" : "koulutus.edit.opintoala",
-  "locale" : "fi",
-  "created" : 1384332982621,
-  "category" : "tarjonta",
-  "accessed" : 1384332984728,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332984728,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Tallenna luonnoksena",
-  "key" : "koulutus.edit.tallenna.luonnos",
-  "locale" : "fi",
-  "created" : 1384332982658,
-  "category" : "tarjonta",
-  "accessed" : 1384332984756,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332984756,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Pohjakoulutusvaatimukset",
-  "key" : "koulutus.edit.pohjakoulutusvaatimus",
-  "locale" : "fi",
-  "created" : 1384332982658,
-  "category" : "tarjonta",
-  "accessed" : 1384332984794,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332984794,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Lisätieto",
-  "key" : "tarjonta.hakukohde.valintakoe.modal.ajankohta.table.lisatietoja",
-  "locale" : "fi",
-  "created" : 1384332982677,
-  "category" : "tarjonta",
-  "accessed" : 1384332984812,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332984812,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Uusi koulutus",
-  "key" : "koulutus.edit.header.title",
-  "locale" : "fi",
-  "created" : 1384332982689,
-  "category" : "tarjonta",
-  "accessed" : 1384332984844,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332984844,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Siirrä",
-  "key" : "transfer",
-  "locale" : "fi",
-  "created" : 1384332982729,
-  "category" : "tarjonta",
-  "accessed" : 1384332984899,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332984899,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "EQF-luokitus on pakollinen",
-  "key" : "koulutus.edit.eqfLuokitus.required",
-  "locale" : "fi",
-  "created" : 1384332982738,
-  "category" : "tarjonta",
-  "accessed" : 1384332984931,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332984931,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Huomaa, että koulutuksen maksullisuutta voi kuvata tarkemmin Koulutuksen kuvailevat tiedot -välilehdellä",
-  "key" : "koulutus.edit.maksullisuus.help",
-  "locale" : "fi",
-  "created" : 1384332982801,
-  "category" : "tarjonta",
-  "accessed" : 1384332984966,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332984966,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "ECTS-koordinaattori",
-  "key" : "kk.edit.ects-koordinaattori",
-  "locale" : "fi",
-  "created" : 1384332982829,
-  "category" : "tarjonta",
-  "accessed" : 1384332984997,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332984997,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Tutkinto",
-  "key" : "kk.edit.tutkinto",
-  "locale" : "fi",
-  "created" : 1384332982857,
-  "category" : "tarjonta",
-  "accessed" : 1384332985023,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332985023,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Suunniteltu kesto",
-  "key" : "kk.edit.suunniteltu-kesto",
-  "locale" : "fi",
-  "created" : 1384332982912,
-  "category" : "tarjonta",
-  "accessed" : 1384332985090,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332985090,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Sijainti",
-  "key" : "tarjonta.hakukohde.valintakoe.modal.ajankohta.sijainti",
-  "locale" : "fi",
-  "created" : 1384332982932,
-  "category" : "tarjonta",
-  "accessed" : 1384332985102,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332985102,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Näytä koulutukset",
-  "key" : "tarjonta.toiminnot.hakukohde.linkit",
-  "locale" : "fi",
-  "created" : 1384332982933,
-  "category" : "tarjonta",
-  "accessed" : 1384332985112,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332985112,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Poista",
-  "key" : "koulutus.review.poista",
-  "locale" : "fi",
-  "created" : 1384332982949,
-  "category" : "tarjonta",
-  "accessed" : 1384332985123,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332985123,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Sijainti",
-  "key" : "tarjonta.hakukohde.valintakoe.modal.ajankohta.table.sijaint",
-  "locale" : "fi",
-  "created" : 1384332982964,
-  "category" : "tarjonta",
-  "accessed" : 1384332985140,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332985140,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Koulutuslaji",
-  "key" : "koulutus.review.perustiedot.koulutuslaji",
-  "locale" : "fi",
-  "created" : 1384332982985,
-  "category" : "tarjonta",
-  "accessed" : 1384332985156,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332985156,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Koulutuskoodi",
-  "key" : "kk.edit.koulutuskoodi",
-  "locale" : "fi",
-  "created" : 1384332983009,
-  "category" : "tarjonta",
-  "accessed" : 1384332985166,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332985166,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Hakukelpoisuusvaatimukset",
-  "key" : "kk.hakukohde.hakukelpoisuusvaatimukset",
-  "locale" : "fi",
-  "created" : 1384332983019,
-  "category" : "tarjonta",
-  "accessed" : 1384332985176,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332985176,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Liitteiden toimituspvm",
-  "key" : "kk.hakukohde.liitteidenToimitusPvm",
-  "locale" : "fi",
-  "created" : 1384332983032,
-  "category" : "tarjonta",
-  "accessed" : 1384332985189,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332985189,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Hakutulokset: ({0})",
-  "key" : "selectTutkintoOhjelma.hakutulokset",
-  "locale" : "fi",
-  "created" : 1384332983072,
-  "category" : "tarjonta",
-  "accessed" : 1384332985203,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332985203,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Koulutuksen alkamispäivä on pakollinen",
-  "key" : "koulutus.edit.koulutuksen-alkamispvm.required",
-  "locale" : "fi",
-  "created" : 1384332983091,
-  "category" : "tarjonta",
-  "accessed" : 1384332985212,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332985212,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Tutkintonimike",
-  "key" : "kk.edit.tutkintonimike",
-  "locale" : "fi",
-  "created" : 1384332983121,
-  "category" : "tarjonta",
-  "accessed" : 1384332985237,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332985237,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Poista",
-  "key" : "delete",
-  "locale" : "fi",
-  "created" : 1384332983146,
-  "category" : "tarjonta",
-  "accessed" : 1384332985269,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332985269,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Tarkastele",
-  "key" : "tarjonta.toiminnot.tarkastele",
-  "locale" : "fi",
-  "created" : 1384332983151,
-  "category" : "tarjonta",
-  "accessed" : 1384332985285,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332985285,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Koulutusaste",
-  "key" : "kk.edit.koulutusaste",
-  "locale" : "fi",
-  "created" : 1384332983188,
-  "category" : "tarjonta",
-  "accessed" : 1384332985297,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332985297,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Ammatillinen peruskoulutus",
-  "key" : "koulutus.koulutusaste.AMMATILLINEN_PERUSKOULUTUS",
-  "locale" : "fi",
-  "created" : 1384332983189,
-  "category" : "tarjonta",
-  "accessed" : 1384332985310,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332985310,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Sulje",
-  "key" : "tarjonta.toiminnot.sulje",
-  "locale" : "fi",
-  "created" : 1384332983211,
-  "category" : "tarjonta",
-  "accessed" : 1384332985323,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332985323,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Liitteen toimituksen määräaika ja osoite",
-  "key" : "tarjonta.hakukohde.liite.listaus.liitteen.osoite",
-  "locale" : "fi",
-  "created" : 1384332983216,
-  "category" : "tarjonta",
-  "accessed" : 1384332985332,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332985332,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Yhteyshenkilö",
-  "key" : "kk.edit.yhteyshenkilo",
-  "locale" : "fi",
-  "created" : 1384332983244,
-  "category" : "tarjonta",
-  "accessed" : 1384332985345,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332985345,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Sijoittuminen työelämään",
-  "key" : "koulutus.review.kuvailevatTiedot.sijoittuminenTyoelamaan",
-  "locale" : "fi",
-  "created" : 1384332983253,
-  "category" : "tarjonta",
-  "accessed" : 1384332985356,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332985356,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Yhteyshenkilö",
-  "key" : "koulutus.edit.yhteyshenkilo",
-  "locale" : "fi",
-  "created" : 1384332983277,
-  "category" : "tarjonta",
-  "accessed" : 1384332985366,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332985366,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Takaisin",
-  "key" : "back",
-  "locale" : "fi",
-  "created" : 1384332983299,
-  "category" : "tarjonta",
-  "accessed" : 1384332985383,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332985383,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "OID",
-  "key" : "koulutus.review.perustiedot.oid",
-  "locale" : "fi",
-  "created" : 1384332983329,
-  "category" : "tarjonta",
-  "accessed" : 1384332985410,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332985410,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Toimintoa ei toteutettu",
-  "key" : "notImplemented.title",
-  "locale" : "fi",
-  "created" : 1384332982750,
-  "category" : "tarjonta",
-  "accessed" : 1384332984937,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332984937,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Valitsemillasi hakuehdoilla ei löytynyt tutkinto-ohjelmia. Ole hyvä ja tarkenna hakua.",
-  "key" : "selectTutkintoOhjelma.eihakutuloksia",
-  "locale" : "fi",
-  "created" : 1384332982786,
-  "category" : "tarjonta",
-  "accessed" : 1384332984951,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332984951,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Opintojen laajuus on pakollinen",
-  "key" : "koulutus.edit.opintojenLaajuus.required",
-  "locale" : "fi",
-  "created" : 1384332982798,
-  "category" : "tarjonta",
-  "accessed" : 1384332984981,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332984981,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
+  "category" : "tarjonta"
 }, {
-  "value" : "Hakukohteen poisto",
-  "key" : "tarjonta.poistovahvistus.otsikko.hakukohde",
+  "key" : "koulutus.edit.TAVOITTEET.title",
   "locale" : "fi",
-  "created" : 1384332982830,
-  "category" : "tarjonta",
-  "accessed" : 1384332984998,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332984998,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
+  "value" : "Tavoitteet",
+  "category" : "tarjonta"
 }, {
-  "value" : "Luonnos",
-  "key" : "koulutus.tila.LUONNOS",
+  "key" : "koulutus.edit.LOPPUKOEVAATIMUKSET.title",
   "locale" : "fi",
-  "created" : 1384332982833,
-  "category" : "tarjonta",
-  "accessed" : 1384332985009,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332985009,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
+  "value" : "Loppukoevaatimukset",
+  "category" : "tarjonta"
 }, {
-  "value" : "Liitteen nimi",
-  "key" : "tarjonta.hakukohde.liite.modal.nimi",
+  "key" : "koulutus.edit.MAKSULLISUUS.title",
   "locale" : "fi",
-  "created" : 1384332982856,
-  "category" : "tarjonta",
-  "accessed" : 1384332985026,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332985026,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Koulutuksen kuvailevat tiedot",
-  "key" : "koulutus.review.kuvailevatTiedot.otsikko",
-  "locale" : "fi",
-  "created" : 1384332982874,
-  "category" : "tarjonta",
-  "accessed" : 1384332985051,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332985051,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Opetusmuoto on pakollinen",
-  "key" : "koulutus.edit.opetusmuodot.required",
-  "locale" : "fi",
-  "created" : 1384332982884,
-  "category" : "tarjonta",
-  "accessed" : 1384332985059,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332985059,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Lisää uusi nimi",
-  "key" : "tarjonta.hakukohde.toiminnot.lisaa.nimi",
-  "locale" : "fi",
-  "created" : 1384332982896,
-  "category" : "tarjonta",
-  "accessed" : 1384332985081,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332985081,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
   "value" : "Maksullisuus",
-  "key" : "koulutus.review.perustiedot.maksullisuus",
-  "locale" : "fi",
-  "created" : 1384332983329,
-  "category" : "tarjonta",
-  "accessed" : 1384332985390,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332985390,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
+  "category" : "tarjonta"
 }, {
-  "value" : "Poista",
-  "key" : "tarjonta.toiminnot.poista",
-  "locale" : "fi",
-  "created" : 1384332983330,
-  "category" : "tarjonta",
-  "accessed" : 1384332985410,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332985410,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Kuvauskieli",
-  "key" : "tarjonta.hakukohde.valintakoe.modal.kuvauskieli",
-  "locale" : "fi",
-  "created" : 1384332983391,
-  "category" : "tarjonta",
-  "accessed" : 1384332985440,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332985440,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Puhelinnumero",
-  "key" : "koulutus.edit.yhteyshenkilo.phone",
-  "locale" : "fi",
-  "created" : 1384332983417,
-  "category" : "tarjonta",
-  "accessed" : 1384332985471,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332985471,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Peruuta",
-  "key" : "tarjonta.hakukohde.liite.modal.peruuta.button",
-  "locale" : "fi",
-  "created" : 1384332983420,
-  "category" : "tarjonta",
-  "accessed" : 1384332985494,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332985494,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo",
-  "key" : "koulutus.edit.sijoittuminen_tyoelamaan.help",
-  "locale" : "fi",
-  "created" : 1384332983448,
-  "category" : "tarjonta",
-  "accessed" : 1384332985519,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332985519,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "[tarjonta.tila.status fi]",
-  "key" : "tarjonta.tila.status",
-  "locale" : "fi",
-  "created" : 1384332983484,
-  "category" : "tarjonta",
-  "accessed" : 1384332985546,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332985546,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Koulutusohjelman valinta",
-  "key" : "koulutus.edit.KOULUTUSOHJELMAN_VALINTA.title",
-  "locale" : "fi",
-  "created" : 1384332983508,
-  "category" : "tarjonta",
-  "accessed" : 1384332985568,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332985568,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Opintojen maksullisuus",
-  "key" : "koulutus.review.kuvailevatTiedot.opintojenMaksullisuus",
-  "locale" : "fi",
-  "created" : 1384332983557,
-  "category" : "tarjonta",
-  "accessed" : 1384332985597,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332985597,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Tyhjennä",
-  "key" : "kk.edit.tyhjenna",
-  "locale" : "fi",
-  "created" : 1384332983564,
-  "category" : "tarjonta",
-  "accessed" : 1384332985619,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332985619,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Näytä myös lakkautetut",
-  "key" : "organisaatiohaku.label.nayta.myos.lakkautetut",
-  "locale" : "fi",
-  "created" : 1384332983638,
-  "category" : "tarjonta",
-  "accessed" : 1384332985665,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332985665,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Koulutukselliset- ja ammatilliset tavoitteet",
-  "key" : "koulutus.review.kuvailevatTiedot.koulutuksellisetJaAmmatillisetTavoitteet",
-  "locale" : "fi",
-  "created" : 1384332983659,
-  "category" : "tarjonta",
-  "accessed" : 1384332985685,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332985685,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Opetusmuoto",
-  "key" : "koulutus.review.perustiedot.opetusmuoto",
-  "locale" : "fi",
-  "created" : 1384332983658,
-  "category" : "tarjonta",
-  "accessed" : 1384332985703,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332985703,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Koulutusohjelma",
-  "key" : "koulutus.review.perustiedot.koulutusohjelma",
-  "locale" : "fi",
-  "created" : 1384332983706,
-  "category" : "tarjonta",
-  "accessed" : 1384332985718,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332985718,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Yhteistyö muiden toimijoiden kanssa",
-  "key" : "koulutus.review.kuvailevatTiedot.yhteistyoMuidenToimijoidenKanssa",
-  "locale" : "fi",
-  "created" : 1384332983729,
-  "category" : "tarjonta",
-  "accessed" : 1384332985745,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332985745,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Koulutusala",
-  "key" : "koulutus.review.perustiedot.koulutusala",
-  "locale" : "fi",
-  "created" : 1384332983733,
-  "category" : "tarjonta",
-  "accessed" : 1384332985756,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332985756,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "<b>TUNTEMATON KOULUTUSTYYPPI!</b>",
-  "key" : "koulutus.review.tuntematonTyyppi",
-  "locale" : "fi",
-  "created" : 1384332983731,
-  "category" : "tarjonta",
-  "accessed" : 1384332985803,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332985803,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Alla",
-  "key" : "tarjonta.haku.kaikki",
-  "locale" : "sv",
-  "created" : 1384332983611,
-  "category" : "tarjonta",
-  "accessed" : 1384333528750,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384333528750,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Koulutukset",
-  "key" : "tarjonta.linkit.otsikko.hakukohde",
-  "locale" : "fi",
-  "created" : 1384332982987,
-  "category" : "tarjonta",
-  "accessed" : 1384332985146,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332985146,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Tutkimuksen painopisteet",
-  "key" : "koulutus.review.kuvailevatTiedot.tutkimuksenPainopisteet",
-  "locale" : "fi",
-  "created" : 1384332982987,
-  "category" : "tarjonta",
-  "accessed" : 1384332985160,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332985160,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Näytä myös suunnitellut",
-  "key" : "organisaatiohaku.label.nayta.myos.suunnitellut",
-  "locale" : "fi",
-  "created" : 1384332983022,
-  "category" : "tarjonta",
-  "accessed" : 1384332985182,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332985182,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Haluatko varmasti poistaa hakukohteen:",
-  "key" : "tarjonta.poistovahvistus.ohje.hakukohde",
-  "locale" : "fi",
-  "created" : 1384332983078,
-  "category" : "tarjonta",
-  "accessed" : 1384332985204,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332985204,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Yes",
-  "key" : "yes",
-  "locale" : "en",
-  "created" : 1384332983095,
-  "category" : "tarjonta",
-  "accessed" : 1384332985219,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332985219,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Alkamispäivämäärä",
-  "key" : "koulutus.review.perustiedot.alkamispvm",
-  "locale" : "fi",
-  "created" : 1384332983102,
-  "category" : "tarjonta",
-  "accessed" : 1384332985236,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332985236,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Koulutuksen tavoitteet",
-  "key" : "koulutus.review.kuvailevatTiedot.tavoitteetKoulutus",
-  "locale" : "fi",
-  "created" : 1384332983118,
-  "category" : "tarjonta",
-  "accessed" : 1384332985256,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332985256,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Valintaperustekuvaus",
-  "key" : "kk.hakukohde.valintaperustekuvaus",
-  "locale" : "fi",
-  "created" : 1384332983165,
-  "category" : "tarjonta",
-  "accessed" : 1384332985273,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332985273,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Lisää uusi kieli",
-  "key" : "kk.edit.lisaa-kieli",
-  "locale" : "fi",
-  "created" : 1384332983187,
-  "category" : "tarjonta",
-  "accessed" : 1384332985304,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332985304,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Opetuskieli on pakollinen",
-  "key" : "koulutus.edit.opetuskielet.required",
-  "locale" : "fi",
-  "created" : 1384332983193,
-  "category" : "tarjonta",
-  "accessed" : 1384332985316,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332985316,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Käytetään järjestelmän valintapalvelua",
-  "key" : "kk.hakukohde.kaytetaanjarjestelman.valintapalvelua",
-  "locale" : "fi",
-  "created" : 1384332983210,
-  "category" : "tarjonta",
-  "accessed" : 1384332985327,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332985327,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Suunniteltu kesto",
-  "key" : "koulutus.review.perustiedot.suunniteltuKesto",
-  "locale" : "fi",
-  "created" : 1384332983219,
-  "category" : "tarjonta",
-  "accessed" : 1384332985338,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332985338,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Koulutus",
-  "key" : "koulutus.review.perustiedot.koulutus",
-  "locale" : "fi",
-  "created" : 1384332983248,
-  "category" : "tarjonta",
-  "accessed" : 1384332985345,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332985345,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Muokkaa valintakoetta",
-  "key" : "tarjonta.hakukohde.valintakoe.modal.otsikko",
-  "locale" : "fi",
-  "created" : 1384332983261,
-  "category" : "tarjonta",
-  "accessed" : 1384332985362,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332985362,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Koulutus on maksullista",
-  "key" : "koulutus.edit.maksullisuus.valinta",
-  "locale" : "fi",
-  "created" : 1384332983304,
-  "category" : "tarjonta",
-  "accessed" : 1384332985389,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332985389,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Tässä dialogissa luodaan uusi koulutus valitsemalla...",
-  "key" : "luoKoulutusDialogi.kuvaus",
-  "locale" : "fi",
-  "created" : 1384332983323,
-  "category" : "tarjonta",
-  "accessed" : 1384332985412,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332985412,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Valintakokeen kuvaus",
-  "key" : "tarjonta.hakukohde.valintakoe.listaus.valintakokeen.kuvaus",
-  "locale" : "fi",
-  "created" : 1384332983370,
-  "category" : "tarjonta",
-  "accessed" : 1384332985439,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332985439,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Koulutuksen perustiedot",
-  "key" : "koulutus.review.perustiedot.otsikko",
-  "locale" : "fi",
-  "created" : 1384332983419,
-  "category" : "tarjonta",
-  "accessed" : 1384332985475,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332985475,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Pohjakoulutusvaatimus",
-  "key" : "koulutus.review.perustiedot.pohjakoulutusvaatimus",
-  "locale" : "fi",
-  "created" : 1384332983448,
-  "category" : "tarjonta",
-  "accessed" : 1384332985494,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332985494,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Hae",
-  "key" : "organisaatiohaku.button.hae",
-  "locale" : "fi",
-  "created" : 1384332983446,
-  "category" : "tarjonta",
-  "accessed" : 1384332985510,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332985510,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Tutkimuksen painopisteet",
   "key" : "koulutus.edit.TUTKIMUKSEN_PAINOPISTEET.title",
   "locale" : "fi",
-  "created" : 1384332983476,
-  "category" : "tarjonta",
-  "accessed" : 1384332985528,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332985528,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
+  "value" : "Tutkimuksen painopisteet",
+  "category" : "tarjonta"
 }, {
-  "value" : "Ladataan...",
-  "key" : "loading",
+  "key" : "koulutus.edit.maksullisuus.euroa_lukuvuodessa",
   "locale" : "fi",
-  "created" : 1384332983505,
-  "category" : "tarjonta",
-  "accessed" : 1384332985547,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332985547,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
+  "value" : "euroa lukuvuodessa",
+  "category" : "tarjonta"
 }, {
-  "value" : "[organisaatiotyyppi.oppisopimustoimipiste sv]",
-  "key" : "organisaatiotyyppi.oppisopimustoimipiste",
-  "locale" : "sv",
-  "created" : 1384332983504,
-  "category" : "tarjonta",
-  "accessed" : 1384332985554,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332985554,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Valmis",
-  "key" : "koulutus.tila.VALMIS",
+  "key" : "tarjonta.toiminnot.peruuta\"",
   "locale" : "fi",
-  "created" : 1384332983505,
-  "category" : "tarjonta",
-  "accessed" : 1384332985568,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332985568,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
+  "value" : "[tarjonta.toiminnot.peruuta&quot; fi]",
+  "category" : "tarjonta"
 }, {
-  "value" : "Käytetään koulutuksen järjestävän organisaation hakutoimiston postiosoitetta",
-  "key" : "tarjonta.hakukohde.liite.modal.kaytetaanOrganisaationPostiosoitetta",
+  "key" : "tarjonta.mkt.valiste_lisattava_kieli",
   "locale" : "fi",
-  "created" : 1384332983541,
-  "category" : "tarjonta",
-  "accessed" : 1384332985596,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332985596,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
+  "value" : "[tarjonta.mkt.valiste_lisattava_kieli fi]",
+  "category" : "tarjonta"
 }, {
-  "value" : "Siirrä tai kopioi",
-  "key" : "tarjonta.toiminnot.siirra_tai_kopioi",
-  "locale" : "fi",
-  "created" : 1384332983585,
-  "category" : "tarjonta",
-  "accessed" : 1384332985630,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332985630,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Koulutuksen rakenne",
-  "key" : "koulutus.edit.koulutuksen_rakenne.title",
-  "locale" : "fi",
-  "created" : 1384332983588,
-  "category" : "tarjonta",
-  "accessed" : 1384332985638,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332985638,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Uusi liite",
-  "key" : "tarjonta.hakukohde.valintakoe.listaus.uusi.liite",
-  "locale" : "fi",
-  "created" : 1384332983607,
-  "category" : "tarjonta",
-  "accessed" : 1384332985646,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332985646,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "[organisaatiotyyppi.toimipiste sv]",
-  "key" : "organisaatiotyyppi.toimipiste",
-  "locale" : "sv",
-  "created" : 1384332983618,
-  "category" : "tarjonta",
-  "accessed" : 1384332985661,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332985661,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Muokkaa liitettä",
-  "key" : "tarjonta.hakukohde.liite.modal.otsikko",
-  "locale" : "fi",
-  "created" : 1384332983634,
-  "category" : "tarjonta",
-  "accessed" : 1384332985669,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332985669,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Liitteiden toimitusosoite",
-  "key" : "kk.hakukohde.liitteidentoimitusosoite",
-  "locale" : "fi",
-  "created" : 1384332983646,
-  "category" : "tarjonta",
-  "accessed" : 1384332985681,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332985681,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Kopierad",
-  "key" : "tarjonta.tila.KOPIOITU",
-  "locale" : "sv",
-  "created" : 1384332983479,
-  "category" : "tarjonta",
-  "accessed" : 1384333528746,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384333528746,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Tutkinnon tavoitteet",
-  "key" : "koulutus.review.kuvailevatTiedot.tavoitteetTutkinto",
-  "locale" : "fi",
-  "created" : 1384332983008,
-  "category" : "tarjonta",
-  "accessed" : 1384332985167,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332985167,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Jatko-opintomahdollisuudet",
-  "key" : "koulutus.review.kuvailevatTiedot.jatkoopintoMahdollisuudet",
-  "locale" : "fi",
-  "created" : 1384332983016,
-  "category" : "tarjonta",
-  "accessed" : 1384332985179,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332985179,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Peruuta",
-  "key" : "tarjonta.hakukohde.valintakoe.modal.cancel",
-  "locale" : "fi",
-  "created" : 1384332983070,
-  "category" : "tarjonta",
-  "accessed" : 1384332985201,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332985201,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Peruuta",
-  "key" : "tarjonta.toiminnot.peruuta",
-  "locale" : "fi",
-  "created" : 1384332983078,
-  "category" : "tarjonta",
-  "accessed" : 1384332985214,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332985214,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Sisältyvät opintokokonaisuudet",
-  "key" : "koulutus.review.sisaltyvatOpintokokonaisuudet.otsikko",
-  "locale" : "fi",
-  "created" : 1384332983113,
-  "category" : "tarjonta",
-  "accessed" : 1384332985231,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332985231,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Opintoala",
-  "key" : "koulutus.review.perustiedot.opintoala",
-  "locale" : "fi",
-  "created" : 1384332983134,
-  "category" : "tarjonta",
-  "accessed" : 1384332985254,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332985254,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Tila",
-  "key" : "tarjonta.haku.tila",
-  "locale" : "fi",
-  "created" : 1384332983164,
-  "category" : "tarjonta",
-  "accessed" : 1384332985273,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332985273,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Tutkinto-ohjelma",
-  "key" : "koulutus.tyyppi.TUTKINTO_OHJELMA",
-  "locale" : "fi",
-  "created" : 1384332983165,
-  "category" : "tarjonta",
-  "accessed" : 1384332985285,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332985285,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "OK",
-  "key" : "tarjonta.toiminnot.ok",
-  "locale" : "fi",
-  "created" : 1384332983209,
-  "category" : "tarjonta",
-  "accessed" : 1384332985322,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332985322,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Tallenna",
-  "key" : "tarjonta.hakukohde.liite.modal.tallenna.button",
-  "locale" : "fi",
-  "created" : 1384332983214,
-  "category" : "tarjonta",
-  "accessed" : 1384332985339,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332985339,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Päättymisaika",
-  "key" : "kk.hakukohde.paattymisaika",
-  "locale" : "fi",
-  "created" : 1384332983250,
-  "category" : "tarjonta",
-  "accessed" : 1384332985355,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332985355,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Valintakokeen ajat ja sijainnit",
-  "key" : "tarjonta.hakukohde.valintakoe.listaus.valintakokeen.aika",
-  "locale" : "fi",
-  "created" : 1384332983269,
-  "category" : "tarjonta",
-  "accessed" : 1384332985364,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332985364,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Oletko varma, että haluat todellakin <b>poistaa pysyvästi</b> seuraavan koulutuksen:<br /> <i>{0}</i> <br /> <b>Toimintoa ei voi peruuttaa.</b>",
-  "key" : "koulutus.review.poista.confirm.description",
-  "locale" : "fi",
-  "created" : 1384332983298,
-  "category" : "tarjonta",
-  "accessed" : 1384332985380,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332985380,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Esikatsele",
-  "key" : "koulutus.review.esikatsele",
-  "locale" : "fi",
-  "created" : 1384332983362,
-  "category" : "tarjonta",
-  "accessed" : 1384332985414,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332985414,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Tyyppi",
-  "key" : "koulutus.review.perustiedot.tyyppi",
-  "locale" : "fi",
-  "created" : 1384332983366,
-  "category" : "tarjonta",
-  "accessed" : 1384332985436,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332985436,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Muokkaa tutkintoa",
-  "key" : "kk.edit.muokkaaTutkinto",
-  "locale" : "fi",
-  "created" : 1384332983392,
-  "category" : "tarjonta",
-  "accessed" : 1384332985448,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332985448,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Koulutusohjelma",
-  "key" : "kk.edit.koulutusohjelma",
-  "locale" : "fi",
-  "created" : 1384332983393,
-  "category" : "tarjonta",
-  "accessed" : 1384332985460,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332985460,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Opetuskielet",
-  "key" : "kk.edit.opetuskielet",
-  "locale" : "fi",
-  "created" : 1384332983396,
-  "category" : "tarjonta",
-  "accessed" : 1384332985474,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332985474,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Maksullisuus",
-  "key" : "kk.edit.maksullisuus",
-  "locale" : "fi",
-  "created" : 1384332983450,
-  "category" : "tarjonta",
-  "accessed" : 1384332985516,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332985516,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Tyhjennä",
-  "key" : "koulutus.edit.tyhjenna",
-  "locale" : "fi",
-  "created" : 1384332983502,
-  "category" : "tarjonta",
-  "accessed" : 1384332985547,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332985547,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Loppytyön kuvaus",
-  "key" : "koulutus.review.kuvailevatTiedot.lopputyonKuvaus",
-  "locale" : "fi",
-  "created" : 1384332983530,
-  "category" : "tarjonta",
-  "accessed" : 1384332985569,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332985569,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Koulutuksen poisto",
-  "key" : "tarjonta.poistovahvistus.otsikko.koulutus",
-  "locale" : "fi",
-  "created" : 1384332983558,
-  "category" : "tarjonta",
-  "accessed" : 1384332985598,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332985598,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Hakukausi",
-  "key" : "tarjonta.hakutulokset.kausi",
-  "locale" : "fi",
-  "created" : 1384332983561,
-  "category" : "tarjonta",
-  "accessed" : 1384332985618,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332985618,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Tyhjennä",
-  "key" : "selectTutkintoOhjelma.tyhjenna",
-  "locale" : "fi",
-  "created" : 1384332983562,
-  "category" : "tarjonta",
-  "accessed" : 1384332985627,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332985627,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Yhteistyö muoden toimijoiden kanssa",
-  "key" : "koulutus.edit.yhteistyo_muiden_toimijoiden_kanssa.title",
-  "locale" : "fi",
-  "created" : 1384332983589,
-  "category" : "tarjonta",
-  "accessed" : 1384332985640,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332985640,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "[tarjonta.tila.VALMIS sv]",
-  "key" : "tarjonta.tila.VALMIS",
-  "locale" : "sv",
-  "created" : 1384332983617,
-  "category" : "tarjonta",
-  "accessed" : 1384332985662,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332985662,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Hakutapa",
-  "key" : "tarjonta.hakutulokset.hakutapa",
-  "locale" : "fi",
-  "created" : 1384332983666,
-  "category" : "tarjonta",
-  "accessed" : 1384332985685,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332985685,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Perustiedot",
-  "key" : "kk.hakukohde.perustiedot",
-  "locale" : "fi",
-  "created" : 1384332983670,
-  "category" : "tarjonta",
-  "accessed" : 1384332985704,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332985704,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Ja",
-  "key" : "yes",
-  "locale" : "sv",
-  "created" : 1384332983702,
-  "category" : "tarjonta",
-  "accessed" : 1384332985719,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332985719,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Lisää rinnakkainen koulutus",
-  "key" : "koulutus.review.lisaa.rinnakkainen",
-  "locale" : "fi",
-  "created" : 1384332983706,
-  "category" : "tarjonta",
-  "accessed" : 1384332985732,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332985732,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Peruuta",
-  "key" : "cancel",
-  "locale" : "fi",
-  "created" : 1384332983725,
-  "category" : "tarjonta",
-  "accessed" : 1384332985744,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332985744,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Tila",
-  "key" : "koulutus.review.perustiedot.tila",
-  "locale" : "fi",
-  "created" : 1384332983729,
-  "category" : "tarjonta",
-  "accessed" : 1384332985759,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332985759,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Valitse koulutuksen toteutuspaikka:",
-  "key" : "luoKoulutusDialogi.valitseKoulutuksenToteutuspaikka",
-  "locale" : "fi",
-  "created" : 1384332983752,
-  "category" : "tarjonta",
-  "accessed" : 1384332985871,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332985871,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Studielägenher typ",
-  "key" : "organisaatiohaku.oppilaitostyypit.prompt",
-  "locale" : "sv",
-  "created" : 1384332983614,
-  "category" : "tarjonta",
-  "accessed" : 1384333220300,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384333220300,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Opintojen suunniteltu kesto on pakollinen",
-  "key" : "koulutus.edit.suunniteltu-kesto.required",
-  "locale" : "fi",
-  "created" : 1384332983100,
-  "category" : "tarjonta",
-  "accessed" : 1384332985228,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332985228,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Valitse organisaatio",
-  "key" : "selectOrganisaatio.dialogTitle",
-  "locale" : "fi",
-  "created" : 1384332983122,
-  "category" : "tarjonta",
-  "accessed" : 1384332985238,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332985238,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Valintakokeet:",
-  "key" : "tarjonta.hakukohde.valintakoe.modal.ajankohta.table.title",
-  "locale" : "fi",
-  "created" : 1384332983124,
-  "category" : "tarjonta",
-  "accessed" : 1384332985253,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332985253,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Sähköpostiosoite",
-  "key" : "koulutus.edit.ects-koordinaattori.email",
-  "locale" : "fi",
-  "created" : 1384332983127,
-  "category" : "tarjonta",
-  "accessed" : 1384332985263,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332985263,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Muokkaa",
-  "key" : "tarjonta.toiminnot.muokkaa",
-  "locale" : "fi",
-  "created" : 1384332983177,
-  "category" : "tarjonta",
-  "accessed" : 1384332985296,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332985296,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Tutkinto-ohjelman tunniste",
-  "key" : "kk.edit.tutkinto-ohjelman-tunniste",
-  "locale" : "fi",
-  "created" : 1384332983192,
-  "category" : "tarjonta",
-  "accessed" : 1384332985314,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332985314,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Muokkaa",
-  "key" : "tarjonta.hakukohde.liite.listaus.muokkaa",
-  "locale" : "fi",
-  "created" : 1384332983246,
-  "category" : "tarjonta",
-  "accessed" : 1384332985346,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332985346,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Muokkaa",
-  "key" : "koulutus.review.muokkaa",
-  "locale" : "fi",
-  "created" : 1384332983278,
-  "category" : "tarjonta",
-  "accessed" : 1384332985367,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332985367,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Opetusmuoto",
-  "key" : "koulutus.review.perustiedot.opetusmuodot",
-  "locale" : "fi",
-  "created" : 1384332983283,
-  "category" : "tarjonta",
-  "accessed" : 1384332985379,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332985379,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Koulutuslaji",
-  "key" : "tarjonta.hakutulokset.koulutuslaji",
-  "locale" : "fi",
-  "created" : 1384332983357,
-  "category" : "tarjonta",
-  "accessed" : 1384332985412,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332985412,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Koulutusta ei ole vielä liitetty mihinkään organisaatioon.",
-  "key" : "luoKoulutusDialogi.organisaatiotaEiValittu",
-  "locale" : "fi",
-  "created" : 1384332983391,
-  "category" : "tarjonta",
-  "accessed" : 1384332985437,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332985437,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Koulutuksen rakenne",
-  "key" : "koulutus.review.kuvailevatTiedot.rakenneKoulutus",
-  "locale" : "fi",
-  "created" : 1384332983416,
-  "category" : "tarjonta",
-  "accessed" : 1384332985470,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332985470,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Lisää uusi valintakoe",
-  "key" : "tarjonta.hakukohde.valintakoe.listaus.uusi.valintakoe",
-  "locale" : "fi",
-  "created" : 1384332983266,
-  "category" : "tarjonta",
-  "accessed" : 1384332985524,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332985524,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Valitse lisättävä kieli",
   "key" : "tarjonta.mkt.valitse_lisattava_kieli",
   "locale" : "fi",
-  "created" : 1384332983476,
-  "category" : "tarjonta",
-  "accessed" : 1384332985539,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332985539,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
+  "value" : "Valitse lisättävä kieli",
+  "category" : "tarjonta"
 }, {
-  "value" : "Opintojen laajuus",
-  "key" : "kk.edit.opintojen-laajuus",
+  "key" : "kk.hakukohde.lisatietoja.hakemisesta",
   "locale" : "fi",
-  "created" : 1384332983510,
-  "category" : "tarjonta",
-  "accessed" : 1384332985573,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332985573,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
+  "value" : "Lisätietoja hakemisesta",
+  "category" : "tarjonta"
 }, {
-  "value" : "Koulutusala",
-  "key" : "kk.edit.koulutusala",
+  "key" : "hakukohde.valintakokeet.list.remove.title",
   "locale" : "fi",
-  "created" : 1384332983537,
-  "category" : "tarjonta",
-  "accessed" : 1384332985596,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332985596,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
+  "value" : "[hakukohde.valintakokeet.list.remove.title fi]",
+  "category" : "tarjonta"
 }, {
-  "value" : "Muokkaa valintakoetta",
-  "key" : "tarjonta.hakukohde.valintakoe.listaus.valintakoe.muokka",
+  "key" : "koulutus.edit.lataaKuva",
   "locale" : "fi",
-  "created" : 1384332983585,
-  "category" : "tarjonta",
-  "accessed" : 1384332985621,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332985621,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
+  "value" : "[koulutus.edit.lataaKuva fi]",
+  "category" : "tarjonta"
 }, {
-  "value" : "TODO ohjeteksti",
-  "key" : "koulutus.edit.MAKSULLISUUS.help",
+  "key" : "hakukohde.edit.header.title",
   "locale" : "fi",
-  "created" : 1384332983618,
-  "category" : "tarjonta",
-  "accessed" : 1384332985668,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332985668,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
+  "value" : "Uusi hakukohde",
+  "category" : "tarjonta"
 }, {
-  "value" : "Alkamisvuosi",
+  "key" : "kk.hakukohde.valintapalvelu",
+  "locale" : "fi",
+  "value" : "Valintapalvelu",
+  "category" : "tarjonta"
+}, {
+  "key" : "kk.hakukohde.sahkoinentoimitusosoite",
+  "locale" : "fi",
+  "value" : "Sähköinen toimitusosoite",
+  "category" : "tarjonta"
+}, {
+  "key" : "koulutus.edit.yhteistyo_muiden_toimijoiden_kanssa.title",
+  "locale" : "fi",
+  "value" : "[koulutus.edit.yhteistyo_muiden_toimijoiden_kanssa.title fi]",
+  "category" : "tarjonta"
+}, {
+  "key" : "koulutus.edit.sijoittuminen_tyoelamaan.help",
+  "locale" : "fi",
+  "value" : "[koulutus.edit.sijoittuminen_tyoelamaan.help fi]",
+  "category" : "tarjonta"
+}, {
+  "key" : "koulutus.edit.tavoitteet.title",
+  "locale" : "fi",
+  "value" : "[koulutus.edit.tavoitteet.title fi]",
+  "category" : "tarjonta"
+}, {
+  "key" : "koulutus.edit.tavoitteet.help",
+  "locale" : "fi",
+  "value" : "[koulutus.edit.tavoitteet.help fi]",
+  "category" : "tarjonta"
+}, {
+  "key" : "koulutus.edit.maksullisuus.title",
+  "locale" : "fi",
+  "value" : "[koulutus.edit.maksullisuus.title fi]",
+  "category" : "tarjonta"
+}, {
+  "key" : "koulutus.edit.lisatietoa_opetuskielista.help",
+  "locale" : "fi",
+  "value" : "[koulutus.edit.lisatietoa_opetuskielista.help fi]",
+  "category" : "tarjonta"
+}, {
+  "key" : "koulutus.edit.patevyys.title",
+  "locale" : "fi",
+  "value" : "[koulutus.edit.patevyys.title fi]",
+  "category" : "tarjonta"
+}, {
+  "key" : "koulutus.edit.sijoittuminen_tyoelamaan.title",
+  "locale" : "fi",
+  "value" : "[koulutus.edit.sijoittuminen_tyoelamaan.title fi]",
+  "category" : "tarjonta"
+}, {
+  "key" : "organisaatiohaku.tekstihaku.placeholder",
+  "locale" : "sv",
+  "value" : "[organisaatiohaku.tekstihaku.placeholder sv]",
+  "category" : "tarjonta"
+}, {
+  "key" : "organisaatiohaku.label.nayta.myos.suunnitellut",
+  "locale" : "sv",
+  "value" : "[organisaatiohaku.label.nayta.myos.suunnitellut sv]",
+  "category" : "tarjonta"
+}, {
+  "key" : "koulutus.edit.koulutuksen_rakenne.help",
+  "locale" : "fi",
+  "value" : "[koulutus.edit.koulutuksen_rakenne.help fi]",
+  "category" : "tarjonta"
+}, {
+  "key" : "tarjonta.tila.PERUTTU",
+  "locale" : "sv",
+  "value" : "[tarjonta.tila.PERUTTU sv]",
+  "category" : "tarjonta"
+}, {
+  "key" : "koulutus.edit.jatkoopinto_mahdollisuudet.help",
+  "locale" : "fi",
+  "value" : "[koulutus.edit.jatkoopinto_mahdollisuudet.help fi]",
+  "category" : "tarjonta"
+}, {
+  "key" : "koulutus.edit.kansainvalistuminen.title",
+  "locale" : "fi",
+  "value" : "[koulutus.edit.kansainvalistuminen.title fi]",
+  "category" : "tarjonta"
+}, {
+  "key" : "tarjonta.haku.alkamisKausi",
+  "locale" : "sv",
+  "value" : "[tarjonta.haku.alkamisKausi sv]",
+  "category" : "tarjonta"
+}, {
+  "key" : "tarjonta.hakutulokset.kausi",
+  "locale" : "sv",
+  "value" : "[tarjonta.hakutulokset.kausi sv]",
+  "category" : "tarjonta"
+}, {
+  "key" : "tarjonta.toiminnot.valitse_kaikki",
+  "locale" : "sv",
+  "value" : "[tarjonta.toiminnot.valitse_kaikki sv]",
+  "category" : "tarjonta"
+}, {
+  "key" : "tarjonta.hakutulos.hakukohteet",
+  "locale" : "sv",
+  "value" : "[tarjonta.hakutulos.hakukohteet sv]",
+  "category" : "tarjonta"
+}, {
+  "key" : "organisaatiotyyppi.oppilaitos",
+  "locale" : "sv",
+  "value" : "[organisaatiotyyppi.oppilaitos sv]",
+  "category" : "tarjonta"
+}, {
+  "key" : "organisaatiohaku.label.nayta.myos.lakkautetut",
+  "locale" : "sv",
+  "value" : "[organisaatiohaku.label.nayta.myos.lakkautetut sv]",
+  "category" : "tarjonta"
+}, {
+  "key" : "koulutus.edit.paaaineen_valinta.title",
+  "locale" : "fi",
+  "value" : "[koulutus.edit.paaaineen_valinta.title fi]",
+  "category" : "tarjonta"
+}, {
+  "key" : "tarjonta.haku.tila",
+  "locale" : "sv",
+  "value" : "[tarjonta.haku.tila sv]",
+  "category" : "tarjonta"
+}, {
+  "key" : "tarjonta.tila.result",
+  "locale" : "fi",
+  "value" : "[tarjonta.tila.result fi]",
+  "category" : "tarjonta"
+}, {
+  "key" : "organisaatiohaku.button.hae",
+  "locale" : "sv",
+  "value" : "[organisaatiohaku.button.hae sv]",
+  "category" : "tarjonta"
+}, {
+  "key" : "tarjonta.haku.poistaOrgValinta",
+  "locale" : "sv",
+  "value" : "[tarjonta.haku.poistaOrgValinta sv]",
+  "category" : "tarjonta"
+}, {
+  "key" : "koulutus.edit.lisatietoa_opetuskielista.title",
+  "locale" : "fi",
+  "value" : "[koulutus.edit.lisatietoa_opetuskielista.title fi]",
+  "category" : "tarjonta"
+}, {
+  "key" : "koulutus.review.perustiedot.vaativuustaso",
+  "locale" : "fi",
+  "value" : "[koulutus.review.perustiedot.vaativuustaso fi]",
+  "category" : "tarjonta"
+}, {
+  "key" : "tarjonta.poistovahvistus.otsikko.null",
+  "locale" : "fi",
+  "value" : "[tarjonta.poistovahvistus.otsikko.null fi]",
+  "category" : "tarjonta"
+}, {
+  "key" : "tarjonta.haku.tulosta_raportti",
+  "locale" : "sv",
+  "value" : "[tarjonta.haku.tulosta_raportti sv]",
+  "category" : "tarjonta"
+}, {
+  "key" : "tarjonta.tila.KOPIOITU",
+  "locale" : "sv",
+  "value" : "[tarjonta.tila.KOPIOITU sv]",
+  "category" : "tarjonta"
+}, {
+  "key" : "tarjonta.tila.status",
+  "locale" : "fi",
+  "value" : "[tarjonta.tila.status fi]",
+  "category" : "tarjonta"
+}, {
+  "key" : "tarjonta.hakutulokset.aloituspaikat",
+  "locale" : "sv",
+  "value" : "[tarjonta.hakutulokset.aloituspaikat sv]",
+  "category" : "tarjonta"
+}, {
+  "key" : "tarjonta.hakutulokset.koulutuslaji",
+  "locale" : "sv",
+  "value" : "[tarjonta.hakutulokset.koulutuslaji sv]",
+  "category" : "tarjonta"
+}, {
   "key" : "tarjonta.haku.alkamisVuosi",
-  "locale" : "fi",
-  "created" : 1384332983645,
-  "category" : "tarjonta",
-  "accessed" : 1384332985683,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332985683,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
+  "locale" : "sv",
+  "value" : "[tarjonta.haku.alkamisVuosi sv]",
+  "category" : "tarjonta"
 }, {
-  "value" : "Takaisin",
-  "key" : "koulutus.review.takaisin",
+  "key" : "koulutus.edit.PATEVYYS.help",
   "locale" : "fi",
-  "created" : 1384332983702,
-  "category" : "tarjonta",
-  "accessed" : 1384332985715,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332985715,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Voidaan toimittaa sähköisesti",
-  "key" : "kk.hakukohde.voidaantoimittaa.sahkoisesti",
-  "locale" : "fi",
-  "created" : 1384332983756,
-  "category" : "tarjonta",
-  "accessed" : 1384332985801,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332985801,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Kuvaus",
-  "key" : "tarjonta.hakukohde.valintakoe.listaus.liitteen.kuvaus",
-  "locale" : "fi",
-  "created" : 1384332983792,
-  "category" : "tarjonta",
-  "accessed" : 1384332985871,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332985871,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Koulutusala",
-  "key" : "selectTutkintoOhjelma.koulutusala",
-  "locale" : "fi",
-  "created" : 1384332983357,
-  "category" : "tarjonta",
-  "accessed" : 1384332985438,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332985438,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Koulutusaste",
-  "key" : "koulutus.review.perustiedot.koulutusaste",
-  "locale" : "fi",
-  "created" : 1384332983420,
-  "category" : "tarjonta",
-  "accessed" : 1384332985482,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332985482,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo",
-  "key" : "koulutus.edit.sisalto.help",
-  "locale" : "fi",
-  "created" : 1384332983453,
-  "category" : "tarjonta",
-  "accessed" : 1384332985520,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332985520,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
   "value" : "TODO ohjeteksti",
+  "category" : "tarjonta"
+}, {
+  "key" : "koulutus.edit.YHTEISTYO_MUIDEN_TOIMIJOIDEN_KANSSA.help",
+  "locale" : "fi",
+  "value" : "TODO ohjeteksti",
+  "category" : "tarjonta"
+}, {
+  "key" : "koulutus.edit.KOULUTUSOHJELMAN_VALINTA.help",
+  "locale" : "fi",
+  "value" : "TODO ohjeteksti",
+  "category" : "tarjonta"
+}, {
   "key" : "koulutus.edit.PAINOTUS.help",
   "locale" : "fi",
-  "created" : 1384332983480,
-  "category" : "tarjonta",
-  "accessed" : 1384332985545,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332985545,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
+  "value" : "TODO ohjeteksti",
+  "category" : "tarjonta"
 }, {
-  "value" : "Luo uusi koulutus",
-  "key" : "luoKoulutusDialogi.otsikko",
+  "key" : "koulutus.edit.JATKOOPINTO_MAHDOLLISUUDET.title",
   "locale" : "fi",
-  "created" : 1384332983524,
-  "category" : "tarjonta",
-  "accessed" : 1384332985570,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332985570,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
+  "value" : "Jatko-opintomahdollisuudet",
+  "category" : "tarjonta"
 }, {
-  "value" : "Julkaise",
-  "key" : "tarjonta.toiminnot.julkaise",
+  "key" : "koulutus.edit.PAAAINEEN_VALINTA.title",
   "locale" : "fi",
-  "created" : 1384332983555,
-  "category" : "tarjonta",
-  "accessed" : 1384332985597,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332985597,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
+  "value" : "Pääaineen valinta",
+  "category" : "tarjonta"
 }, {
-  "value" : "Käytetään muuta osoitetta",
-  "key" : "tarjonta.hakukohde.liite.modal.kaytetaanMuutaOsoitetta",
+  "key" : "koulutus.edit.kuva.title",
   "locale" : "fi",
-  "created" : 1384332983586,
-  "category" : "tarjonta",
-  "accessed" : 1384332985622,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332985622,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
+  "value" : "Kuva",
+  "category" : "tarjonta"
 }, {
-  "value" : "Koulutuksen teemat ja aiheet",
+  "key" : "hakukohde.valintakokeet.list.remove.desc",
+  "locale" : "fi",
+  "value" : "[hakukohde.valintakokeet.list.remove.desc fi]",
+  "category" : "tarjonta"
+}, {
+  "key" : "kk.hakukohde.kaytetaanHaunPaattymisenAikaa",
+  "locale" : "fi",
+  "value" : "Käytetään haun päättymisen aikaa",
+  "category" : "tarjonta"
+}, {
+  "key" : "hakukohde.liitteet.list.remove.title",
+  "locale" : "fi",
+  "value" : "[hakukohde.liitteet.list.remove.title fi]",
+  "category" : "tarjonta"
+}, {
+  "key" : "hakukohde.liitteet.list.remove.desc",
+  "locale" : "fi",
+  "value" : "[hakukohde.liitteet.list.remove.desc fi]",
+  "category" : "tarjonta"
+}, {
+  "key" : "organisaatiohaku.button.tyhjenna",
+  "locale" : "sv",
+  "value" : "[organisaatiohaku.button.tyhjenna sv]",
+  "category" : "tarjonta"
+}, {
+  "key" : "koulutus.edit.kansainvalistuminen.help",
+  "locale" : "fi",
+  "value" : "[koulutus.edit.kansainvalistuminen.help fi]",
+  "category" : "tarjonta"
+}, {
   "key" : "koulutus.review.perustiedot.teematJaAiheet",
   "locale" : "fi",
-  "created" : 1384332983589,
-  "category" : "tarjonta",
-  "accessed" : 1384332985643,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332985643,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
+  "value" : "[koulutus.review.perustiedot.teematJaAiheet fi]",
+  "category" : "tarjonta"
 }, {
+  "key" : "koulutus.edit.sisalto.help",
+  "locale" : "fi",
+  "value" : "[koulutus.edit.sisalto.help fi]",
+  "category" : "tarjonta"
+}, {
+  "key" : "koulutus.edit.yhteistyo_muiden_toimijoiden_kanssa.help",
+  "locale" : "fi",
+  "value" : "[koulutus.edit.yhteistyo_muiden_toimijoiden_kanssa.help fi]",
+  "category" : "tarjonta"
+}, {
+  "key" : "tarjonta.hakutulokset.hakutapa",
+  "locale" : "sv",
+  "value" : "[tarjonta.hakutulokset.hakutapa sv]",
+  "category" : "tarjonta"
+}, {
+  "key" : "tarjonta.tila.[object Object]",
+  "locale" : "fi",
+  "value" : "[tarjonta.tila.[object Object] fi]",
+  "category" : "tarjonta"
+}, {
+  "key" : "tarjonta.hakukohde.valintakoe.listaus.liitteen.osoite",
+  "locale" : "fi",
+  "value" : "[tarjonta.hakukohde.valintakoe.listaus.liitteen.osoite fi]",
+  "category" : "tarjonta"
+}, {
+  "key" : "no",
+  "locale" : "sv",
+  "value" : "[no sv]",
+  "category" : "tarjonta"
+}, {
+  "key" : "koulutus.edit.SIJOITTUMINEN_TYOELAMAAN.help",
+  "locale" : "fi",
+  "value" : "TODO ohjeteksti",
+  "category" : "tarjonta"
+}, {
+  "key" : "koulutus.edit.ARVIOINTIKRITEERIT.help",
+  "locale" : "fi",
+  "value" : "TODO ohjeteksti",
+  "category" : "tarjonta"
+}, {
+  "key" : "koulutus.edit.KANSAINVALISTYMINEN.help",
+  "locale" : "fi",
+  "value" : "TODO ohjeteksti",
+  "category" : "tarjonta"
+}, {
+  "key" : "koulutus.edit.JATKOOPINTO_MAHDOLLISUUDET.help",
+  "locale" : "fi",
+  "value" : "TODO ohjeteksti",
+  "category" : "tarjonta"
+}, {
+  "key" : "koulutus.edit.ammattinimikkeet.title",
+  "locale" : "fi",
+  "value" : "Ammattinimikkeet",
+  "category" : "tarjonta"
+}, {
+  "key" : "koulutus.edit.LISATIETOA_OPETUSKIELISTA.title",
+  "locale" : "fi",
+  "value" : "Lisätietoa opetuskielistä",
+  "category" : "tarjonta"
+}, {
+  "key" : "koulutus.edit.koulutuksen-alkamispvm",
+  "locale" : "fi",
+  "value" : "Koulutuksen alkamispvm",
+  "category" : "tarjonta"
+}, {
+  "key" : "koulutus.edit.paaaineen_valinta.help",
+  "locale" : "fi",
+  "value" : "[koulutus.edit.paaaineen_valinta.help fi]",
+  "category" : "tarjonta"
+}, {
+  "key" : "tarjonta.hakutulokset.hakukausi",
+  "locale" : "fi",
+  "value" : "[tarjonta.hakutulokset.hakukausi fi]",
+  "category" : "tarjonta"
+}, {
+  "key" : "tarjonta.tila.JULKAISTU",
+  "locale" : "sv",
+  "value" : "[tarjonta.tila.JULKAISTU sv]",
+  "category" : "tarjonta"
+}, {
+  "key" : "tarjonta.tila.undefined",
+  "locale" : "fi",
+  "value" : "[tarjonta.tila.undefined fi]",
+  "category" : "tarjonta"
+}, {
+  "key" : "no",
+  "locale" : "en",
+  "value" : "[no en]",
+  "category" : "tarjonta"
+}, {
+  "key" : "tarjonta.poistovahvistus.ohje.null",
+  "locale" : "fi",
+  "value" : "[tarjonta.poistovahvistus.ohje.null fi]",
+  "category" : "tarjonta"
+}, {
+  "key" : "tarjonta.haku.tyhjenna",
+  "locale" : "sv",
+  "value" : "[tarjonta.haku.tyhjenna sv]",
+  "category" : "tarjonta"
+}, {
+  "key" : "tarjonta.haku.hae",
+  "locale" : "sv",
+  "value" : "[tarjonta.haku.hae sv]",
+  "category" : "tarjonta"
+}, {
+  "key" : "tarjonta.hakutulos.koulutukset",
+  "locale" : "sv",
+  "value" : "[tarjonta.hakutulos.koulutukset sv]",
+  "category" : "tarjonta"
+}, {
+  "key" : "organisaatiotyyppi.oppisopimustoimipiste",
+  "locale" : "sv",
+  "value" : "[organisaatiotyyppi.oppisopimustoimipiste sv]",
+  "category" : "tarjonta"
+}, {
+  "key" : "koulutus.edit.header.",
+  "locale" : "fi",
+  "value" : "[koulutus.edit.header. fi]",
+  "category" : "tarjonta"
+}, {
+  "key" : "koulutus.edit.LISATIETOA_OPETUSKIELISTA.help",
+  "locale" : "fi",
+  "value" : "TODO ohjeteksti",
+  "category" : "tarjonta"
+}, {
+  "key" : "koulutus.edit.LOPPUKOEVAATIMUKSET.help",
+  "locale" : "fi",
+  "value" : "TODO ohjeteksti",
+  "category" : "tarjonta"
+}, {
+  "key" : "koulutus.edit.PATEVYYS.title",
+  "locale" : "fi",
+  "value" : "Pätevyys",
+  "category" : "tarjonta"
+}, {
+  "key" : "koulutus.edit.SISALTO.title",
+  "locale" : "fi",
+  "value" : "Sisältö",
+  "category" : "tarjonta"
+}, {
+  "key" : "koulutus.edit.ARVIOINTIKRITEERIT.title",
+  "locale" : "fi",
+  "value" : "Arviointikriteerit",
+  "category" : "tarjonta"
+}, {
+  "key" : "koulutus.edit.KOULUTUSOHJELMAN_VALINTA.title",
+  "locale" : "fi",
+  "value" : "Koulutusohjelman valinta",
+  "category" : "tarjonta"
+}, {
+  "key" : "koulutus.edit.koulutuksen_rakenne.title",
+  "locale" : "fi",
+  "value" : "[koulutus.edit.koulutuksen_rakenne.title fi]",
+  "category" : "tarjonta"
+}, {
+  "key" : "tarjonta.toiminnot.luo_uusi_hakukohde",
+  "locale" : "sv",
+  "value" : "[tarjonta.toiminnot.luo_uusi_hakukohde sv]",
+  "category" : "tarjonta"
+}, {
+  "key" : "tarjonta.linkit.eohje.null",
+  "locale" : "fi",
+  "value" : "[tarjonta.linkit.eohje.null fi]",
+  "category" : "tarjonta"
+}, {
+  "key" : "tarjonta.hakukohde.valintakoe.listaus.valintakoe.muokka",
+  "locale" : "fi",
+  "value" : "[tarjonta.hakukohde.valintakoe.listaus.valintakoe.muokka fi]",
+  "category" : "tarjonta"
+}, {
+  "key" : "no",
+  "locale" : "fi",
+  "value" : "[no fi]",
+  "category" : "tarjonta"
+}, {
+  "key" : "tarjonta.tila.LUONNOS",
+  "locale" : "sv",
+  "value" : "[tarjonta.tila.LUONNOS sv]",
+  "category" : "tarjonta"
+}, {
+  "key" : "luoKoulutusDialogi.liitaToiseenOrganisaatioon'",
+  "locale" : "fi",
+  "value" : "[luoKoulutusDialogi.liitaToiseenOrganisaatioon' fi]",
+  "category" : "tarjonta"
+}, {
+  "key" : "organisaatiohaku.organisaatiotyypit.prompt",
+  "locale" : "sv",
+  "value" : "[organisaatiohaku.organisaatiotyypit.prompt sv]",
+  "category" : "tarjonta"
+}, {
+  "key" : "organisaatiotyyppi.koulutustoimija",
+  "locale" : "sv",
+  "value" : "[organisaatiotyyppi.koulutustoimija sv]",
+  "category" : "tarjonta"
+}, {
+  "key" : "koulutus.edit.TAVOITTEET.help",
+  "locale" : "fi",
+  "value" : "TODO ohjeteksti",
+  "category" : "tarjonta"
+}, {
+  "key" : "koulutus.edit.KOULUTUKSEN_RAKENNE.help",
+  "locale" : "fi",
+  "value" : "TODO ohjeteksti",
+  "category" : "tarjonta"
+}, {
+  "key" : "koulutus.edit.SIJOITTUMINEN_TYOELAMAAN.title",
+  "locale" : "fi",
+  "value" : "Sijoittuminen työelämään",
+  "category" : "tarjonta"
+}, {
+  "key" : "koulutus.edit.PAINOTUS.title",
+  "locale" : "fi",
+  "value" : "Painotus",
+  "category" : "tarjonta"
+}, {
+  "key" : "koulutus.edit.KANSAINVALISTYMINEN.title",
+  "locale" : "fi",
+  "value" : "Kansainvälistyminen",
+  "category" : "tarjonta"
+}, {
+  "key" : "koulutus.edit.KUVAILEVAT_TIEDOT.title",
+  "locale" : "fi",
+  "value" : "Kuvailevat tiedot",
+  "category" : "tarjonta"
+}, {
+  "key" : "koulutus.edit.maksullisuus.hinta",
+  "locale" : "fi",
+  "value" : "Hinta",
+  "category" : "tarjonta"
+}, {
+  "key" : "koulutus.edit.tutkinto-ohjelman-tunniste.help",
+  "locale" : "fi",
+  "value" : "Tunnisteena voidaan käyttää korkeakoulun omaa yksilöivää tunnistetta tai virallista koulutusohjelmakoodia",
+  "category" : "tarjonta"
+}, {
+  "key" : "koulutus.edit.muokkaaTutkinto",
+  "locale" : "fi",
+  "value" : "Vaihda koulutus",
+  "category" : "tarjonta"
+}, {
+  "key" : "selectTutkintoOhjelma.peruuta",
+  "locale" : "fi",
+  "value" : "Peruuta",
+  "category" : "tarjonta"
+}, {
+  "key" : "selectTutkintoOhjelma.tekstihaku",
+  "locale" : "fi",
+  "value" : "Tekstihaku",
+  "category" : "tarjonta"
+}, {
+  "key" : "koulutus.edit.koulutusaste",
+  "locale" : "fi",
+  "value" : "Koulutusaste",
+  "category" : "tarjonta"
+}, {
+  "key" : "tarjonta.hakukohde.liite.modal.kuvauskieli",
+  "locale" : "fi",
+  "value" : "Kuvauskieli",
+  "category" : "tarjonta"
+}, {
+  "key" : "tarjonta.hakukohde.valintakoe.listaus.valintakoe.muokkaa",
+  "locale" : "fi",
+  "value" : "Muokkaa",
+  "category" : "tarjonta"
+}, {
+  "key" : "kk.hakukohde.liitteet",
+  "locale" : "fi",
+  "value" : "Liiteet",
+  "category" : "tarjonta"
+}, {
+  "key" : "tarjonta.hakukohde.liite.listaus.uusi.liite",
+  "locale" : "fi",
+  "value" : "Lisää uusi liite",
+  "category" : "tarjonta"
+}, {
+  "key" : "tarjonta.linkit.eohje.hakukohde",
+  "locale" : "fi",
+  "value" : "Hakukohteeseen ei ole liitetty koulutuksia.",
+  "category" : "tarjonta"
+}, {
+  "key" : "koulutus.tila.PERUTTU",
+  "locale" : "fi",
+  "value" : "Peruttu",
+  "category" : "tarjonta"
+}, {
+  "key" : "koulutus.edit.sisalto.title",
+  "locale" : "fi",
+  "value" : "[koulutus.edit.sisalto.title fi]",
+  "category" : "tarjonta"
+}, {
+  "key" : "koulutus.edit.jatkoopinto_mahdollisuudet.title",
+  "locale" : "fi",
+  "value" : "[koulutus.edit.jatkoopinto_mahdollisuudet.title fi]",
+  "category" : "tarjonta"
+}, {
+  "key" : "tarjonta.haku.kaikki",
+  "locale" : "sv",
+  "value" : "[tarjonta.haku.kaikki sv]",
+  "category" : "tarjonta"
+}, {
+  "key" : "tarjonta.hakukohde.valintakoe.listaus.uusi.liite",
+  "locale" : "fi",
+  "value" : "[tarjonta.hakukohde.valintakoe.listaus.uusi.liite fi]",
+  "category" : "tarjonta"
+}, {
+  "key" : "tarjonta.toiminnot.siirra_tai_kopioi",
+  "locale" : "sv",
+  "value" : "[tarjonta.toiminnot.siirra_tai_kopioi sv]",
+  "category" : "tarjonta"
+}, {
+  "key" : "tarjonta.hakutulokset.tila",
+  "locale" : "sv",
+  "value" : "[tarjonta.hakutulokset.tila sv]",
+  "category" : "tarjonta"
+}, {
+  "key" : "organisaatiohaku.oppilaitostyypit.prompt",
+  "locale" : "sv",
+  "value" : "[organisaatiohaku.oppilaitostyypit.prompt sv]",
+  "category" : "tarjonta"
+}, {
+  "key" : "organisaatiotyyppi.toimipiste",
+  "locale" : "sv",
+  "value" : "[organisaatiotyyppi.toimipiste sv]",
+  "category" : "tarjonta"
+}, {
+  "key" : "koulutus.edit.MAKSULLISUUS.help",
+  "locale" : "fi",
+  "value" : "TODO ohjeteksti",
+  "category" : "tarjonta"
+}, {
+  "key" : "koulutus.edit.eqf-luokitus",
+  "locale" : "fi",
+  "value" : "EQF-luokitus",
+  "category" : "tarjonta"
+}, {
+  "key" : "koulutus.edit.suunniteltu-kesto",
+  "locale" : "fi",
+  "value" : "Suunniteltu kesto",
+  "category" : "tarjonta"
+}, {
+  "key" : "koulutus.edit.takaisin",
+  "locale" : "fi",
+  "value" : "Takaisin",
+  "category" : "tarjonta"
+}, {
+  "key" : "selectTutkintoOhjelma.hae",
+  "locale" : "fi",
+  "value" : "Hae",
+  "category" : "tarjonta"
+}, {
+  "key" : "koulutus.edit.ects-koordinaattori.phone",
+  "locale" : "fi",
+  "value" : "Puhelinnumero",
+  "category" : "tarjonta"
+}, {
+  "key" : "selectTutkintoOhjelma.kuvaus",
+  "locale" : "fi",
+  "value" : "Luo uusi koulutus valitsemalla alasvetovalkosta jotakin kivaa.",
+  "category" : "tarjonta"
+}, {
+  "key" : "koulutus.edit.yhteyshenkilo.email",
+  "locale" : "fi",
+  "value" : "Sähköpostiosoite",
+  "category" : "tarjonta"
+}, {
+  "key" : "tarjonta.hakukohde.valintakoe.modal.ajankohta.lisaa",
+  "locale" : "fi",
+  "value" : "Lisää",
+  "category" : "tarjonta"
+}, {
+  "key" : "tarjonta.hakukohde.valintakoe.listaus.valintakoe.poista",
+  "locale" : "fi",
+  "value" : "X",
+  "category" : "tarjonta"
+}, {
+  "key" : "kk.review.poista",
+  "locale" : "en",
+  "value" : "Remove",
+  "category" : "tarjonta"
+}, {
+  "key" : "koulutus.review.kopioi",
+  "locale" : "fi",
+  "value" : "Kopioi",
+  "category" : "tarjonta"
+}, {
+  "key" : "koulutus.edit.tallenna.jatka",
+  "locale" : "fi",
+  "value" : "Jatka",
+  "category" : "tarjonta"
+}, {
+  "key" : "tarjonta.toiminnot.koulutus.linkit",
+  "locale" : "fi",
+  "value" : "Näytä hakukohteet",
+  "category" : "tarjonta"
+}, {
+  "key" : "kk.review.poista",
+  "locale" : "sv",
+  "value" : "Annulera",
+  "category" : "tarjonta"
+}, {
+  "key" : "koulutus.review.updateStatus",
+  "locale" : "fi",
+  "value" : "(Päivitetty {0}, päivittäjä {1})",
+  "category" : "tarjonta"
+}, {
+  "key" : "koulutus.review.perustiedot.opintojenLaajuus",
+  "locale" : "fi",
+  "value" : "Opintojen laajuus",
+  "category" : "tarjonta"
+}, {
+  "key" : "koulutus.review.kuvailevatTiedot.patevyys",
+  "locale" : "fi",
+  "value" : "Pätevyys",
+  "category" : "tarjonta"
+}, {
+  "key" : "selectTutkintoOhjelma.jatka",
+  "locale" : "fi",
+  "value" : "Jatka",
+  "category" : "tarjonta"
+}, {
+  "key" : "koulutus.review.murupolku",
+  "locale" : "fi",
+  "value" : "Olet tarkastelemassa <b>{0}</b> joka on sidottu organisaatioon <i>{1}</i>",
+  "category" : "tarjonta"
+}, {
+  "key" : "tarjonta.linkit.otsikko.koulutus",
+  "locale" : "fi",
+  "value" : "Hakukohteet",
+  "category" : "tarjonta"
+}, {
+  "key" : "kk.hakukohde.koulutuksen.nimi",
+  "locale" : "fi",
+  "value" : "Koulutuksen nimi",
+  "category" : "tarjonta"
+}, {
+  "key" : "koulutus.edit.PAAAINEEN_VALINTA.help",
+  "locale" : "fi",
+  "value" : "TODO ohjeteksti",
+  "category" : "tarjonta"
+}, {
+  "key" : "koulutus.edit.TUTKIMUKSEN_PAINOPISTEET.help",
+  "locale" : "fi",
+  "value" : "TODO ohjeteksti",
+  "category" : "tarjonta"
+}, {
+  "key" : "koulutus.edit.KOULUTUKSEN_RAKENNE.title",
+  "locale" : "fi",
+  "value" : "Koulutuksen rakenne",
+  "category" : "tarjonta"
+}, {
+  "key" : "koulutus.edit.YHTEISTYO_MUIDEN_TOIMIJOIDEN_KANSSA.title",
+  "locale" : "fi",
+  "value" : "Yhteistyö muiden toimijoiden kanssa",
+  "category" : "tarjonta"
+}, {
+  "key" : "koulutus.edit.header.KORKEAKOULUTUS",
+  "locale" : "fi",
+  "value" : "Olet luomassa <b>tutkintoon johtavaa koulutusta</b> organisaatiolle <b>{0}</b>",
+  "category" : "tarjonta"
+}, {
+  "key" : "tarjonta.hakukohde.label.oletus.postisoite",
+  "locale" : "fi",
+  "value" : "Käytetään oletuksena järjestävän organisaation ensisijaista postiosoitetta",
+  "category" : "tarjonta"
+}, {
+  "key" : "tarjonta.toiminnot.luo_uusi_koulutus",
+  "locale" : "sv",
+  "value" : "[tarjonta.toiminnot.luo_uusi_koulutus sv]",
+  "category" : "tarjonta"
+}, {
+  "key" : "koulutus.edit.patevyys.help",
+  "locale" : "fi",
+  "value" : "[koulutus.edit.patevyys.help fi]",
+  "category" : "tarjonta"
+}, {
+  "key" : "tarjonta.linkit.otsikko.null",
+  "locale" : "fi",
+  "value" : "[tarjonta.linkit.otsikko.null fi]",
+  "category" : "tarjonta"
+}, {
+  "key" : "tarjonta.hakukohde.valintakoe.listaus.liitteen.kuvaus",
+  "locale" : "fi",
+  "value" : "[tarjonta.hakukohde.valintakoe.listaus.liitteen.kuvaus fi]",
+  "category" : "tarjonta"
+}, {
+  "key" : "tarjonta.tila.VALMIS",
+  "locale" : "sv",
+  "value" : "[tarjonta.tila.VALMIS sv]",
+  "category" : "tarjonta"
+}, {
+  "key" : "koulutus.edit.teemat",
+  "locale" : "fi",
   "value" : "Teemat",
+  "category" : "tarjonta"
+}, {
+  "key" : "koulutus.edit.tutkinto-ohjelman-tunniste",
+  "locale" : "fi",
+  "value" : "Tutkinto-ohjelman tunniste",
+  "category" : "tarjonta"
+}, {
+  "key" : "koulutus.edit.tutkintonimike",
+  "locale" : "fi",
+  "value" : "Tutkintonimike",
+  "category" : "tarjonta"
+}, {
+  "key" : "koulutus.edit.header.AMMATTIKORKEAKOULUTUS",
+  "locale" : "fi",
+  "value" : "Olet luomassa <b>tutkintoon johtavaa koulutusta</b> organisaatiolle <b>{0}</b>",
+  "category" : "tarjonta"
+}, {
+  "key" : "copy",
+  "locale" : "fi",
+  "value" : "Kopioi",
+  "category" : "tarjonta"
+}, {
+  "key" : "tarjonta.hakukohde.liite.modal.otsikko",
+  "locale" : "fi",
+  "value" : "Muokkaa liitettä",
+  "category" : "tarjonta"
+}, {
   "key" : "kk.edit.teemat",
   "locale" : "fi",
-  "created" : 1384332983635,
-  "category" : "tarjonta",
-  "accessed" : 1384332985666,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332985666,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
+  "value" : "Teemat",
+  "category" : "tarjonta"
 }, {
-  "value" : "Koulutuksen perustiedot",
+  "key" : "luoKoulutsDialogi.koulutus",
+  "locale" : "fi",
+  "value" : "Valitse koulutus",
+  "category" : "tarjonta"
+}, {
+  "key" : "tarjonta.hakukohde.liite.modal.kuvaus",
+  "locale" : "fi",
+  "value" : "Kuvaus",
+  "category" : "tarjonta"
+}, {
+  "key" : "koulutus.review.perustiedot.tutkintoOhjelmaJaTunniste",
+  "locale" : "fi",
+  "value" : "Tutkinto-ohjelma ja tunniste",
+  "category" : "tarjonta"
+}, {
+  "key" : "koulutus.review.peruuta",
+  "locale" : "fi",
+  "value" : "Peruuta",
+  "category" : "tarjonta"
+}, {
+  "key" : "koulutus.review.perustiedot.linkkiOpetussuunnitelmaan",
+  "locale" : "fi",
+  "value" : "Linkki opetussuunnitelmaan",
+  "category" : "tarjonta"
+}, {
+  "key" : "koulutusaste.AMMATILLINEN_PERUSKOULUTUS",
+  "locale" : "fi",
+  "value" : "Ammatillinen peruskoulutus",
+  "category" : "tarjonta"
+}, {
+  "key" : "tarjonta.hakukohde.label.muu.osoite",
+  "locale" : "fi",
+  "value" : "Käytetään muuta osoitetta",
+  "category" : "tarjonta"
+}, {
+  "key" : "organisaatiohaku.button.tyhjenna",
+  "locale" : "fi",
+  "value" : "Tyhjennä",
+  "category" : "tarjonta"
+}, {
+  "key" : "tarjonta.toiminnot.luo_uusi_hakukohde",
+  "locale" : "fi",
+  "value" : "Luo uusi hakukohde",
+  "category" : "tarjonta"
+}, {
+  "key" : "tarjonta.toiminnot.valitse_kaikki",
+  "locale" : "fi",
+  "value" : "Valitse kaikki",
+  "category" : "tarjonta"
+}, {
+  "key" : "tarjonta.haku.hae",
+  "locale" : "fi",
+  "value" : "Hae",
+  "category" : "tarjonta"
+}, {
+  "key" : "tarjonta.tila.KOPIOITU",
+  "locale" : "fi",
+  "value" : "Kopioitu",
+  "category" : "tarjonta"
+}, {
+  "key" : "organisaatiotyyppi.oppilaitos",
+  "locale" : "fi",
+  "value" : "Oppilaitos",
+  "category" : "tarjonta"
+}, {
+  "key" : "tarjonta.hakutulos.koulutukset",
+  "locale" : "fi",
+  "value" : "Koulutukset",
+  "category" : "tarjonta"
+}, {
+  "key" : "tarjonta.toiminnot.luo_uusi_koulutus",
+  "locale" : "fi",
+  "value" : "Luo uusi koulutus",
+  "category" : "tarjonta"
+}, {
+  "key" : "koulutus.edit.lisatiedot",
+  "locale" : "fi",
+  "value" : "Koulutuksen kuvailevat tiedot",
+  "category" : "tarjonta"
+}, {
+  "key" : "luoKoulutusDialogi.koulutusLuodaanSeuraaviinOrganisaatioihin",
+  "locale" : "fi",
+  "value" : "Koulutus luodaan seuraaviin organisaatioihin:",
+  "category" : "tarjonta"
+}, {
+  "key" : "tarjonta.tila.VALMIS",
+  "locale" : "fi",
+  "value" : "Valmis",
+  "category" : "tarjonta"
+}, {
+  "key" : "tarjonta.haku.poistaOrgValinta",
+  "locale" : "fi",
+  "value" : "Poista organisaatiovalinta",
+  "category" : "tarjonta"
+}, {
+  "key" : "koulutus.edit.koulutusala",
+  "locale" : "fi",
+  "value" : "Koulutusala",
+  "category" : "tarjonta"
+}, {
+  "key" : "koulutus.edit.tallenna.valmis",
+  "locale" : "fi",
+  "value" : "Tallenna valmiina",
+  "category" : "tarjonta"
+}, {
+  "key" : "koulutus.edit.koulutuskoodi",
+  "locale" : "fi",
+  "value" : "Koulutus",
+  "category" : "tarjonta"
+}, {
+  "key" : "organisaatiohaku.tekstihaku.placeholder",
+  "locale" : "fi",
+  "value" : "Hae organisaatioita",
+  "category" : "tarjonta"
+}, {
+  "key" : "organisaatiotyyppi.oppisopimustoimipiste",
+  "locale" : "fi",
+  "value" : "Oppisopimustoimipiste",
+  "category" : "tarjonta"
+}, {
+  "key" : "organisaatiohaku.oppilaitostyypit.prompt",
+  "locale" : "fi",
+  "value" : "Oppilaitostyyppi",
+  "category" : "tarjonta"
+}, {
+  "key" : "koulutus.edit.opetuskielet.help",
+  "locale" : "fi",
+  "value" : "Huomaa, että opetuskielistä voi antaa lisätietoa Koulutuksen kuvailevat tiedot -välilehdellä",
+  "category" : "tarjonta"
+}, {
+  "key" : "koulutus.edit.opintojen-laajuus",
+  "locale" : "fi",
+  "value" : "Opintojen laajuus",
+  "category" : "tarjonta"
+}, {
+  "key" : "koulutus.edit.tutkinto.required",
+  "locale" : "fi",
+  "value" : "Tutkinto on pakollinen",
+  "category" : "tarjonta"
+}, {
+  "key" : "tarjonta.haku.tulosta_raportti",
+  "locale" : "fi",
+  "value" : "Tulosta raportti",
+  "category" : "tarjonta"
+}, {
+  "key" : "organisaatiotyyppi.toimipiste",
+  "locale" : "fi",
+  "value" : "Toimipiste",
+  "category" : "tarjonta"
+}, {
+  "key" : "tarjonta.haku.alkamisVuosi",
+  "locale" : "fi",
+  "value" : "Alkamisvuosi",
+  "category" : "tarjonta"
+}, {
+  "key" : "organisaatiohaku.organisaatiotyypit.prompt",
+  "locale" : "fi",
+  "value" : "Organisaatiotyyppi",
+  "category" : "tarjonta"
+}, {
+  "key" : "tarjonta.haku.kaikki",
+  "locale" : "fi",
+  "value" : "Kaikki",
+  "category" : "tarjonta"
+}, {
+  "key" : "tarjonta.haku.tyhjenna",
+  "locale" : "fi",
+  "value" : "Tyhjennä",
+  "category" : "tarjonta"
+}, {
+  "key" : "koulutus.edit.lisaa-kieli",
+  "locale" : "fi",
+  "value" : "Lisää kieli",
+  "category" : "tarjonta"
+}, {
+  "key" : "koulutus.edit.maksullisuus",
+  "locale" : "fi",
+  "value" : "Koulutuksen maksullisuus",
+  "category" : "tarjonta"
+}, {
+  "key" : "organisaatiohaku.label.nayta.myos.lakkautetut",
+  "locale" : "fi",
+  "value" : "Näytä myös lakkautetut",
+  "category" : "tarjonta"
+}, {
+  "key" : "tarjonta.haku.alkamisKausi",
+  "locale" : "fi",
+  "value" : "Alkamiskausi",
+  "category" : "tarjonta"
+}, {
+  "key" : "tarjonta.tila.JULKAISTU",
+  "locale" : "fi",
+  "value" : "Julkaistu",
+  "category" : "tarjonta"
+}, {
+  "key" : "tarjonta.hakutulos.hakukohteet",
+  "locale" : "fi",
+  "value" : "Hakukohteet",
+  "category" : "tarjonta"
+}, {
+  "key" : "koulutus.edit.koulutusohjelma",
+  "locale" : "fi",
+  "value" : "Koulutusohjelma",
+  "category" : "tarjonta"
+}, {
+  "key" : "koulutus.edit.tutkinto",
+  "locale" : "fi",
+  "value" : "Tutkinto",
+  "category" : "tarjonta"
+}, {
+  "key" : "koulutus.edit.opintoala",
+  "locale" : "fi",
+  "value" : "Opintoala",
+  "category" : "tarjonta"
+}, {
+  "key" : "koulutus.edit.opintojen-laajuus.help",
+  "locale" : "fi",
+  "value" : "Laajuuden tulee vastata valittua koulutusta",
+  "category" : "tarjonta"
+}, {
+  "key" : "koulutus.edit.ects-koordinaattori.name",
+  "locale" : "fi",
+  "value" : "ECTS-koordinaattori",
+  "category" : "tarjonta"
+}, {
+  "key" : "koulutus.edit.yhteyshenkilo.name",
+  "locale" : "fi",
+  "value" : "Koulutuksen yhteyshenkilö",
+  "category" : "tarjonta"
+}, {
+  "key" : "tarjonta.tila.LUONNOS",
+  "locale" : "fi",
+  "value" : "Luonnos",
+  "category" : "tarjonta"
+}, {
+  "key" : "koulutus.edit.opetuskielet",
+  "locale" : "fi",
+  "value" : "Opetuskielet",
+  "category" : "tarjonta"
+}, {
+  "key" : "tarjonta.tila.PERUTTU",
+  "locale" : "fi",
+  "value" : "Peruttu",
+  "category" : "tarjonta"
+}, {
+  "key" : "organisaatiotyyppi.koulutustoimija",
+  "locale" : "fi",
+  "value" : "Koulutustoimija",
+  "category" : "tarjonta"
+}, {
+  "key" : "koulutus.edit.opetusmuodot",
+  "locale" : "fi",
+  "value" : "Opetusmuodot",
+  "category" : "tarjonta"
+}, {
+  "key" : "koulutus.edit.tallenna.luonnos",
+  "locale" : "fi",
+  "value" : "Tallenna luonnoksena",
+  "category" : "tarjonta"
+}, {
+  "key" : "koulutus.edit.lisaa-kieli.help",
+  "locale" : "fi",
+  "value" : "Tutkinto-ohjelman nimi on se koulutuksen nimi, joka näytetään hakijalle Opintopolku.fi -palvelussa.",
+  "category" : "tarjonta"
+}, {
+  "key" : "koulutus.edit.pohjakoulutusvaatimus",
+  "locale" : "fi",
+  "value" : "Pohjakoulutusvaatimukset",
+  "category" : "tarjonta"
+}, {
   "key" : "koulutus.edit.perustiedot",
   "locale" : "fi",
-  "created" : 1384332983644,
-  "category" : "tarjonta",
-  "accessed" : 1384332985682,
-  "createdBy" : "1.2.246.562.24.00000000001",
-  "modified" : 1384332985682,
-  "modifiedBy" : "1.2.246.562.24.00000000001"
+  "value" : "Koulutuksen perustiedot",
+  "category" : "tarjonta"
+}, {
+  "key" : "tarjonta.hakukohde.valintakoe.modal.ajankohta.table.lisatietoja",
+  "locale" : "fi",
+  "value" : "Lisätieto",
+  "category" : "tarjonta"
+}, {
+  "key" : "tarjonta.hakukohde.valintakoe.modal.ok",
+  "locale" : "fi",
+  "value" : "Ok",
+  "category" : "tarjonta"
+}, {
+  "key" : "luoKoulutusDialogi.jatka",
+  "locale" : "fi",
+  "value" : "Jatka",
+  "category" : "tarjonta"
+}, {
+  "key" : "tarjonta.hakukohde.liite.listaus.poista",
+  "locale" : "fi",
+  "value" : "Poista",
+  "category" : "tarjonta"
+}, {
+  "key" : "koulutus.edit.yhteyshenkilo.title",
+  "locale" : "fi",
+  "value" : "Tehtävänimike",
+  "category" : "tarjonta"
+}, {
+  "key" : "koulutus.edit.header.title",
+  "locale" : "fi",
+  "value" : "Uusi koulutus",
+  "category" : "tarjonta"
+}, {
+  "key" : "koulutus.edit.opintojenMaksullisuus.help",
+  "locale" : "fi",
+  "value" : "Huomaa, että koulutuksen maksullisuutta voi kuvata tarkemmin Koulutuksen kuvailevat tiedot -välilehdellä",
+  "category" : "tarjonta"
+}, {
+  "key" : "tarjonta.hakukohde.valintakoe.modal.valintakoenimi",
+  "locale" : "fi",
+  "value" : "Valintakokeen nimi",
+  "category" : "tarjonta"
+}, {
+  "key" : "tarjonta.hakukohde.valintakoe.modal.ajankohta.aika",
+  "locale" : "fi",
+  "value" : "Ajankohta",
+  "category" : "tarjonta"
+}, {
+  "key" : "tarjonta.hakukohde.valintakoe.listaus.valintakokeen.lisatiedot",
+  "locale" : "fi",
+  "value" : "Lisätietoja valintakokeesta",
+  "category" : "tarjonta"
+}, {
+  "key" : "kk.hakukohde.hakukohdenimi",
+  "locale" : "fi",
+  "value" : "Hakukohteen nimi",
+  "category" : "tarjonta"
+}, {
+  "key" : "transfer",
+  "locale" : "fi",
+  "value" : "Siirrä",
+  "category" : "tarjonta"
+}, {
+  "key" : "yes",
+  "locale" : "fi",
+  "value" : "Kyllä",
+  "category" : "tarjonta"
+}, {
+  "key" : "kk.hakukohde.liitteidentoimitusosoite",
+  "locale" : "fi",
+  "value" : "Liitteiden toimitusosoite",
+  "category" : "tarjonta"
+}, {
+  "key" : "koulutus.edit.eqfLuokitus.required",
+  "locale" : "fi",
+  "value" : "EQF-luokitus on pakollinen",
+  "category" : "tarjonta"
+}, {
+  "key" : "koulutus.review.perustiedot.opetusmuoto",
+  "locale" : "fi",
+  "value" : "Opetusmuoto",
+  "category" : "tarjonta"
+}, {
+  "key" : "koulutus.review.poista.confirm.title",
+  "locale" : "fi",
+  "value" : "Varmista valitun koulutuksen poistaminen",
+  "category" : "tarjonta"
+}, {
+  "key" : "koulutus.review.kuvailevatTiedot.koulutuksellisetJaAmmatillisetTavoitteet",
+  "locale" : "fi",
+  "value" : "Koulutukselliset- ja ammatilliset tavoitteet",
+  "category" : "tarjonta"
+}, {
+  "key" : "koulutus.review.kuvailevatTiedot.paaaineenValinta",
+  "locale" : "fi",
+  "value" : "Pääaineen valinta",
+  "category" : "tarjonta"
+}, {
+  "key" : "koulutus.review.perustiedot.tutkintonimike",
+  "locale" : "fi",
+  "value" : "Tutkintonimike",
+  "category" : "tarjonta"
+}, {
+  "key" : "koulutus.edit.contactPerson.help",
+  "locale" : "fi",
+  "value" : "Yhteyshenkilö voi olla myös opinto- tai hakutoimisto",
+  "category" : "tarjonta"
+}, {
+  "key" : "tarjonta.hakutulokset.hakutapa",
+  "locale" : "fi",
+  "value" : "Hakutapa",
+  "category" : "tarjonta"
+}, {
+  "key" : "tarjonta.hakukohde.liite.listaus.liitteen.kuvaus",
+  "locale" : "fi",
+  "value" : "Liitteen kuvaus",
+  "category" : "tarjonta"
+}, {
+  "key" : "notImplemented.title",
+  "locale" : "fi",
+  "value" : "Toimintoa ei toteutettu",
+  "category" : "tarjonta"
+}, {
+  "key" : "koulutus.edit.opintojenLaajuus.required",
+  "locale" : "fi",
+  "value" : "Opintojen laajuus on pakollinen",
+  "category" : "tarjonta"
+}, {
+  "key" : "selectTutkintoOhjelma.eihakutuloksia",
+  "locale" : "fi",
+  "value" : "Valitsemillasi hakuehdoilla ei löytynyt tutkinto-ohjelmia. Ole hyvä ja tarkenna hakua.",
+  "category" : "tarjonta"
+}, {
+  "key" : "kk.edit.opintoala",
+  "locale" : "fi",
+  "value" : "Opintoala",
+  "category" : "tarjonta"
+}, {
+  "key" : "kk.hakukohde.hakijoilleilmoitettavataloituspaikat",
+  "locale" : "fi",
+  "value" : "Hakijoille ilmoitettavat aloituspaikat",
+  "category" : "tarjonta"
+}, {
+  "key" : "notImplemented.description",
+  "locale" : "fi",
+  "value" : "Valitsemaasi toimintoa ei ole <i>vielä</i> toteutettu",
+  "category" : "tarjonta"
+}, {
+  "key" : "koulutus.edit.maksullisuus.help",
+  "locale" : "fi",
+  "value" : "Huomaa, että koulutuksen maksullisuutta voi kuvata tarkemmin Koulutuksen kuvailevat tiedot -välilehdellä",
+  "category" : "tarjonta"
+}, {
+  "key" : "kk.edit.eqf-luokitus",
+  "locale" : "fi",
+  "value" : "EQF-luokitus",
+  "category" : "tarjonta"
+}, {
+  "key" : "kk.edit.ects-koordinaattori",
+  "locale" : "fi",
+  "value" : "ECTS-koordinaattori",
+  "category" : "tarjonta"
+}, {
+  "key" : "tarjonta.poistovahvistus.otsikko.hakukohde",
+  "locale" : "fi",
+  "value" : "Hakukohteen poisto",
+  "category" : "tarjonta"
+}, {
+  "key" : "tarjonta.poistovahvistus.ohje.koulutus",
+  "locale" : "fi",
+  "value" : "Haluatko varmasti poistaa koulutuksen:",
+  "category" : "tarjonta"
+}, {
+  "key" : "koulutus.tila.LUONNOS",
+  "locale" : "fi",
+  "value" : "Luonnos",
+  "category" : "tarjonta"
+}, {
+  "key" : "tarjonta.hakukohde.valintakoe.modal.ajankohta.table.aika",
+  "locale" : "fi",
+  "value" : "Ajankohta",
+  "category" : "tarjonta"
+}, {
+  "key" : "koulutus.review.kuvailevatTiedot.lisatietoaOpetuskielista",
+  "locale" : "fi",
+  "value" : "Lisätietoa opetuskielistä",
+  "category" : "tarjonta"
+}, {
+  "key" : "tarjonta.hakukohde.liite.modal.nimi",
+  "locale" : "fi",
+  "value" : "Liitteen nimi",
+  "category" : "tarjonta"
+}, {
+  "key" : "kk.edit.tutkinto",
+  "locale" : "fi",
+  "value" : "Tutkinto",
+  "category" : "tarjonta"
+}, {
+  "key" : "tarjonta.hakutulokset.tila",
+  "locale" : "fi",
+  "value" : "Tila",
+  "category" : "tarjonta"
+}, {
+  "key" : "koulutus.review.kuvailevatTiedot.ammattinimikkeet",
+  "locale" : "fi",
+  "value" : "Ammattinimikkeet",
+  "category" : "tarjonta"
+}, {
+  "key" : "koulutus.review.kuvailevatTiedot.otsikko",
+  "locale" : "fi",
+  "value" : "Koulutuksen kuvailevat tiedot",
+  "category" : "tarjonta"
+}, {
+  "key" : "kk.hakukohde.valintakokeet",
+  "locale" : "fi",
+  "value" : "Valintakokeet",
+  "category" : "tarjonta"
+}, {
+  "key" : "tarjonta.linkit.eohje.koulutus",
+  "locale" : "fi",
+  "value" : "Koulutukseen ei ole liitetty hakukohteita.",
+  "category" : "tarjonta"
+}, {
+  "key" : "koulutus.edit.opetusmuodot.required",
+  "locale" : "fi",
+  "value" : "Opetusmuoto on pakollinen",
+  "category" : "tarjonta"
+}, {
+  "key" : "tarjonta.hakukohde.toiminnot.lisaa.nimi",
+  "locale" : "fi",
+  "value" : "Lisää uusi nimi",
+  "category" : "tarjonta"
+}, {
+  "key" : "koulutus.review.perustiedot.opetuskieli",
+  "locale" : "fi",
+  "value" : "Opetuskieli",
+  "category" : "tarjonta"
+}, {
+  "key" : "tarjonta.hakutulokset.aloituspaikat",
+  "locale" : "fi",
+  "value" : "Aloituspaikat",
+  "category" : "tarjonta"
+}, {
+  "key" : "koulutus.edit.pohjakoulutusvaatimus.required",
+  "locale" : "fi",
+  "value" : "Pohjakoulutusvaatimus on pakollinen",
+  "category" : "tarjonta"
+}, {
+  "key" : "koulutus.review.perustiedot.koulutusohjelma",
+  "locale" : "fi",
+  "value" : "Koulutusohjelma",
+  "category" : "tarjonta"
+}, {
+  "key" : "koulutus.review.kuvailevatTiedot.kansainvalisyys",
+  "locale" : "fi",
+  "value" : "Kansainvälisyys",
+  "category" : "tarjonta"
+}, {
+  "key" : "kk.hakukohde.perustiedot",
+  "locale" : "fi",
+  "value" : "Perustiedot",
+  "category" : "tarjonta"
+}, {
+  "key" : "yes",
+  "locale" : "sv",
+  "value" : "Ja",
+  "category" : "tarjonta"
+}, {
+  "key" : "koulutus.review.siirra.osaksi",
+  "locale" : "fi",
+  "value" : "Siirrä osaksi toista koulutusta",
+  "category" : "tarjonta"
+}, {
+  "key" : "koulutus.review.takaisin",
+  "locale" : "fi",
+  "value" : "Takaisin",
+  "category" : "tarjonta"
+}, {
+  "key" : "kk.hakukohde.kaytetaanJarjestelmanValintaPalvelua",
+  "locale" : "fi",
+  "value" : "Käytetään järjestelmän valintapalvelua",
+  "category" : "tarjonta"
+}, {
+  "key" : "koulutus.review.perustiedot.yhteyshenkilo",
+  "locale" : "fi",
+  "value" : "Yhteyshenkilö(t)",
+  "category" : "tarjonta"
+}, {
+  "key" : "tarjonta.hakukohde.valintakoe.modal.ajankohta.sijainti",
+  "locale" : "fi",
+  "value" : "Sijainti",
+  "category" : "tarjonta"
+}, {
+  "key" : "luoKoulutusDialogi.liitaToiseenOrganisaatioon",
+  "locale" : "fi",
+  "value" : "Liitä toiseen organisaatioon",
+  "category" : "tarjonta"
+}, {
+  "key" : "tarjonta.toiminnot.hakukohde.linkit",
+  "locale" : "fi",
+  "value" : "Näytä koulutukset",
+  "category" : "tarjonta"
+}, {
+  "key" : "koulutus.review.poista",
+  "locale" : "fi",
+  "value" : "Poista",
+  "category" : "tarjonta"
+}, {
+  "key" : "koulutus.review.hakukohteet.otsikko",
+  "locale" : "fi",
+  "value" : "Hakukohteet",
+  "category" : "tarjonta"
+}, {
+  "key" : "koulutus.review.perustiedot.organisaatio",
+  "locale" : "fi",
+  "value" : "Organisaatio",
+  "category" : "tarjonta"
+}, {
+  "key" : "tarjonta.hakukohde.valintakoe.modal.ajankohta.table.sijaint",
+  "locale" : "fi",
+  "value" : "Sijainti",
+  "category" : "tarjonta"
+}, {
+  "key" : "kk.edit.pohjakoulutusvaatimus",
+  "locale" : "fi",
+  "value" : "Pohjakoulutusvaatimukset",
+  "category" : "tarjonta"
+}, {
+  "key" : "koulutus.review.kuvailevatTiedot.sisaltoKoulutus",
+  "locale" : "fi",
+  "value" : "Koulutuksen sisältö",
+  "category" : "tarjonta"
+}, {
+  "key" : "tarjonta.hakukohde.liite.modal.toimitusosoite",
+  "locale" : "fi",
+  "value" : "Liitteen toimitusosoite",
+  "category" : "tarjonta"
+}, {
+  "key" : "tarjonta.linkit.otsikko.hakukohde",
+  "locale" : "fi",
+  "value" : "Koulutukset",
+  "category" : "tarjonta"
+}, {
+  "key" : "kk.edit.koulutuksen-alkamispvm",
+  "locale" : "fi",
+  "value" : "Koulutuksen alkamispäivä",
+  "category" : "tarjonta"
+}, {
+  "key" : "kk.edit.opetusmuodot",
+  "locale" : "fi",
+  "value" : "Opetusmuodot",
+  "category" : "tarjonta"
+}, {
+  "key" : "koulutus.review.kuvailevatTiedot.tutkimuksenPainopisteet",
+  "locale" : "fi",
+  "value" : "Tutkimuksen painopisteet",
+  "category" : "tarjonta"
+}, {
+  "key" : "koulutus.review.kuvailevatTiedot.tavoitteetTutkinto",
+  "locale" : "fi",
+  "value" : "Tutkinnon tavoitteet",
+  "category" : "tarjonta"
+}, {
+  "key" : "koulutus.review.perustiedot.koulutuslaji",
+  "locale" : "fi",
+  "value" : "Koulutuslaji",
+  "category" : "tarjonta"
+}, {
+  "key" : "selectTutkintoOhjelma.dialogTitle",
+  "locale" : "fi",
+  "value" : "Valitse tutkinto-ohjelma",
+  "category" : "tarjonta"
+}, {
+  "key" : "koulutus.edit.tutkintonimike.required",
+  "locale" : "fi",
+  "value" : "Tutkintonimike on pakollinen",
+  "category" : "tarjonta"
+}, {
+  "key" : "kk.edit.koulutuskoodi",
+  "locale" : "fi",
+  "value" : "Koulutuskoodi",
+  "category" : "tarjonta"
+}, {
+  "key" : "kk.hakukohde.haut",
+  "locale" : "fi",
+  "value" : "Haut",
+  "category" : "tarjonta"
+}, {
+  "key" : "koulutus.review.kuvailevatTiedot.jatkoopintoMahdollisuudet",
+  "locale" : "fi",
+  "value" : "Jatko-opintomahdollisuudet",
+  "category" : "tarjonta"
+}, {
+  "key" : "organisaatiohaku.label.nayta.myos.suunnitellut",
+  "locale" : "fi",
+  "value" : "Näytä myös suunnitellut",
+  "category" : "tarjonta"
+}, {
+  "key" : "koulutus.review.perustiedot.tutkinto",
+  "locale" : "fi",
+  "value" : "Tutkinto",
+  "category" : "tarjonta"
+}, {
+  "key" : "selectTutkintoOhjelma.hakutulokset",
+  "locale" : "fi",
+  "value" : "Hakutulokset: ({0})",
+  "category" : "tarjonta"
+}, {
+  "key" : "kk.hakukohde.hakukelpoisuusvaatimukset",
+  "locale" : "fi",
+  "value" : "Hakukelpoisuusvaatimukset",
+  "category" : "tarjonta"
+}, {
+  "key" : "tarjonta.toiminnot.peruuta",
+  "locale" : "fi",
+  "value" : "Peruuta",
+  "category" : "tarjonta"
+}, {
+  "key" : "tarjonta.poistovahvistus.ohje.hakukohde",
+  "locale" : "fi",
+  "value" : "Haluatko varmasti poistaa hakukohteen:",
+  "category" : "tarjonta"
+}, {
+  "key" : "selectOrganisaatio.kuvaus",
+  "locale" : "fi",
+  "value" : "Olet valitsemassa organisaatiota...",
+  "category" : "tarjonta"
+}, {
+  "key" : "tarjonta.hakukohde.valintakoe.modal.cancel",
+  "locale" : "fi",
+  "value" : "Peruuta",
+  "category" : "tarjonta"
+}, {
+  "key" : "luoKoulutusDialogi.peruuta",
+  "locale" : "fi",
+  "value" : "Peruuta",
+  "category" : "tarjonta"
+}, {
+  "key" : "kk.edit.suunniteltu-kesto",
+  "locale" : "fi",
+  "value" : "Suunniteltu kesto",
+  "category" : "tarjonta"
+}, {
+  "key" : "koulutus.review.lisaa.rinnakkainen",
+  "locale" : "fi",
+  "value" : "Lisää rinnakkainen koulutus",
+  "category" : "tarjonta"
+}, {
+  "key" : "koulutus.edit.koulutuksen-alkamispvm.required",
+  "locale" : "fi",
+  "value" : "Koulutuksen alkamispäivä on pakollinen",
+  "category" : "tarjonta"
+}, {
+  "key" : "yes",
+  "locale" : "en",
+  "value" : "Yes",
+  "category" : "tarjonta"
+}, {
+  "key" : "koulutus.review.kuvailevatTiedot.koulutusohjelmanValinta",
+  "locale" : "fi",
+  "value" : "Koulutusohjelman valinta",
+  "category" : "tarjonta"
+}, {
+  "key" : "koulutus.review.perustiedot.alkamispvm",
+  "locale" : "fi",
+  "value" : "Alkamispäivämäärä",
+  "category" : "tarjonta"
+}, {
+  "key" : "koulutus.edit.suunniteltu-kesto.required",
+  "locale" : "fi",
+  "value" : "Opintojen suunniteltu kesto on pakollinen",
+  "category" : "tarjonta"
+}, {
+  "key" : "kk.edit.tutkintonimike",
+  "locale" : "fi",
+  "value" : "Tutkintonimike",
+  "category" : "tarjonta"
+}, {
+  "key" : "koulutus.review.sisaltyvatOpintokokonaisuudet.otsikko",
+  "locale" : "fi",
+  "value" : "Sisältyvät opintokokonaisuudet",
+  "category" : "tarjonta"
+}, {
+  "key" : "tarjonta.hakukohde.valintakoe.modal.ajankohta.table.title",
+  "locale" : "fi",
+  "value" : "Valintakokeet:",
+  "category" : "tarjonta"
+}, {
+  "key" : "selectOrganisaatio.dialogTitle",
+  "locale" : "fi",
+  "value" : "Valitse organisaatio",
+  "category" : "tarjonta"
+}, {
+  "key" : "cancel",
+  "locale" : "fi",
+  "value" : "Peruuta",
+  "category" : "tarjonta"
+}, {
+  "key" : "koulutus.review.kuvailevatTiedot.tavoitteetKoulutus",
+  "locale" : "fi",
+  "value" : "Koulutuksen tavoitteet",
+  "category" : "tarjonta"
+}, {
+  "key" : "kk.hakukohde.liitteidenToimitusPvm",
+  "locale" : "fi",
+  "value" : "Liitteet toimitettava mennessä",
+  "category" : "tarjonta"
+}, {
+  "key" : "koulutus.review.kuvailevatTiedot.yhteistyoMuidenToimijoidenKanssa",
+  "locale" : "fi",
+  "value" : "Yhteistyö muiden toimijoiden kanssa",
+  "category" : "tarjonta"
+}, {
+  "key" : "koulutus.edit.ects-koordinaattori.email",
+  "locale" : "fi",
+  "value" : "Sähköpostiosoite",
+  "category" : "tarjonta"
+}, {
+  "key" : "delete",
+  "locale" : "fi",
+  "value" : "Poista",
+  "category" : "tarjonta"
+}, {
+  "key" : "koulutus.review.tuntematonTyyppi",
+  "locale" : "fi",
+  "value" : "<b>TUNTEMATON KOULUTUSTYYPPI!</b>",
+  "category" : "tarjonta"
+}, {
+  "key" : "koulutus.review.perustiedot.opintoala",
+  "locale" : "fi",
+  "value" : "Opintoala",
+  "category" : "tarjonta"
+}, {
+  "key" : "kk.hakukohde.valintaperustekuvaus",
+  "locale" : "fi",
+  "value" : "Valintaperustekuvaus",
+  "category" : "tarjonta"
+}, {
+  "key" : "koulutus.tyyppi.TUTKINTO_OHJELMA",
+  "locale" : "fi",
+  "value" : "Tutkinto-ohjelma",
+  "category" : "tarjonta"
+}, {
+  "key" : "tarjonta.toiminnot.tarkastele",
+  "locale" : "fi",
+  "value" : "Tarkastele",
+  "category" : "tarjonta"
+}, {
+  "key" : "ok",
+  "locale" : "fi",
+  "value" : "OK",
+  "category" : "tarjonta"
+}, {
+  "key" : "tarjonta.haku.tila",
+  "locale" : "fi",
+  "value" : "Tila",
+  "category" : "tarjonta"
+}, {
+  "key" : "tarjonta.toiminnot.muokkaa",
+  "locale" : "fi",
+  "value" : "Muokkaa",
+  "category" : "tarjonta"
+}, {
+  "key" : "kk.edit.lisaa-kieli",
+  "locale" : "fi",
+  "value" : "Lisää uusi kieli",
+  "category" : "tarjonta"
+}, {
+  "key" : "kk.edit.koulutusaste",
+  "locale" : "fi",
+  "value" : "Koulutusaste",
+  "category" : "tarjonta"
+}, {
+  "key" : "koulutus.edit.opetuskielet.required",
+  "locale" : "fi",
+  "value" : "Opetuskieli on pakollinen",
+  "category" : "tarjonta"
+}, {
+  "key" : "koulutus.koulutusaste.AMMATILLINEN_PERUSKOULUTUS",
+  "locale" : "fi",
+  "value" : "Ammatillinen peruskoulutus",
+  "category" : "tarjonta"
+}, {
+  "key" : "kk.edit.tutkinto-ohjelman-tunniste",
+  "locale" : "fi",
+  "value" : "Tutkinto-ohjelman tunniste",
+  "category" : "tarjonta"
+}, {
+  "key" : "tarjonta.toiminnot.ok",
+  "locale" : "fi",
+  "value" : "OK",
+  "category" : "tarjonta"
+}, {
+  "key" : "tarjonta.hakukohde.liite.listaus.liitteen.osoite",
+  "locale" : "fi",
+  "value" : "Liitteen toimituksen määräaika ja osoite",
+  "category" : "tarjonta"
+}, {
+  "key" : "tarjonta.hakukohde.liite.modal.tallenna.button",
+  "locale" : "fi",
+  "value" : "Tallenna",
+  "category" : "tarjonta"
+}, {
+  "key" : "kk.hakukohde.kaytetaanjarjestelman.valintapalvelua",
+  "locale" : "fi",
+  "value" : "Käytetään järjestelmän valintapalvelua",
+  "category" : "tarjonta"
+}, {
+  "key" : "tarjonta.toiminnot.sulje",
+  "locale" : "fi",
+  "value" : "Sulje",
+  "category" : "tarjonta"
+}, {
+  "key" : "koulutus.review.perustiedot.suunniteltuKesto",
+  "locale" : "fi",
+  "value" : "Suunniteltu kesto",
+  "category" : "tarjonta"
+}, {
+  "key" : "tarjonta.hakukohde.liite.listaus.muokkaa",
+  "locale" : "fi",
+  "value" : "Muokkaa",
+  "category" : "tarjonta"
+}, {
+  "key" : "kk.edit.yhteyshenkilo",
+  "locale" : "fi",
+  "value" : "Yhteyshenkilö",
+  "category" : "tarjonta"
+}, {
+  "key" : "koulutus.review.perustiedot.koulutus",
+  "locale" : "fi",
+  "value" : "Koulutus",
+  "category" : "tarjonta"
+}, {
+  "key" : "koulutus.review.perustiedot.koulutusala",
+  "locale" : "fi",
+  "value" : "Koulutusala",
+  "category" : "tarjonta"
+}, {
+  "key" : "koulutus.review.kuvailevatTiedot.sijoittuminenTyoelamaan",
+  "locale" : "fi",
+  "value" : "Sijoittuminen työelämään",
+  "category" : "tarjonta"
+}, {
+  "key" : "koulutus.review.perustiedot.tila",
+  "locale" : "fi",
+  "value" : "Tila",
+  "category" : "tarjonta"
+}, {
+  "key" : "kk.hakukohde.paattymisaika",
+  "locale" : "fi",
+  "value" : "Päättymisaika",
+  "category" : "tarjonta"
+}, {
+  "key" : "tarjonta.hakukohde.valintakoe.modal.otsikko",
+  "locale" : "fi",
+  "value" : "Muokkaa valintakoetta",
+  "category" : "tarjonta"
+}, {
+  "key" : "luoKoulutusDialogi.valitseKoulutuksenToteutuspaikka",
+  "locale" : "fi",
+  "value" : "Valitse koulutuksen toteutuspaikka:",
+  "category" : "tarjonta"
+}, {
+  "key" : "tarjonta.hakukohde.valintakoe.listaus.valintakokeen.aika",
+  "locale" : "fi",
+  "value" : "Valintakokeen ajat ja sijainnit",
+  "category" : "tarjonta"
+}, {
+  "key" : "tarjonta.hakukohde.valintakoe.listaus.uusi.valintakoe",
+  "locale" : "fi",
+  "value" : "Lisää uusi valintakoe",
+  "category" : "tarjonta"
+}, {
+  "key" : "koulutus.review.muokkaa",
+  "locale" : "fi",
+  "value" : "Muokkaa",
+  "category" : "tarjonta"
+}, {
+  "key" : "koulutus.edit.yhteyshenkilo",
+  "locale" : "fi",
+  "value" : "Yhteyshenkilö",
+  "category" : "tarjonta"
+}, {
+  "key" : "koulutus.review.perustiedot.opetusmuodot",
+  "locale" : "fi",
+  "value" : "Opetusmuoto",
+  "category" : "tarjonta"
+}, {
+  "key" : "koulutus.review.poista.confirm.description",
+  "locale" : "fi",
+  "value" : "Oletko varma, että haluat todellakin <b>poistaa pysyvästi</b> seuraavan koulutuksen:<br /> <i>{0}</i> <br /> <b>Toimintoa ei voi peruuttaa.</b>",
+  "category" : "tarjonta"
+}, {
+  "key" : "koulutus.edit.maksullisuus.valinta",
+  "locale" : "fi",
+  "value" : "Koulutus on maksullista",
+  "category" : "tarjonta"
+}, {
+  "key" : "tarjonta.hakukohde.valintakoe.modal.ajankohta.lisatieto",
+  "locale" : "fi",
+  "value" : "Lisätietoja",
+  "category" : "tarjonta"
+}, {
+  "key" : "back",
+  "locale" : "fi",
+  "value" : "Takaisin",
+  "category" : "tarjonta"
+}, {
+  "key" : "koulutus.review.perustiedot.oidTilaTyyppi",
+  "locale" : "fi",
+  "value" : "oid / tila / tyyppi",
+  "category" : "tarjonta"
+}, {
+  "key" : "luoKoulutusDialogi.kuvaus",
+  "locale" : "fi",
+  "value" : "Tässä dialogissa luodaan uusi koulutus valitsemalla...",
+  "category" : "tarjonta"
+}, {
+  "key" : "koulutus.review.perustiedot.maksullisuus",
+  "locale" : "fi",
+  "value" : "Maksullisuus",
+  "category" : "tarjonta"
+}, {
+  "key" : "koulutus.review.perustiedot.oid",
+  "locale" : "fi",
+  "value" : "OID",
+  "category" : "tarjonta"
+}, {
+  "key" : "tarjonta.toiminnot.poista",
+  "locale" : "fi",
+  "value" : "Poista",
+  "category" : "tarjonta"
+}, {
+  "key" : "selectTutkintoOhjelma.koulutusala",
+  "locale" : "fi",
+  "value" : "Koulutusala",
+  "category" : "tarjonta"
+}, {
+  "key" : "tarjonta.hakutulokset.koulutuslaji",
+  "locale" : "fi",
+  "value" : "Koulutuslaji",
+  "category" : "tarjonta"
+}, {
+  "key" : "koulutus.review.esikatsele",
+  "locale" : "fi",
+  "value" : "Esikatsele",
+  "category" : "tarjonta"
+}, {
+  "key" : "koulutus.review.perustiedot.tyyppi",
+  "locale" : "fi",
+  "value" : "Tyyppi",
+  "category" : "tarjonta"
+}, {
+  "key" : "tarjonta.hakukohde.valintakoe.listaus.valintakokeen.kuvaus",
+  "locale" : "fi",
+  "value" : "Valintakokeen kuvaus",
+  "category" : "tarjonta"
+}, {
+  "key" : "tarjonta.hakukohde.valintakoe.modal.kuvauskieli",
+  "locale" : "fi",
+  "value" : "Kuvauskieli",
+  "category" : "tarjonta"
+}, {
+  "key" : "luoKoulutusDialogi.organisaatiotaEiValittu",
+  "locale" : "fi",
+  "value" : "Koulutusta ei ole vielä liitetty mihinkään organisaatioon.",
+  "category" : "tarjonta"
+}, {
+  "key" : "kk.edit.koulutusohjelma",
+  "locale" : "fi",
+  "value" : "Koulutusohjelma",
+  "category" : "tarjonta"
+}, {
+  "key" : "kk.edit.muokkaaTutkinto",
+  "locale" : "fi",
+  "value" : "Muokkaa tutkintoa",
+  "category" : "tarjonta"
+}, {
+  "key" : "kk.edit.opetuskielet",
+  "locale" : "fi",
+  "value" : "Opetuskielet",
+  "category" : "tarjonta"
+}, {
+  "key" : "koulutus.edit.yhteyshenkilo.phone",
+  "locale" : "fi",
+  "value" : "Puhelinnumero",
+  "category" : "tarjonta"
+}, {
+  "key" : "koulutus.review.perustiedot.koulutusaste",
+  "locale" : "fi",
+  "value" : "Koulutusaste",
+  "category" : "tarjonta"
+}, {
+  "key" : "koulutus.review.perustiedot.otsikko",
+  "locale" : "fi",
+  "value" : "Koulutuksen perustiedot",
+  "category" : "tarjonta"
+}, {
+  "key" : "tarjonta.hakukohde.liite.modal.peruuta.button",
+  "locale" : "fi",
+  "value" : "Peruuta",
+  "category" : "tarjonta"
+}, {
+  "key" : "koulutus.review.kuvailevatTiedot.rakenneKoulutus",
+  "locale" : "fi",
+  "value" : "Koulutuksen rakenne",
+  "category" : "tarjonta"
+}, {
+  "key" : "organisaatiohaku.button.hae",
+  "locale" : "fi",
+  "value" : "Hae",
+  "category" : "tarjonta"
+}, {
+  "key" : "tarjonta.hakukohde.valintakoe.modal.kuvaus",
+  "locale" : "fi",
+  "value" : "Kuvaus",
+  "category" : "tarjonta"
+}, {
+  "key" : "koulutus.review.perustiedot.pohjakoulutusvaatimus",
+  "locale" : "fi",
+  "value" : "Pohjakoulutusvaatimus",
+  "category" : "tarjonta"
+}, {
+  "key" : "kk.edit.maksullisuus",
+  "locale" : "fi",
+  "value" : "Maksullisuus",
+  "category" : "tarjonta"
+}, {
+  "key" : "koulutus.tila.VALMIS",
+  "locale" : "fi",
+  "value" : "Valmis",
+  "category" : "tarjonta"
+}, {
+  "key" : "loading",
+  "locale" : "fi",
+  "value" : "Ladataan...",
+  "category" : "tarjonta"
+}, {
+  "key" : "koulutus.edit.tyhjenna",
+  "locale" : "fi",
+  "value" : "Tyhjennä",
+  "category" : "tarjonta"
+}, {
+  "key" : "tarjonta.hakukohde.liite.modal.voidaanToimittaaSahkoisesti",
+  "locale" : "fi",
+  "value" : "Voidaan toimittaa myös sähköisesti",
+  "category" : "tarjonta"
+}, {
+  "key" : "kk.edit.opintojen-laajuus",
+  "locale" : "fi",
+  "value" : "Opintojen laajuus",
+  "category" : "tarjonta"
+}, {
+  "key" : "luoKoulutusDialogi.otsikko",
+  "locale" : "fi",
+  "value" : "Luo uusi koulutus",
+  "category" : "tarjonta"
+}, {
+  "key" : "tarjonta.hakukohde.liite.modal.toimitettavaMennessa",
+  "locale" : "fi",
+  "value" : "Toimitettava mennessä",
+  "category" : "tarjonta"
+}, {
+  "key" : "koulutus.review.perustiedot.opetuskielet",
+  "locale" : "fi",
+  "value" : "Opetuskielet",
+  "category" : "tarjonta"
+}, {
+  "key" : "koulutus.review.kuvailevatTiedot.lopputyonKuvaus",
+  "locale" : "fi",
+  "value" : "Loppytyön kuvaus",
+  "category" : "tarjonta"
+}, {
+  "key" : "tarjonta.hakukohde.liite.modal.kaytetaanOrganisaationPostiosoitetta",
+  "locale" : "fi",
+  "value" : "Käytetään koulutuksen järjestävän organisaation hakutoimiston postiosoitetta",
+  "category" : "tarjonta"
+}, {
+  "key" : "kk.edit.koulutusala",
+  "locale" : "fi",
+  "value" : "Koulutusala",
+  "category" : "tarjonta"
+}, {
+  "key" : "tarjonta.hakutulokset.kausi",
+  "locale" : "fi",
+  "value" : "Hakukausi",
+  "category" : "tarjonta"
+}, {
+  "key" : "tarjonta.toiminnot.julkaise",
+  "locale" : "fi",
+  "value" : "Julkaise",
+  "category" : "tarjonta"
+}, {
+  "key" : "kk.edit.tyhjenna",
+  "locale" : "fi",
+  "value" : "Tyhjennä",
+  "category" : "tarjonta"
+}, {
+  "key" : "tarjonta.poistovahvistus.otsikko.koulutus",
+  "locale" : "fi",
+  "value" : "Koulutuksen poisto",
+  "category" : "tarjonta"
+}, {
+  "key" : "koulutus.review.kuvailevatTiedot.opintojenMaksullisuus",
+  "locale" : "fi",
+  "value" : "Opintojen maksullisuus",
+  "category" : "tarjonta"
+}, {
+  "key" : "selectTutkintoOhjelma.tyhjenna",
+  "locale" : "fi",
+  "value" : "Tyhjennä",
+  "category" : "tarjonta"
+}, {
+  "key" : "tarjonta.hakukohde.liite.modal.kaytetaanMuutaOsoitetta",
+  "locale" : "fi",
+  "value" : "Käytetään muuta osoitetta",
+  "category" : "tarjonta"
+}, {
+  "key" : "tarjonta.toiminnot.siirra_tai_kopioi",
+  "locale" : "fi",
+  "value" : "Siirrä tai kopioi",
+  "category" : "tarjonta"
+}, {
+  "key" : "kk.hakukohde.voidaantoimittaa.sahkoisesti",
+  "locale" : "fi",
+  "value" : "Voidaan toimittaa myös sähköisesti",
+  "category" : "tarjonta"
 } ]
