@@ -58,7 +58,7 @@ public class LocalisationDaoImpl extends AbstractJpaDAOImpl<Localisation, Long> 
 
         List<Localisation> ll = q.where(whereExpr).list(qLocalisation);
 
-        LOG.info(" --> result = {}", ll);
+        LOG.info(" --> result.size = {}", ll == null ? 0 : ll.size());
 
         return ll;
     }

@@ -73,7 +73,7 @@ public class LocalisationResourceImpl implements LocalisationResource {
             }
 
             List<LocalisationRDTO> result = convert(l);
-            LOG.info("  --> result = {}", result);
+            LOG.info("  --> result.size = {}", result.size());
             return result;
         } catch (Throwable ex) {
             LOG.error("failed", ex);

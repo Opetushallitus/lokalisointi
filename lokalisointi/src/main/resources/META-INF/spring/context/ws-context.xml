@@ -56,10 +56,12 @@
     </bean>
 
     <!-- CORS (cross domain) support for rest services -->
+    <!--
     <bean id="cors-filter" class="org.apache.cxf.rs.security.cors.CrossOriginResourceSharingFilter">
         <property name="allowCredentials" value="true"/>
-        <property name="allowOrigins" value="http://localhost:*"/>
+        <property name="allowOrigins" value="http://localhost:8383"/>
     </bean>
+    -->
 
     <!--
         REST Services
@@ -69,7 +71,7 @@
             <ref bean="lokalisointiResource" />
         </jaxrs:serviceBeans>
         <jaxrs:providers>
-            <ref bean="cors-filter" />
+<!--            <ref bean="cors-filter" /> -->
             <ref bean="lokalisointiJacksonJsonProvider" />
         </jaxrs:providers>
     </jaxrs:server>
