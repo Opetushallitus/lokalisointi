@@ -41,7 +41,7 @@ public interface LocalisationResource {
      */
     @GET
     @Produces(MediaType.TEXT_PLAIN)
-    @Path("/authorize")
+    @Path("authorize")
     public String authorize();
 
     /**
