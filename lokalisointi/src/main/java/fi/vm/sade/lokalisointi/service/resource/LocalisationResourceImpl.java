@@ -61,8 +61,6 @@ public class LocalisationResourceImpl implements LocalisationResource {
     }
 
     // /localisation?category=tarjonta
-    // @Secured({ROLE_READ})
-    @PreAuthorize("permitAll")
     @Override
     public List<LocalisationRDTO> getLocalisations(LocalisationRDTO query) {
         LOG.info("getLocalisations({})", query);

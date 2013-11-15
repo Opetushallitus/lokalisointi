@@ -28,8 +28,10 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 
 /**
+ * Implement necessary services to manage localisation and internationalization support for other applications.
  *
  * @author mlyly
+ * @see CORS fi.vm.sade.lokalisointi.service.resource.AllowAllCorsRequestsFilter in web.xml
  */
 @Path("/v1/localisation")
 public interface LocalisationResource {
@@ -58,8 +60,8 @@ public interface LocalisationResource {
      * Update exisiting localisation. If a localisation is found via ID the it is updated - otherwise
      * a localisation is searched with category, key and locale and is´ only one is found then its value + description is updated.
      *
-     * @param id
-     * @param data
+     * @param id NOT USED
+     * @param data if data.id < 0 find by (key, locale, cat) - if data.id >= 0 find by id.
      * @return
      */
     @PUT
@@ -71,8 +73,8 @@ public interface LocalisationResource {
     /**
      * Update last accessed timestamp.
      *
-     * @param id
-     * @param data
+     * @param id NOT USED
+     * @param data if data.id < 0 find by (key, locale, cat) - if data.id >= 0 find by id.
      * @return
      */
     @PUT
