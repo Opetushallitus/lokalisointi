@@ -173,23 +173,21 @@
                     }
                 });
 
-//                //
-//                // Preloadt application localisation
-//                //
-//                var localisationUrl = window.CONFIG.env.lokalisointiRestUrl;
-//                console.log("** Loading localisation info; from: ", localisationUrl);
-//                init_counter++;
-//                jQuery.ajax(localisationUrl, {
-//                    dataType: "json",
-//                    complete: function(xhr, status) {
-//                        window.CONFIG.env["localisations"] = xhr.responseJSON;
-//                        initFunction("localisations", xhr, status);
-//                    },
-//                    error: function(xhr, status) {
-//                        window.CONFIG.env["localisations"] = [];
-//                        initFunction("localisations FAILED", xhr, status);
-//                    }
-//                });
+                //
+                // Make sure user is really authenticated
+                //
+                console.log("** Make sure user is authenticated... from: ", window.CONFIG.env.lokalisointiRestUrl + "/authorize");
+                init_counter++;
+                jQuery.ajax(window.CONFIG.env.lokalisointiRestUrl + "/authorize", {
+                    dataType: "text",
+                    success: function(xhr, status) {
+                        initFunction("LOGIN_FIX", xhr, status);
+                    },
+                    error: function(xhr, status) {
+                        initFunction("LOGIN_FIX FAILED", xhr, status);
+                    }
+                });
+
         </script>
 
     </body>
