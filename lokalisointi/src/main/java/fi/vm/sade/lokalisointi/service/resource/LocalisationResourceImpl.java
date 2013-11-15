@@ -33,12 +33,13 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
- * Implement necessary services for localisations.
+ * Implement necessary services to manage localisation and internationalization support for other applications.
  *
  * @author mlyly
+ * @see CORS fi.vm.sade.lokalisointi.service.resource.AllowAllCorsRequestsFilter in web.xml
  */
 @Transactional(readOnly = false)
-// @CrossOriginResourceSharing -- CONFIGURED IN SPRING (ws-context.xml)
+// @CrossOriginResourceSharing -- CONFIGURED IN WEB.XML
 public class LocalisationResourceImpl implements LocalisationResource {
 
     private static final String ROLE_READ = "ROLE_APP_LOKALISOINTI_READ";
@@ -50,6 +51,7 @@ public class LocalisationResourceImpl implements LocalisationResource {
     @Autowired
     private LocalisationDao localisationDao;
 
+    // /localisation/authorize
     @Secured({ROLE_READ})
     @Override
     public String authorize() {
@@ -57,7 +59,7 @@ public class LocalisationResourceImpl implements LocalisationResource {
         return getCurrentUserName();
     }
 
-
+    // /localisation?category=tarjonta
     // @Secured({ROLE_READ})
     @Override
     public List<LocalisationRDTO> getLocalisations(LocalisationRDTO query) {
@@ -126,6 +128,7 @@ public class LocalisationResourceImpl implements LocalisationResource {
         if (SecurityContextHolder.getContext() == null
                 || SecurityContextHolder.getContext().getAuthentication() == null
                 || SecurityContextHolder.getContext().getAuthentication().isAuthenticated() == false) {
+            LOG.warn("  cannot create Localisations with non-logged in user, localisation = {}", data);
             throw new MessageException("NOT AUTHORIZED, only logged in users can create (initial) translations.");
         }
 
