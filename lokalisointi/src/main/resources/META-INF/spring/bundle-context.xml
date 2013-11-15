@@ -15,8 +15,8 @@
                 <prop key="cas_mode">front</prop>
                 <prop key="cas_key">lokalisointi-service</prop>
                 <prop key="cas_service">${cas.service.lokalisointi-service}</prop>
-                <prop key="spring_security_default_access">permitAll</prop>
-<!--                 <prop key="spring_security_default_access">hasRole('ROLE_APP_LOKALISOINTI')</prop> -->
+<!--                <prop key="spring_security_default_access">permitAll</prop> -->
+                <prop key="spring_security_default_access">hasRole('ROLE_APP_LOKALISOINTI')</prop>
             </util:properties>
         </property>
     </bean>
