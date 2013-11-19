@@ -195,7 +195,7 @@ angular.module('app').controller('AppCtrl:TransferController', ['$scope', '$log'
         $scope.model = {
             // Reppu by default
             // copyFrom: "https://test-virkailija.oph.ware.fi/lokalisointi/cxf/rest/v1/localisation",
-            copyFrom: "localisations.json",
+            copyFrom: "../localisations.json",
             result: ""
         };
 
