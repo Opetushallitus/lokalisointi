@@ -27,6 +27,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
+ * Simple filter to ALLOW ALL CORS-requests. At development time it is reeeally annoying to have CORS-related difficulties.
  *
  * @author mlyly
  */
