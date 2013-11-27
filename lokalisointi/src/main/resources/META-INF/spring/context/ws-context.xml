@@ -55,28 +55,18 @@
         <property name="mapper" ref="lokalisointiObjectMapper"/>
     </bean>
 
-    <!-- CORS (cross domain) support for rest services -->
-    <!--
-    <bean id="cors-filter" class="org.apache.cxf.rs.security.cors.CrossOriginResourceSharingFilter">
-        <property name="allowCredentials" value="true"/>
-        <property name="allowOrigins" value="http://localhost:8383"/>
-    </bean>
-    -->
-
     <!--
         REST Services
+        NOTE: CORS is handled with separate allow all requests filter, see web.xml
     -->
     <jaxrs:server id="lokalisointiPublicationREST" address="/rest">
         <jaxrs:serviceBeans>
             <ref bean="lokalisointiResource" />
         </jaxrs:serviceBeans>
         <jaxrs:providers>
-            <!--            <ref bean="cors-filter" /> -->
             <ref bean="lokalisointiJacksonJsonProvider" />
         </jaxrs:providers>
     </jaxrs:server>
-
-
 
     <!--
       SWAGGER
@@ -101,6 +91,7 @@
         <property name="scan" value="true"/>
     </bean>
 
+    <!-- define where "api-docs" resource will be bound. -->
     <bean class="org.apache.cxf.jaxrs.JAXRSServerFactoryBean" init-method="create">
         <property name="address" value="/api/rest/v1" />
         <property name="serviceBeans">

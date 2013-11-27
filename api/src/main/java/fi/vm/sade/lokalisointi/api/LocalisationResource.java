@@ -14,6 +14,8 @@
  */
 package fi.vm.sade.lokalisointi.api;
 
+import com.wordnik.swagger.annotations.Api;
+import com.wordnik.swagger.annotations.ApiOperation;
 import fi.vm.sade.lokalisointi.api.model.LocalisationRDTO;
 import java.util.List;
 import javax.ws.rs.Consumes;
@@ -34,6 +36,7 @@ import javax.ws.rs.core.MediaType;
  * @see CORS fi.vm.sade.lokalisointi.service.resource.AllowAllCorsRequestsFilter in web.xml
  */
 @Path("/v1/localisation")
+@Api(value = "/v1/localisation", description = "Lokalisointipalvelun V1 operaatiot")
 public interface LocalisationResource {
 
     /**
@@ -54,11 +57,15 @@ public interface LocalisationResource {
      */
     @GET
     @Produces(MediaType.APPLICATION_JSON + ";charset=UTF-8")
+    @ApiOperation(value = "Listaa lokalisaatiot kyselyn mukaan",
+            notes = "Palauttaa kaikki kyselyn mukaiset lokalisaatiot listassa. Parametreina voi olla esim. 'category=tarjonta&locale=sv' jne. "
+            + "Tyhjä kysely palauttaa kaikki käännökset.",
+            response = LocalisationRDTO.class)
     public List<LocalisationRDTO> getLocalisations(@QueryParam("") LocalisationRDTO query);
 
     /**
-     * Update exisiting localisation. If a localisation is found via ID the it is updated - otherwise
-     * a localisation is searched with category, key and locale and is´ only one is found then its value + description is updated.
+     * Update exisiting localisation. If a localisation is found via ID the it is updated - otherwise a localisation is searched with category, key and locale
+     * and is´ only one is found then its value + description is updated.
      *
      * @param id NOT USED
      * @param data if data.id < 0 find by (key, locale, cat) - if data.id >= 0 find by id.
@@ -68,6 +75,9 @@ public interface LocalisationResource {
     @Produces(MediaType.APPLICATION_JSON + ";charset=UTF-8")
     @Consumes(MediaType.APPLICATION_JSON + ";charset=UTF-8")
     @Path("{id}")
+    @ApiOperation(value = "Päivitä lokalisaatiota.",
+            notes = "Päivittää annetun lokalisaation. Jos löytyy ID:llä päivitetään sitä, muuten haetaan key,category,locale avaimella.",
+            response = LocalisationRDTO.class)
     public LocalisationRDTO updateLocalisation(@PathParam("id") Long id, LocalisationRDTO data);
 
     /**
@@ -81,6 +91,9 @@ public interface LocalisationResource {
     @Path("{id}/access")
     @Produces(MediaType.APPLICATION_JSON + ";charset=UTF-8")
     @Consumes(MediaType.APPLICATION_JSON + ";charset=UTF-8")
+    @ApiOperation(value = "Päivitä 'accessed' aikaleimaa.",
+            notes = "Päivittää annetun lokalisaation 'accessed' päivämääärää tähän hetkeen.",
+            response = LocalisationRDTO.class)
     public LocalisationRDTO updateLocalisationAccessed(@PathParam("id") Long id, LocalisationRDTO data);
 
     /**
@@ -92,6 +105,9 @@ public interface LocalisationResource {
     @POST
     @Produces(MediaType.APPLICATION_JSON + ";charset=UTF-8")
     @Consumes(MediaType.APPLICATION_JSON + ";charset=UTF-8")
+    @ApiOperation(value = "Luo uusi lokalisaatio",
+            notes = "Luo uuden lokalisaation. Tarkistetaan että avain (key,locale,category) on uniikki.",
+            response = LocalisationRDTO.class)
     public LocalisationRDTO createLocalisation(LocalisationRDTO data);
 
     /**
@@ -103,5 +119,8 @@ public interface LocalisationResource {
     @DELETE
     @Produces(MediaType.APPLICATION_JSON + ";charset=UTF-8")
     @Path("{id}")
+    @ApiOperation(value = "Poista lokalisaatio ID:llä",
+            notes = "Poistaa lokalisaation ID:llä.",
+            response = LocalisationRDTO.class)
     public LocalisationRDTO deleteLocalisation(@PathParam("id") Long id);
 }

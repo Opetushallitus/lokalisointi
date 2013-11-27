@@ -14,6 +14,8 @@
  */
 package fi.vm.sade.lokalisointi.api.model;
 
+import com.wordnik.swagger.annotations.ApiModel;
+import com.wordnik.swagger.annotations.ApiModelProperty;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -38,6 +40,7 @@ import java.util.Date;
  *
  * @author mlyly
  */
+@ApiModel(description = "Lokalisointi yhdellä kielellä, avaimella ja kategorialla.", value = "Lokalisointiarvo.")
 public class LocalisationRDTO implements Serializable {
 
     public static final String DEFAULT_CATEGORY = "NONE";
@@ -60,6 +63,7 @@ public class LocalisationRDTO implements Serializable {
         return "LocalisationRDTO[category=" + getCategory() + ", key=" + getKey() + ", locale=" + getLocale() + "]";
     }
 
+    @ApiModelProperty(notes = "Tietokanta-avain.", value = "Tietokanta-avain")
     public Long getId() {
         return _id;
     }
@@ -100,6 +104,7 @@ public class LocalisationRDTO implements Serializable {
         this._modifiedBy = modifiedBy;
     }
 
+    @ApiModelProperty(notes = "Kategoria, oletusarvona 'NONE'. Esim. 'tarjonta'. Tyhjä arvo käännetään oletusarvoon.", value = "Kategoria")
     public String getCategory() {
         return _category;
     }
@@ -112,6 +117,7 @@ public class LocalisationRDTO implements Serializable {
         }
     }
 
+    @ApiModelProperty(notes = "Käännöksen kieli, esim. fi, en, sv, etc.", value = "Käännöksen kielikoodi")
     public String getLocale() {
         return _locale;
     }
@@ -120,6 +126,7 @@ public class LocalisationRDTO implements Serializable {
         this._locale = locale;
     }
 
+    @ApiModelProperty(notes = "Käännösavain, esim. 'edit.lisatiedot.otsikko'. Tee hierarkia esim. pisteillä.", value = "Käännösavain")
     public String getKey() {
         return _key;
     }
@@ -128,6 +135,7 @@ public class LocalisationRDTO implements Serializable {
         this._key = key;
     }
 
+    @ApiModelProperty(notes = "Käännösarvo", value = "käännösarvo")
     public String getValue() {
         return _value;
     }
@@ -136,6 +144,7 @@ public class LocalisationRDTO implements Serializable {
         this._value = value;
     }
 
+    @ApiModelProperty(notes = "Käännöksen kuvaus, esim. missä käännös esiintyy, parametrit jne.", value = "Käännöksen kuvaus")
     public String getDescription() {
         return _description;
     }
