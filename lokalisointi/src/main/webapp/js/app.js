@@ -22,6 +22,7 @@ angular.module('app',
             'ngSanitize',
             'ngAnimate',
             'ui.bootstrap',
+            'debounce'
         ]);
 
 angular.module('app').value("globalConfig", window.CONFIG);
@@ -29,8 +30,8 @@ angular.module('app').value("globalConfig", window.CONFIG);
 /**
  * Main controller to manage translations.
  */
-angular.module('app').controller('AppCtrl', ['$scope', '$q', '$log', '$modal', 'LocalisationService',
-    function($scope, $q, $log, $modal, LocalisationService) {
+angular.module('app').controller('AppCtrl', ['$scope', '$q', '$log', '$modal', 'LocalisationService', 'debounce', '$filter',
+    function($scope, $q, $log, $modal, LocalisationService, debounce, $filter) {
 
         $log.info("AppCtrl()");
 
@@ -40,7 +41,8 @@ angular.module('app').controller('AppCtrl', ['$scope', '$q', '$log', '$modal', '
             filterLocale: "fi",
             filterKey: "",
             filterValue: "",
-            info: []
+            info: [],
+            filteredList: []
         };
 
         $scope.deleteMessage = function(msg) {
@@ -86,7 +88,13 @@ angular.module('app').controller('AppCtrl', ['$scope', '$q', '$log', '$modal', '
         };
 
         $scope.doFilter = new function() {
-            return function(item) {
+            return function(item, index, list) {
+                // $log.debug("  filter: ", item, index);
+
+                if (item === undefined) {
+                    return false;
+                }
+
                 var result = true;
                 result = result && $scope.filterCategoryWithCategory(item);
                 result = result && $scope.filterKeyWithKey(item);
@@ -101,10 +109,22 @@ angular.module('app').controller('AppCtrl', ['$scope', '$q', '$log', '$modal', '
             }
         };
 
+//                    <tr data-ng-repeat="l in model.localisations| filter: doFilter | orderBy: ['category', 'key', 'locale']" data-ng-class="{uiChanged: l.uiChanged}">
+
+        $scope.doFiltering = function() {
+            var scope = this;
+            debounce("filterLocalisations", function() {
+                // $scope.model.filteredList = $filter()($scope.model.localisations, $scope.doFilter());
+                scope.model.filteredList = _.filter(scope.model.localisations, scope.doFilter);
+            }, 500);
+        };
+
+
         $scope.reloadData = function() {
             $log.info("reloadData()");
             LocalisationService.reload().then(function(data) {
                 $scope.model.localisations = data;
+                $scope.doFiltering();
             }, function(aa, bb, cc, dd) {
                 $scope.model.info.push({status: "ERROR", aa: aa, bb: bb, cc: cc, dd: dd});
             });
@@ -175,8 +195,6 @@ angular.module('app').controller('AppCtrl', ['$scope', '$q', '$log', '$modal', '
             });
 
         };
-
-
 
 
         // Trigger reload

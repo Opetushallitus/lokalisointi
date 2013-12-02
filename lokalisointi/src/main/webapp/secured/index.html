@@ -40,6 +40,7 @@
         <script src="../js/shared/loading.js"></script>
 
         <script src="../js/services.js"></script>
+        <script src="../js/shared/debounce.js"></script>
         <script src="../js/app.js"></script>
 
         <script src="../lib/ui-bootstrap-tpls-0.6.0.js"></script>
@@ -83,16 +84,16 @@
 
                 <table>
                     <tr>
-                        <th colspan="6">Näytetään {{(model.localisations| filter: doFilter).length}}
+                        <th colspan="6">Näytetään {{model.filteredList.length}}
                             / {{model.localisations.length}} käännöstekstistä</th>
                     </tr>
 
                     <tr>
                         <td>-</td>
-                        <td><input type="text" data-ng-model="model.filterCategory" placeholder="Kategoria filtteri"></td>
-                        <td><input type="text" data-ng-model="model.filterKey" placeholder="Avain filtteri"></td>
-                        <td><input type="text" data-ng-model="model.filterLocale" placeholder="Locale filtteri" ></td>
-                        <td><input type="text" data-ng-model="model.filterValue" placeholder="Arvo filtteri" ></td>
+                        <td><input type="text" data-ng-model="model.filterCategory" ng-change="doFiltering()" placeholder="Kategoria filtteri"></td>
+                        <td><input type="text" data-ng-model="model.filterKey" ng-change="doFiltering()" placeholder="Avain filtteri"></td>
+                        <td><input type="text" data-ng-model="model.filterLocale" ng-change="doFiltering()" placeholder="Locale filtteri" ></td>
+                        <td><input type="text" data-ng-model="model.filterValue" ng-change="doFiltering()" placeholder="Arvo filtteri" ></td>
                         <td>--</td>
                     </tr>
 
@@ -105,16 +106,11 @@
                         <th>Kuvaus</th>
                     </tr>
 
-                    <tr data-ng-repeat="l in model.localisations| filter: doFilter | orderBy: ['category', 'key', 'locale']" data-ng-class="{uiChanged: l.uiChanged}">
+                    <tr data-ng-repeat="l in model.filteredList | orderBy: ['category', 'key', 'locale']" data-ng-class="{uiChanged: l.uiChanged}">
                         <td><input type="checkbox" data-ng-model="l.uiDelete" data-ng-change="l.uiChanged = true"></td>
                         <td>{{ l.category }}</td>
                         <td>{{ l.key }}</td>
                         <td>{{ l.locale }}</td>
-<!--
-                        <td><input type="text" data-ng-model="l.category" required data-ng-change="l.uiChanged = true"></td>
-                        <td><input type="text" data-ng-model="l.key" required data-ng-change="l.uiChanged = true"></td>
-                        <td><input type="text" data-ng-model="l.locale" required data-ng-change="l.uiChanged = true"></td>
--->
                         <td><textarea data-ng-model="l.value" data-ng-change="l.uiChanged = true" cols="10"></textarea></td>
                         <td><textarea data-ng-model="l.description" data-ng-change="l.uiChanged = true" cols="10"></textarea></td>
                     </tr>
