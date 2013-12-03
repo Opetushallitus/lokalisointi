@@ -54,7 +54,6 @@
 				
 				unzip -qo -d${tomcat.home}/webapps/lokalisointi ${tomcat.home}/webapps/lokalisointi*.war;
 				
-				rm -rf ${tomcat.home}/webapps/*.war;
 				"
                 host="${tomcat-host}" username="tomcat" keyfile="${ssh.keyfile}"
                 passphrase="${ssh.keypass}" trust="true" failonerror="false" />
