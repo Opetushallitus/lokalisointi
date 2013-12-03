@@ -679,16 +679,6 @@
   "modified" : 1385111844107,
   "modifiedBy" : "1.2.246.562.24.00000000001"
 }, {
-  "value" : "[koulutus.review.updateStatus-sv]",
-  "key" : "koulutus.review.updateStatus",
-  "locale" : "sv",
-  "created" : 1384774721861,
-  "category" : "tarjonta",
-  "accessed" : 1384774721861,
-  "createdBy" : "anonymousUser",
-  "modified" : 1384774721861,
-  "modifiedBy" : "anonymousUser"
-}, {
   "value" : "Avbryt",
   "key" : "cancel",
   "locale" : "sv",
@@ -879,6 +869,16 @@
   "modified" : 1385119533066,
   "modifiedBy" : "1.2.246.562.24.00000000001"
 }, {
+  "value" : "Updatera staus",
+  "key" : "koulutus.review.updateStatus",
+  "locale" : "sv",
+  "created" : 1384774721861,
+  "category" : "tarjonta",
+  "accessed" : 1386078313469,
+  "createdBy" : "anonymousUser",
+  "modified" : 1386078313469,
+  "modifiedBy" : "1.2.246.562.24.00000000001"
+}, {
   "value" : "Ytterligare studier",
   "key" : "koulutus.review.kuvailevatTiedot.jatkoopintoMahdollisuudet",
   "locale" : "sv",
@@ -1007,6 +1007,36 @@
   "accessed" : 1385120221418,
   "createdBy" : "anonymousUser",
   "modified" : 1385120221418,
+  "modifiedBy" : "1.2.246.562.24.00000000001"
+}, {
+  "value" : "Liitä koulutus",
+  "key" : "tarjonta.toiminnot.liita_koulutus",
+  "locale" : "fi",
+  "created" : 1385722092234,
+  "category" : "tarjonta",
+  "accessed" : 1386078057503,
+  "createdBy" : "anonymousUser",
+  "modified" : 1386078057503,
+  "modifiedBy" : "1.2.246.562.24.00000000001"
+}, {
+  "value" : "Tyhjennä",
+  "key" : "sisaltyvyys.tyhjenna",
+  "locale" : "fi",
+  "created" : 1385723497497,
+  "category" : "tarjonta",
+  "accessed" : 1386078057576,
+  "createdBy" : "anonymousUser",
+  "modified" : 1386078057576,
+  "modifiedBy" : "1.2.246.562.24.00000000001"
+}, {
+  "value" : "Choosing service",
+  "key" : "kk.hakukohde.valintapalvelu",
+  "locale" : "en",
+  "created" : 1385366875278,
+  "category" : "tarjonta",
+  "accessed" : 1386078420510,
+  "createdBy" : "anonymousUser",
+  "modified" : 1386078420510,
   "modifiedBy" : "1.2.246.562.24.00000000001"
 }, {
   "value" : "Koulutusohjelman valinta",
@@ -2179,6 +2209,26 @@
   "modified" : 1385557467578,
   "modifiedBy" : "1.2.246.562.24.00000000001"
 }, {
+  "value" : "Koulutuskoodi",
+  "key" : "sisaltyvyys.hakutulos.arvo",
+  "locale" : "fi",
+  "created" : 1385729974160,
+  "category" : "tarjonta",
+  "accessed" : 1386078057606,
+  "createdBy" : "anonymousUser",
+  "modified" : 1386078057606,
+  "modifiedBy" : "1.2.246.562.24.00000000001"
+}, {
+  "value" : "Tutkinto-ohjelman nimi",
+  "key" : "sisaltyvyys.hakutulos.nimi",
+  "locale" : "fi",
+  "created" : 1385729974175,
+  "category" : "tarjonta",
+  "accessed" : 1386078057619,
+  "createdBy" : "anonymousUser",
+  "modified" : 1386078057619,
+  "modifiedBy" : "1.2.246.562.24.00000000001"
+}, {
   "value" : "Kuvailevat tiedot",
   "key" : "koulutus.review.kuvailevatTiedot.KUVAILEVAT_TIEDOT",
   "locale" : "fi",
@@ -2207,6 +2257,16 @@
   "accessed" : 1385111843951,
   "createdBy" : "anonymousUser",
   "modified" : 1385111843951,
+  "modifiedBy" : "1.2.246.562.24.00000000001"
+}, {
+  "value" : "Opetusajat",
+  "key" : "koulutus.edit.opetusaikas",
+  "locale" : "fi",
+  "created" : 1386062103561,
+  "category" : "tarjonta",
+  "accessed" : 1386078057641,
+  "createdBy" : "anonymousUser",
+  "modified" : 1386078057641,
   "modifiedBy" : "1.2.246.562.24.00000000001"
 }, {
   "value" : "Töm",
@@ -2440,16 +2500,6 @@
   "modified" : 1384332984065,
   "modifiedBy" : "1.2.246.562.24.00000000001"
 }, {
-  "value" : "[kk.hakukohde.sora.addl.title-en]",
-  "key" : "kk.hakukohde.sora.addl.title",
-  "locale" : "en",
-  "created" : 1385366875357,
-  "category" : "tarjonta",
-  "accessed" : 1385366875358,
-  "createdBy" : "anonymousUser",
-  "modified" : 1385366875358,
-  "modifiedBy" : "anonymousUser"
-}, {
   "value" : "Addtional information about applying",
   "key" : "kk.hakukohde.lisatietoja.hakemisesta",
   "locale" : "en",
@@ -2550,16 +2600,6 @@
   "modified" : 1385120345795,
   "modifiedBy" : "1.2.246.562.24.00000000001"
 }, {
-  "value" : "[kk.hakukohde.sora.addl.title-fi]",
-  "key" : "kk.hakukohde.sora.addl.title",
-  "locale" : "fi",
-  "created" : 1385124848989,
-  "category" : "tarjonta",
-  "accessed" : 1385124848989,
-  "createdBy" : "anonymousUser",
-  "modified" : 1385124848989,
-  "modifiedBy" : "anonymousUser"
-}, {
   "value" : "[no-FF]",
   "key" : "no",
   "locale" : "FF",
@@ -2588,6 +2628,26 @@
   "accessed" : 1385557467640,
   "createdBy" : "anonymousUser",
   "modified" : 1385557467640,
+  "modifiedBy" : "1.2.246.562.24.00000000001"
+}, {
+  "value" : "SORA kysymys lyhyt ohje teksti",
+  "key" : "kk.hakukohde.sora.addl.title",
+  "locale" : "fi",
+  "created" : 1385124848989,
+  "category" : "tarjonta",
+  "accessed" : 1386078057481,
+  "createdBy" : "anonymousUser",
+  "modified" : 1386078057481,
+  "modifiedBy" : "1.2.246.562.24.00000000001"
+}, {
+  "value" : "SORA lorem ipsum dolor sit ameet etc lorem ipsum dolor sit ameet etc  lorem ipsum dolor sit ameet etc  lorem ipsum dolor sit ameet etc  lorem ipsum dolor sit ameet etc lorem ipsum dolor sit ameet etc  lorem ipsum dolor sit ameet etc  lorem ipsum dolor sit ameet etc",
+  "key" : "kk.hakukohde.sora.addl.title",
+  "locale" : "en",
+  "created" : 1385366875357,
+  "category" : "tarjonta",
+  "accessed" : 1386078420512,
+  "createdBy" : "anonymousUser",
+  "modified" : 1386078420512,
   "modifiedBy" : "1.2.246.562.24.00000000001"
 }, {
   "value" : "Internationalisation",
@@ -2780,36 +2840,6 @@
   "modified" : 1384762844375,
   "modifiedBy" : "1.2.246.562.24.00000000001"
 }, {
-  "value" : "[kk.hakukohde.valintaperustekuvaus.addl.title-fi]",
-  "key" : "kk.hakukohde.valintaperustekuvaus.addl.title",
-  "locale" : "fi",
-  "created" : 1385124848973,
-  "category" : "tarjonta",
-  "accessed" : 1385124848973,
-  "createdBy" : "anonymousUser",
-  "modified" : 1385124848973,
-  "modifiedBy" : "anonymousUser"
-}, {
-  "value" : "[tarjonta.toiminnot.tarkastele-sv]",
-  "key" : "tarjonta.toiminnot.tarkastele",
-  "locale" : "sv",
-  "created" : 1385363965554,
-  "category" : "tarjonta",
-  "accessed" : 1385363965554,
-  "createdBy" : "anonymousUser",
-  "modified" : 1385363965554,
-  "modifiedBy" : "anonymousUser"
-}, {
-  "value" : "[kk.hakukohde.sora.title-en]",
-  "key" : "kk.hakukohde.sora.title",
-  "locale" : "en",
-  "created" : 1385366875358,
-  "category" : "tarjonta",
-  "accessed" : 1385366875358,
-  "createdBy" : "anonymousUser",
-  "modified" : 1385366875358,
-  "modifiedBy" : "anonymousUser"
-}, {
   "value" : "Educations",
   "key" : "hakukohde.edit.header.koulutus.list.title",
   "locale" : "en",
@@ -3000,6 +3030,36 @@
   "modified" : 1385557600844,
   "modifiedBy" : "1.2.246.562.24.00000000001"
 }, {
+  "value" : "Valintaperustekuvaus lyhyt ohje teksti",
+  "key" : "kk.hakukohde.valintaperustekuvaus.addl.title",
+  "locale" : "fi",
+  "created" : 1385124848973,
+  "category" : "tarjonta",
+  "accessed" : 1386078057501,
+  "createdBy" : "anonymousUser",
+  "modified" : 1386078057501,
+  "modifiedBy" : "1.2.246.562.24.00000000001"
+}, {
+  "value" : "Observera",
+  "key" : "tarjonta.toiminnot.tarkastele",
+  "locale" : "sv",
+  "created" : 1385363965554,
+  "category" : "tarjonta",
+  "accessed" : 1386078313427,
+  "createdBy" : "anonymousUser",
+  "modified" : 1386078313427,
+  "modifiedBy" : "1.2.246.562.24.00000000001"
+}, {
+  "value" : "SORA Question",
+  "key" : "kk.hakukohde.sora.title",
+  "locale" : "en",
+  "created" : 1385366875358,
+  "category" : "tarjonta",
+  "accessed" : 1386078420508,
+  "createdBy" : "anonymousUser",
+  "modified" : 1386078420508,
+  "modifiedBy" : "1.2.246.562.24.00000000001"
+}, {
   "value" : "Nej",
   "key" : "no",
   "locale" : "sv",
@@ -3059,16 +3119,6 @@
   "createdBy" : "1.2.246.562.24.00000000001",
   "modified" : 1384762844396,
   "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "[kk.hakukohde.valintapalvelu-en]",
-  "key" : "kk.hakukohde.valintapalvelu",
-  "locale" : "en",
-  "created" : 1385366875278,
-  "category" : "tarjonta",
-  "accessed" : 1385366875278,
-  "createdBy" : "anonymousUser",
-  "modified" : 1385366875278,
-  "modifiedBy" : "anonymousUser"
 }, {
   "value" : "[yes-AB]",
   "key" : "yes",
@@ -3269,16 +3319,6 @@
   "createdBy" : "1.2.246.562.24.00000000001",
   "modified" : 1384762844410,
   "modifiedBy" : "1.2.246.562.24.00000000001"
-}, {
-  "value" : "[kk.hakukohde.valintaperustekuvaus.addl.title-en]",
-  "key" : "kk.hakukohde.valintaperustekuvaus.addl.title",
-  "locale" : "en",
-  "created" : 1385366875344,
-  "category" : "tarjonta",
-  "accessed" : 1385366875344,
-  "createdBy" : "anonymousUser",
-  "modified" : 1385366875344,
-  "modifiedBy" : "anonymousUser"
 }, {
   "value" : "Places (for applicants)",
   "key" : "kk.hakukohde.hakijoilleilmoitettavataloituspaikat",
@@ -5250,6 +5290,16 @@
   "modified" : 1385557600845,
   "modifiedBy" : "1.2.246.562.24.00000000001"
 }, {
+  "value" : "Choosing basis description lorem ipsum dolor sit ameet etc lorem ipsum dolor sit ameet etc  lorem ipsum dolor sit ameet etc  lorem ipsum dolor sit ameet etc  lorem ipsum dolor sit ameet etc lorem ipsum dolor sit ameet etc  lorem ipsum dolor sit ameet etc  lorem ipsum dolor sit ameet etc",
+  "key" : "kk.hakukohde.valintaperustekuvaus.addl.title",
+  "locale" : "en",
+  "created" : 1385366875344,
+  "category" : "tarjonta",
+  "accessed" : 1386078420512,
+  "createdBy" : "anonymousUser",
+  "modified" : 1386078420512,
+  "modifiedBy" : "1.2.246.562.24.00000000001"
+}, {
   "value" : "Tutkinto-ohjelma ja tunniste",
   "key" : "koulutus.review.perustiedot.tutkintoOhjelmaJaTunniste",
   "locale" : "fi",
@@ -5970,6 +6020,16 @@
   "modified" : 1385117476244,
   "modifiedBy" : "1.2.246.562.24.00000000001"
 }, {
+  "value" : "ja",
+  "key" : "tarjonta.yleiset.ja",
+  "locale" : "fi",
+  "created" : 1385715483659,
+  "category" : "tarjonta",
+  "accessed" : 1385723119381,
+  "createdBy" : "anonymousUser",
+  "modified" : 1385723119381,
+  "modifiedBy" : "1.2.246.562.24.00000000001"
+}, {
   "value" : "Koulutukset",
   "key" : "tarjonta.linkit.otsikko.hakukohde",
   "locale" : "fi",
@@ -6318,6 +6378,16 @@
   "accessed" : 1385111844129,
   "createdBy" : "anonymousUser",
   "modified" : 1385111844129,
+  "modifiedBy" : "1.2.246.562.24.00000000001"
+}, {
+  "value" : "Sisältyvyyksien hallinta",
+  "key" : "sisaltyvyys.dialogTitle",
+  "locale" : "fi",
+  "created" : 1385723497034,
+  "category" : "tarjonta",
+  "accessed" : 1386078057508,
+  "createdBy" : "anonymousUser",
+  "modified" : 1386078057508,
   "modifiedBy" : "1.2.246.562.24.00000000001"
 }, {
   "value" : "Tutkinnon tavoitteet",
@@ -6900,6 +6970,16 @@
   "modified" : 1384332985871,
   "modifiedBy" : "1.2.246.562.24.00000000001"
 }, {
+  "value" : "Peruuta",
+  "key" : "sisaltyvyys.peruuta",
+  "locale" : "fi",
+  "created" : 1385723497402,
+  "category" : "tarjonta",
+  "accessed" : 1386078057579,
+  "createdBy" : "anonymousUser",
+  "modified" : 1386078057579,
+  "modifiedBy" : "1.2.246.562.24.00000000001"
+}, {
   "value" : "[yes-AA]",
   "key" : "yes",
   "locale" : "AA",
@@ -7230,6 +7310,26 @@
   "modified" : 1385119393289,
   "modifiedBy" : "1.2.246.562.24.00000000001"
 }, {
+  "value" : "Olet muokkaamassa hakukohdetta koulutukselle {0}.",
+  "key" : "hakukohde.edit.header.single",
+  "locale" : "fi",
+  "created" : 1385725396728,
+  "category" : "tarjonta",
+  "accessed" : 1385725552865,
+  "createdBy" : "anonymousUser",
+  "modified" : 1385725552865,
+  "modifiedBy" : "1.2.246.562.24.00000000001"
+}, {
+  "value" : "Näytä tutkintotyyppi",
+  "key" : "sisaltyvyys.nayta-tutkintotyyppi",
+  "locale" : "fi",
+  "created" : 1385729147057,
+  "category" : "tarjonta",
+  "accessed" : 1386078057566,
+  "createdBy" : "anonymousUser",
+  "modified" : 1386078057566,
+  "modifiedBy" : "1.2.246.562.24.00000000001"
+}, {
   "value" : "Startdate",
   "key" : "koulutus.edit.koulutuksen-alkamispvm.required",
   "locale" : "en",
@@ -7490,6 +7590,16 @@
   "modified" : 1385119393323,
   "modifiedBy" : "1.2.246.562.24.00000000001"
 }, {
+  "value" : "Hae",
+  "key" : "sisaltyvyys.hae",
+  "locale" : "fi",
+  "created" : 1385723497497,
+  "category" : "tarjonta",
+  "accessed" : 1386078057618,
+  "createdBy" : "anonymousUser",
+  "modified" : 1386078057618,
+  "modifiedBy" : "1.2.246.562.24.00000000001"
+}, {
   "value" : "EQF-classification is required",
   "key" : "koulutus.edit.eqfLuokitus.required",
   "locale" : "en",
@@ -7728,6 +7838,26 @@
   "accessed" : 1385120221448,
   "createdBy" : "anonymousUser",
   "modified" : 1385120221448,
+  "modifiedBy" : "1.2.246.562.24.00000000001"
+}, {
+  "value" : "Olet muokkaamassa hakukohdetta koulutuksille {0}.",
+  "key" : "hakukohde.edit.header.multi",
+  "locale" : "fi",
+  "created" : 1385725027994,
+  "category" : "tarjonta",
+  "accessed" : 1385725552863,
+  "createdBy" : "anonymousUser",
+  "modified" : 1385725552863,
+  "modifiedBy" : "1.2.246.562.24.00000000001"
+}, {
+  "value" : "Sisältyvyys kuvaus Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+  "key" : "sisaltyvyys.kuvaus",
+  "locale" : "fi",
+  "created" : 1385723497496,
+  "category" : "tarjonta",
+  "accessed" : 1386078110406,
+  "createdBy" : "anonymousUser",
+  "modified" : 1386078110406,
   "modifiedBy" : "1.2.246.562.24.00000000001"
 }, {
   "value" : "Stydylevel",
@@ -8380,6 +8510,56 @@
   "modified" : 1385118781722,
   "modifiedBy" : "1.2.246.562.24.00000000001"
 }, {
+  "value" : "[yes-AY]",
+  "key" : "yes",
+  "locale" : "AY",
+  "created" : 1386060382459,
+  "category" : "tarjonta",
+  "accessed" : 1386060382459,
+  "createdBy" : "anonymousUser",
+  "modified" : 1386060382459,
+  "modifiedBy" : "anonymousUser"
+}, {
+  "value" : "Ei hakutuloksia, ingen vinst.",
+  "key" : "sisaltyvyys.eihakutuloksia",
+  "locale" : "fi",
+  "created" : 1385723497310,
+  "category" : "tarjonta",
+  "accessed" : 1386078057559,
+  "createdBy" : "anonymousUser",
+  "modified" : 1386078057559,
+  "modifiedBy" : "1.2.246.562.24.00000000001"
+}, {
+  "value" : "Palaa",
+  "key" : "sisaltyvyys.palaa",
+  "locale" : "fi",
+  "created" : 1385980667793,
+  "category" : "tarjonta",
+  "accessed" : 1386078057644,
+  "createdBy" : "anonymousUser",
+  "modified" : 1386078057644,
+  "modifiedBy" : "1.2.246.562.24.00000000001"
+}, {
+  "value" : "Opetuspaikka vaaditan",
+  "key" : "koulutus.edit.opetusPaikkas.required",
+  "locale" : "fi",
+  "created" : 1386062102074,
+  "category" : "tarjonta",
+  "accessed" : 1386078057648,
+  "createdBy" : "anonymousUser",
+  "modified" : 1386078057648,
+  "modifiedBy" : "1.2.246.562.24.00000000001"
+}, {
+  "value" : "Opetuspaikat",
+  "key" : "koulutus.edit.opetusPaikkas",
+  "locale" : "fi",
+  "created" : 1386062103647,
+  "category" : "tarjonta",
+  "accessed" : 1386078057647,
+  "createdBy" : "anonymousUser",
+  "modified" : 1386078057647,
+  "modifiedBy" : "1.2.246.562.24.00000000001"
+}, {
   "value" : "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
   "key" : "koulutus.edit.PAAAINEEN_VALINTA.help",
   "locale" : "en",
@@ -8570,6 +8750,46 @@
   "modified" : 1385118986293,
   "modifiedBy" : "1.2.246.562.24.00000000001"
 }, {
+  "value" : "Tekstihaku",
+  "key" : "sisaltyvyys.tekstihaku",
+  "locale" : "fi",
+  "created" : 1385723496994,
+  "category" : "tarjonta",
+  "accessed" : 1386078057482,
+  "createdBy" : "anonymousUser",
+  "modified" : 1386078057482,
+  "modifiedBy" : "1.2.246.562.24.00000000001"
+}, {
+  "value" : "Hae koulutuksia",
+  "key" : "sisaltyvyys.hae-koulutuksia",
+  "locale" : "fi",
+  "created" : 1385729147090,
+  "category" : "tarjonta",
+  "accessed" : 1386078057602,
+  "createdBy" : "anonymousUser",
+  "modified" : 1386078057602,
+  "modifiedBy" : "1.2.246.562.24.00000000001"
+}, {
+  "value" : "Tallenna",
+  "key" : "sisaltyvyys.tallenna",
+  "locale" : "fi",
+  "created" : 1385980667472,
+  "category" : "tarjonta",
+  "accessed" : 1386078057620,
+  "createdBy" : "anonymousUser",
+  "modified" : 1386078057620,
+  "modifiedBy" : "1.2.246.562.24.00000000001"
+}, {
+  "value" : "Opetusaika vaaditaan",
+  "key" : "koulutus.edit.opetusAikas.required",
+  "locale" : "fi",
+  "created" : 1386062102065,
+  "category" : "tarjonta",
+  "accessed" : 1386078057639,
+  "createdBy" : "anonymousUser",
+  "modified" : 1386078057639,
+  "modifiedBy" : "1.2.246.562.24.00000000001"
+}, {
   "value" : "Internationalisation",
   "key" : "koulutus.edit.KANSAINVALISTYMINEN.title",
   "locale" : "en",
@@ -8678,5 +8898,35 @@
   "accessed" : 1385118781697,
   "createdBy" : "anonymousUser",
   "modified" : 1385118781697,
+  "modifiedBy" : "1.2.246.562.24.00000000001"
+}, {
+  "value" : "Hakutulokset",
+  "key" : "sisaltyvyys.hakutulokset",
+  "locale" : "fi",
+  "created" : 1385723497239,
+  "category" : "tarjonta",
+  "accessed" : 1386078057481,
+  "createdBy" : "anonymousUser",
+  "modified" : 1386078057481,
+  "modifiedBy" : "1.2.246.562.24.00000000001"
+}, {
+  "value" : "Jatka",
+  "key" : "sisaltyvyys.jatka",
+  "locale" : "fi",
+  "created" : 1385723497286,
+  "category" : "tarjonta",
+  "accessed" : 1386078057535,
+  "createdBy" : "anonymousUser",
+  "modified" : 1386078057535,
+  "modifiedBy" : "1.2.246.562.24.00000000001"
+}, {
+  "value" : "Taso",
+  "key" : "sisaltyvyys.taso",
+  "locale" : "fi",
+  "created" : 1385723497286,
+  "category" : "tarjonta",
+  "accessed" : 1386078057553,
+  "createdBy" : "anonymousUser",
+  "modified" : 1386078057553,
   "modifiedBy" : "1.2.246.562.24.00000000001"
 } ]
