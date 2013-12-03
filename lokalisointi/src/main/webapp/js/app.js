@@ -116,7 +116,7 @@ angular.module('app').controller('AppCtrl', ['$scope', '$q', '$log', '$modal', '
             debounce("filterLocalisations", function() {
                 // $scope.model.filteredList = $filter()($scope.model.localisations, $scope.doFilter());
                 scope.model.filteredList = _.filter(scope.model.localisations, scope.doFilter);
-            }, 500);
+            }, 300);
         };
 
 
