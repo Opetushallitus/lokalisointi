@@ -39,6 +39,8 @@
                  passphrase="${ssh.keypass}" trust="true" failonerror="false" />
 
         <echo>Copy files to server...</echo>
+        <echo>  XXX from dir: ${maven.repo}/fi/vm/sade/lokalisointi/lokalisointi/${pom.version}</echo>
+
 		<scp todir="tomcat@${tomcat-host}:${tomcat.home}/webapps/"
                keyfile="${ssh.keyfile}" passphrase="${ssh.keypass}" verbose="true">
 			
