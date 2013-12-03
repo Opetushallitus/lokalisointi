@@ -26,7 +26,7 @@
                  passphrase="${ssh.keypass}" trust="true" failonerror="false" />
 
 		<echo>Wait Tomcat to stop...</echo>
-        <waitfor maxwait="30000" checkevery="500">
+        <waitfor maxwait="300000" checkevery="500">
             <not>
                 <socket server="${tomcat-host}" port="${tomcat-port}" />
             </not>
@@ -70,7 +70,7 @@
                  passphrase="${ssh.keypass}" trust="true" failonerror="false" />
 
 		<echo>Wait for service http-url</echo>
-		<waitfor maxwait="30000" checkevery="500" >
+		<waitfor maxwait="300000" checkevery="500" >
 			<and>
 			<http url="http://${tomcat-host}:${tomcat-port}/lokalisointi"/>
 			</and>
