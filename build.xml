@@ -70,16 +70,16 @@
                  passphrase="${ssh.keypass}" trust="true" failonerror="false" />
 
 		<echo>Wait for service http-url</echo>
-		<waitfor maxwait="300000" checkevery="500" >
+		<waitfor maxwait="600000" checkevery="500" >
 			<and>
-			<http url="http://${tomcat-host}:${tomcat-port}/lokalisointi"/>
+			  <http url="http://${tomcat-host}:${tomcat-port}/lokalisointi/cxf/rest/v1/localisation?category=testing"/>
 			</and>
 		</waitfor>
 		<fail message="App did not come up.  Check your log files, fix and try again.  Good Luck :-).">     
 			<condition>
 				<or>
 					<not>
-						<http url="http://${tomcat-host}:${tomcat-port}/lokalisointi" />
+						<http url="http://${tomcat-host}:${tomcat-port}/lokalisointi/cxf/rest/v1/localisation?category=testing" />
 					</not>
 				</or>
 			</condition>
