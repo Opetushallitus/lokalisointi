@@ -83,7 +83,7 @@ public class LocalisationResourceImpl implements LocalisationResource {
         }
     }
 
-    @Secured({ROLE_UPDATE})
+    @Secured({ROLE_UPDATE, ROLE_CRUD})
     @Override
     public LocalisationRDTO updateLocalisation(Long id, LocalisationRDTO data) {
         LOG.info("updateLocalisation({})", data);
@@ -101,7 +101,7 @@ public class LocalisationResourceImpl implements LocalisationResource {
         }
     }
 
-    @Secured({ROLE_UPDATE})
+    @Secured({ROLE_UPDATE, ROLE_CRUD})
     @Override
     public LocalisationRDTO updateLocalisationAccessed(Long id, LocalisationRDTO data) {
         LOG.info("updateLocalisationAccessed({})", data);
