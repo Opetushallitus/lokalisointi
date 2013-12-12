@@ -68,6 +68,7 @@ public class LocalisationDaoImpl extends AbstractJpaDAOImpl<Localisation, Long> 
         LOG.info("findOne({}, {}, {}, {})", new Object[] {id, category, key, locale});
 
         List<Localisation> ll = findBy(id, category, key, locale);
+
         if (ll.size() == 1) {
             return ll.get(0);
         } else {

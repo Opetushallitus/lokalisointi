@@ -46,7 +46,7 @@ public interface LocalisationResource {
      */
     @GET
     @Produces(MediaType.TEXT_PLAIN)
-    @Path("authorize")
+    @Path("/authorize")
     public String authorize();
 
     /**
@@ -74,7 +74,7 @@ public interface LocalisationResource {
     @PUT
     @Produces(MediaType.APPLICATION_JSON + ";charset=UTF-8")
     @Consumes(MediaType.APPLICATION_JSON + ";charset=UTF-8")
-    @Path("{id}")
+    @Path("/{id}")
     @ApiOperation(value = "Päivitä lokalisaatiota.",
             notes = "Päivittää annetun lokalisaation. Jos löytyy ID:llä päivitetään sitä, muuten haetaan key,category,locale avaimella.",
             response = LocalisationRDTO.class)
@@ -88,7 +88,7 @@ public interface LocalisationResource {
      * @return
      */
     @PUT
-    @Path("{id}/access")
+    @Path("/{id}/access")
     @Produces(MediaType.APPLICATION_JSON + ";charset=UTF-8")
     @Consumes(MediaType.APPLICATION_JSON + ";charset=UTF-8")
     @ApiOperation(value = "Päivitä 'accessed' aikaleimaa.",
@@ -111,14 +111,14 @@ public interface LocalisationResource {
     public LocalisationRDTO createLocalisation(LocalisationRDTO data);
 
     /**
-     * Deletes a localisation.
+     * Deletes a localisation. Note: delete is done with the database key.
      *
      * @param id
      * @return
      */
     @DELETE
     @Produces(MediaType.APPLICATION_JSON + ";charset=UTF-8")
-    @Path("{id}")
+    @Path("/{id}")
     @ApiOperation(value = "Poista lokalisaatio ID:llä",
             notes = "Poistaa lokalisaation ID:llä.",
             response = LocalisationRDTO.class)
