@@ -70,10 +70,13 @@ app.service('LocalisationService', function($log, $q, Localisations, globalConfi
 
         var deferred = $q.defer();
 
-        // Try to save to the server
+        // Cannot post with ID -> method not allowed
+        delete entry.id;
+
+        // Try to save/insert to the server
         Localisations.save(entry,
                 function(data, status, headers, config) {
-                    $log.info("  save() - OK", data, status, headers, config);
+                    $log.info("  save() - OK (inserted)", data, status, headers, config);
 
                     // OK - this is a new entry - so update the values to be correct
                     data.category = entry.category;
@@ -85,17 +88,17 @@ app.service('LocalisationService', function($log, $q, Localisations, globalConfi
                     // And update it then
                     Localisations.update(data,
                             function(data2, status2, headers2, config2) {
-                                $log.info("  save() - OK - update() - OK", data2, status2, headers2, config2);
+                                $log.info("  save() - OK -> update() - OK", data2, status2, headers2, config2);
                                 deferred.resolve(entry);
                             },
                             function(data2, status2, headers2, config2) {
-                                $log.info("  save() - OK - update() - ERROR", data2, status2, headers2, config2);
+                                $log.info("  save() - OK -> update() - ERROR", data2, status2, headers2, config2);
                                 deferred.reject(entry);
                             });
 
                 },
                 function(data, status, headers, config) {
-                    $log.info("  save() - ERROR, try to update still :)", data, status, headers, config, entry);
+                    $log.info("  save() - insert failed, try to update still :)", data, status, headers, config, entry);
 
                     // "insert" failed - maybe existing translation - try to update
                     data = {}
@@ -106,7 +109,7 @@ app.service('LocalisationService', function($log, $q, Localisations, globalConfi
                     data.value = entry.value;
                     data.description = entry.description;
 
-                    // And update it then
+                    // Try to update it (== PUTs with id...)
                     Localisations.update(data,
                             function(data2, status2, headers2, config2) {
                                 $log.info("  save() - ERROR - update() - OK", data2, status2, headers2, config2);

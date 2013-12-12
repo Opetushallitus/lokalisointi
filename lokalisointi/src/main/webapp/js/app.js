@@ -239,6 +239,7 @@ angular.module('app').controller('AppCtrl:TransferController', ['$scope', '$log'
                         // Loop over and access all translations so that undefined will be created
                         for (var i = 0; i < data.length; i++) {
                             var l = data[i];
+
                             $log.info("  processing: " + i + " - ", l);
 
                             LocalisationService.save(l).then(
@@ -256,7 +257,7 @@ angular.module('app').controller('AppCtrl:TransferController', ['$scope', '$log'
 
                         setTimeout(function() {
                             $modalInstance.close();
-                        }, 10000);
+                        }, 30000);
                     },
                     function(data, status, headers, config) {
                         console.log("ERROR", data, status, headers, config);

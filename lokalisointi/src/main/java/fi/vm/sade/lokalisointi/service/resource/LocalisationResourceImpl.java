@@ -52,7 +52,7 @@ public class LocalisationResourceImpl implements LocalisationResource {
     @Autowired
     private LocalisationDao localisationDao;
 
-    // /localisation/authorize
+    // GET /localisation/authorize
     @Secured({ROLE_READ})
     @Override
     public String authorize() {
@@ -60,7 +60,7 @@ public class LocalisationResourceImpl implements LocalisationResource {
         return getCurrentUserName();
     }
 
-    // /localisation?category=tarjonta
+    // GET /localisation?category=tarjonta
     @Override
     public List<LocalisationRDTO> getLocalisations(LocalisationRDTO query) {
         LOG.info("getLocalisations({})", query);
@@ -83,6 +83,7 @@ public class LocalisationResourceImpl implements LocalisationResource {
         }
     }
 
+    // PUT localisation/{id}
     @Secured({ROLE_UPDATE, ROLE_CRUD})
     @Override
     public LocalisationRDTO updateLocalisation(Long id, LocalisationRDTO data) {
@@ -92,7 +93,8 @@ public class LocalisationResourceImpl implements LocalisationResource {
         }
 
         try {
-            Localisation t = localisationDao.findOne(data.getId(), data.getCategory(), data.getKey(), data.getLocale());
+            // Find localisations only by the composite primary key
+            Localisation t = localisationDao.findOne((Long) null, data.getCategory(), data.getKey(), data.getLocale());
             update(t, data);
             return convert(t);
         } catch (Throwable ex) {
@@ -101,13 +103,15 @@ public class LocalisationResourceImpl implements LocalisationResource {
         }
     }
 
+    // PUT /localisation/{id}/accessed
     @Secured({ROLE_UPDATE, ROLE_CRUD})
     @Override
     public LocalisationRDTO updateLocalisationAccessed(Long id, LocalisationRDTO data) {
         LOG.info("updateLocalisationAccessed({})", data);
 
         try {
-            Localisation l = localisationDao.findOne(data.getId(), data.getCategory(), data.getKey(), data.getLocale());
+            // Find localisations only by the composite primary key
+            Localisation l = localisationDao.findOne((Long) null, data.getCategory(), data.getKey(), data.getLocale());
             if (l != null) {
                 l.setAccessed(new Date());
                 l = localisationDao.save(l);
@@ -120,19 +124,18 @@ public class LocalisationResourceImpl implements LocalisationResource {
         }
     }
 
+    // POST /localisation
     @Override
     public LocalisationRDTO createLocalisation(LocalisationRDTO data) {
         LOG.info("createLocalisation({})", data);
 
-        // Just require logged in user so that we can create missing translations in any application, VIA angualr apps too
+        // Just require logged in user so that we can create missing translations in any application, VIA angular apps too
         if (SecurityContextHolder.getContext() == null
                 || SecurityContextHolder.getContext().getAuthentication() == null
                 || SecurityContextHolder.getContext().getAuthentication().isAuthenticated() == false) {
             LOG.warn("  cannot create Localisations with non-logged in user, localisation = {}", data);
             throw new MessageException("NOT AUTHORIZED, only logged in users can create (initial) translations.");
         }
-
-        Throwable failure = null;
 
         try {
             // Find already existing? (shoud not be found)
@@ -164,6 +167,7 @@ public class LocalisationResourceImpl implements LocalisationResource {
                 // Save it
                 localisationDao.save(t);
             } else {
+                LOG.info("createLocalisation() --- Cannot create new localisation since it already exists!");
                 throw new NotFoundException("Localisation should not have been found: " + data);
             }
 
@@ -174,6 +178,7 @@ public class LocalisationResourceImpl implements LocalisationResource {
         }
     }
 
+    // DELETE /localisation/{id}
     @Secured({ROLE_CRUD})
     @Override
     public LocalisationRDTO deleteLocalisation(Long id) {
@@ -181,6 +186,7 @@ public class LocalisationResourceImpl implements LocalisationResource {
         try {
             LocalisationRDTO result = null;
 
+            // Use db key to find the localisation
             Localisation l = localisationDao.findOne(id, null, null, null);
             if (l != null) {
                 result = convert(l);
@@ -194,6 +200,12 @@ public class LocalisationResourceImpl implements LocalisationResource {
         }
     }
 
+    /**
+     * Convert list of localisations to list of transferobjects.
+     *
+     * @param l
+     * @return
+     */
     private List<LocalisationRDTO> convert(List<Localisation> l) {
         List<LocalisationRDTO> result = new ArrayList<LocalisationRDTO>();
 
@@ -206,6 +218,12 @@ public class LocalisationResourceImpl implements LocalisationResource {
         return result;
     }
 
+    /**
+     * Convert the localisation to transfer object.
+     *
+     * @param s
+     * @return
+     */
     private LocalisationRDTO convert(Localisation s) {
         if (s == null) {
             return null;
@@ -228,6 +246,12 @@ public class LocalisationResourceImpl implements LocalisationResource {
         return t;
     }
 
+    /**
+     * Update db localisation from transfer object.
+     *
+     * @param t
+     * @param data
+     */
     private void update(Localisation t, LocalisationRDTO data) {
         if (t == null) {
             throw new NotFoundException("Cannot find localisation for: " + data);
@@ -249,6 +273,11 @@ public class LocalisationResourceImpl implements LocalisationResource {
         t.setValue(data.getValue());
     }
 
+    /**
+     * Gets current username - for "auditing" purposes.
+     *
+     * @return
+     */
     private String getCurrentUserName() {
         if (SecurityContextHolder.getContext() == null
                 || SecurityContextHolder.getContext().getAuthentication() == null
