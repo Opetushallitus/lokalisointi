@@ -157,12 +157,14 @@ public class LocalisationResourceImpl implements LocalisationResource {
                 t.setLanguage(data.getLocale());
                 t.setAccessed(new Date());
 
-                // NOTE do not accept any data in creation since it is not "trusted" used created :)
-                t.setDescription(null);
-                t.setValue("[" + t.getCategory() + "-" + t.getKey() + "-" + t.getLanguage() + "]");
-
                 t.setDescription(data.getDescription());
-                t.setValue(data.getValue());
+
+                // If no value has been given for localisation, use "[gategory-key-locale]" format as value.
+                if (data.getValue() == null) {
+                    t.setValue("[" + t.getCategory() + "-" + t.getKey() + "-" + t.getLanguage() + "]");
+                } else {
+                    t.setValue(data.getValue());
+                }
 
                 // Save it
                 localisationDao.save(t);
