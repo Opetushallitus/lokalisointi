@@ -24,7 +24,7 @@
     </bean>
 
     <context:property-placeholder
-        location="classpath:lokalisointi.properties, file:///${user.home:''}/oph-configuration/common.properties, file:///${user.home:''}/oph-configuration/lokalisointi.properties"
+        location="classpath:lokalisointi.properties, file:///${user.home:''}/oph-configuration/common.properties, file:///${user.home:''}/oph-configuration/lokalisointi.properties, file:///${user.home:''}/oph-configuration/override.properties"
         ignore-resource-not-found="true" properties-ref="defaultProps"/>
 
     <import resource="file:///${user.home:''}/oph-configuration/security-context-backend.xml"/>
