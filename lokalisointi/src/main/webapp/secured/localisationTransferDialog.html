@@ -9,23 +9,29 @@
         <div>
             Kopioi :
 
-            <button class="btn" ng-click="model.copyFrom = '../localisations.json'"">(esiladatut)</button>
-            <button class="btn" ng-click="model.copyFrom = 'https://itest-virkailija.oph.ware.fi/lokalisointi/cxf/rest/v1/localisation'"">Luokalta</button>
-            <button class="btn" ng-click="model.copyFrom = 'https://test-virkailija.oph.ware.fi/lokalisointi/cxf/rest/v1/localisation'"">Repulta</button>
-            <button class="btn" ng-click="model.copyFrom = 'https://testi.virkailija.opintopolku.fi/lokalisointi/cxf/rest/v1/localisation'"">QA:lta</button>
-            <button class="btn" ng-click="model.copyFrom = 'https://koulutus.virkailija.opintopolku.fi/lokalisointi/cxf/rest/v1/localisation'"">Koulutuksesta</button>
-            <button class="btn" ng-click="model.copyFrom = 'https://virkailija.opintopolku.fi/lokalisointi/cxf/rest/v1/localisation'"">Tuotannosta</button>
+            <select ng-model="model.copyFrom">
+                <option value="">-- Valitse mistä käännökset kopioidaan --</option>
+                <option value="../localisations.json">(esiladatu)</option>
+                <option value="https://itest-virkailija.oph.ware.fi/lokalisointi/cxf/rest/v1/localisation?category=virkailijaraamit&locale=sv">Luokalta</option>
+                <option value="https://test-virkailija.oph.ware.fi/lokalisointi/cxf/rest/v1/localisation?category=virkailijaraamit&locale=sv">Repulta</option>
+                <option value="https://testi.virkailija.opintopolku.fi/lokalisointi/cxf/rest/v1/localisation?category=virkailijaraamit&locale=sv">QA:lta</option>
+                <option value="https://koulutus.virkailija.opintopolku.fi/lokalisointi/cxf/rest/v1/localisation?category=virkailijaraamit&locale=sv">Koulutuksesta</option>
+                <option value="https://virkailija.opintopolku.fi/lokalisointi/cxf/rest/v1/localisation?category=virkailijaraamit&locale=sv">Tuotannosta</option>
+            </select>
         </div>
 
-        <input type="text" data-ng-model="model.copyFrom" placeholder="localisointi REST uri tähän" />
+        <div>
+            <input type="checkbox" data-ng-model="model.force"> Pakotettu päivitys (kirjoittaa päälle vaikka olisi uudempi olemassa)<br/>
+            <input type="text" data-ng-model="model.copyFrom" placeholder="localisointi REST uri tähän"  width="80" />
+        </div>
 
-        {{ model.result }}
+        A {{ model.result }} B
 
     </div>
 
     <div class="modal-footer">
         <button class="btn btn-primary" ng-click="transferDialogCancel()">Peruuta</button>
-        <button class="btn btn-warning" ng-click="transferDialogOk()">Suorita kopiointi</button>
+        <button class="btn btn-warning" ng-click="transferDialogOk()" ng-disabled="model.copyFrom == ''">Suorita kopiointi</button>
     </div>
 
 </div>

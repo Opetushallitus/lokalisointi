@@ -37,7 +37,7 @@ public class LocalisationDaoImpl extends AbstractJpaDAOImpl<Localisation, Long> 
 
     @Override
     public List<Localisation> findBy(Long id, String category, String key, String locale) {
-        LOG.info("findBy({}, {}, {}, {})", new Object[] {id, category, key, locale});
+        LOG.debug("findBy({}, {}, {}, {})", new Object[] {id, category, key, locale});
 
         QLocalisation qLocalisation = QLocalisation.localisation;
 
@@ -58,14 +58,14 @@ public class LocalisationDaoImpl extends AbstractJpaDAOImpl<Localisation, Long> 
 
         List<Localisation> ll = q.where(whereExpr).list(qLocalisation);
 
-        LOG.info(" --> result.size = {}", ll == null ? 0 : ll.size());
+        LOG.debug(" --> result.size = {}", ll == null ? 0 : ll.size());
 
         return ll;
     }
 
     @Override
     public Localisation findOne(Long id, String category, String key, String locale) {
-        LOG.info("findOne({}, {}, {}, {})", new Object[] {id, category, key, locale});
+        LOG.debug("findOne({}, {}, {}, {})", new Object[] {id, category, key, locale});
 
         List<Localisation> ll = findBy(id, category, key, locale);
 
@@ -81,7 +81,7 @@ public class LocalisationDaoImpl extends AbstractJpaDAOImpl<Localisation, Long> 
 
     @Override
     public Localisation save(Localisation localisation) {
-        LOG.info("save({})", localisation);
+        LOG.debug("save({})", localisation);
 
         if (localisation.getId() != null) {
             super.update(localisation);
@@ -94,7 +94,7 @@ public class LocalisationDaoImpl extends AbstractJpaDAOImpl<Localisation, Long> 
 
     @Override
     public boolean delete(Localisation localisation) {
-        LOG.info("delete({})", localisation);
+        LOG.debug("delete({})", localisation);
 
         super.remove(localisation);
 
