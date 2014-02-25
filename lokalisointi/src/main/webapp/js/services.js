@@ -65,8 +65,8 @@ app.service('LocalisationService', function($log, $q, Localisations, globalConfi
         return deferred.promise;
     };
 
-    this.save = function(entry) {
-        $log.info("save()", entry);
+    this.save = function(entry, forceUpdate) {
+        $log.info("save()", entry, forceUpdate);
 
         var deferred = $q.defer();
 
@@ -108,6 +108,11 @@ app.service('LocalisationService', function($log, $q, Localisations, globalConfi
                     data.locale = entry.locale;
                     data.value = entry.value;
                     data.description = entry.description;
+
+                    // needed if we want to detect older forced translations...
+                    data.modified = entry.modified;
+
+                    data.force = forceUpdate ? true : false;
 
                     // Try to update it (== PUTs with id...)
                     Localisations.update(data,

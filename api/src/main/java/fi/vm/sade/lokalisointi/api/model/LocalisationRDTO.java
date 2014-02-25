@@ -57,6 +57,7 @@ public class LocalisationRDTO implements Serializable {
     private String _key;
     private String _value;
     private String _description;
+    private boolean _force = false;
 
     @Override
     public String toString() {
@@ -160,5 +161,15 @@ public class LocalisationRDTO implements Serializable {
     public void setAccessed(Date _accessed) {
         this._accessed = _accessed;
     }
+
+    @ApiModelProperty(notes = "Päivityksen pakotus, jos TRUE tallennetaan vaikka kannassa olis uudenpi muokkaus.", value = "Tallennuksen pakotus")
+    public boolean getForce() {
+        return _force;
+    }
+
+    public void setForce(boolean force) {
+        this._force = force;
+    }
+
 
 }

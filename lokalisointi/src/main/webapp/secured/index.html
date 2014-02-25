@@ -59,7 +59,7 @@
                 <div data-ng-switch-when="OK" class="alert alert-success">
                     <a class="close" data-dismiss="alert" data-ng-click="deleteMessage(msg)">×</a>
                     OK
-                    {{ timedDeleteMessage(msg) }}
+                    {{ timedDeleteMessage(msg)}}
                 </div>
                 <div data-ng-switch-when="ERROR" class="alert alert-error">
                     <a class="close" data-dismiss="alert" data-ng-click="deleteMessage(msg)">×</a>
@@ -106,11 +106,11 @@
                         <th>Kuvaus</th>
                     </tr>
 
-                    <tr data-ng-repeat="l in model.filteredList | orderBy: ['category', 'key', 'locale']" data-ng-class="{uiChanged: l.uiChanged}">
+                    <tr data-ng-repeat="l in model.filteredList| orderBy: ['category', 'key', 'locale']" data-ng-class="{uiChanged: l.uiChanged}">
                         <td><input type="checkbox" data-ng-model="l.uiDelete" data-ng-change="l.uiChanged = true"></td>
-                        <td>{{ l.category }}</td>
-                        <td>{{ l.key }}</td>
-                        <td>{{ l.locale }}</td>
+                        <td>{{ l.category}}</td>
+                        <td>{{ l.key}}</td>
+                        <td>{{ l.locale}}</td>
                         <td><textarea data-ng-model="l.value" data-ng-change="l.uiChanged = true" cols="10"></textarea></td>
                         <td><textarea data-ng-model="l.description" data-ng-change="l.uiChanged = true" cols="10"></textarea></td>
                     </tr>
@@ -130,44 +130,85 @@
             </div>
         </div>
 
+
+        <script type="text/ng-template" id="localisationTransferDialog2.html">
+        <div>
+            <div class="modal-header">
+                <h3>Käännösten siirtäminen ympäristöstä toiseen</h3>
+            </div>
+
+            <div class="modal-body">
+                <div>Käännösten kopiointi annetusta ympäristöstä 'TÄHÄN' ympäristöön.</div>
+
+                <div>
+                    Kopioi :
+
+                    <select ng-model="model.copyFrom">
+                        <option value="">-- Valitse mistä käännökset kopioidaan --</option>
+                        <option value="../localisations.json">(esiladatu)</option>
+                        <option value="https://itest-virkailija.oph.ware.fi/lokalisointi/cxf/rest/v1/localisation">Luokalta</option>
+                        <option value="https://test-virkailija.oph.ware.fi/lokalisointi/cxf/rest/v1/localisation">Repulta</option>
+                        <option value="https://testi.virkailija.opintopolku.fi/lokalisointi/cxf/rest/v1/localisation">QA:lta</option>
+                        <option value="https://koulutus.virkailija.opintopolku.fi/lokalisointi/cxf/rest/v1/localisation">Koulutuksesta</option>
+                        <option value="https://virkailija.opintopolku.fi/lokalisointi/cxf/rest/v1/localisation">Tuotannosta</option>
+                    </select>
+                </div>
+
+                <div>
+                    <input type="checkbox" data-ng-model="model.force"> Pakotettu päivitys (kirjoittaa päälle vaikka olisi uudempi olemassa)<br/>
+                    <input type="text" data-ng-model="model.copyFrom" placeholder="localisointi REST uri tähän"  width="80" />
+                </div>
+
+                AD {{ model.result}} BC
+
+            </div>
+
+            <div class="modal-footer">
+                <button class="btn btn-primary" ng-click="transferDialogCancel()">Peruuta</button>
+                <button class="btn btn-warning" ng-click="transferDialogOk()" ng-disabled="model.copyFrom == ''">Suorita kopiointi</button>
+            </div>
+        </div>
+        </script>
+
+
         <script>
-                var init_counter = 0;
-                var initFunction = function(id, xhr, status) {
-                    init_counter--;
+                    var init_counter = 0;
+                    var initFunction = function(id, xhr, status) {
+                        init_counter--;
 
-                    console.log("Got ready signal from: " + id);
-                    console.log("  status = ", status);
-                    console.log("  xhr = ", xhr);
+                        console.log("Got ready signal from: " + id);
+                        console.log("  status = ", status);
+                        console.log("  xhr = ", xhr);
 
-                    if (init_counter > 0) {
-                        console.log("Got ready signal from: '" + id + "' -- still waiting for " + init_counter + " requests.");
-                    } else {
-                        console.log("OK! That was the last request, init the app!");
+                        if (init_counter > 0) {
+                            console.log("Got ready signal from: '" + id + "' -- still waiting for " + init_counter + " requests.");
+                        } else {
+                            console.log("OK! That was the last request, init the app!");
 
-                        angular.element(document).ready(function() {
-                            angular.module('myApp', ['app']);
-                            angular.bootstrap(document, ['myApp']);
-                        });
-                    }
-                };
+                            angular.element(document).ready(function() {
+                                angular.module('myApp', ['app']);
+                                angular.bootstrap(document, ['myApp']);
+                            });
+                        }
+                    };
 
 
-                //
-                // Get current users authorisation info (/cas/myroles)
-                //
-                console.log("** Loading authentication info; from: ", window.CONFIG.env.casUrl);
-                init_counter++;
-                jQuery.ajax(window.CONFIG.env.casUrl, {
-                    dataType: "json",
-                    success: function(xhr, status) {
-                        window.CONFIG.env["cas.myroles"] = xhr;
-                        initFunction("AUTHENTICATION", xhr, status);
-                    },
-                    error: function(xhr, status) {
-                        window.CONFIG.env["cas.myroles"] = [];
-                        initFunction("AUTHENTICATION FAILED", xhr, status);
-                    }
-                });
+                    //
+                    // Get current users authorisation info (/cas/myroles)
+                    //
+                    console.log("** Loading authentication info; from: ", window.CONFIG.env.casUrl);
+                    init_counter++;
+                    jQuery.ajax(window.CONFIG.env.casUrl, {
+                        dataType: "json",
+                        success: function(xhr, status) {
+                            window.CONFIG.env["cas.myroles"] = xhr;
+                            initFunction("AUTHENTICATION", xhr, status);
+                        },
+                        error: function(xhr, status) {
+                            window.CONFIG.env["cas.myroles"] = [];
+                            initFunction("AUTHENTICATION FAILED", xhr, status);
+                        }
+                    });
 
         </script>
 

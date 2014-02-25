@@ -30,8 +30,8 @@ angular.module('app').value("globalConfig", window.CONFIG);
 /**
  * Main controller to manage translations.
  */
-angular.module('app').controller('AppCtrl', ['$scope', '$q', '$log', '$modal', 'LocalisationService', 'debounce', '$filter',
-    function($scope, $q, $log, $modal, LocalisationService, debounce, $filter) {
+angular.module('app').controller('AppCtrl', ['$scope', '$q', '$log', '$modal', 'LocalisationService', 'debounce', '$filter', '$templateCache',
+    function($scope, $q, $log, $modal, LocalisationService, debounce, $filter, $templateCache) {
 
         $log.info("AppCtrl()");
 
@@ -152,6 +152,9 @@ angular.module('app').controller('AppCtrl', ['$scope', '$q', '$log', '$modal', '
 
                 if (item.uiChanged) {
                     $log.info("  -- SAVE:", item);
+                    // Remove date - takes lastest timestamp in serverside
+                    delete item.modified;
+
                     promises.push(
                             item.$update(function(data, headers) {
                                 $scope.pushResult({status: "OK", data: data, headers: headers});
@@ -190,10 +193,9 @@ angular.module('app').controller('AppCtrl', ['$scope', '$q', '$log', '$modal', '
 
             var modalInstance = $modal.open({
                 scope: $scope,
-                templateUrl: 'localisationTransferDialog.html',
+                templateUrl: 'localisationTransferDialog2.html',
                 controller: 'AppCtrl:TransferController'
             });
-
         };
 
 
@@ -213,8 +215,9 @@ angular.module('app').controller('AppCtrl:TransferController', ['$scope', '$log'
         $scope.model = {
             // Reppu by default
             // copyFrom: "https://test-virkailija.oph.ware.fi/lokalisointi/cxf/rest/v1/localisation",
-            copyFrom: "../localisations.json",
-            result: ""
+            copyFrom: "",
+            result: "",
+            force : false
         };
 
         $scope.transferDialogCancel = function() {
@@ -242,7 +245,8 @@ angular.module('app').controller('AppCtrl:TransferController', ['$scope', '$log'
 
                             $log.info("  processing: " + i + " - ", l);
 
-                            LocalisationService.save(l).then(
+                            // TODO add force checkbox to UI
+                            LocalisationService.save(l, $scope.model.force).then(
                                     function(newEntry) {
                                         updateCount++;
                                         $log.info("  updated: " + updateCount);

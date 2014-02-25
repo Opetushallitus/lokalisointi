@@ -29,7 +29,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -93,7 +92,7 @@ public class LocalisationResourceImpl implements LocalisationResource {
         }
 
         try {
-            // Find localisations only by the composite primary key
+            // NOTE! Find localisations only by the composite primary key
             Localisation t = localisationDao.findOne((Long) null, data.getCategory(), data.getKey(), data.getLocale());
             update(t, data);
             return convert(t);
@@ -175,7 +174,9 @@ public class LocalisationResourceImpl implements LocalisationResource {
 
             return convert(t);
         } catch (Throwable ex) {
-            LOG.error("failed", ex);
+            if (!(ex instanceof NotFoundException)) {
+                LOG.error("failed", ex);
+            }
             throw new WebApplicationException(ex, Response.Status.INTERNAL_SERVER_ERROR);
         }
     }
@@ -253,10 +254,29 @@ public class LocalisationResourceImpl implements LocalisationResource {
      *
      * @param t
      * @param data
+     * @param force if true no modified after check will be done
      */
     private void update(Localisation t, LocalisationRDTO data) {
         if (t == null) {
             throw new NotFoundException("Cannot find localisation for: " + data);
+        }
+
+        // Forced update?
+        if (!data.getForce()) {
+            // No forced updated if db translation is newer
+            if (t.getModified() != null && data.getModified() != null && t.getModified().after(data.getModified())) {
+                LOG.warn("******************* Cowardly refusing to 'downgrade' localisation for {}-{}-{}, modified: {} > ui modified: {}",
+                        new Object[]{
+                            t.getCategory(), t.getKey(), t.getLanguage(), t.getModified(), data.getModified()
+                        });
+                return;
+            }
+
+            LOG.warn("  --> OK localisation for {}-{}-{}, modified: {} <= ui modified: {}",
+                        new Object[]{
+                            t.getCategory(), t.getKey(), t.getLanguage(), t.getModified(), data.getModified()
+                        });
+
         }
 
         if (data.getId() != null) {
@@ -268,11 +288,18 @@ public class LocalisationResourceImpl implements LocalisationResource {
 
         t.setAccessed(new Date());
 
-        t.setModified(new Date());
+        // If data contains last modified data then use it for last modification ts
+        if (data.getModified() != null) {
+            t.setModified(data.getModified());
+        } else {
+            t.setModified(new Date());
+        }
         t.setModifiedBy(getCurrentUserName());
 
         t.setDescription(data.getDescription());
         t.setValue(data.getValue());
+
+        LOG.info("Updated!");
     }
 
     /**
