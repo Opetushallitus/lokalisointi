@@ -28,7 +28,8 @@ import java.util.Date;
  *   createdBy:...,
  *   modified:...,
  *   modifiedBy:...,
- *   accessed: 21.1.2011 10:42
+ *   accessed: 21.1.2011 10:42,
+ *   accesscount: 12345,
  *   category: "Tarjonta"
  *   key: "review.title"
  *   locale: "kieli_fi"
@@ -51,6 +52,7 @@ public class LocalisationRDTO implements Serializable {
     private Date _modified = new Date();
     private String _modifiedBy;
     private Date _accessed = new Date();
+    private long accesscount = 0;
 
     private String _category = DEFAULT_CATEGORY;
     private String _locale;
@@ -171,5 +173,12 @@ public class LocalisationRDTO implements Serializable {
         this._force = force;
     }
 
+    public long getAccesscount() {
+        return accesscount;
+    }
+
+    public void setAccesscount(long accesscount) {
+        this.accesscount = accesscount;
+    }
 
 }

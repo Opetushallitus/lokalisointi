@@ -18,6 +18,7 @@ import com.wordnik.swagger.annotations.Api;
 import com.wordnik.swagger.annotations.ApiOperation;
 import fi.vm.sade.lokalisointi.api.model.LocalisationRDTO;
 import java.util.List;
+import java.util.Map;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -81,20 +82,19 @@ public interface LocalisationResource {
     public LocalisationRDTO updateLocalisation(@PathParam("id") Long id, LocalisationRDTO data);
 
     /**
-     * Update last accessed timestamp.
+     * Update last accessed timestamps.
      *
-     * @param id NOT USED
-     * @param data if data.id < 0 find by (key, locale, cat) - if data.id >= 0 find by id.
-     * @return
+     * @param ids List of database id's
+     * @return { "updated" : "count" }
      */
     @PUT
-    @Path("/{id}/access")
+    @Path("/access")
     @Produces(MediaType.APPLICATION_JSON + ";charset=UTF-8")
     @Consumes(MediaType.APPLICATION_JSON + ";charset=UTF-8")
     @ApiOperation(value = "Päivitä 'accessed' aikaleimaa.",
             notes = "Päivittää annetun lokalisaation 'accessed' päivämääärää tähän hetkeen.",
-            response = LocalisationRDTO.class)
-    public LocalisationRDTO updateLocalisationAccessed(@PathParam("id") Long id, LocalisationRDTO data);
+            response = Map.class)
+    public Map<String, Long> updateLocalisationAccessed(List<Long> ids);
 
     /**
      * Creates new localisation.
