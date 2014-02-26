@@ -22,7 +22,9 @@ import fi.vm.sade.lokalisointi.service.dao.LocalisationDao;
 import fi.vm.sade.lokalisointi.service.model.Localisation;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Response;
 import org.slf4j.Logger;
@@ -102,21 +104,15 @@ public class LocalisationResourceImpl implements LocalisationResource {
         }
     }
 
-    // PUT /localisation/{id}/accessed
-    @Secured({ROLE_UPDATE, ROLE_CRUD})
+    // PUT /localisation/access
     @Override
-    public LocalisationRDTO updateLocalisationAccessed(Long id, LocalisationRDTO data) {
-        LOG.info("updateLocalisationAccessed({})", data);
-
+    public Map<String, Long> updateLocalisationAccessed(List<Long> ids) {
+        // Access check updates can be made by anyone
         try {
-            // Find localisations only by the composite primary key
-            Localisation l = localisationDao.findOne((Long) null, data.getCategory(), data.getKey(), data.getLocale());
-            if (l != null) {
-                l.setAccessed(new Date());
-                l = localisationDao.save(l);
-            }
-
-            return convert(l);
+            Map<String, Long> result = new HashMap<String, Long>();
+            long count = localisationDao.updateAccessed(ids);
+            result.put("updated", count);
+            return result;
         } catch (Throwable ex) {
             LOG.error("failed", ex);
             throw new WebApplicationException(ex, Response.Status.INTERNAL_SERVER_ERROR);
@@ -154,7 +150,6 @@ public class LocalisationResourceImpl implements LocalisationResource {
                 t.setCategory(data.getCategory());
                 t.setKey(data.getKey());
                 t.setLanguage(data.getLocale());
-                t.setAccessed(new Date());
 
                 t.setDescription(data.getDescription());
 
@@ -245,6 +240,7 @@ public class LocalisationResourceImpl implements LocalisationResource {
         t.setModified(s.getModified());
         t.setModifiedBy(s.getModifiedBy());
         t.setValue(s.getValue());
+        t.setAccesscount(s.getAccesscount());
 
         return t;
     }
@@ -286,7 +282,10 @@ public class LocalisationResourceImpl implements LocalisationResource {
             t.setLanguage(data.getLocale());
         }
 
-        t.setAccessed(new Date());
+        // Don't update accessed on update
+        if (t.getAccessed() == null) {
+            t.setAccessed(new Date());
+        }
 
         // If data contains last modified data then use it for last modification ts
         if (data.getModified() != null) {

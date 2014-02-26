@@ -22,7 +22,8 @@ angular.module('app',
             'ngSanitize',
             'ngAnimate',
             'ui.bootstrap',
-            'debounce'
+            'debounce',
+            'ngGrid'
         ]);
 
 angular.module('app').value("globalConfig", window.CONFIG);
@@ -37,14 +38,109 @@ angular.module('app').controller('AppCtrl', ['$scope', '$q', '$log', '$modal', '
 
         $scope.model = {
             localisations: LocalisationService.getTranslations(),
+            changedItems: {},
             filterCategory: "tarjonta",
             filterLocale: "fi",
             filterKey: "",
             filterValue: "",
             info: [],
-            filteredList: []
+            filteredList: [],
+            gridOptions: {
+                data : 'model.filteredList',
+                // rowHeight: 50,
+                selectedItems: [],
+                showSelectionCheckbox: true,
+                selectWithCheckboxOnly: true,
+                enableCellEditOnFocus: true,
+                beforeSelectionChange: function(row, event) {
+                    return !(row instanceof Array);
+                },
+                showColumnMenu: true,
+                // showFilter: true,
+                showFooter: true,
+                sortInfo: {
+                    fields: ["key"],
+                    directions: ['asc']
+                },
+                columnDefs: [
+                    {
+                        field: "category",
+                        enableCellEdit: false,
+                        width: 150
+                    },
+                    {
+                        field: "key",
+                        enableCellEdit: false,
+                        width: 300
+                    },
+                    {
+                        field: "locale",
+                        enableCellEdit: false,
+                        width: 50
+                    },
+                    {
+                        field: "value",
+                        enableCellEdit: true,
+                        editableCellTemplate: '<input ng-class="\'colt\' + col.index" ng-input="COL_FIELD" ng-model="COL_FIELD" ng-change="uiChanged(row)" ng-dblclick="openLongTextDialog(row)">',
+                        // cellTemplate: '<input ng-class="\'colt\' + col.index" ng-input="COL_FIELD" ng-model="COL_FIELD" ng-change="uiChanged(row)" ng-dblclick="openLongTextDialog(row)">',
+                        minWidth : 1000,
+                        resizable: true
+                    },
+                    {
+                        field: "accessed",
+                        enableCellEdit: false,
+                        cellFilter: "date:'dd.MM.yyyy HH:mm:ss'",
+                        width: 150
+                    },
+                    {
+                        field: "accesscount",
+                        enableCellEdit: false,
+                        width: 50
+                    },
+                ]
+            }
         };
 
+        $scope.numChangedItems = function() {
+           return Object.keys($scope.getChangedItems()).length;
+        };
+
+        $scope.getChangedItems = function() {
+            return $scope.model.changedItems;
+        };
+
+        $scope.clearChangedItems = function() {
+            $scope.model.changedItems = {};
+        };
+
+        $scope.numSelected = function() {
+            return $scope.getSelectedItems().length;
+        };
+
+        $scope.getSelectedItems = function() {
+            return $scope.model.gridOptions.selectedItems;
+        };
+
+        $scope.clearSelectedItems = function() {
+            $scope.model.gridOptions.selectedItems.splice(0);
+        };
+
+        /**
+         * Informational / error messages added here.
+         *
+         * @param {type} info
+         * @returns {undefined}
+         */
+        $scope.pushMessage = function(info) {
+            $scope.model.info.push(info);
+        };
+
+        /**
+         * Informational messages handling
+         *
+         * @param {type} msg
+         * @returns {undefined}
+         */
         $scope.deleteMessage = function(msg) {
             $log.info("deleteMessage()", msg);
 
@@ -56,12 +152,22 @@ angular.module('app').controller('AppCtrl', ['$scope', '$q', '$log', '$modal', '
             }
         };
 
+        /**
+         * Automatically delete messages
+         *
+         * @param {type} msg
+         * @returns {undefined}
+         */
         $scope.timedDeleteMessage = function(msg) {
             setTimeout(function() {
                 $scope.deleteMessage(msg);
                 $scope.$digest();
-            }, 3000);
+            }, 5000);
         };
+
+        /*
+         * FILTERING
+         */
 
         $scope.filterCategoryWithCategory = function(item) {
             var result = ($scope.model.filterCategory === undefined) || item.category === undefined || (item.category.indexOf($scope.model.filterCategory) != -1);
@@ -87,6 +193,11 @@ angular.module('app').controller('AppCtrl', ['$scope', '$q', '$log', '$modal', '
             return result;
         };
 
+        /**
+         * Returns function thats checks if the given item matches the criteria defined.
+         *
+         * @returns {Function}
+         */
         $scope.doFilter = new function() {
             return function(item, index, list) {
                 // $log.debug("  filter: ", item, index);
@@ -109,79 +220,102 @@ angular.module('app').controller('AppCtrl', ['$scope', '$q', '$log', '$modal', '
             }
         };
 
-//                    <tr data-ng-repeat="l in model.localisations| filter: doFilter | orderBy: ['category', 'key', 'locale']" data-ng-class="{uiChanged: l.uiChanged}">
-
+        /**
+         * Filters translations in list, used to search and narrow scope down
+         *
+         * @returns {undefined}
+         */
         $scope.doFiltering = function() {
             var scope = this;
             debounce("filterLocalisations", function() {
                 // $scope.model.filteredList = $filter()($scope.model.localisations, $scope.doFilter());
                 scope.model.filteredList = _.filter(scope.model.localisations, scope.doFilter);
-            }, 300);
+            }, 500);
         };
 
 
+        /**
+         * Reloads data from server.
+         *
+         * @returns {undefined}
+         */
         $scope.reloadData = function() {
             $log.info("reloadData()");
             LocalisationService.reload().then(function(data) {
                 $scope.model.localisations = data;
                 $scope.doFiltering();
+                $scope.pushMessage({status: "OK", message: "Käännökset uudelleen ladattu, " + data.length + " käännöstä."});
+
+                // Clear modifications and selections
+                $scope.clearChangedItems();
+                $scope.clearSelectedItems();
             }, function(aa, bb, cc, dd) {
                 $scope.model.info.push({status: "ERROR", aa: aa, bb: bb, cc: cc, dd: dd});
             });
         };
 
-        $scope.saveAllModified = function() {
-            $log.info("saveAllModified()", $scope.localisationsForm);
+        /**
+         * Hook from UI, triggered on row cell edit. See gridOptions - cell template for "value".
+         *
+         * @param {type} ngGridRow
+         * @returns {undefined}
+         */
+        $scope.uiChanged = function(ngGridRow) {
+            $log.info("uiChanged()", ngGridRow);
+            $scope.getChangedItems()[ngGridRow.entity.id] = ngGridRow.entity;
+        };
+
+        /**
+         * Saves all modifications and performs deletions of selected items.
+         *
+         * @returns {undefined}
+         */
+        $scope.saveAllModifiedNew = function() {
+            $log.info("saveAllModifiedNew()", $scope.localisationsForm);
 
             var promises = [];
 
-            for (var i = 0; i < $scope.model.localisations.length; i++) {
-                var item = $scope.model.localisations[i];
+            $scope.pushMessage({status: "INFO", message: "Tallennetaan " + $scope.numChangedItems() + " muutosta..."});
 
-                if (item.uiDelete) {
-                    $log.info("  -- DELETE:", item);
-                    promises.push(
-                            item.$delete({id: item.id}, function() {
-                                $scope.pushResult({status: "OK"});
-                            }, function(aa, bb, cc, dd, ee) {
-                                $scope.pushResult({status: "ERROR", aa: aa, bb: bb, cc: cc, dd: dd, ee: ee});
-                            }));
-                    item.uiDelete = false;
-                    item.uiChanged = false;
-                }
+            angular.forEach($scope.getChangedItems(), function(item) {
+                $log.info("Save: ", item);
 
-                if (item.uiChanged) {
-                    $log.info("  -- SAVE:", item);
-                    // Remove date - takes lastest timestamp in serverside
-                    delete item.modified;
+                // Forces to use server side ts
+                delete item.modified;
 
-                    promises.push(
-                            item.$update(function(data, headers) {
-                                $scope.pushResult({status: "OK", data: data, headers: headers});
-                            }, function(data, headers, xxx) {
-                                $scope.pushResult({status: "ERROR", data: data, headers: headers, xxx: xxx});
-                            }));
-                }
-            }
+                promises.push(
+                    item.$update(function(data, headers) {
+                        $log.info("Saved: ", data);
+                    }, function(data, headers, xxx) {
+                        $scope.pushMessage({status: "ERROR", data: data, headers: headers, xxx: xxx});
+                }));
+            });
 
-            $scope.localisationsForm.$setPristine();
+            $scope.pushMessage({status: "INFO", message: "Poistetaan " + $scope.model.gridOptions.selectedItems.length + " käännöstä..."});
 
-            // Trigger reload, ONLY AFTER WAITING UPDATES TO FINNISH - please, $q.all().then ....
-            // $scope.reloadData();
+            angular.forEach($scope.getSelectedItems(), function(item) {
+                $log.info("Delete: ", item);
+
+                promises.push(
+                        item.$delete({id: item.id}, function() {
+                            $log.info("Käännös poistettu...", item);
+                        }, function(aa, bb, cc, dd, ee) {
+                            $scope.pushMessage({status: "ERROR", message: "Poisto epäonnistui", aa: aa, bb: bb, cc: cc, dd: dd, ee: ee});
+                        }));
+            });
 
             $q.all(promises).then(function() {
-                $log.info("  all operations completed... reload data.");
+                $log.info("  all items saved completed... reload data.");
+                $scope.pushMessage({status: "OK", message: "Kaikki muutokset ja poistot tehty."});
                 $scope.reloadData();
             });
 
-        };
+            // Mark form unmodified
+            $scope.localisationsForm.$setPristine();
 
-        $scope.createNew = function() {
-            $log.info("createNew()");
-        };
-
-        $scope.pushResult = function(info) {
-            $scope.model.info.push(info);
+            // Remove modification / selection information
+            $scope.clearChangedItems();
+            $scope.clearSelectedItems();
         };
 
         /**
@@ -198,11 +332,33 @@ angular.module('app').controller('AppCtrl', ['$scope', '$q', '$log', '$modal', '
             });
         };
 
+        /**
+         * Open long text edit component.
+         *
+         * @returns {undefined}
+         */
+        $scope.openLongTextDialog = function(row) {
 
-        // Trigger reload
+            $scope.model.longText = row.entity.value;
+
+            var modalInstance = $modal.open({
+                scope: $scope,
+                templateUrl: 'localisationLongTextDialog.html'
+            });
+
+            modalInstance.result.then(function (result) {
+                // OK - make the changes
+                row.entity.value = $scope.model.longText;
+                $scope.uiChanged(row);
+            }, function (result) {
+                // Cancelled, no change to be had
+            });
+
+        };
+
+        // Trigger (re)load of localisations
         $scope.reloadData();
     }]);
-
 
 
 
