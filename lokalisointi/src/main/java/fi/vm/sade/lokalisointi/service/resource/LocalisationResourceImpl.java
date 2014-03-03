@@ -110,7 +110,12 @@ public class LocalisationResourceImpl implements LocalisationResource {
         // Access check updates can be made by anyone
         try {
             Map<String, Long> result = new HashMap<String, Long>();
-            long count = localisationDao.updateAccessed(ids);
+
+            long count = 0;
+            if (isLoggedInUser()) {
+                count = localisationDao.updateAccessed(ids);
+            }
+
             result.put("updated", count);
             return result;
         } catch (Throwable ex) {
@@ -125,9 +130,7 @@ public class LocalisationResourceImpl implements LocalisationResource {
         LOG.info("createLocalisation({})", data);
 
         // Just require logged in user so that we can create missing translations in any application, VIA angular apps too
-        if (SecurityContextHolder.getContext() == null
-                || SecurityContextHolder.getContext().getAuthentication() == null
-                || SecurityContextHolder.getContext().getAuthentication().isAuthenticated() == false) {
+        if (!isLoggedInUser()) {
             LOG.warn("  cannot create Localisations with non-logged in user, localisation = {}", data);
             throw new MessageException("NOT AUTHORIZED, only logged in users can create (initial) translations.");
         }
@@ -307,12 +310,28 @@ public class LocalisationResourceImpl implements LocalisationResource {
      * @return
      */
     private String getCurrentUserName() {
-        if (SecurityContextHolder.getContext() == null
-                || SecurityContextHolder.getContext().getAuthentication() == null
-                || SecurityContextHolder.getContext().getAuthentication().getName() == null) {
+        if (isLoggedInUser()) {
+            return SecurityContextHolder.getContext().getAuthentication().getName();
+        } else {
             return "NA";
         }
-
-        return SecurityContextHolder.getContext().getAuthentication().getName();
     }
+
+
+    private boolean isLoggedInUser() {
+        boolean result = true;
+
+        result = result && SecurityContextHolder.getContext() != null;
+        result = result && SecurityContextHolder.getContext().getAuthentication() != null;
+        result = result && SecurityContextHolder.getContext().getAuthentication().isAuthenticated();
+        result = result && SecurityContextHolder.getContext().getAuthentication().getPrincipal() != null;
+        result = result && SecurityContextHolder.getContext().getAuthentication().getAuthorities() != null;
+        result = result && SecurityContextHolder.getContext().getAuthentication().getAuthorities().isEmpty() == false;
+
+        // LOG.info("AUTHZ = {}", result ? SecurityContextHolder.getContext().getAuthentication().getAuthorities() : null);
+
+        LOG.info("isLoggedInUser(): {} - {}", result, result ? SecurityContextHolder.getContext().getAuthentication().getName() : "NA");
+        return result;
+    }
+
 }
