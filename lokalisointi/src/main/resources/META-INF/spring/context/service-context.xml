@@ -14,7 +14,10 @@
     <context:annotation-config/>
     <context:component-scan base-package="fi.vm.sade.lokalisointi" />
 
+    <!--
+       ### Localisation automatic copying / transferral support bean
+    -->
     <task:annotation-driven/>
-    <bean id="localisationCopyBean" class="fi.vm.sade.lokalisointi.service.CopyLocalisatationsFrom" />
+    <bean id="localisationCopyBean" class="fi.vm.sade.lokalisointi.service.CopyLocalisationsFrom" />
 
 </beans>
