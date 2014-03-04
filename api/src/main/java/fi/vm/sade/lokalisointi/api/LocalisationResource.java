@@ -123,4 +123,5 @@ public interface LocalisationResource {
             notes = "Poistaa lokalisaation ID:llä.",
             response = LocalisationRDTO.class)
     public LocalisationRDTO deleteLocalisation(@PathParam("id") Long id);
+
 }
