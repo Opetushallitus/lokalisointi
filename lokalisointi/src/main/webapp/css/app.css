@@ -41,3 +41,12 @@ tr.uiChanged { background-color: #ccf0ed}
 
 table tr  td {vertical-align: top;}
 
+input.small {
+    width: 50px;
+}
+
+.gridStyle {
+    border: 1px solid rgb(212,212,212);
+    width: "95%";
+    height: 500px;
+}

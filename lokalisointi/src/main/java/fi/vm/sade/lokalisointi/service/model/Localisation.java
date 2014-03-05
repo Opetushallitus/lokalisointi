@@ -79,6 +79,13 @@ public class Localisation extends BaseEntity {
     @Column(nullable = false)
     private Date accessed = new Date();
 
+    /**
+     * This column contains approximate access count. Note: just relative numer - the bigger the more used translation.
+     * Requires usage of "LocalisationResource.updateLocalisationAccessed" call (PUT /localisation/access)
+     */
+    @Column(name = "accesscount", nullable = false)
+    private int _accesscount = 0;
+
     public String getCategory() {
         return category;
     }
@@ -157,6 +164,14 @@ public class Localisation extends BaseEntity {
 
     public void setAccessed(Date accessed) {
         this.accessed = accessed;
+    }
+
+    public int getAccesscount() {
+        return _accesscount;
+    }
+
+    public void setAccesscount(int count) {
+        this._accesscount = count;
     }
 
 }

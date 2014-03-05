@@ -61,4 +61,12 @@ public interface LocalisationDao extends JpaDAO<Localisation, Long> {
      * @return
      */
     boolean delete(Localisation localisation);
+
+    /**
+     * Update accessed timestamps.
+     *
+     * @param oids
+     * @return { "updated" : "UPDATE_COUNT" }
+     */
+    public long updateAccessed(List<Long> oids);
 }

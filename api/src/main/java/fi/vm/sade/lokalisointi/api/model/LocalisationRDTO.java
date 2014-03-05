@@ -28,7 +28,8 @@ import java.util.Date;
  *   createdBy:...,
  *   modified:...,
  *   modifiedBy:...,
- *   accessed: 21.1.2011 10:42
+ *   accessed: 21.1.2011 10:42,
+ *   accesscount: 12345,
  *   category: "Tarjonta"
  *   key: "review.title"
  *   locale: "kieli_fi"
@@ -51,12 +52,14 @@ public class LocalisationRDTO implements Serializable {
     private Date _modified = new Date();
     private String _modifiedBy;
     private Date _accessed = new Date();
+    private long accesscount = 0;
 
     private String _category = DEFAULT_CATEGORY;
     private String _locale;
     private String _key;
     private String _value;
     private String _description;
+    private boolean _force = false;
 
     @Override
     public String toString() {
@@ -159,6 +162,23 @@ public class LocalisationRDTO implements Serializable {
 
     public void setAccessed(Date _accessed) {
         this._accessed = _accessed;
+    }
+
+    @ApiModelProperty(notes = "Päivityksen pakotus, jos TRUE tallennetaan vaikka kannassa olis uudenpi muokkaus.", value = "Tallennuksen pakotus")
+    public boolean getForce() {
+        return _force;
+    }
+
+    public void setForce(boolean force) {
+        this._force = force;
+    }
+
+    public long getAccesscount() {
+        return accesscount;
+    }
+
+    public void setAccesscount(long accesscount) {
+        this.accesscount = accesscount;
     }
 
 }

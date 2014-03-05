@@ -22,14 +22,15 @@ import fi.vm.sade.lokalisointi.service.dao.LocalisationDao;
 import fi.vm.sade.lokalisointi.service.model.Localisation;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Response;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -93,7 +94,7 @@ public class LocalisationResourceImpl implements LocalisationResource {
         }
 
         try {
-            // Find localisations only by the composite primary key
+            // NOTE! Find localisations only by the composite primary key
             Localisation t = localisationDao.findOne((Long) null, data.getCategory(), data.getKey(), data.getLocale());
             update(t, data);
             return convert(t);
@@ -103,21 +104,20 @@ public class LocalisationResourceImpl implements LocalisationResource {
         }
     }
 
-    // PUT /localisation/{id}/accessed
-    @Secured({ROLE_UPDATE, ROLE_CRUD})
+    // PUT /localisation/access
     @Override
-    public LocalisationRDTO updateLocalisationAccessed(Long id, LocalisationRDTO data) {
-        LOG.info("updateLocalisationAccessed({})", data);
-
+    public Map<String, Long> updateLocalisationAccessed(List<Long> ids) {
+        // Access check updates can be made by anyone
         try {
-            // Find localisations only by the composite primary key
-            Localisation l = localisationDao.findOne((Long) null, data.getCategory(), data.getKey(), data.getLocale());
-            if (l != null) {
-                l.setAccessed(new Date());
-                l = localisationDao.save(l);
+            Map<String, Long> result = new HashMap<String, Long>();
+
+            long count = 0;
+            if (isLoggedInUser()) {
+                count = localisationDao.updateAccessed(ids);
             }
 
-            return convert(l);
+            result.put("updated", count);
+            return result;
         } catch (Throwable ex) {
             LOG.error("failed", ex);
             throw new WebApplicationException(ex, Response.Status.INTERNAL_SERVER_ERROR);
@@ -130,9 +130,7 @@ public class LocalisationResourceImpl implements LocalisationResource {
         LOG.info("createLocalisation({})", data);
 
         // Just require logged in user so that we can create missing translations in any application, VIA angular apps too
-        if (SecurityContextHolder.getContext() == null
-                || SecurityContextHolder.getContext().getAuthentication() == null
-                || SecurityContextHolder.getContext().getAuthentication().isAuthenticated() == false) {
+        if (!isLoggedInUser()) {
             LOG.warn("  cannot create Localisations with non-logged in user, localisation = {}", data);
             throw new MessageException("NOT AUTHORIZED, only logged in users can create (initial) translations.");
         }
@@ -155,14 +153,15 @@ public class LocalisationResourceImpl implements LocalisationResource {
                 t.setCategory(data.getCategory());
                 t.setKey(data.getKey());
                 t.setLanguage(data.getLocale());
-                t.setAccessed(new Date());
-
-                // NOTE do not accept any data in creation since it is not "trusted" used created :)
-                t.setDescription(null);
-                t.setValue("[" + t.getCategory() + "-" + t.getKey() + "-" + t.getLanguage() + "]");
 
                 t.setDescription(data.getDescription());
-                t.setValue(data.getValue());
+
+                // If no value has been given for localisation, use "[gategory-key-locale]" format as value.
+                if (data.getValue() == null) {
+                    t.setValue("[" + t.getCategory() + "-" + t.getKey() + "-" + t.getLanguage() + "]");
+                } else {
+                    t.setValue(data.getValue());
+                }
 
                 // Save it
                 localisationDao.save(t);
@@ -173,7 +172,9 @@ public class LocalisationResourceImpl implements LocalisationResource {
 
             return convert(t);
         } catch (Throwable ex) {
-            LOG.error("failed", ex);
+            if (!(ex instanceof NotFoundException)) {
+                LOG.error("failed", ex);
+            }
             throw new WebApplicationException(ex, Response.Status.INTERNAL_SERVER_ERROR);
         }
     }
@@ -242,6 +243,7 @@ public class LocalisationResourceImpl implements LocalisationResource {
         t.setModified(s.getModified());
         t.setModifiedBy(s.getModifiedBy());
         t.setValue(s.getValue());
+        t.setAccesscount(s.getAccesscount());
 
         return t;
     }
@@ -251,10 +253,29 @@ public class LocalisationResourceImpl implements LocalisationResource {
      *
      * @param t
      * @param data
+     * @param force if true no modified after check will be done
      */
     private void update(Localisation t, LocalisationRDTO data) {
         if (t == null) {
             throw new NotFoundException("Cannot find localisation for: " + data);
+        }
+
+        // Forced update?
+        if (!data.getForce()) {
+            // No forced updated if db translation is newer
+            if (t.getModified() != null && data.getModified() != null && t.getModified().after(data.getModified())) {
+                LOG.warn("******************* Cowardly refusing to 'downgrade' localisation for {}-{}-{}, modified: {} > ui modified: {}",
+                        new Object[]{
+                            t.getCategory(), t.getKey(), t.getLanguage(), t.getModified(), data.getModified()
+                        });
+                return;
+            }
+
+            LOG.warn("  --> OK localisation for {}-{}-{}, modified: {} <= ui modified: {}",
+                        new Object[]{
+                            t.getCategory(), t.getKey(), t.getLanguage(), t.getModified(), data.getModified()
+                        });
+
         }
 
         if (data.getId() != null) {
@@ -264,13 +285,23 @@ public class LocalisationResourceImpl implements LocalisationResource {
             t.setLanguage(data.getLocale());
         }
 
-        t.setAccessed(new Date());
+        // Don't update accessed on update
+        if (t.getAccessed() == null) {
+            t.setAccessed(new Date());
+        }
 
-        t.setModified(new Date());
+        // If data contains last modified data then use it for last modification ts
+        if (data.getModified() != null) {
+            t.setModified(data.getModified());
+        } else {
+            t.setModified(new Date());
+        }
         t.setModifiedBy(getCurrentUserName());
 
         t.setDescription(data.getDescription());
         t.setValue(data.getValue());
+
+        LOG.info("Updated!");
     }
 
     /**
@@ -279,12 +310,29 @@ public class LocalisationResourceImpl implements LocalisationResource {
      * @return
      */
     private String getCurrentUserName() {
-        if (SecurityContextHolder.getContext() == null
-                || SecurityContextHolder.getContext().getAuthentication() == null
-                || SecurityContextHolder.getContext().getAuthentication().getName() == null) {
+        if (isLoggedInUser()) {
+            return SecurityContextHolder.getContext().getAuthentication().getName();
+        } else {
             return "NA";
         }
-
-        return SecurityContextHolder.getContext().getAuthentication().getName();
     }
+
+
+    private boolean isLoggedInUser() {
+        boolean result = true;
+
+        result = result && SecurityContextHolder.getContext() != null;
+        result = result && SecurityContextHolder.getContext().getAuthentication() != null;
+        result = result && SecurityContextHolder.getContext().getAuthentication().isAuthenticated();
+        result = result && SecurityContextHolder.getContext().getAuthentication().getPrincipal() != null;
+        result = result && SecurityContextHolder.getContext().getAuthentication().getAuthorities() != null;
+        result = result && SecurityContextHolder.getContext().getAuthentication().getAuthorities().isEmpty() == false;
+
+        // LOG.info("AUTHZ = {}", result ? SecurityContextHolder.getContext().getAuthentication().getAuthorities() : null);
+
+        LOG.info("isLoggedInUser(): {} - {}", result, result ? SecurityContextHolder.getContext().getAuthentication().getName() : "NA");
+        return result;
+    }
+
+
 }

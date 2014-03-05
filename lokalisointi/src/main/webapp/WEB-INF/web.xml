@@ -54,7 +54,7 @@
 
     <filter>
         <filter-name>AllowAllCorsFilter</filter-name>
-        <filter-class>fi.vm.sade.lokalisointi.service.resource.AllowAllCorsRequestsFilter</filter-class>
+        <filter-class>fi.vm.sade.generic.servlet.AllowAllCorsRequestsInDevModeServletFilter</filter-class>
     </filter>
 
     <filter-mapping>

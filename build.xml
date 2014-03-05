@@ -55,7 +55,8 @@
 				mkdir ${tomcat.home}/webapps/lokalisointi;
 				
 				unzip -qo -d${tomcat.home}/webapps/lokalisointi ${tomcat.home}/webapps/lokalisointi*.war;
-				
+
+				rm -f ${tomcat.home}/webapps/lokalisointi*.war;				
 				"
                 host="${tomcat-host}" username="tomcat" keyfile="${ssh.keyfile}"
                 passphrase="${ssh.keypass}" trust="true" failonerror="false" />
