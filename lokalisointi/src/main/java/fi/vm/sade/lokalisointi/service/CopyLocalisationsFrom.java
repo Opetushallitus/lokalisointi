@@ -92,7 +92,7 @@ public class CopyLocalisationsFrom {
         LOG.debug("copyLocalisationsFrom() force={}, cron='{}', uri='{}'", _forced, _cron, _copyLocalisationsFromUri);
 
         if (_copyLocalisationsFromUri == null || _copyLocalisationsFromUri.isEmpty()) {
-            LOG.info("Copying of localisations is not enabled, set environment variable 'lokalisointi.copy.from' to enable it.");
+            LOG.info("Copying of localisations is not enabled, set property variable 'lokalisointi.copy.from' to enable it.");
             return;
         }
 
