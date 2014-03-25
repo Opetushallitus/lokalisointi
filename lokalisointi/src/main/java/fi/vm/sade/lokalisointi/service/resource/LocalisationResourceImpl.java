@@ -25,6 +25,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Response;
 import org.slf4j.Logger;
@@ -57,14 +58,22 @@ public class LocalisationResourceImpl implements LocalisationResource {
     @Secured({ROLE_READ})
     @Override
     public String authorize() {
-        LOG.info("authorize()");
+        LOG.debug("authorize()");
         return getCurrentUserName();
     }
 
-    // GET /localisation?category=tarjonta
+    // GET /localisation?category=tarjonta&value=cached
     @Override
-    public List<LocalisationRDTO> getLocalisations(LocalisationRDTO query) {
-        LOG.info("getLocalisations({})", query);
+    public List<LocalisationRDTO> getLocalisations(LocalisationRDTO query, HttpServletResponse httpServletResponse) {
+        LOG.debug("getLocalisations({})", query);
+
+        //
+        // Add "?value=cached" to request to add cache headers cache
+        //
+        if (httpServletResponse != null && query != null && query.getValue() != null && query.getValue().equalsIgnoreCase("cached")) {
+            LOG.debug("  adding 'Cache-Control' header for 600 s / ten minutes");
+            httpServletResponse.addHeader("Cache-Control", "public, max-age=600");
+        }
 
         try {
             List<Localisation> l;
@@ -76,7 +85,7 @@ public class LocalisationResourceImpl implements LocalisationResource {
             }
 
             List<LocalisationRDTO> result = convert(l);
-            LOG.info("  --> result.size = {}", result.size());
+            LOG.debug("  --> result.size = {}", result.size());
             return result;
         } catch (Throwable ex) {
             LOG.error("failed", ex);
@@ -88,7 +97,7 @@ public class LocalisationResourceImpl implements LocalisationResource {
     @Secured({ROLE_UPDATE, ROLE_CRUD})
     @Override
     public LocalisationRDTO updateLocalisation(Long id, LocalisationRDTO data) {
-        LOG.info("updateLocalisation({})", data);
+        LOG.debug("updateLocalisation({})", data);
         if (data == null) {
             throw new NotFoundException("Invalid null input for update!");
         }
@@ -127,7 +136,7 @@ public class LocalisationResourceImpl implements LocalisationResource {
     // POST /localisation
     @Override
     public LocalisationRDTO createLocalisation(LocalisationRDTO data) {
-        LOG.info("createLocalisation({})", data);
+        LOG.debug("createLocalisation({})", data);
 
         // Just require logged in user so that we can create missing translations in any application, VIA angular apps too
         if (!isLoggedInUser()) {
@@ -157,7 +166,7 @@ public class LocalisationResourceImpl implements LocalisationResource {
                 t.setDescription(data.getDescription());
 
                 // If no value has been given for localisation, use "[gategory-key-locale]" format as value.
-                if (data.getValue() == null) {
+                if (data.getValue() == null || data.getValue().trim().isEmpty()) {
                     t.setValue("[" + t.getCategory() + "-" + t.getKey() + "-" + t.getLanguage() + "]");
                 } else {
                     t.setValue(data.getValue());
@@ -183,7 +192,7 @@ public class LocalisationResourceImpl implements LocalisationResource {
     @Secured({ROLE_CRUD})
     @Override
     public LocalisationRDTO deleteLocalisation(Long id) {
-        LOG.info("deleteLocalisation({})", id);
+        LOG.debug("deleteLocalisation({})", id);
         try {
             LocalisationRDTO result = null;
 
@@ -264,17 +273,17 @@ public class LocalisationResourceImpl implements LocalisationResource {
         if (!data.getForce()) {
             // No forced updated if db translation is newer
             if (t.getModified() != null && data.getModified() != null && t.getModified().after(data.getModified())) {
-                LOG.warn("******************* Cowardly refusing to 'downgrade' localisation for {}-{}-{}, modified: {} > ui modified: {}",
+                LOG.debug("*** Cowardly refusing to 'downgrade' localisation for {}-{}-{}, modified: {} > ui modified: {}",
                         new Object[]{
                             t.getCategory(), t.getKey(), t.getLanguage(), t.getModified(), data.getModified()
                         });
                 return;
             }
 
-            LOG.warn("  --> OK localisation for {}-{}-{}, modified: {} <= ui modified: {}",
-                        new Object[]{
-                            t.getCategory(), t.getKey(), t.getLanguage(), t.getModified(), data.getModified()
-                        });
+            LOG.debug("  --> OK localisation for {}-{}-{}, modified: {} <= ui modified: {}",
+                    new Object[]{
+                        t.getCategory(), t.getKey(), t.getLanguage(), t.getModified(), data.getModified()
+                    });
 
         }
 
@@ -301,7 +310,7 @@ public class LocalisationResourceImpl implements LocalisationResource {
         t.setDescription(data.getDescription());
         t.setValue(data.getValue());
 
-        LOG.info("Updated!");
+        LOG.debug("Updated!");
     }
 
     /**
@@ -317,7 +326,9 @@ public class LocalisationResourceImpl implements LocalisationResource {
         }
     }
 
-
+    /**
+     * @return true if user has been logged in AND is not "anonymousUser"
+     */
     private boolean isLoggedInUser() {
         boolean result = true;
 
@@ -328,11 +339,13 @@ public class LocalisationResourceImpl implements LocalisationResource {
         result = result && SecurityContextHolder.getContext().getAuthentication().getAuthorities() != null;
         result = result && SecurityContextHolder.getContext().getAuthentication().getAuthorities().isEmpty() == false;
 
-        // LOG.info("AUTHZ = {}", result ? SecurityContextHolder.getContext().getAuthentication().getAuthorities() : null);
+        // TODO how to make this check more robust?
+        result = result && !"anonymousUser".equalsIgnoreCase(SecurityContextHolder.getContext().getAuthentication().getName());
 
-        LOG.info("isLoggedInUser(): {} - {}", result, result ? SecurityContextHolder.getContext().getAuthentication().getName() : "NA");
+        LOG.debug("isLoggedInUser(): {} - {}", result, result ? SecurityContextHolder.getContext().getAuthentication().getName() : "NA");
+        LOG.debug("  authorities = {}", result ? SecurityContextHolder.getContext().getAuthentication().getAuthorities() : null);
+
         return result;
     }
-
 
 }
