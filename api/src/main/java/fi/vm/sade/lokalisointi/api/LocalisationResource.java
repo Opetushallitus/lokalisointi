@@ -19,6 +19,7 @@ import com.wordnik.swagger.annotations.ApiOperation;
 import fi.vm.sade.lokalisointi.api.model.LocalisationRDTO;
 import java.util.List;
 import java.util.Map;
+import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -28,6 +29,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 
 /**
@@ -54,6 +56,7 @@ public interface LocalisationResource {
      * Loads ALL localisations with given prefix (if any).
      *
      * @param query "Localisation object" that can be used in query, ie. "category", "locale", "key", etc.
+     * @param httpServletResponse
      * @return list of matched localisations
      */
     @GET
@@ -62,7 +65,7 @@ public interface LocalisationResource {
             notes = "Palauttaa kaikki kyselyn mukaiset lokalisaatiot listassa. Parametreina voi olla esim. 'category=tarjonta&locale=sv' jne. "
             + "Tyhjä kysely palauttaa kaikki käännökset.",
             response = LocalisationRDTO.class)
-    public List<LocalisationRDTO> getLocalisations(@QueryParam("") LocalisationRDTO query);
+    public List<LocalisationRDTO> getLocalisations(@QueryParam("") LocalisationRDTO query, @Context HttpServletResponse httpServletResponse);
 
     /**
      * Update exisiting localisation. If a localisation is found via ID the it is updated - otherwise a localisation is searched with category, key and locale
