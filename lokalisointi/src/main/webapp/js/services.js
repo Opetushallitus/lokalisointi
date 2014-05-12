@@ -134,7 +134,7 @@ app.service('LocalisationService', function($log, $q, Localisations, globalConfi
 
         var deferred = $q.defer();
 
-        Localisations.query({},
+        Localisations.query({ value : "NOCACHE" },
                 function(data) {
                     $log.log("  reload() - successfull", data);
                     globalConfig.env.localisations = data;
