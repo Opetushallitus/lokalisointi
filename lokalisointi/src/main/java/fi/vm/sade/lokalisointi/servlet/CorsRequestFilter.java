@@ -77,12 +77,12 @@ public class CorsRequestFilter implements Filter {
                     // Does the url match list of allowed?
                     boolean originMatch = false;
                     for (String origin : allowOrigins) {
-                        LOG.info("  checking: {} against - {}", headerOrigin, origin);
+                        // LOG.debug("  checking: {} against - {}", headerOrigin, origin);
                         originMatch = originMatch || headerOrigin.contains(origin);
                     }
-
+                   
                     if (originMatch) {
-                        LOG.info("  origin match! fixing PRODUCTION CORS --> allow: '{}'", headerOrigin);
+                        LOG.debug("  origin match! fixing PRODUCTION CORS --> allow: '{}'", headerOrigin);
 
                         HttpServletResponse res = (HttpServletResponse) response;
                         res.addHeader("Access-Control-Allow-Origin", headerOrigin);
@@ -93,7 +93,7 @@ public class CorsRequestFilter implements Filter {
                                 "X-PINGOTHER, Origin, X-Requested-With, Content-Type, Accept");
                         res.addHeader("Access-Control-Max-Age", "1728000");
                     } else {
-                        LOG.warn("Original uri={} is not in allowed uris list... sorry.", headerOrigin);
+                        LOG.info("Original uri={} is not in allowed uris list... sorry.", headerOrigin);
                     }
                 }
             }
