@@ -32,12 +32,18 @@ public class CorsRequestFilter implements Filter {
     @Value("${cors.allow-origin.lokalisointi}")
     private String allowOrigin;
 
+    private String[] allowOrigins = {};
+
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
         SpringBeanAutowiringSupport.processInjectionBasedOnServletContext(this,
                 filterConfig.getServletContext());
         isDev = "dev".equals(authMode);
         LOG.info("Cors filter startied in (dev mode=) " + isDev + " mode. Env 'cors.allow-origin.lokalisointi' == " + allowOrigin);
+        
+        if (allowOrigin != null) {
+            allowOrigins = allowOrigin.split(",");
+        }
     }
 
     @Override
@@ -64,17 +70,31 @@ public class CorsRequestFilter implements Filter {
             }
         } else {
             if (response instanceof HttpServletResponse) {
-                if (allowOrigin != null) {
-                    LOG.info("  fixing PRODUCTION CORS --> allow: '{}'", allowOrigin);
+                HttpServletRequest req = (HttpServletRequest) request;
+                String headerOrigin = req.getHeader("Origin");
 
-                    HttpServletResponse res = (HttpServletResponse) response;
-                    res.addHeader("Access-Control-Allow-Origin", allowOrigin);
-                    res.addHeader("Access-Control-Allow-Credentials", "true");
-                    res.addHeader("Access-Control-Allow-Methods",
-                            "POST, GET, OPTIONS, PUT, DELETE, HEAD");
-                    res.addHeader("Access-Control-Allow-Headers",
-                            "X-PINGOTHER, Origin, X-Requested-With, Content-Type, Accept");
-                    res.addHeader("Access-Control-Max-Age", "1728000");
+                if (allowOrigin != null) {
+                    // Does the url match list of allowed?
+                    boolean originMatch = false;
+                    for (String origin : allowOrigins) {
+                        originMatch = originMatch || headerOrigin.contains(origin);
+                        LOG.info("  checking: {} against - {}", headerOrigin, origin);
+                    }
+
+                    if (originMatch) {
+                        LOG.info("  origin match! fixing PRODUCTION CORS --> allow: '{}'", allowOrigin);
+
+                        HttpServletResponse res = (HttpServletResponse) response;
+                        res.addHeader("Access-Control-Allow-Origin", headerOrigin);
+                        res.addHeader("Access-Control-Allow-Credentials", "true");
+                        res.addHeader("Access-Control-Allow-Methods",
+                                "POST, GET, OPTIONS, PUT, DELETE, HEAD");
+                        res.addHeader("Access-Control-Allow-Headers",
+                                "X-PINGOTHER, Origin, X-Requested-With, Content-Type, Accept");
+                        res.addHeader("Access-Control-Max-Age", "1728000");
+                    } else {
+                        LOG.warn("Original uri={} is not in allowed uris list... sorry.", headerOrigin);
+                    }
                 }
             }
         }
