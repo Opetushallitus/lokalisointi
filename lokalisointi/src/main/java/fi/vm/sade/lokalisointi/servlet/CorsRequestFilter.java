@@ -77,8 +77,10 @@ public class CorsRequestFilter implements Filter {
                     // Does the url match list of allowed?
                     boolean originMatch = false;
                     for (String origin : allowOrigins) {
-                        originMatch = originMatch || headerOrigin.contains(origin);
-                        LOG.info("  checking: {} against - {}", headerOrigin, origin);
+                        if (headerOrigin != null) {
+                            originMatch = originMatch || headerOrigin.contains(origin);
+                            LOG.info("  checking: {} against - {}", headerOrigin, origin);
+                        }
                     }
 
                     if (originMatch) {
