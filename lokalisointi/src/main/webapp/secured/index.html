@@ -259,6 +259,24 @@
                         }
                     });
 
+                    //
+                    // Get current users authorisation info 
+                    // (window.CONFIG.env.lokalisointiRestUrl /lokalisointi/cxf/rest/v1/localisation/authorize)
+                    //
+                    console.log("** Calling mr. Authorize: ", window.CONFIG.env.lokalisointiRestUrl + "/authorize");
+                    init_counter++;
+                    jQuery.ajax(window.CONFIG.env.lokalisointiRestUrl + "/authorize", {
+                        dataType: "text",
+                        xhrFields: {
+                          withCredentials: true
+                        },
+                        success: function(xhr, status) {
+                            initFunction("/authorize", xhr, status);
+                        },
+                        error: function(xhr, status) {
+                            initFunction("/authorize FAILED", xhr, status);
+                        }
+                    });
         </script>
 
     </body>
