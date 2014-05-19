@@ -73,18 +73,16 @@ public class CorsRequestFilter implements Filter {
                 HttpServletRequest req = (HttpServletRequest) request;
                 String headerOrigin = req.getHeader("Origin");
 
-                if (allowOrigin != null) {
+                if (headerOrigin != null && allowOrigin != null) {
                     // Does the url match list of allowed?
                     boolean originMatch = false;
                     for (String origin : allowOrigins) {
-                        if (headerOrigin != null) {
-                            originMatch = originMatch || headerOrigin.contains(origin);
-                            LOG.info("  checking: {} against - {}", headerOrigin, origin);
-                        }
+                        LOG.info("  checking: {} against - {}", headerOrigin, origin);
+                        originMatch = originMatch || headerOrigin.contains(origin);
                     }
 
                     if (originMatch) {
-                        LOG.info("  origin match! fixing PRODUCTION CORS --> allow: '{}'", allowOrigin);
+                        LOG.info("  origin match! fixing PRODUCTION CORS --> allow: '{}'", headerOrigin);
 
                         HttpServletResponse res = (HttpServletResponse) response;
                         res.addHeader("Access-Control-Allow-Origin", headerOrigin);
