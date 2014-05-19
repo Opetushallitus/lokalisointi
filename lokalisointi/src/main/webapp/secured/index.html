@@ -266,17 +266,15 @@
                     console.log("** Calling mr. Authorize: ", window.CONFIG.env.lokalisointiRestUrl + "/authorize");
                     init_counter++;
                     jQuery.ajax(window.CONFIG.env.lokalisointiRestUrl + "/authorize", {
-                        dataType: "json",
+                        dataType: "text",
                         xhrFields: {
                           withCredentials: true
                         },
                         success: function(xhr, status) {
-                            window.CONFIG.env["cas.myroles"] = xhr;
-                            initFunction("AUTHENTICATION", xhr, status);
+                            initFunction("/authorize", xhr, status);
                         },
                         error: function(xhr, status) {
-                            window.CONFIG.env["cas.myroles"] = [];
-                            initFunction("AUTHENTICATION FAILED", xhr, status);
+                            initFunction("/authorize FAILED", xhr, status);
                         }
                     });
         </script>
