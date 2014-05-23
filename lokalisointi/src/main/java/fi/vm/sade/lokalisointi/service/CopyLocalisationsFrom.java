@@ -86,7 +86,10 @@ public class CopyLocalisationsFrom {
     @Autowired
     private LocalisationDao localisationDao;
 
-    @Scheduled(cron = "${lokalisointi.copy.cron:0 0 * * * *}")
+    //
+    // DISABLED  - THIS IS NOT ACTUALLY WANTED FEATURE AT ALL
+    //
+    // @Scheduled(cron = "${lokalisointi.copy.cron:0 0 * * * *}")
     @Transactional(readOnly = false)
     public void copyLocalisationsFrom() {
         LOG.debug("copyLocalisationsFrom() force={}, cron='{}', uri='{}'", _forced, _cron, _copyLocalisationsFromUri);
