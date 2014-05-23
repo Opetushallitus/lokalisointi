@@ -21,6 +21,7 @@ import fi.vm.sade.lokalisointi.api.model.LocalisationRDTO;
 import fi.vm.sade.lokalisointi.service.dao.LocalisationDao;
 import fi.vm.sade.lokalisointi.service.model.Localisation;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -210,6 +211,61 @@ public class LocalisationResourceImpl implements LocalisationResource {
         }
     }
 
+    // POST /localisation/update
+    @Secured({ROLE_CRUD})
+    @Override
+    public List<Map> updateLocalisations(List<LocalisationRDTO> data) {
+        LOG.info("updateLocalisations({} kpl)", data != null ? data.size() : 0);
+
+        List<Map> tmp = new ArrayList<Map>();
+        Map result = new HashMap();
+        tmp.add(result);
+
+        int updated = 0;
+        int created = 0;
+        int notModified = 0;
+        
+        for (LocalisationRDTO l : data) {
+            LOG.info("processing: {}", l);
+
+            // Find already existing?
+            Localisation t = localisationDao.findOne((Long) null, l.getCategory(), l.getKey(), l.getLocale());
+
+            boolean isNew = (t == null);
+            
+            if (t == null) {
+                t = new Localisation();
+
+                t.setCreated(new Date());
+                t.setCreatedBy(getCurrentUserName());
+                t.setModified(null);
+                t.setModifiedBy(null);
+
+                t.setCategory(l.getCategory());
+                t.setKey(l.getKey());
+                t.setLanguage(l.getLocale());
+            }
+
+            if (update(t, l)) {
+                if (isNew) {
+                    created++;
+                } else {
+                    updated++;
+                }
+                localisationDao.save(t);
+            } else {
+                notModified++;
+            }
+        }
+            
+        result.put("status", "OK");
+        result.put("updated", updated);
+        result.put("created", created);
+        result.put("notModified", notModified);
+                
+        return tmp;
+    }
+    
     /**
      * Convert list of localisations to list of transferobjects.
      *
@@ -263,8 +319,9 @@ public class LocalisationResourceImpl implements LocalisationResource {
      * @param t
      * @param data
      * @param force if true no modified after check will be done
+     * @return true if modifications done, false if not modified
      */
-    private void update(Localisation t, LocalisationRDTO data) {
+    private boolean update(Localisation t, LocalisationRDTO data) {
         if (t == null) {
             throw new NotFoundException("Cannot find localisation for: " + data);
         }
@@ -277,7 +334,7 @@ public class LocalisationResourceImpl implements LocalisationResource {
                         new Object[]{
                             t.getCategory(), t.getKey(), t.getLanguage(), t.getModified(), data.getModified()
                         });
-                return;
+                return false;
             }
 
             LOG.debug("  --> OK localisation for {}-{}-{}, modified: {} <= ui modified: {}",
@@ -299,7 +356,7 @@ public class LocalisationResourceImpl implements LocalisationResource {
             t.setAccessed(new Date());
         }
 
-        // If data contains last modified data then use it for last modification ts
+        // If data contains last modified data then use it for last modification ts (so we can store even older data to db)
         if (data.getModified() != null) {
             t.setModified(data.getModified());
         } else {
@@ -311,6 +368,7 @@ public class LocalisationResourceImpl implements LocalisationResource {
         t.setValue(data.getValue());
 
         LOG.debug("Updated!");
+        return true;
     }
 
     /**
@@ -343,7 +401,7 @@ public class LocalisationResourceImpl implements LocalisationResource {
         result = result && !"anonymousUser".equalsIgnoreCase(SecurityContextHolder.getContext().getAuthentication().getName());
 
         LOG.debug("isLoggedInUser(): {} - {}", result, result ? SecurityContextHolder.getContext().getAuthentication().getName() : "NA");
-        LOG.debug("  authorities = {}", result ? SecurityContextHolder.getContext().getAuthentication().getAuthorities() : null);
+        // LOG.debug("  authorities = {}", result ? SecurityContextHolder.getContext().getAuthentication().getAuthorities() : null);
 
         return result;
     }

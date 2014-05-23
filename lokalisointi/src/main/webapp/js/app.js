@@ -324,11 +324,13 @@ angular.module('app').controller('AppCtrl', ['$scope', '$q', '$log', '$modal', '
          * @returns {undefined}
          */
         $scope.openDialog = function() {
-
             var modalInstance = $modal.open({
                 scope: $scope,
                 templateUrl: 'localisationTransferDialog2.html',
                 controller: 'AppCtrl:TransferController'
+            }).result.then(function(res) {
+                $log.info("CLOSED: ", res);
+                $scope.reloadData();
             });
         };
 
@@ -377,54 +379,49 @@ angular.module('app').controller('AppCtrl:TransferController', ['$scope', '$log'
         };
 
         $scope.transferDialogCancel = function() {
-            $log.info("transferDialogCancel()" + $modalInstance);
+            $log.info("transferDialogCancel()", $modalInstance);
             $modalInstance.close();
         };
 
         $scope.transferDialogOk = function() {
-            $log.info("transferDialogOk()" + $modalInstance);
+            $log.info("transferDialogOk()");
 
-            // Get data
+            $scope.model.result = "Ladataan käännöksiä...";
+
+            // Get data, prededined uri's have "?value=NOCACHE"
             $resource($scope.model.copyFrom).query({},
 
                     // OK, translations loaded
-                    function(data, status, headers, config) {
-                        console.log("SUCCESS : ", data);
+                    function(data) {
+                        console.log("  Käännökset ladattu:", data);
                         $scope.model.result = "OK, käännökset luettu, käsittelen...";
 
-                        var errorCount = 0;
-                        var updateCount = 0;
-
-                        // Loop over and access all translations so that undefined will be created
-                        for (var i = 0; i < data.length; i++) {
-                            var l = data[i];
-
-                            $log.info("  processing: " + i + " - ", l);
-
-                            // TODO add force checkbox to UI
-                            LocalisationService.save(l, $scope.model.force).then(
-                                    function(newEntry) {
-                                        updateCount++;
-                                        $log.info("  updated: " + updateCount);
-                                        $scope.model.result = "Päivitän: " + updateCount + " / " + data.length + " -- errors = " + errorCount;
-                                    },
-                                    function(reason) {
-                                        $log.error("  save failed: ", l, reason);
-                                        errorCount++;
-                                        $scope.model.result = "Päivitän: " + updateCount + " / " + data.length + " -- errors = " + errorCount;
-                                    });
-                        }
-
+                        LocalisationService.massUpdate($scope.model.force, data).then(
+                            function(result) {
+                                console.log("  Käännökset puskettu serverille: muokattu=" + result.updated + ", luotu: " + result.created);
+                                $scope.model.result = "OK; muokattu: " + result.updated + ", luotu: " + result.created + ", ei muutettu: " + result.notModified;
+                                setTimeout(function() {
+                                    $modalInstance.close();
+                                }, 5000);
+                            },
+                            function(result) {
+                                console.log("err result = ", result);
+                                $scope.model.result = "Odottamaton virhe: " + result;
+                                setTimeout(function() {
+                                    $modalInstance.close();
+                                }, 5000);
+                            });
+                    },
+                    
+                    // Failure, cannot load translations
+                    function(err) {
+                        console.log("ERROR, failed to load translations.", err);
+                        $scope.model.result = "Käännösten lataaminen epäonnistui.";
                         setTimeout(function() {
                             $modalInstance.close();
-                        }, 30000);
-                    },
-                    function(data, status, headers, config) {
-                        console.log("ERROR", data, status, headers, config);
-                        $scope.model.result = "Hups, käännösten lataaminen epäonnistui!";
+                        }, 5000);
                     });
         };
-
     }]);
 
 //
