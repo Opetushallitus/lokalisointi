@@ -386,7 +386,9 @@ angular.module('app').controller('AppCtrl:TransferController', ['$scope', '$log'
         $scope.transferDialogOk = function() {
             $log.info("transferDialogOk()");
 
-            $scope.model.result = "Ladataan käännöksiä...";
+            $scope.model.copyFrom = $scope.model.copyFrom + $scope.model.copySubset;
+
+            $scope.model.result = "Ladataan käännöksiä osoitteesta: " + $scope.model.copyFrom;
 
             // Get data, prededined uri's have "?value=NOCACHE"
             $resource($scope.model.copyFrom).query({},
