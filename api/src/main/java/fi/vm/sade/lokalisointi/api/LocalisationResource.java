@@ -127,4 +127,19 @@ public interface LocalisationResource {
             response = LocalisationRDTO.class)
     public LocalisationRDTO deleteLocalisation(@PathParam("id") Long id);
 
+    /**
+     * Mass update functionality.
+     * 
+     * @param data
+     * @return update result as string, ex. "{updated: XXX, deleted: XXX, created: XXX, errors: XXX}"
+     */
+    @POST
+    @Path("update")
+    @Produces(MediaType.APPLICATION_JSON + ";charset=UTF-8")
+    @Consumes(MediaType.APPLICATION_JSON + ";charset=UTF-8")
+    @ApiOperation(value = "Päivitä lokalisaatiot.",
+            notes = "Massapäivitys lokalisaatioille, palauttaa kaikki lokalisaatiot kun valmis.",
+            response = LocalisationRDTO.class)
+    public List<Map> updateLocalisations(List<LocalisationRDTO> data);
+    
 }

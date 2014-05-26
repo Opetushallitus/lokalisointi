@@ -6,6 +6,22 @@
         <meta name="description" content="Lokalisointi">
         <meta name="author" content="Opetushallitus">
         <title>Lokalisointi</title>
+        <script>
+            if (!(window.console && console.log)) {
+                console = {
+                    log: function() {
+                    },
+                    debug: function() {
+                    },
+                    info: function() {
+                    },
+                    warn: function() {
+                    },
+                    error: function() {
+                    }
+                };
+            }
+        </script>
 
         <script src="../lib/jquery-1.10.2.min.js"></script>
         <script src="../lib/jquery-ui.min.js"></script>
@@ -103,50 +119,6 @@
                 <div class="gridStyle" ng-grid="model.gridOptions"></div>
             </form>
 
-<!--
-            <form name="localisationsForm" novalidate>
-                <div class="btn btn-primary" data-ng-click="reloadData()">Lataa käännökset uudelleen</div>
-                <div class="btn btn-primary" data-ng-click="saveAllModified()" data-ng-disabled="localisationsForm.$pristine">Tallenna kaikki muuttuneet</div>
-                <div class="btn btn-primary" ng-click="openDialog()">Kopiointi</div>
-                <a href="/lokalisointi/cxf/rest/v1/localisation">Lataa (Save Link As...)</a>
-
-                <table>
-                    <tr>
-                        <th colspan="6">Näytetään {{model.filteredList.length}}
-                            / {{model.localisations.length}} käännöstekstistä</th>
-                    </tr>
-
-                    <tr>
-                        <td>-</td>
-                        <td><input type="text" data-ng-model="model.filterCategory" ng-change="doFiltering()" placeholder="Kategoria filtteri"></td>
-                        <td><input type="text" data-ng-model="model.filterKey" ng-change="doFiltering()" placeholder="Avain filtteri"></td>
-                        <td><input type="text" data-ng-model="model.filterLocale" ng-change="doFiltering()" placeholder="Locale filtteri" ></td>
-                        <td><input type="text" data-ng-model="model.filterValue" ng-change="doFiltering()" placeholder="Arvo filtteri" ></td>
-                        <td>--</td>
-                    </tr>
-
-                    <tr>
-                        <th>[POISTA]</th>
-                        <th>Kategoria</th>
-                        <th>Avain</th>
-                        <th>Kieli</th>
-                        <th>Arvo</th>
-                        <th>Accessed, lkm</th>
-                    </tr>
-
-                    <tr data-ng-repeat="l in model.filteredList| orderBy: ['category', 'key', 'locale']" data-ng-class="{uiChanged: l.uiChanged}">
-                        <td><input type="checkbox" data-ng-model="l.uiDelete" data-ng-change="l.uiChanged = true"></td>
-                        <td>{{ l.category}}</td>
-                        <td>{{ l.key}}</td>
-                        <td>{{ l.locale}}</td>
-                        <td><textarea data-ng-model="l.value" data-ng-change="l.uiChanged = true" cols="10"></textarea></td>
-                        <! -- <td><textarea data-ng-model="l.description" data-ng-change="l.uiChanged = true" cols="10"></textarea></td> - ->
-                        <td>{{ l.accessed | date:'dd.MM.yyyy HH:mm:ss'}} / {{ l.accesscount}}</td>
-                    </tr>
-                </table>
-            </form>
--->
-
         </div>
 
         <div data-ng-controller="LoadingCtrl"
@@ -170,18 +142,33 @@
             <div>Käännösten kopiointi annetusta ympäristöstä 'TÄHÄN' ympäristöön.</div>
 
             <div>
-            Kopioi :
+            Lähde :
 
             <select ng-model="model.copyFrom">
             <option value="">-- Valitse mistä käännökset kopioidaan --</option>
-            <option value="../localisations.json">(esiladatu)</option>
-            <option value="https://itest-virkailija.oph.ware.fi/lokalisointi/cxf/rest/v1/localisation">Luokalta</option>
-            <option value="https://test-virkailija.oph.ware.fi/lokalisointi/cxf/rest/v1/localisation">Repulta</option>
-            <option value="https://testi.virkailija.opintopolku.fi/lokalisointi/cxf/rest/v1/localisation">QA:lta</option>
-            <option value="https://koulutus.virkailija.opintopolku.fi/lokalisointi/cxf/rest/v1/localisation">Koulutuksesta</option>
-            <option value="https://virkailija.opintopolku.fi/lokalisointi/cxf/rest/v1/localisation">Tuotannosta</option>
+            <option value="../localisations.json">(esiladatut)</option>
+            <option value="https://itest-virkailija.oph.ware.fi/lokalisointi/cxf/rest/v1/localisation?value=NOCACHE">Luokalta</option>
+            <option value="https://test-virkailija.oph.ware.fi/lokalisointi/cxf/rest/v1/localisation?value=NOCACHE">Repulta</option>
+            <option value="https://testi.virkailija.opintopolku.fi/lokalisointi/cxf/rest/v1/localisation?value=NOCACHE">QA:lta</option>
+            <option value="https://koulutus.virkailija.opintopolku.fi/lokalisointi/cxf/rest/v1/localisation?value=NOCACHE">Koulutuksesta</option>
+            <option value="https://virkailija.opintopolku.fi/lokalisointi/cxf/rest/v1/localisation?value=NOCACHE">Tuotannosta</option>
             </select>
             </div>
+    
+            <div>
+            Sovellus: 
+            
+            <select ng-model="model.copySubset" ng->
+            <option value="">-- Valitse sovellus jonka käännökset kopioidaan --</option>
+            <option value="&category=tarjonta">Tarjonta</option>
+            <option value="&category=virkailijaraamit">Virkailijaraamit</option>
+            <option value="&category=osoitepalvelu">Osoitepalvelu</option>
+            <option value="&category=tiedonsiirto">Tiedonsiirto</option>
+            <option value="&category=suoritusrekisteri">Suoritusrekisteri</option>
+            <option value="&category=rekisterointi">Rekisteröinti</option>
+            </select>
+            </div>
+    
 
             <div>
             <input type="checkbox" data-ng-model="model.force"> Pakotettu päivitys (kirjoittaa päälle vaikka olisi uudempi olemassa)<br/>
@@ -259,6 +246,24 @@
                         }
                     });
 
+                    //
+                    // Get current users authorisation info 
+                    // (window.CONFIG.env.lokalisointiRestUrl /lokalisointi/cxf/rest/v1/localisation/authorize)
+                    //
+                    console.log("** Calling mr. Authorize: ", window.CONFIG.env.lokalisointiRestUrl + "/authorize");
+                    init_counter++;
+                    jQuery.ajax(window.CONFIG.env.lokalisointiRestUrl + "/authorize", {
+                        dataType: "text",
+                        xhrFields: {
+                          withCredentials: true
+                        },
+                        success: function(xhr, status) {
+                            initFunction("/authorize", xhr, status);
+                        },
+                        error: function(xhr, status) {
+                            initFunction("/authorize FAILED", xhr, status);
+                        }
+                    });
         </script>
 
     </body>
