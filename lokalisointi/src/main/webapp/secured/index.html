@@ -98,10 +98,9 @@
             <form name="localisationsForm" novalidate>
                 <div>
                     <div class="btn btn-primary" data-ng-click="reloadData()">Lataa käännökset uudelleen</div>
-                    <div class="btn btn-primary" data-ng-click="saveAllModifiedNew()">
-                        Tallenna kaikki muuttuneet ({{numChangedItems()}})
-                        ja poista valitut ({{numSelected()}}) käännökset
-                    </div>
+                    <div class="btn btn-primary" data-ng-click="openCreationDialog()">Luo uusi käännös</div>
+                    <div class="btn btn-primary" data-ng-click="saveAllModified()">Tallenna kaikki muuttuneet ({{numChangedItems()}}) käännökset</div>
+                    <div class="btn btn-primary" data-ng-click="removeAllSelected()">Poista valitut ({{numSelected()}}) käännökset</div>
                     <div class="btn btn-primary" ng-click="openDialog()">Kopiointi</div>
                     <a href="/lokalisointi/cxf/rest/v1/localisation">Lataa (Save Link As...)</a>
                 </div>
@@ -185,6 +184,27 @@
             <button class="btn btn-warning" ng-click="transferDialogOk()" ng-disabled="model.copyFrom == ''">Suorita kopiointi</button>
             </div>
             </div>
+        </script>
+
+        <script type="text/ng-template" id="createNewLocalisationDialog.html">
+            <form name="createLocalisationForm" novalidate>
+                <div class="modal-header">
+                    <h3>Luo uusi käännös</h3>
+                </div>
+
+                <div class="modal-body">
+                    <input type="text" data-ng-model="model.key" placeholder="Lokalisoinnin avain (key) tähän"  width="80" required/>
+                    <input type="text" data-ng-model="model.category" placeholder="Lokalisoinnin kategoria (category) tähän"  width="80" required/>
+                    <input type="text" data-ng-model="model.locale" placeholder="Lokalisoinnin alue (locale) tähän"  width="80" minlength="2" maxlength="2"/>
+                    <input type="text" data-ng-model="model.value" placeholder="Lokalisoinnin käännös (value) tähän"  width="80" required/>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                <button class="btn btn-primary" ng-click="createDialogCancel()">Peruuta</button>
+                <button class="btn btn-warning" ng-click="createDialogOk()" ng-disabled="">Luo käännös</button>
+                </div>
+            </form>
         </script>
 
 
