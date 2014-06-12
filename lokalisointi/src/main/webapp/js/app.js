@@ -361,10 +361,15 @@ angular.module('app').controller('AppCtrl', ['$scope', '$q', '$log', '$modal', '
                 scope: $scope,
                 templateUrl: 'createNewLocalisationDialog.html',
                 controller: 'AppCtrl:NewLocalisationController'
-            }).result.then(function(res) {
-                $log.info("CLOSED: ", res);
-                $scope.reloadData();
-            });
+            }).result.then(
+                function(res) {
+                    $scope.pushMessage({status: "OK", message: "Uusi käännös luotiin onnistuneesti!"});
+                    $scope.reloadData();
+                },
+                function(err) {
+                    $scope.pushMessage({status: "ERROR", message: "Käännöksen luomisessa tapahtui virhe!"});
+                    $scope.reloadData();
+                });
         };
 
         /**
@@ -485,12 +490,12 @@ angular.module('app').controller('AppCtrl:NewLocalisationController', ['$scope',
                     // Localisation created successfully
                     function(res) {
                         $log.info('  Uusi käännös luotu', res);
-                        $modalInstance.close();
+                        $modalInstance.close(res);
                     },
                     // Localisation creation error
                     function(err) {
                         $log.warn('  Käännöksen luominen päättyi virheeseen!', err);
-                        $modalInstance.close();
+                        $modalInstance.dismiss(err);
                     });
             }
         };
