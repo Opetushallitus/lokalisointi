@@ -480,18 +480,19 @@ angular.module('app').controller('AppCtrl:NewLocalisationController', ['$scope',
 
         $scope.createDialogOk = function() {
             $log.info("newLocalisationDialogOk()", $scope.model);
-
-            Localisations.save($scope.model,
-                // Localisation created successfully
-                function(res) {
-                    $log.info('  Uusi käännös luotu', res);
-                    $modalInstance.close();
-                },
-                // Localisation creation error
-                function(err) {
-                    $log.warn('  Käännöksen luominen päättyi virheeseen!', err);
-                    $modalInstance.close();
-                });
+            if ($scope.createLocalisationForm.$valid) {
+                Localisations.save($scope.model,
+                    // Localisation created successfully
+                    function(res) {
+                        $log.info('  Uusi käännös luotu', res);
+                        $modalInstance.close();
+                    },
+                    // Localisation creation error
+                    function(err) {
+                        $log.warn('  Käännöksen luominen päättyi virheeseen!', err);
+                        $modalInstance.close();
+                    });
+            }
         };
     }]);
 
