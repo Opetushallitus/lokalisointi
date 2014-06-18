@@ -15,6 +15,7 @@ host.ilb={{host_ilb}}
 host.postgresql.lokalisointi={{host_postgresql_lokalisointi}}
 host.postgresql.lokalisointi.password={{host_postgresql_lokalisointi_password}}
 host.postgresql.lokalisointi.user={{host_postgresql_lokalisointi_user}}
+host.virkailija={{host_virkailija}}
 port.postgresql={{port_postgresql}}
 server.name={{ansible_hostname}}
 
