@@ -6,6 +6,22 @@
         <meta name="description" content="Lokalisointi">
         <meta name="author" content="Opetushallitus">
         <title>Lokalisointi</title>
+        <script>
+            if (!(window.console && console.log)) {
+                console = {
+                    log: function() {
+                    },
+                    debug: function() {
+                    },
+                    info: function() {
+                    },
+                    warn: function() {
+                    },
+                    error: function() {
+                    }
+                };
+            }
+        </script>
 
         <script src="../lib/jquery-1.10.2.min.js"></script>
         <script src="../lib/jquery-ui.min.js"></script>
@@ -81,12 +97,11 @@
 
             <form name="localisationsForm" novalidate>
                 <div>
-                    <div class="btn btn-primary" data-ng-click="reloadData()">Lataa käännökset uudelleen</div>
-                    <div class="btn btn-primary" data-ng-click="saveAllModifiedNew()">
-                        Tallenna kaikki muuttuneet ({{numChangedItems()}})
-                        ja poista valitut ({{numSelected()}}) käännökset
-                    </div>
-                    <div class="btn btn-primary" ng-click="openDialog()">Kopiointi</div>
+                    <button class="btn" data-ng-click="reloadData()"><span class="icon-refresh"></span> Lataa käännökset uudelleen</button>
+                    <button class="btn" data-ng-click="openCreationDialog()"><span class="icon-plus"></span> Luo uusi käännös</button>
+                    <button class="btn btn-primary" data-ng-click="saveAllModified()"><span class="icon-file"></span> Tallenna kaikki muuttuneet ({{numChangedItems()}}) käännökset</button>
+                    <button class="btn btn-primary" data-ng-click="removeAllSelected()"><span class="icon-trash"></span> Poista valitut ({{numSelected()}}) käännökset</button>
+                    <button class="btn" ng-click="openDialog()">Kopiointi</button>
                     <a href="/lokalisointi/cxf/rest/v1/localisation">Lataa (Save Link As...)</a>
                 </div>
 
@@ -102,50 +117,6 @@
 
                 <div class="gridStyle" ng-grid="model.gridOptions"></div>
             </form>
-
-<!--
-            <form name="localisationsForm" novalidate>
-                <div class="btn btn-primary" data-ng-click="reloadData()">Lataa käännökset uudelleen</div>
-                <div class="btn btn-primary" data-ng-click="saveAllModified()" data-ng-disabled="localisationsForm.$pristine">Tallenna kaikki muuttuneet</div>
-                <div class="btn btn-primary" ng-click="openDialog()">Kopiointi</div>
-                <a href="/lokalisointi/cxf/rest/v1/localisation">Lataa (Save Link As...)</a>
-
-                <table>
-                    <tr>
-                        <th colspan="6">Näytetään {{model.filteredList.length}}
-                            / {{model.localisations.length}} käännöstekstistä</th>
-                    </tr>
-
-                    <tr>
-                        <td>-</td>
-                        <td><input type="text" data-ng-model="model.filterCategory" ng-change="doFiltering()" placeholder="Kategoria filtteri"></td>
-                        <td><input type="text" data-ng-model="model.filterKey" ng-change="doFiltering()" placeholder="Avain filtteri"></td>
-                        <td><input type="text" data-ng-model="model.filterLocale" ng-change="doFiltering()" placeholder="Locale filtteri" ></td>
-                        <td><input type="text" data-ng-model="model.filterValue" ng-change="doFiltering()" placeholder="Arvo filtteri" ></td>
-                        <td>--</td>
-                    </tr>
-
-                    <tr>
-                        <th>[POISTA]</th>
-                        <th>Kategoria</th>
-                        <th>Avain</th>
-                        <th>Kieli</th>
-                        <th>Arvo</th>
-                        <th>Accessed, lkm</th>
-                    </tr>
-
-                    <tr data-ng-repeat="l in model.filteredList| orderBy: ['category', 'key', 'locale']" data-ng-class="{uiChanged: l.uiChanged}">
-                        <td><input type="checkbox" data-ng-model="l.uiDelete" data-ng-change="l.uiChanged = true"></td>
-                        <td>{{ l.category}}</td>
-                        <td>{{ l.key}}</td>
-                        <td>{{ l.locale}}</td>
-                        <td><textarea data-ng-model="l.value" data-ng-change="l.uiChanged = true" cols="10"></textarea></td>
-                        <! -- <td><textarea data-ng-model="l.description" data-ng-change="l.uiChanged = true" cols="10"></textarea></td> - ->
-                        <td>{{ l.accessed | date:'dd.MM.yyyy HH:mm:ss'}} / {{ l.accesscount}}</td>
-                    </tr>
-                </table>
-            </form>
--->
 
         </div>
 
@@ -170,18 +141,34 @@
             <div>Käännösten kopiointi annetusta ympäristöstä 'TÄHÄN' ympäristöön.</div>
 
             <div>
-            Kopioi :
+            Lähde :
 
             <select ng-model="model.copyFrom">
             <option value="">-- Valitse mistä käännökset kopioidaan --</option>
-            <option value="../localisations.json">(esiladatu)</option>
-            <option value="https://itest-virkailija.oph.ware.fi/lokalisointi/cxf/rest/v1/localisation">Luokalta</option>
-            <option value="https://test-virkailija.oph.ware.fi/lokalisointi/cxf/rest/v1/localisation">Repulta</option>
-            <option value="https://testi.virkailija.opintopolku.fi/lokalisointi/cxf/rest/v1/localisation">QA:lta</option>
-            <option value="https://koulutus.virkailija.opintopolku.fi/lokalisointi/cxf/rest/v1/localisation">Koulutuksesta</option>
-            <option value="https://virkailija.opintopolku.fi/lokalisointi/cxf/rest/v1/localisation">Tuotannosta</option>
+            <option value="../localisations.json">(esiladatut)</option>
+            <option value="https://itest-virkailija.oph.ware.fi/lokalisointi/cxf/rest/v1/localisation?value=NOCACHE">Luokalta</option>
+            <option value="https://test-virkailija.oph.ware.fi/lokalisointi/cxf/rest/v1/localisation?value=NOCACHE">Repulta</option>
+            <option value="https://testi.virkailija.opintopolku.fi/lokalisointi/cxf/rest/v1/localisation?value=NOCACHE">QA:lta</option>
+            <option value="https://koulutus.virkailija.opintopolku.fi/lokalisointi/cxf/rest/v1/localisation?value=NOCACHE">Koulutuksesta</option>
+            <option value="https://virkailija.opintopolku.fi/lokalisointi/cxf/rest/v1/localisation?value=NOCACHE">Tuotannosta</option>
             </select>
             </div>
+    
+            <div>
+            Sovellus: 
+            
+            <select ng-model="model.copySubset" ng->
+            <option value="">-- Valitse sovellus jonka käännökset kopioidaan --</option>
+            <option value="&category=tarjonta">Tarjonta</option>
+            <option value="&category=virkailijaraamit">Virkailijaraamit</option>
+            <option value="&category=osoitepalvelu">Osoitepalvelu</option>
+            <option value="&category=tiedonsiirto">Tiedonsiirto</option>
+            <option value="&category=suoritusrekisteri">Suoritusrekisteri</option>
+            <option value="&category=rekisterointi">Rekisteröinti</option>
+            <option value="&category=organisaatio">Organisaatioiden hallintapalvelu</option>
+            </select>
+            </div>
+    
 
             <div>
             <input type="checkbox" data-ng-model="model.force"> Pakotettu päivitys (kirjoittaa päälle vaikka olisi uudempi olemassa)<br/>
@@ -197,6 +184,53 @@
             <button class="btn btn-warning" ng-click="transferDialogOk()" ng-disabled="model.copyFrom == ''">Suorita kopiointi</button>
             </div>
             </div>
+        </script>
+
+        <script type="text/ng-template" id="createNewLocalisationDialog.html">
+            <form name="$parent.createLocalisationForm" class="form-horizontal" novalidate>
+                <div class="modal-header">
+                    <h3>Luo uusi käännös</h3>
+                </div>
+
+                <div class="modal-body">
+                    <div class="control-group">
+                        <label for="key" class="control-label">Avain*</label>
+                        <div class="controls">
+                            <input name="key" type="text" data-ng-model="model.key"  width="80" required/>
+                            <p class="help-block">Käännösavain, jonka avulla käännös tunnistetaan käyttöliittymässä.</p>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label for="category" class="control-label">Kategoria*</label>
+                        <div class="controls">
+                            <input name="category" type="text" data-ng-model="model.category" width="80" required/>
+                            <p class="help-block">Määrittelee kategorian, eli sovelluksen, johon käännös kuuluu.</p>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label for="locale" class="control-label">Kieli*</label>
+                        <div class="controls">
+                            <input name="locale" type="text" data-ng-model="model.locale"  width="80" minlength="2" maxlength="2" required/>
+                            <p class="help-block">Käännöksen kieli ilmaistuna kaksikirjaimisena kielitunnuksena.</p>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label for="value" class="control-label">Käännösteksti*</label>
+                        <div class="controls">
+                            <input name="value" type="text" data-ng-model="model.value"  width="80" required/>
+                            <p class="help-block">Annettua avainta, kategoriaa ja kieltä vastaava käännösteksti.</p>
+                        </div>
+                    </div>
+                    
+                    
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                <button class="btn" ng-click="createDialogCancel()"><span class="icon-remove"></span> Peruuta</button>
+                <button class="btn btn-primary" ng-click="createDialogOk()" ng-disabled="createLocalisationForm.$invalid"><span class="icon-ok"></span> Luo käännös</button>
+                </div>
+            </form>
         </script>
 
 

@@ -270,7 +270,7 @@ angular.module('app').controller('AppCtrl', ['$scope', '$q', '$log', '$modal', '
          *
          * @returns {undefined}
          */
-        $scope.saveAllModifiedNew = function() {
+        $scope.saveAllModified = function() {
             $log.info("saveAllModifiedNew()", $scope.localisationsForm);
 
             var promises = [];
@@ -291,6 +291,24 @@ angular.module('app').controller('AppCtrl', ['$scope', '$q', '$log', '$modal', '
                 }));
             });
 
+            $q.all(promises).then(function() {
+                $log.info("  all items saved completed... reload data.");
+                $scope.pushMessage({status: "OK", message: "Kaikki tehdyt muokkaukset tallennettu."});
+                $scope.reloadData();
+            });
+
+            // Mark form unmodified
+            $scope.localisationsForm.$setPristine();
+
+            // Remove modification / selection information
+            $scope.clearChangedItems();
+        };
+
+        $scope.removeAllSelected = function() {
+            $log.info("removeAllSelected()", $scope.localisationsForm);
+
+            var promises = [];
+
             $scope.pushMessage({status: "INFO", message: "Poistetaan " + $scope.model.gridOptions.selectedItems.length + " käännöstä..."});
 
             angular.forEach($scope.getSelectedItems(), function(item) {
@@ -305,16 +323,15 @@ angular.module('app').controller('AppCtrl', ['$scope', '$q', '$log', '$modal', '
             });
 
             $q.all(promises).then(function() {
-                $log.info("  all items saved completed... reload data.");
-                $scope.pushMessage({status: "OK", message: "Kaikki muutokset ja poistot tehty."});
+                $log.info("  all items deletion completed... reload data.");
+                $scope.pushMessage({status: "OK", message: "Kaikki valitut käännökset poistettu."});
                 $scope.reloadData();
             });
 
             // Mark form unmodified
             $scope.localisationsForm.$setPristine();
 
-            // Remove modification / selection information
-            $scope.clearChangedItems();
+            // Selection information
             $scope.clearSelectedItems();
         };
 
@@ -324,12 +341,35 @@ angular.module('app').controller('AppCtrl', ['$scope', '$q', '$log', '$modal', '
          * @returns {undefined}
          */
         $scope.openDialog = function() {
-
             var modalInstance = $modal.open({
                 scope: $scope,
                 templateUrl: 'localisationTransferDialog2.html',
                 controller: 'AppCtrl:TransferController'
+            }).result.then(function(res) {
+                $log.info("CLOSED: ", res);
+                $scope.reloadData();
             });
+        };
+
+        /**
+         * Open a dialog to create a new localisation
+         *
+         * @returns {undefined}
+         */
+        $scope.openCreationDialog = function() {
+            var modalInstance = $modal.open({
+                scope: $scope,
+                templateUrl: 'createNewLocalisationDialog.html',
+                controller: 'AppCtrl:NewLocalisationController'
+            }).result.then(
+                function(res) {
+                    $scope.pushMessage({status: "OK", message: "Uusi käännös luotiin onnistuneesti!"});
+                    $scope.reloadData();
+                },
+                function(err) {
+                    $scope.pushMessage({status: "ERROR", message: "Käännöksen luomisessa tapahtui virhe!"});
+                    $scope.reloadData();
+                });
         };
 
         /**
@@ -372,59 +412,93 @@ angular.module('app').controller('AppCtrl:TransferController', ['$scope', '$log'
             // Reppu by default
             // copyFrom: "https://test-virkailija.oph.ware.fi/lokalisointi/cxf/rest/v1/localisation",
             copyFrom: "",
+            copySubset: "",
             result: "",
             force : false
         };
 
         $scope.transferDialogCancel = function() {
-            $log.info("transferDialogCancel()" + $modalInstance);
+            $log.info("transferDialogCancel()", $modalInstance);
             $modalInstance.close();
         };
 
         $scope.transferDialogOk = function() {
-            $log.info("transferDialogOk()" + $modalInstance);
+            $log.info("transferDialogOk()");
 
-            // Get data
+            $scope.model.copyFrom = $scope.model.copyFrom + $scope.model.copySubset;
+
+            $scope.model.result = "Ladataan käännöksiä osoitteesta: " + $scope.model.copyFrom;
+
+            // Get data, prededined uri's have "?value=NOCACHE"
             $resource($scope.model.copyFrom).query({},
 
                     // OK, translations loaded
-                    function(data, status, headers, config) {
-                        console.log("SUCCESS : ", data);
+                    function(data) {
+                        console.log("  Käännökset ladattu:", data);
                         $scope.model.result = "OK, käännökset luettu, käsittelen...";
 
-                        var errorCount = 0;
-                        var updateCount = 0;
-
-                        // Loop over and access all translations so that undefined will be created
-                        for (var i = 0; i < data.length; i++) {
-                            var l = data[i];
-
-                            $log.info("  processing: " + i + " - ", l);
-
-                            // TODO add force checkbox to UI
-                            LocalisationService.save(l, $scope.model.force).then(
-                                    function(newEntry) {
-                                        updateCount++;
-                                        $log.info("  updated: " + updateCount);
-                                        $scope.model.result = "Päivitän: " + updateCount + " / " + data.length + " -- errors = " + errorCount;
-                                    },
-                                    function(reason) {
-                                        $log.error("  save failed: ", l, reason);
-                                        errorCount++;
-                                        $scope.model.result = "Päivitän: " + updateCount + " / " + data.length + " -- errors = " + errorCount;
-                                    });
-                        }
-
+                        LocalisationService.massUpdate($scope.model.force, data).then(
+                            function(result) {
+                                console.log("  Käännökset puskettu serverille: muokattu=" + result.updated + ", luotu: " + result.created);
+                                $scope.model.result = "OK; muokattu: " + result.updated + ", luotu: " + result.created + ", ei muutettu: " + result.notModified;
+                                setTimeout(function() {
+                                    $modalInstance.close();
+                                }, 5000);
+                            },
+                            function(result) {
+                                console.log("err result = ", result);
+                                $scope.model.result = "Odottamaton virhe: " + result;
+                                setTimeout(function() {
+                                    $modalInstance.close();
+                                }, 5000);
+                            });
+                    },
+                    
+                    // Failure, cannot load translations
+                    function(err) {
+                        console.log("ERROR, failed to load translations.", err);
+                        $scope.model.result = "Käännösten lataaminen epäonnistui.";
                         setTimeout(function() {
                             $modalInstance.close();
-                        }, 30000);
-                    },
-                    function(data, status, headers, config) {
-                        console.log("ERROR", data, status, headers, config);
-                        $scope.model.result = "Hups, käännösten lataaminen epäonnistui!";
+                        }, 5000);
                     });
         };
+    }]);
 
+/**
+ * Transferring localisations from one environment to another.
+ */
+angular.module('app').controller('AppCtrl:NewLocalisationController', ['$scope', '$log', 'Localisations', '$modalInstance',
+    function($scope, $log, Localisations, $modalInstance) {
+
+        $scope.model = {
+            key: '',
+            category: '',
+            locale: '',
+            value: ''
+        };
+
+        $scope.createDialogCancel = function() {
+            $log.info("newLocalisationDialogCancel()", $modalInstance);
+            $modalInstance.close();
+        };
+
+        $scope.createDialogOk = function() {
+            $log.info("newLocalisationDialogOk()", $scope.model);
+            if ($scope.createLocalisationForm.$valid) {
+                Localisations.save($scope.model,
+                    // Localisation created successfully
+                    function(res) {
+                        $log.info('  Uusi käännös luotu', res);
+                        $modalInstance.close(res);
+                    },
+                    // Localisation creation error
+                    function(err) {
+                        $log.warn('  Käännöksen luominen päättyi virheeseen!', err);
+                        $modalInstance.dismiss(err);
+                    });
+            }
+        };
     }]);
 
 //

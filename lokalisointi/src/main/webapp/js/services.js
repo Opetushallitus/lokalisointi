@@ -39,6 +39,13 @@ app.factory('Localisations', function($log, $resource, globalConfig) {
             method: 'POST',
             withCredentials: true,
             headers: {'Content-Type': 'application/json; charset=UTF-8'}
+        },
+        massUpdate: {
+            url: globalConfig.env.lokalisointiRestUrl + "/update",
+            method: 'POST',
+            withCredentials: true,
+            headers: {'Content-Type': 'application/json; charset=UTF-8'},
+            isArray: true
         }
     });
 
@@ -46,6 +53,31 @@ app.factory('Localisations', function($log, $resource, globalConfig) {
 
 app.service('LocalisationService', function($log, $q, Localisations, globalConfig) {
     $log.log("LocalisationService()");
+
+    this.massUpdate = function(forced, data) {
+        $log.info("massUpdate()", forced, data);
+        
+        var deferred = $q.defer();
+
+        // Remove all "id" fields and update "forced" info
+        var tmp = angular.copy(data);
+        angular.forEach(tmp, function(t) {
+            delete t.id;
+            t.force = forced;
+        });
+
+        Localisations.massUpdate(tmp, 
+            function (result) {
+                $log.info("  success!", result);
+                deferred.resolve(result[0]);
+            },
+            function (err) {
+                $log.info("  failed!", err);
+                deferred.reject({ status: "ERROR", error: err });
+            });
+        
+        return deferred.promise;
+    };
 
     this.delete = function(entry) {
         $log.info("delete()", entry);
