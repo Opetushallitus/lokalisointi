@@ -16,6 +16,9 @@ host.ldap={{host_ldap}}
 host.postgresql.lokalisointi={{host_postgresql_lokalisointi}}
 host.postgresql.lokalisointi.password={{host_postgresql_lokalisointi_password}}
 host.postgresql.lokalisointi.user={{host_postgresql_lokalisointi_user}}
+host.virkailija={{host_virkailija}}
+ldap.manager.password={{ldap_manager_password}}
+ldap.manager-password={{ldap_manager_password}}
 port.postgresql={{port_postgresql}}
 server.name={{ansible_hostname}}
 
@@ -34,6 +37,7 @@ activeMq.targetDestination.learningopportunityprovider.public=fi.vm.sade.learnin
 activeMq.targetDestination.organisaatio=fi.vm.sade.organisaatio.service
 activeMq.targetDestinationAdmin.tarjonta=fi.vm.sade.tarjonta.admin.service
 activeMq.targetDestinationPublic.tarjonta=fi.vm.sade.tarjonta.public.service
+cas.callback.lokalisointi-service=http://${server.name}:8319/lokalisointi
 cas.callback.organisaatio-app=http://${server.name}:8301/organisaatio-app
 cas.callback.organisaatio-service=http://${server.name}:8301/organisaatio-service
 cas.callback.authentication-service=http://${server.name}:8308/authentication-service
