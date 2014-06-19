@@ -33,7 +33,7 @@
               testOnBorrow="true"
               removeAbandoned="true"
               removeAbandonedTimeout="300"
-              username="{{host_postgresql_lokalisointi_user}}" password="{{host_postgresql_lokalisointi_password}}"
+              username="{{ host_postgresql_lokalisointi_user }}" password="{{ host_postgresql_lokalisointi_password }}"
               driverClassName="org.postgresql.Driver"
               url="jdbc:postgresql://{{host_postgresql_lokalisointi}}:{{port_postgresql}}/lokalisointi"/>
               
