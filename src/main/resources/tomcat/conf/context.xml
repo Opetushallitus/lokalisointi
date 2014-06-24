@@ -29,7 +29,6 @@
               minIdle="5"
               maxIdle="10"
               validationQuery="SELECT 1"
-              validationQueryTimeout="5"
               testOnBorrow="true"
               removeAbandoned="true"
               removeAbandonedTimeout="300"
