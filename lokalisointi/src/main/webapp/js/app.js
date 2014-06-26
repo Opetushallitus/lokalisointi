@@ -270,7 +270,7 @@ angular.module('app').controller('AppCtrl', ['$scope', '$q', '$log', '$modal', '
          *
          * @returns {undefined}
          */
-        $scope.saveAllModifiedNew = function() {
+        $scope.saveAllModified = function() {
             $log.info("saveAllModifiedNew()", $scope.localisationsForm);
 
             var promises = [];
@@ -291,6 +291,24 @@ angular.module('app').controller('AppCtrl', ['$scope', '$q', '$log', '$modal', '
                 }));
             });
 
+            $q.all(promises).then(function() {
+                $log.info("  all items saved completed... reload data.");
+                $scope.pushMessage({status: "OK", message: "Kaikki tehdyt muokkaukset tallennettu."});
+                $scope.reloadData();
+            });
+
+            // Mark form unmodified
+            $scope.localisationsForm.$setPristine();
+
+            // Remove modification / selection information
+            $scope.clearChangedItems();
+        };
+
+        $scope.removeAllSelected = function() {
+            $log.info("removeAllSelected()", $scope.localisationsForm);
+
+            var promises = [];
+
             $scope.pushMessage({status: "INFO", message: "Poistetaan " + $scope.model.gridOptions.selectedItems.length + " käännöstä..."});
 
             angular.forEach($scope.getSelectedItems(), function(item) {
@@ -305,16 +323,15 @@ angular.module('app').controller('AppCtrl', ['$scope', '$q', '$log', '$modal', '
             });
 
             $q.all(promises).then(function() {
-                $log.info("  all items saved completed... reload data.");
-                $scope.pushMessage({status: "OK", message: "Kaikki muutokset ja poistot tehty."});
+                $log.info("  all items deletion completed... reload data.");
+                $scope.pushMessage({status: "OK", message: "Kaikki valitut käännökset poistettu."});
                 $scope.reloadData();
             });
 
             // Mark form unmodified
             $scope.localisationsForm.$setPristine();
 
-            // Remove modification / selection information
-            $scope.clearChangedItems();
+            // Selection information
             $scope.clearSelectedItems();
         };
 
@@ -332,6 +349,27 @@ angular.module('app').controller('AppCtrl', ['$scope', '$q', '$log', '$modal', '
                 $log.info("CLOSED: ", res);
                 $scope.reloadData();
             });
+        };
+
+        /**
+         * Open a dialog to create a new localisation
+         *
+         * @returns {undefined}
+         */
+        $scope.openCreationDialog = function() {
+            var modalInstance = $modal.open({
+                scope: $scope,
+                templateUrl: 'createNewLocalisationDialog.html',
+                controller: 'AppCtrl:NewLocalisationController'
+            }).result.then(
+                function(res) {
+                    $scope.pushMessage({status: "OK", message: "Uusi käännös luotiin onnistuneesti!"});
+                    $scope.reloadData();
+                },
+                function(err) {
+                    $scope.pushMessage({status: "ERROR", message: "Käännöksen luomisessa tapahtui virhe!"});
+                    $scope.reloadData();
+                });
         };
 
         /**
@@ -374,6 +412,7 @@ angular.module('app').controller('AppCtrl:TransferController', ['$scope', '$log'
             // Reppu by default
             // copyFrom: "https://test-virkailija.oph.ware.fi/lokalisointi/cxf/rest/v1/localisation",
             copyFrom: "",
+            copySubset: "",
             result: "",
             force : false
         };
@@ -423,6 +462,42 @@ angular.module('app').controller('AppCtrl:TransferController', ['$scope', '$log'
                             $modalInstance.close();
                         }, 5000);
                     });
+        };
+    }]);
+
+/**
+ * Transferring localisations from one environment to another.
+ */
+angular.module('app').controller('AppCtrl:NewLocalisationController', ['$scope', '$log', 'Localisations', '$modalInstance',
+    function($scope, $log, Localisations, $modalInstance) {
+
+        $scope.model = {
+            key: '',
+            category: '',
+            locale: '',
+            value: ''
+        };
+
+        $scope.createDialogCancel = function() {
+            $log.info("newLocalisationDialogCancel()", $modalInstance);
+            $modalInstance.close();
+        };
+
+        $scope.createDialogOk = function() {
+            $log.info("newLocalisationDialogOk()", $scope.model);
+            if ($scope.createLocalisationForm.$valid) {
+                Localisations.save($scope.model,
+                    // Localisation created successfully
+                    function(res) {
+                        $log.info('  Uusi käännös luotu', res);
+                        $modalInstance.close(res);
+                    },
+                    // Localisation creation error
+                    function(err) {
+                        $log.warn('  Käännöksen luominen päättyi virheeseen!', err);
+                        $modalInstance.dismiss(err);
+                    });
+            }
         };
     }]);
 
