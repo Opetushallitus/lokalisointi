@@ -51,6 +51,8 @@ cas.user-search-base=ou\=people
 cas.user-search-filter=(|(mail\={0})(uid\={0}))
 cas.service.authentication-service=https\://${host.virkailija}/authentication-service
 cas.service.authentication-ui=https://${host.virkailija}/authentication-ui
+cas.service.lokalisointi=https://${host.virkailija}/lokalisointi
+cas.service.lokalisointi-service=https://${host.virkailija}/lokalisointi
 cas.service.organisaatio-app==https://${host.virkailija}/organisaatio-app
 cas.service.organisaatio-service=https\://${host.virkailija}/organisaatio-service
 cas.service.registration-ui=https://${host.virkailija}/registration-ui
