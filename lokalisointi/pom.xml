@@ -9,7 +9,7 @@
     <parent>
         <artifactId>pom</artifactId>
         <groupId>fi.vm.sade.lokalisointi</groupId>
-        <version>9.0-SNAPSHOT</version>
+        <version>12.0-SNAPSHOT</version>
     </parent>
 
     <properties>
@@ -19,20 +19,19 @@
     </properties>
 
     <dependencies>
-        
         <dependency>
             <groupId>org.jasig.cas</groupId>
             <artifactId>cas-client-support-distributed-ehcache</artifactId>
             <version>3.1.10</version>
             <exclusions>
                 <exclusion>
-                   <groupId>net.sf.ehcache</groupId>
-		   <artifactId>ehcache</artifactId>
-		</exclusion>
+                    <groupId>net.sf.ehcache</groupId>
+                    <artifactId>ehcache</artifactId>
+                </exclusion>
             </exclusions>
-	</dependency>
-        
-        
+        </dependency>
+
+
         <dependency>
             <groupId>fi.vm.sade.lokalisointi</groupId>
             <artifactId>lokalisointi-api</artifactId>
@@ -65,7 +64,7 @@
                 </exclusion>
             </exclusions>
         </dependency>
- 
+
         <dependency>
             <groupId>fi.vm.sade.log</groupId>
             <artifactId>log-client</artifactId>
@@ -131,14 +130,6 @@
             <artifactId>cxf-rt-frontend-jaxrs</artifactId>
             <version>${cxf.version}</version>
         </dependency>
-
-<!--
-        <dependency>
-            <groupId>org.apache.cxf</groupId>
-            <artifactId>cxf-rt-rs-security-cors</artifactId>
-            <version>${cxf.version}</version>
-        </dependency>
--->
 
         <dependency>
             <groupId>fi.vm.sade.authentication</groupId>
@@ -238,7 +229,25 @@
                     </execution>
                 </executions>
             </plugin>
-
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>build-helper-maven-plugin</artifactId>
+                <version>1.4</version>
+                <executions>
+                    <execution>
+                        <id>add-querydsl-source</id>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>add-source</goal>
+                        </goals>
+                        <configuration>
+                            <sources>
+                                <source>${project.build.directory}/generated-sources/java</source>
+                            </sources>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
             <plugin>
                 <groupId>de.smartics.maven.plugin</groupId>
                 <artifactId>hibernate4-maven-plugin</artifactId>
