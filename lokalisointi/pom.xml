@@ -9,7 +9,7 @@
     <parent>
         <artifactId>pom</artifactId>
         <groupId>fi.vm.sade.lokalisointi</groupId>
-        <version>9.0-SNAPSHOT</version>
+        <version>12.0-SNAPSHOT</version>
     </parent>
 
     <properties>
@@ -19,6 +19,19 @@
     </properties>
 
     <dependencies>
+        <dependency>
+            <groupId>org.jasig.cas</groupId>
+            <artifactId>cas-client-support-distributed-ehcache</artifactId>
+            <version>3.1.10</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>net.sf.ehcache</groupId>
+                    <artifactId>ehcache</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+
         <dependency>
             <groupId>fi.vm.sade.lokalisointi</groupId>
             <artifactId>lokalisointi-api</artifactId>
@@ -44,6 +57,10 @@
                 <exclusion>
                     <artifactId>cas-client-core</artifactId>
                     <groupId>org.jasig.cas</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>spring-aop</artifactId>
+                    <groupId>org.springframework</groupId>
                 </exclusion>
             </exclusions>
         </dependency>
@@ -76,6 +93,7 @@
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>
+            <version>${servlet.version}</version>
             <scope>provided</scope>
         </dependency>
 
@@ -100,13 +118,21 @@
             <version>3.1.0</version>
         </dependency>
 
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-web</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+
         <dependency>
             <groupId>org.apache.cxf</groupId>
-            <artifactId>cxf-rt-rs-security-cors</artifactId>
-            <version>2.6.1</version>
+            <artifactId>cxf-rt-frontend-jaxrs</artifactId>
+            <version>${cxf.version}</version>
         </dependency>
+
         <dependency>
-            <groupId>fi.vm.sade.auth</groupId>
+            <groupId>fi.vm.sade.authentication</groupId>
             <artifactId>authentication-api</artifactId>
             <version>${authentication.api.version}</version>
         </dependency>
@@ -143,6 +169,7 @@
         <dependency>
             <groupId>fi.vm.sade.generic</groupId>
             <artifactId>generic-test-support</artifactId>
+            <version>${generic.version}</version>
             <scope>test</scope>
             <exclusions>
                 <exclusion>
@@ -159,22 +186,26 @@
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-all</artifactId>
+            <version>${mockito.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-test</artifactId>
+            <version>${spring.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>fi.vm.sade.generic</groupId>
             <artifactId>dbunit-support</artifactId>
+            <version>${generic.version}</version>
             <scope>test</scope>
         </dependency>
 
         <dependency>
             <groupId>org.hsqldb</groupId>
             <artifactId>hsqldb</artifactId>
+            <version>${hsqldb.version}</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
@@ -198,7 +229,25 @@
                     </execution>
                 </executions>
             </plugin>
-
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>build-helper-maven-plugin</artifactId>
+                <version>1.4</version>
+                <executions>
+                    <execution>
+                        <id>add-querydsl-source</id>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>add-source</goal>
+                        </goals>
+                        <configuration>
+                            <sources>
+                                <source>${project.build.directory}/generated-sources/java</source>
+                            </sources>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
             <plugin>
                 <groupId>de.smartics.maven.plugin</groupId>
                 <artifactId>hibernate4-maven-plugin</artifactId>
@@ -233,19 +282,5 @@
 
         </plugins>
     </build>
-
-
-    <pluginRepositories>
-        <pluginRepository>
-            <id>smartics</id>
-            <url>http://www.smartics.eu/nexus/content/groups/public-group</url>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-        </pluginRepository>
-    </pluginRepositories>
 
 </project>
