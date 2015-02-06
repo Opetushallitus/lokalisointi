@@ -40,7 +40,7 @@ public class CorsRequestFilter implements Filter {
                 filterConfig.getServletContext());
         isDev = "dev".equals(authMode);
         LOG.info("Cors filter startied in (dev mode=) " + isDev + " mode. Env 'cors.allow-origin.lokalisointi' == " + allowOrigin);
-        
+
         if (allowOrigin != null) {
             allowOrigins = allowOrigin.split(",");
         }
@@ -64,7 +64,7 @@ public class CorsRequestFilter implements Filter {
                     res.addHeader("Access-Control-Allow-Methods",
                             "POST, GET, OPTIONS, PUT, DELETE, HEAD");
                     res.addHeader("Access-Control-Allow-Headers",
-                            "X-PINGOTHER, Origin, X-Requested-With, Content-Type, Accept");
+                            "X-PINGOTHER, Origin, X-Requested-With, Content-Type, Accept, Caller-Id");
                     res.addHeader("Access-Control-Max-Age", "1728000");
                 }
             }
@@ -80,7 +80,7 @@ public class CorsRequestFilter implements Filter {
                         LOG.debug("  checking: {} against - {}", headerOrigin, origin);
                         originMatch = originMatch || headerOrigin.contains(origin);
                     }
-                   
+
                     if (originMatch) {
                         LOG.debug("  origin match! fixing PRODUCTION CORS --> allow: '{}'", headerOrigin);
 
@@ -90,7 +90,7 @@ public class CorsRequestFilter implements Filter {
                         res.addHeader("Access-Control-Allow-Methods",
                                 "POST, GET, OPTIONS, PUT, DELETE, HEAD");
                         res.addHeader("Access-Control-Allow-Headers",
-                                "X-PINGOTHER, Origin, X-Requested-With, Content-Type, Accept");
+                            "X-PINGOTHER, Origin, X-Requested-With, Content-Type, Accept, Caller-Id");
                         res.addHeader("Access-Control-Max-Age", "1728000");
                     } else {
                         LOG.info("Original uri={} is not in allowed uris list... sorry.", headerOrigin);
