@@ -11,7 +11,7 @@
     <parent>
         <groupId>fi.vm.sade.generic</groupId>
         <artifactId>build-parent</artifactId>
-        <version>9.0-SNAPSHOT</version>
+        <version>13.0-SNAPSHOT</version>
     </parent>
 
     <properties>
