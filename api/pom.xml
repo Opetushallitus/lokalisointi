@@ -10,7 +10,7 @@
     <parent>
         <groupId>fi.vm.sade.lokalisointi</groupId>
         <artifactId>pom</artifactId>
-        <version>12.0</version>
+        <version>13.0-SNAPSHOT</version>
     </parent>
 
     <dependencies>
