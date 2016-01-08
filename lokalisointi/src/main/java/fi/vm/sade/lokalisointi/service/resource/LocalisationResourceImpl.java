@@ -135,6 +135,7 @@ public class LocalisationResourceImpl implements LocalisationResource {
     }
 
     // POST /localisation
+    @Secured({ROLE_CRUD})
     @Override
     public LocalisationRDTO createLocalisation(LocalisationRDTO data) {
         LOG.debug("createLocalisation({})", data);
