@@ -13,7 +13,7 @@
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  */
 
-angular.module('app',
+var app = angular.module('app',
         [
             'app.services',
             'loading',
@@ -21,6 +21,7 @@ angular.module('app',
             'ngResource',
             'ngSanitize',
             'ngAnimate',
+            'ngCookies',
             'ui.bootstrap',
             'debounce',
             'ngGrid'
@@ -28,10 +29,17 @@ angular.module('app',
 
 angular.module('app').value("globalConfig", window.CONFIG);
 
+app.run(function($http, $cookies) {
+    $http.defaults.headers.common['clientSubSystemCode'] = "lokalisointi.frontend";
+    if($cookies['CSRF']) {
+        $http.defaults.headers.common['CSRF'] = $cookies['CSRF'];
+    }
+})
+
 /**
  * Main controller to manage translations.
  */
-angular.module('app').controller('AppCtrl', ['$scope', '$q', '$log', '$modal', 'LocalisationService', 'debounce', '$filter', '$templateCache',
+app.controller('AppCtrl', ['$scope', '$q', '$log', '$modal', 'LocalisationService', 'debounce', '$filter', '$templateCache',
     function($scope, $q, $log, $modal, LocalisationService, debounce, $filter, $templateCache) {
 
         $log.info("AppCtrl()");
