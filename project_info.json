@@ -8,7 +8,7 @@
   "csrf": "front: ok, backend: ?",
 
   "projects": [
-    {"name": "lokalisointi-web", "uses": "cas lokalisointi"},
-    {"name": "lokalisointi", "uses": ""}
+    {"name": "lokalisointi-web", "uses": "cas lokalisointi-rest"},
+    {"name": "lokalisointi-rest", "uses": ""}
   ]
 }
