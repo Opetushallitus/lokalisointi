@@ -38,11 +38,11 @@ activeMq.targetDestination.learningopportunityprovider.public=fi.vm.sade.learnin
 activeMq.targetDestination.organisaatio=fi.vm.sade.organisaatio.service
 activeMq.targetDestinationAdmin.tarjonta=fi.vm.sade.tarjonta.admin.service
 activeMq.targetDestinationPublic.tarjonta=fi.vm.sade.tarjonta.public.service
-cas.callback.lokalisointi-service=http://{{ lokalisointi_host | default("${server.name}") }}:{{ lokalisointi_port | default("8319") }}/lokalisointi
-cas.callback.organisaatio-app=http://{{ organisaatio_host | default("${server.name}") }}:{{ organisaatio_port | default("8301") }}/organisaatio-app
-cas.callback.organisaatio-service=http://{{ organisaatio_host | default("${server.name}") }}:{{ organisaatio_port | default("8301") }}/organisaatio-service
-cas.callback.authentication-service=http://{{ authentication_host | default("${server.name}") }}:{{ authentication_port | default("8308") }}/authentication-service
-cas.callback.registration-ui=http://{{ authentication_host | default("${server.name}") }}:{{ authentication_port | default("8308") }}/registration-ui
+cas.callback.lokalisointi-service=http://{{ cluster_lokalisointi_host | default("${server.name}") }}:{{ cluster_lokalisointi_port | default("8319") }}/lokalisointi
+cas.callback.organisaatio-app=http://{{ cluster_organisaatio_host | default("${server.name}") }}:{{ cluster_organisaatio_port | default("8301") }}/organisaatio-app
+cas.callback.organisaatio-service=http://{{ cluster_organisaatio_host | default("${server.name}") }}:{{ cluster_organisaatio_port | default("8301") }}/organisaatio-service
+cas.callback.authentication-service=http://{{ cluster_authentication_host | default("${server.name}") }}:{{ cluster_authentication_port | default("8308") }}/authentication-service
+cas.callback.registration-ui=http://{{ cluster_authentication_host | default("${server.name}") }}:{{ cluster_authentication_port | default("8308") }}/registration-ui
 cas.group-role-attribute=cn
 cas.group-search-base=ou\=groups
 cas.group-search-filter=(uniqueMember\={0})
