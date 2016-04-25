@@ -26,19 +26,15 @@
         <script src="../lib/jquery-1.10.2.min.js"></script>
         <script src="../lib/jquery-ui.min.js"></script>
 
-        <!--
-          Environment configuration file(s): ext/* - development only - see actual values from service filters.
-        -->
-        <script src="../ext/js/env-configuration.js"></script>
+        <script src="../lib/oph_urls.js/index.js"></script>
+        <script src="../js/lokalisointi-web-oph.js"></script>
+
+        <script src="../js/env-configuration.js"></script>
 
         <!--
         Application configuration file(s):
         -->
         <script src="../js/app-configuration.js"></script>
-        <!--
-         Developer configuration file(s):
-        -->
-        <script src="../dev/dev-configuration.js"></script>
 
         <!--
         Angular, see version.txt for version.
@@ -285,9 +281,9 @@
                     //
                     // Get current users authorisation info (/cas/myroles)
                     //
-                    console.log("** Loading authentication info; from: ", window.CONFIG.env.casUrl);
+                    var myrolesUrl = window.url("cas.myroles");
                     init_counter++;
-                    jQuery.ajax(window.CONFIG.env.casUrl, {
+                    jQuery.ajax(myrolesUrl, {
                         dataType: "json",
                         success: function(xhr, status) {
                             window.CONFIG.env["cas.myroles"] = xhr;
@@ -301,11 +297,9 @@
 
                     //
                     // Get current users authorisation info 
-                    // (window.CONFIG.env.lokalisointiRestUrl /lokalisointi/cxf/rest/v1/localisation/authorize)
-                    //
-                    console.log("** Calling mr. Authorize: ", window.CONFIG.env.lokalisointiRestUrl + "/authorize");
+                    var authorizeUrl = window.url("lokalisointi.authorize");
                     init_counter++;
-                    jQuery.ajax(window.CONFIG.env.lokalisointiRestUrl + "/authorize", {
+                    jQuery.ajax(authorizeUrl, {
                         dataType: "text",
                         xhrFields: {
                           withCredentials: true

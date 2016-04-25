@@ -1,0 +1,13 @@
+{
+  "name": "lokalisointi",
+  "version": "0.0.0",
+  "homepage": "https://github.com/Opetushallitus/lokalisointi",
+  "authors": [
+    "x"
+  ],
+  "license": "EUPL",
+  "private": true,
+  "dependencies": {
+    "oph_urls.js": "https://github.com/Opetushallitus/java-utils/blob/master/java-properties/javascript/oph_urls.js"
+  }
+}

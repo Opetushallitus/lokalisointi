@@ -20,11 +20,7 @@ app.factory('Localisations', function($log, $resource, globalConfig) {
 
     globalConfig.env.localisations = [];
 
-    var uri = globalConfig.env.lokalisointiRestUrl + "/:id";
-
-    $log.info("Localisations() - uri = ", uri);
-
-    return $resource(uri, {id: "@id"}, {
+    return $resource(window.url("lokalisointi.resource"), {id: "@id"}, {
         query: {
             method: 'GET',
             withCredentials: true,
@@ -41,7 +37,7 @@ app.factory('Localisations', function($log, $resource, globalConfig) {
             headers: {'Content-Type': 'application/json; charset=UTF-8'}
         },
         massUpdate: {
-            url: globalConfig.env.lokalisointiRestUrl + "/update",
+            url: window.url("lokalisointi.update"),
             method: 'POST',
             withCredentials: true,
             headers: {'Content-Type': 'application/json; charset=UTF-8'},
