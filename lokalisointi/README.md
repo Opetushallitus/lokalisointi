@@ -9,3 +9,10 @@ Running:
 Spy on requests:
 
         sudo tcpdump -A -i lo0 'tcp port 8319'
+
+# Intellij IDEA
+
+* Get ~/oph-configuration files from some environment
+* Add Local Tomcat Server configuration
+* Set context path /lokalisointi
+* Modify ./lokalisointi/src/main/webapp/META-INF/context.xml to include jdbc/lokalisointi as defined in ./src/main/resources/tomcat/conf/context.xml
