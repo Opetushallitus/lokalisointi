@@ -36,6 +36,7 @@ activeMq.targetDestination.organisaatio=fi.vm.sade.organisaatio.service
 activeMq.targetDestinationAdmin.tarjonta=fi.vm.sade.tarjonta.admin.service
 activeMq.targetDestinationPublic.tarjonta=fi.vm.sade.tarjonta.public.service
 cas.callback.lokalisointi-service=http://{{ cluster_lokalisointi_host | default("${server.name}") }}:{{ cluster_lokalisointi_port | default("8319") }}/lokalisointi
+cas.service.lokalisointi-service=https://{{host_lokalisointi | default("${host.virkailija}") }}/lokalisointi
 cas.group-role-attribute=cn
 cas.group-search-base=ou\=groups
 cas.group-search-filter=(uniqueMember\={0})
