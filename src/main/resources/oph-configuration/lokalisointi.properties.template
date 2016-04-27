@@ -26,7 +26,7 @@ cas.user-search-filter=(|(mail\={0})(uid\={0}))
 flyway.initOnMigrate=true
 jpa.schemaUpdate=validate
 jpa.showSql=false
-ldap.manager-dn=${ldap_manager_userdn}
+ldap.manager-dn={{ldap_manager_userdn}}
 ldap.url.with.base=ldap\://${host.ldap}/dc\=opintopolku,dc\=fi
 root.organisaatio.oid=1.2.246.562.10.00000000001
 web.url.cas=https\://${host.cas}/cas
