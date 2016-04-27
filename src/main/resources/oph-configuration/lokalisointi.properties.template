@@ -24,9 +24,6 @@ port.postgresql={{port_postgresql}}
 server.name={{ansible_hostname}}
 
 # Oletusarvoja
-accessRight.webservice.url.backend=https\://{{host_henkilo | default("${host.virkailija}") }}/authentication-service/services/accessRightService
-accessRightAdmin.webservice.url.backend=https\://{{host_henkilo | default("${host.virkailija}") }}/authentication-service/services/accessRightAdminService
-accessRightHistory.webservice.url.backend=https\://{{host_henkilo | default("${host.virkailija}") }}/authentication-service/services/accessRightHistoryService
 activemq.queue.name.log.error=Sade.Log_Error
 activemq.queue.name.log=Sade.Log
 activemq.queue.name.mail=Sade.Email
@@ -39,27 +36,13 @@ activeMq.targetDestination.organisaatio=fi.vm.sade.organisaatio.service
 activeMq.targetDestinationAdmin.tarjonta=fi.vm.sade.tarjonta.admin.service
 activeMq.targetDestinationPublic.tarjonta=fi.vm.sade.tarjonta.public.service
 cas.callback.lokalisointi-service=http://{{ cluster_lokalisointi_host | default("${server.name}") }}:{{ cluster_lokalisointi_port | default("8319") }}/lokalisointi
-cas.callback.organisaatio-app=http://{{ cluster_organisaatio_host | default("${server.name}") }}:{{ cluster_organisaatio_port | default("8301") }}/organisaatio-app
-cas.callback.organisaatio-service=http://{{ cluster_organisaatio_host | default("${server.name}") }}:{{ cluster_organisaatio_port | default("8301") }}/organisaatio-service
-cas.callback.authentication-service=http://{{ cluster_authentication_host | default("${server.name}") }}:{{ cluster_authentication_port | default("8308") }}/authentication-service
-cas.callback.registration-ui=http://{{ cluster_authentication_host | default("${server.name}") }}:{{ cluster_authentication_port | default("8308") }}/registration-ui
 cas.group-role-attribute=cn
 cas.group-search-base=ou\=groups
 cas.group-search-filter=(uniqueMember\={0})
 cas.sendRenew=false
 cas.user-search-base=ou\=people
 cas.user-search-filter=(|(mail\={0})(uid\={0}))
-cas.service.authentication-service=https\://{{host_henkilo | default("${host.virkailija}") }}/authentication-service
-cas.service.authentication-ui=https://{{host_henkilo | default("${host.virkailija}") }}/authentication-ui
-cas.service.lokalisointi=https://{{host_lokalisointi | default("${host.virkailija}") }}/lokalisointi
-cas.service.lokalisointi-service=https://{{host_lokalisointi | default("${host.virkailija}") }}/lokalisointi
-cas.service.organisaatio-app==https://{{host_organisaatio | default("${host.virkailija}") }}/organisaatio-app
-cas.service.organisaatio-service=https\://{{host_organisaatio | default("${host.virkailija}") }}/organisaatio-service
-cas.service.registration-ui=https://{{host_henkilo | default("${host.virkailija}") }}/registration-ui
-customAttribute.webservice.url.backend=https://{{host_henkilo | default("${host.virkailija}") }}/authentication-service/services/customAttributeService
 flyway.initOnMigrate=true
-koodi.public.webservice.url.backend=https://{{ host_koodisto | default("${host.virkailija}") }}/koodisto-service/services/koodiService
-koodisto.public.webservice.url.backend=https://{{ host_koodisto | default("${host.virkailija}") }}/koodisto-service/services/koodistoService
 jpa.schemaUpdate=validate
 jpa.showSql=false
 ldap.cache.size=10000
@@ -71,9 +54,6 @@ ldap.search.base.people=ou=People,dc=opintopolku,dc=fi
 ldap.url=ldap://${host.ldap}
 ldap.url.with.base=ldap\://${host.ldap}/dc\=opintopolku,dc\=fi
 log4j.properties.file=${user.home.conf}/log4j.properties
-oid.rest.url.backend=${host.ilb}/oid-service/rest/oid
-oid.webservice.url.backend=${host.ilb}/services/oidService
 root.organisaatio.oid=1.2.246.562.10.00000000001
 user.home.conf=${user.home}/oph-configuration
-user.webservice.url.backend=https\://{{host_henkilo | default("${host.virkailija}") }}/authentication-service/services/userService
 web.url.cas=https\://${host.cas}/cas
