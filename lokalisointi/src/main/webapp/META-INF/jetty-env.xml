@@ -9,7 +9,7 @@
                 <Set name="User"><SystemProperty name="dbuser" default="oph"/></Set>
                 <Set name="Password"><SystemProperty name="dbpasswd" default="oph"/></Set>
                 <Set name="DatabaseName">lokalisointi</Set>
-                <Set name="ServerName"><SystemProperty name="dbhost" default="localhost"/></Set>
+                <Set name="ServerName"><SystemProperty name="dbhost" default="taulu.hard.ware.fi"/></Set>
                 <Set name="PortNumber"><SystemProperty name="dbport" default="5432"/></Set>
             </New>
         </Arg>

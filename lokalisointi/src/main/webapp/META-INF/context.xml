@@ -1,2 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Context antiJARLocking="true" path="/lokalisointi"/>
+<Context antiJARLocking="true" path="/lokalisointi">
+    <!-- Default set of monitored resources -->
+    <WatchedResource>WEB-INF/web.xml</WatchedResource>
+
+    <Resource name="jdbc/lokalisointi"
+              auth="Container"
+              type="javax.sql.DataSource"
+              initialSize="5"
+              maxActive="50"
+              minIdle="5"
+              maxIdle="10"
+              validationQuery="SELECT 1"
+              testOnBorrow="true"
+              removeAbandoned="true"
+              removeAbandonedTimeout="300"
+              username="oph" password="oph"
+              driverClassName="org.postgresql.Driver"
+              url="jdbc:postgresql://taulu.hard.ware.fi:5432/lokalisointi"/>
+    </Context>

@@ -14,12 +14,13 @@
                 <prop key="cas_key">lokalisointi-service</prop>
                 <prop key="cas_service">${cas.service.lokalisointi-service}</prop>
                 <prop key="spring_security_default_access">permitAll</prop>
+                <prop key="cas.service.lokalisointi-service">http://localhost:8319/lokalisointi</prop>
             </util:properties>
         </property>
     </bean>
 
     <context:property-placeholder
-        location="classpath:lokalisointi.properties, file:///${user.home:''}/oph-configuration/common.properties, file:///${user.home:''}/oph-configuration/lokalisointi.properties"
+        location="classpath:lokalisointi.properties"
         ignore-resource-not-found="true" properties-ref="defaultProps"/>
 
 <!--
