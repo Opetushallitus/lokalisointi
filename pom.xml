@@ -4,7 +4,7 @@
 
     <groupId>fi.vm.sade.lokalisointi</groupId>
     <artifactId>lokalisointi-project</artifactId>
-    <version>13.0-SNAPSHOT</version>
+    <version>14.0-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>Lokalisointi :: Parent</name>
 
