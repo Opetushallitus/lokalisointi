@@ -11,14 +11,14 @@
     <parent>
         <groupId>fi.vm.sade.generic</groupId>
         <artifactId>build-parent</artifactId>
-        <version>13.0-SNAPSHOT</version>
+        <version>15.0-SNAPSHOT</version>
     </parent>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.build.resourceEncoding>UTF-8</project.build.resourceEncoding>
 
-        <generic.version>9.0-SNAPSHOT</generic.version>
+        <generic.version>9.5-SNAPSHOT</generic.version>
         <log.version>8.0-SNAPSHOT</log.version>
 	<authentication.api.version>10.0-SNAPSHOT</authentication.api.version>
     </properties>
