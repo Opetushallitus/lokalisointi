@@ -70,7 +70,7 @@ public class CopyLocalisationsFrom {
     private static final Logger LOG = LoggerFactory.getLogger(CopyLocalisationsFrom.class);
 
     public CopyLocalisationsFrom() {
-        LOG.info("CopyLocalisationsFrom()");
+        LOG.debug("CopyLocalisationsFrom()");
     }
 
     // @Value("${lokalisointi.copy.from:https://itest-virkailija.oph.ware.fi/lokalisointi/cxf/rest/v1/localisation}")
