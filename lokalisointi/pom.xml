@@ -19,6 +19,18 @@
     </properties>
 
     <dependencies>
+        <!-- Hikari CP -->
+        <dependency>
+            <groupId>com.zaxxer</groupId>
+            <artifactId>HikariCP</artifactId>
+            <version>2.4.7</version>
+        </dependency>
+        <!-- Postgresql -->
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>9.4.1209</version>
+        </dependency>
 
         <dependency>
                 <groupId>net.sf.ehcache</groupId>
