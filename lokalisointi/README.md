@@ -15,4 +15,3 @@ Spy on requests:
 * Get ~/oph-configuration files from some environment
 * Add Local Tomcat Server configuration
 * Set context path /lokalisointi
-* Modify ./lokalisointi/src/main/webapp/META-INF/context.xml to include jdbc/lokalisointi as defined in ./src/main/resources/tomcat/conf/context.xml
