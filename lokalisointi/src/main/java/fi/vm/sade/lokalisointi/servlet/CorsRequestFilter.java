@@ -90,7 +90,7 @@ public class CorsRequestFilter implements Filter {
                         res.addHeader("Access-Control-Allow-Methods",
                                 "POST, GET, OPTIONS, PUT, DELETE, HEAD");
                         res.addHeader("Access-Control-Allow-Headers",
-                            "X-PINGOTHER, Origin, X-Requested-With, Content-Type, Accept, Caller-Id");
+                            "X-PINGOTHER, Origin, X-Requested-With, Content-Type, Accept, Caller-Id, clientSubSystemCode, CSRF, ID");
                         res.addHeader("Access-Control-Max-Age", "1728000");
                     } else {
                         LOG.info("Original uri={} is not in allowed uris list... sorry.", headerOrigin);
