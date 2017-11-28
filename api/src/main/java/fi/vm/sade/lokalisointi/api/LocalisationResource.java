@@ -134,7 +134,7 @@ public interface LocalisationResource {
      * @return update result as string, ex. "{updated: XXX, deleted: XXX, created: XXX, errors: XXX}"
      */
     @POST
-    @Path("update")
+    @Path("/update")
     @Produces(MediaType.APPLICATION_JSON + ";charset=UTF-8")
     @Consumes(MediaType.APPLICATION_JSON + ";charset=UTF-8")
     @ApiOperation(value = "Päivitä lokalisaatiot.",
