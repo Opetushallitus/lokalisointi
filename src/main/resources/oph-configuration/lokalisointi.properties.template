@@ -9,9 +9,8 @@
 auth.mode={{auth_mode}}
 env.loglevel={{env_loglevel}}
 host.cas={{host_cas}}
-host.ldap={{host_ldap}}
+host.alb={{host_alb}}
 host.virkailija={{host_virkailija}}
-ldap.manager-password={{ldap_manager_password}}
 server.name={{ansible_hostname}}
 
 # Oletusarvoja
@@ -26,8 +25,6 @@ cas.user-search-filter=(|(mail\={0})(uid\={0}))
 flyway.initOnMigrate=true
 jpa.schemaUpdate=validate
 jpa.showSql=false
-ldap.manager-dn={{ldap_manager_userdn}}
-ldap.url.with.base=ldap\://${host.ldap}/dc\=opintopolku,dc\=fi
 root.organisaatio.oid=1.2.246.562.10.00000000001
 web.url.cas=https\://${host.cas}/cas
 
