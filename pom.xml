@@ -59,7 +59,7 @@
     <repositories>
       <repository>
         <id>oph-sade-artifactory-snapshots</id>
-        <url>http://penaali.hard.ware.fi/artifactory/oph-sade-snapshot-local</url>
+        <url>https://artifactory.opintopolku.fi/artifactory/oph-sade-snapshot-local</url>
         <snapshots>
           <enabled>true</enabled>
         </snapshots>
@@ -70,7 +70,7 @@
 
       <repository>
         <id>oph-sade-artifactory-releases</id>
-        <url>http://penaali.hard.ware.fi/artifactory/oph-sade-release-local</url>
+        <url>https://artifactory.opintopolku.fi/artifactory/oph-sade-release-local</url>
         <snapshots>
           <enabled>false</enabled>
         </snapshots>
@@ -82,7 +82,7 @@
       <repository>
         <id>oph-sade-artifactory</id>
         <name>oph-sade-artifactory-3rd-party</name>
-        <url>http://penaali.hard.ware.fi/artifactory/libs-3rd-party</url>
+        <url>https://artifactory.opintopolku.fi/artifactory/libs-3rd-party</url>
       </repository>
     </repositories>
 
@@ -90,7 +90,7 @@
       <pluginRepository>
 	<id>oph-sade-artifactory</id>
         <name>oph-sade-artifactory-releases</name>
-        <url>http://penaali.hard.ware.fi/artifactory/libs-3rd-party</url>
+        <url>https://artifactory.opintopolku.fi/artifactory/libs-3rd-party</url>
       </pluginRepository>
 
       <pluginRepository>
@@ -109,14 +109,14 @@
     <repositories>
         <repository>
             <id>oph-sade-artifactory-snapshots</id>
-            <url>http://penaali.hard.ware.fi/artifactory/oph-sade-snapshot-local</url>
+            <url>https://artifactory.opintopolku.fi/artifactory/oph-sade-snapshot-local</url>
             <snapshots>
                 <enabled>true</enabled>
             </snapshots>
         </repository>
         <repository>
             <id>oph-sade-artifactory-releases</id>
-            <url>http://penaali.hard.ware.fi/artifactory/oph-sade-release-local</url>
+            <url>https://artifactory.opintopolku.fi/artifactory/oph-sade-release-local</url>
         </repository>
     </repositories>
 
@@ -124,7 +124,7 @@
       <pluginRepository>
 	<id>oph-sade-artifactory</id>
         <name>oph-sade-artifactory-releases</name>
-        <url>http://penaali.hard.ware.fi/artifactory/libs-3rd-party</url>
+        <url>https://artifactory.opintopolku.fi/artifactory/libs-3rd-party</url>
       </pluginRepository>
     </pluginRepositories>
 -->
