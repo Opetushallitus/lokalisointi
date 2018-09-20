@@ -1,0 +1,36 @@
+sudo: required
+language: java
+jdk:
+- oraclejdk8
+services:
+- docker
+cache:
+  directories:
+  - $HOME/.m2
+env:
+  global:
+  # AWS_ACCESS_KEY_ID
+  - secure: "ZVfxknmddnEOK2KtVCY31HI0twwKnAbOwpHCD1IwRaMS0xfOCj30WObbBGWzYQ7U6NMJSo083Qx1EyVF0eiDHP4D/RF077bCdSA6wkc/v2WVeJQSML66eIqwMohKfX7cVn/7sh0QuJjBmYimZO3rKgxdMekE5e+mpoma9PeZk3mdojujgFh3Q2rX8fFT1l6wE4O2AEblaw7Ex1xco5d3rCeXvsOJIEI6hgyFnzmph5j7kACBCobpYIdNAsikuViEWMpaAyI13RjY3XCxuoxZbX0OVNAxLxLkqEbnjRJXb3dbEvAOl8yYM9oLlQHx5y3ugLutb47WalUjPE55Qlu/zH+QimLdyh6BwTAWzHHs86vmocfoXVCVVUzupmtYhSUM6p3F9ASpxPtYJa8EH6HHvs8NRcBvrCBTRZztFccr4Ra1PPGDoKWVZPrVJlfHXTAbnDdHMCVD0Bp5ZX8xiP+MaODkN6dmZpB0wtzg129Qf4RR3OHE/DX/BZ01NUjOqi4Exx2VDoAgcpQGtq7aCVygAPixicmFrbjwGDQOfUFLbfQRAB3n3VOtIZYaBEFN8mNPWedDt896aIC7YDaZQDV9hWL5qfAIBr2VygXXAoVNolXuI0sebTr3wS/kQ3tQ1m8oYDi5wikBBx53Uu4seKzBKamxbI/9PcBorHKojNVf5hE="
+  # AWS_SECRET_ACCESS_KEY
+  - secure: "W7rOvRBxpKKc+8JasOpZX8lBTDawo1yohUkpRylwKnAQ3RWbJ/rJYq4cqB8ZSq8mjmG257XEn472IymhakDRi1TTIVm4v6SwdsbsIBI/lVbrXgS3sWH+No8HgtU0RaJ0+q6zcKIXUyA+YBqYnorwuz5mEh1JYlIfXoGbBClUN9nI117FVi0UTUJCDEfDuY0DSIMQX3aMWuNzMCTnDc6Va7/W1RhmW7POCWrUivaL/zYIMTeRvBMjjv+hXkYMaQ96SrWc8E3lrKavqE7WMkK/jpKPfiatWLNg4bJB94/+Wz+qzphdvVYnvW6grN0ViuNSYg/Eqa6RX0IXpufHWceh54BB3oGELdVS1lUvYRe9fEP5/Zk4ITuABtIFulliaG4ljlDbd9oVeEzTCuCACGwLSKI1l0qR1pyAntJ47/C4rH2y/Nc+e0lp7Bfg4Ue+e1VzWnGlqhjmrnxDmw/L9PNipdarogmG74FrZ/MR3UCvloGB1g7oKDf5RaOidwVJG/jlP5lR+nbjeabv77sPCgX4JX9/90SyOri8w8aTvXdAzV7zqJxYuDfkpfT48Bwhg01DPP7LOWL5/GKpmBuUg9McOtawwohgyUahU5Wwde9izDjmbKCLz/8vDg8qIA+hAwDdbfbDMbkIN0MInZ7y6wx5lc+kH12A6MUL1TIxhUVaBw8="
+
+install:
+- git clone https://github.com/Opetushallitus/ci-tools.git
+- source ci-tools/common/setup-tools.sh
+- export ARTIFACT_NAME="lokalisointi"
+
+script:
+- mvn clean install -B -Dbranch=${TRAVIS_BRANCH} -Drevision=${TRAVIS_COMMIT} -DbuildNumber=${TRAVIS_BUILD_NUMBER}
+
+- mv lokalisointi/target/lokalisointi-*.war $DOCKER_BUILD_DIR/artifact/${ARTIFACT_NAME}.war
+- cp -vr src/main/resources/oph-configuration $DOCKER_BUILD_DIR/config/
+
+- export BASE_IMAGE="base-legacy:0.1"
+- ./ci-tools/common/pull-image.sh
+- ./ci-tools/build/build-war.sh $ARTIFACT_NAME
+
+deploy:
+  provider: script
+  script: ./ci-tools/build/upload-image.sh $ARTIFACT_NAME
+  on:
+    all_branches: true
