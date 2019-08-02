@@ -30,7 +30,7 @@ var app = angular.module('app',
 angular.module('app').value("globalConfig", window.CONFIG);
 
 app.run(function($http, $cookies) {
-    $http.defaults.headers.common['clientSubSystemCode'] = "lokalisointi.frontend";
+    $http.defaults.headers.common['Caller-Id'] = "1.2.246.562.10.00000000001.lokalisointi.frontend";
     if($cookies['CSRF']) {
         $http.defaults.headers.common['CSRF'] = $cookies['CSRF'];
     }
