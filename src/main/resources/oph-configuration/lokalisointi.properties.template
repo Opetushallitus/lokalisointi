@@ -29,8 +29,8 @@ root.organisaatio.oid=1.2.246.562.10.00000000001
 web.url.cas=https\://${host.cas}/cas
 
 lokalisointi-service.postgresql.url=jdbc:postgresql://{{host_postgresql_lokalisointi}}:{{port_postgresql}}/lokalisointi
-lokalisointi-service.postgresql.user={{host_postgresql_lokalisointi_user}}
-lokalisointi-service.postgresql.password={{host_postgresql_lokalisointi_password}}
+lokalisointi-service.postgresql.user={{postgres_app_user}}
+lokalisointi-service.postgresql.password={{host_postgresql_lokalisointi_app_password}}
 lokalisointi-service.postgresql.maxactive={{host_postgresql_lokalisointi_max_active}}
 lokalisointi-service.postgresql.maxwait={{host_postgresql_lokalisointi_max_wait}}
 lokalisointi-service.postgresql.maxlifetimemillis=60000
