@@ -20,27 +20,30 @@ app.factory('Localisations', function($log, $resource, globalConfig) {
 
     globalConfig.env.localisations = [];
 
+    console.log('globalConfig.env.callerId=' + globalConfig.env.callerId);
+
     return $resource(window.url("lokalisointi.resource"), {id: "@id"}, {
         query: {
             method: 'GET',
             withCredentials: true,
-            isArray: true
+            isArray: true,
+            headers: {'Caller-id': globalConfig.env.callerId}
         },
         update: {
             method: 'PUT',
             withCredentials: true,
-            headers: {'Content-Type': 'application/json; charset=UTF-8'}
+            headers: {'Content-Type': 'application/json; charset=UTF-8','Caller-id': globalConfig.env.callerId}
         },
         save: {
             method: 'POST',
             withCredentials: true,
-            headers: {'Content-Type': 'application/json; charset=UTF-8'}
+            headers: {'Content-Type': 'application/json; charset=UTF-8','Caller-id': globalConfig.env.callerId}
         },
         massUpdate: {
             url: window.url("lokalisointi.update"),
             method: 'POST',
             withCredentials: true,
-            headers: {'Content-Type': 'application/json; charset=UTF-8'},
+            headers: {'Content-Type': 'application/json; charset=UTF-8','Caller-id': globalConfig.env.callerId},
             isArray: true
         }
     });

@@ -293,6 +293,8 @@
                     };
 
 
+                    console.log('window.CONFIG.env.callerId=' + window.CONFIG.env.callerId)
+
                     //
                     // Get current users authorisation info (/cas/myroles)
                     //
@@ -300,6 +302,9 @@
                     init_counter++;
                     jQuery.ajax(myrolesUrl, {
                         dataType: "json",
+                        headers: {
+                          'Caller-id': window.CONFIG.env.callerId
+                        },
                         success: function(xhr, status) {
                             window.CONFIG.env["cas.myroles"] = xhr;
                             initFunction("AUTHENTICATION", xhr, status);
@@ -316,6 +321,9 @@
                     init_counter++;
                     jQuery.ajax(authorizeUrl, {
                         dataType: "text",
+                        headers: {
+                            'Caller-id': window.CONFIG.env.callerId
+                        },
                         xhrFields: {
                           withCredentials: true
                         },
