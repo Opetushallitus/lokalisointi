@@ -1,340 +1,365 @@
 <!doctype html>
 <html lang="fi">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="description" content="Lokalisointi">
-        <meta name="author" content="Opetushallitus">
-        <title>Lokalisointi</title>
-        <script>
-            if (!(window.console && console.log)) {
-                console = {
-                    log: function() {
-                    },
-                    debug: function() {
-                    },
-                    info: function() {
-                    },
-                    warn: function() {
-                    },
-                    error: function() {
-                    }
-                };
-            }
-        </script>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Lokalisointi">
+    <meta name="author" content="Opetushallitus">
+    <title>Lokalisointi</title>
+    <script>
+        if (!(window.console && console.log)) {
+            console = {
+                log: function () {
+                },
+                debug: function () {
+                },
+                info: function () {
+                },
+                warn: function () {
+                },
+                error: function () {
+                }
+            };
+        }
+    </script>
 
-        <script src="../lib/jquery-1.10.2.min.js"></script>
-        <script src="../lib/jquery-ui.min.js"></script>
+    <script src="../lib/jquery-1.10.2.min.js"></script>
+    <script src="../lib/jquery-ui.min.js"></script>
 
-        <script src="../lib/oph_urls.js/index.js"></script>
-        <script src="../js/lokalisointi-web-oph.js"></script>
+    <script src="../lib/oph_urls.js/index.js"></script>
+    <script src="../js/lokalisointi-web-oph.js"></script>
 
-        <script src="../js/env-configuration.js"></script>
+    <script src="../js/env-configuration.js"></script>
 
-        <!--
-        Application configuration file(s):
-        -->
-        <script src="../js/app-configuration.js"></script>
+    <!--
+    Application configuration file(s):
+    -->
+    <script src="../js/app-configuration.js"></script>
 
-        <!--
-        Angular, see version.txt for version.
-        -->
-        <script src="../lib/angular/angular.js"></script>
-        <script src="../lib/angular/angular-resource.js"></script>
-        <script src="../lib/angular/angular-route.js"></script>
-        <script src="../lib/angular/angular-sanitize.js"></script>
-        <script src="../lib/angular/angular-animate.js"></script>
-        <script src="../lib/angular/angular-cookies.js"></script>
+    <!--
+    Angular, see version.txt for version.
+    -->
+    <script src="../lib/angular/angular.js"></script>
+    <script src="../lib/angular/angular-resource.js"></script>
+    <script src="../lib/angular/angular-route.js"></script>
+    <script src="../lib/angular/angular-sanitize.js"></script>
+    <script src="../lib/angular/angular-animate.js"></script>
+    <script src="../lib/angular/angular-cookies.js"></script>
 
-        <script src="../js/ngGrid/ng-grid-2.0.7.min.js"></script>
+    <script src="../js/ngGrid/ng-grid-2.0.7.min.js"></script>
 
-        <script src="../lib/underscore/underscore.js"></script>
-        <script src="../lib/tinymce/tinymce.min.js"></script>
-        <script src="../lib/ui-angular-tinymce.js"></script>
+    <script src="../lib/underscore/underscore.js"></script>
+    <script src="../lib/tinymce/tinymce.min.js"></script>
+    <script src="../lib/ui-angular-tinymce.js"></script>
 
-        <script src="../js/shared/loading.js"></script>
+    <script src="../js/shared/loading.js"></script>
 
-        <script src="../js/services.js"></script>
-        <script src="../js/shared/debounce.js"></script>
-        <script src="../js/app.js"></script>
+    <script src="../js/services.js"></script>
+    <script src="../js/shared/debounce.js"></script>
+    <script src="../js/app.js"></script>
 
-        <script src="../lib/ui-bootstrap-tpls-0.6.0.js"></script>
+    <script src="../lib/ui-bootstrap-tpls-0.6.0.js"></script>
 
-        <link href="../lib/bootstrap-combined.min.css" rel="stylesheet">
-        <link href="../css/virkailija.css" rel="stylesheet"/>
-        <link href="../css/app.css" rel="stylesheet"/>
-        <link href="../js/ngGrid/ng-grid.min.css" rel="stylesheet"/>
+    <link href="../lib/bootstrap-combined.min.css" rel="stylesheet">
+    <link href="../css/virkailija.css" rel="stylesheet"/>
+    <link href="../css/app.css" rel="stylesheet"/>
+    <link href="../js/ngGrid/ng-grid.min.css" rel="stylesheet"/>
 
-        <script type="text/javascript" src="/virkailija-raamit/apply-raamit.js"></script>
-    </head>
+    <script type="text/javascript" src="/virkailija-raamit/apply-raamit.js"></script>
+</head>
 
-    <body data-ng-controller="AppCtrl">
+<body data-ng-controller="AppCtrl">
 
-        <div class="container" data-ng-if="model.info.length > 0">
-            <div data-ng-repeat="msg in model.info" data-ng-switch="msg.status">
-                <div data-ng-switch-when="OK" class="alert alert-success">
-                    <a class="close" data-dismiss="alert" data-ng-click="deleteMessage(msg)">×</a>
-                    OK {{ msg.message }}
-                    {{ timedDeleteMessage(msg)}}
-                </div>
-                <div data-ng-switch-when="ERROR" class="alert alert-error">
-                    <a class="close" data-dismiss="alert" data-ng-click="deleteMessage(msg)">×</a>
-                    ERROR
-                    <pre>{{msg| json }}</pre>
-                </div>
-                <div data-ng-switch-default class="alert alert-info">
-                    <a class="close" data-dismiss="alert" data-ng-click="deleteMessage(msg)">×</a>
-                    INFO {{ msg.message }}
-                    {{ timedDeleteMessage(msg)}}
-                </div>
-            </div>
+<div class="container" data-ng-if="model.info.length > 0">
+    <div data-ng-repeat="msg in model.info" data-ng-switch="msg.status">
+        <div data-ng-switch-when="OK" class="alert alert-success">
+            <a class="close" data-dismiss="alert" data-ng-click="deleteMessage(msg)">×</a>
+            OK {{ msg.message }}
+            {{ timedDeleteMessage(msg)}}
+        </div>
+        <div data-ng-switch-when="ERROR" class="alert alert-error">
+            <a class="close" data-dismiss="alert" data-ng-click="deleteMessage(msg)">×</a>
+            ERROR
+            <pre>{{msg| json }}</pre>
+        </div>
+        <div data-ng-switch-default class="alert alert-info">
+            <a class="close" data-dismiss="alert" data-ng-click="deleteMessage(msg)">×</a>
+            INFO {{ msg.message }}
+            {{ timedDeleteMessage(msg)}}
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid">
+
+    <form name="localisationsForm" novalidate>
+        <div>
+            <button class="btn" data-ng-click="reloadData()"><span class="icon-refresh"></span> Lataa käännökset
+                uudelleen
+            </button>
+            <button class="btn" data-ng-click="openCreationDialog()"><span class="icon-plus"></span> Luo uusi käännös
+            </button>
+            <button class="btn btn-primary" data-ng-click="saveAllModified()"><span class="icon-file"></span> Tallenna
+                kaikki muuttuneet ({{numChangedItems()}}) käännökset
+            </button>
+            <button class="btn btn-primary" data-ng-click="removeAllSelected()"><span class="icon-trash"></span> Poista
+                valitut ({{numSelected()}}) käännökset
+            </button>
+            <button class="btn" ng-click="openDialog()">Kopiointi</button>
+            <a href="/lokalisointi/cxf/rest/v1/localisation">Lataa (Save Link As...)</a>
         </div>
 
-        <div class="container-fluid">
+        <table>
+            <tr>
+                <td>-</td>
+                <td><input type="text" data-ng-model="model.filterCategory" ng-change="doFiltering()"
+                           placeholder="Kategoria filtteri"></td>
+                <td><input type="text" data-ng-model="model.filterKey" ng-change="doFiltering()"
+                           placeholder="Avain filtteri"></td>
+                <td><input type="text" data-ng-model="model.filterLocale" ng-change="doFiltering()"
+                           placeholder="Locale filtteri"></td>
+                <td><input type="text" data-ng-model="model.filterValue" ng-change="doFiltering()"
+                           placeholder="Arvo filtteri"></td>
+            </tr>
+        </table>
 
-            <form name="localisationsForm" novalidate>
-                <div>
-                    <button class="btn" data-ng-click="reloadData()"><span class="icon-refresh"></span> Lataa käännökset uudelleen</button>
-                    <button class="btn" data-ng-click="openCreationDialog()"><span class="icon-plus"></span> Luo uusi käännös</button>
-                    <button class="btn btn-primary" data-ng-click="saveAllModified()"><span class="icon-file"></span> Tallenna kaikki muuttuneet ({{numChangedItems()}}) käännökset</button>
-                    <button class="btn btn-primary" data-ng-click="removeAllSelected()"><span class="icon-trash"></span> Poista valitut ({{numSelected()}}) käännökset</button>
-                    <button class="btn" ng-click="openDialog()">Kopiointi</button>
-                    <a href="/lokalisointi/cxf/rest/v1/localisation">Lataa (Save Link As...)</a>
-                </div>
+        <div class="gridStyle" ng-grid="model.gridOptions"></div>
+    </form>
 
-                <table>
-                    <tr>
-                        <td>-</td>
-                        <td><input type="text" data-ng-model="model.filterCategory" ng-change="doFiltering()" placeholder="Kategoria filtteri"></td>
-                        <td><input type="text" data-ng-model="model.filterKey" ng-change="doFiltering()" placeholder="Avain filtteri"></td>
-                        <td><input type="text" data-ng-model="model.filterLocale" ng-change="doFiltering()" placeholder="Locale filtteri" ></td>
-                        <td><input type="text" data-ng-model="model.filterValue" ng-change="doFiltering()" placeholder="Arvo filtteri" ></td>
-                    </tr>
-                </table>
+</div>
 
-                <div class="gridStyle" ng-grid="model.gridOptions"></div>
-            </form>
-
-        </div>
-
-        <div data-ng-controller="LoadingCtrl"
-             data-ng-show="loading"
-             id="ajax-loader"
-             class="{{ isModal() ? 'max' : 'min'}}">
-            <div>
-                <img alt="Ladataan..." src="../img/ajax-loader-big.gif" />
-                <span>Ladataan...</span>
-            </div>
-        </div>
+<div data-ng-controller="LoadingCtrl"
+     data-ng-show="loading"
+     id="ajax-loader"
+     class="{{ isModal() ? 'max' : 'min'}}">
+    <div>
+        <img alt="Ladataan..." src="../img/ajax-loader-big.gif"/>
+        <span>Ladataan...</span>
+    </div>
+</div>
 
 
-        <script type="text/ng-template" id="localisationTransferDialog2.html">
-            <div>
-            <div class="modal-header">
+<script type="text/ng-template" id="localisationTransferDialog2.html">
+    <div>
+        <div class="modal-header">
             <h3>Käännösten siirtäminen ympäristöstä toiseen</h3>
-            </div>
+        </div>
 
-            <div class="modal-body">
+        <div class="modal-body">
             <div>Käännösten kopiointi annetusta ympäristöstä 'TÄHÄN' ympäristöön.</div>
 
             <div>
-            Lähde :
+                Lähde :
 
-            <select ng-model="model.copyFrom">
-            <option value="">-- Valitse mistä käännökset kopioidaan --</option>
-            <option value="../localisations.json">(esiladatut)</option>
-            <option value="https://virkailija.untuvaopintopolku.fi/lokalisointi/cxf/rest/v1/localisation?value=NOCACHE">Untuvalta</option>
-            <option value="https://virkailija.hahtuvaopintopolku.fi/lokalisointi/cxf/rest/v1/localisation?value=NOCACHE">Hahtuvalta</option>
-            <option value="https://virkailija.testiopintopolku.fi/lokalisointi/cxf/rest/v1/localisation?value=NOCACHE">Pallerolta (QA)</option>
-            <option value="https://virkailija.opintopolku.fi/lokalisointi/cxf/rest/v1/localisation?value=NOCACHE">Tuotannosta</option>
-            </select>
+                <select ng-model="model.copyFrom">
+                    <option value="">-- Valitse mistä käännökset kopioidaan --</option>
+                    <option value="../localisations.json">(esiladatut)</option>
+                    <option value="https://virkailija.untuvaopintopolku.fi/lokalisointi/cxf/rest/v1/localisation?value=NOCACHE">
+                        Untuvalta
+                    </option>
+                    <option value="https://virkailija.hahtuvaopintopolku.fi/lokalisointi/cxf/rest/v1/localisation?value=NOCACHE">
+                        Hahtuvalta
+                    </option>
+                    <option value="https://virkailija.testiopintopolku.fi/lokalisointi/cxf/rest/v1/localisation?value=NOCACHE">
+                        Pallerolta (QA)
+                    </option>
+                    <option value="https://virkailija.opintopolku.fi/lokalisointi/cxf/rest/v1/localisation?value=NOCACHE">
+                        Tuotannosta
+                    </option>
+                </select>
             </div>
-    
-            <div>
-            Sovellus: 
-            
-            <select ng-model="model.copySubset" ng->
-            <option value="">-- Valitse sovellus jonka käännökset kopioidaan --</option>
-            <option value="&category=tarjonta">Tarjonta</option>
-            <option value="&category=virkailijaraamit">Virkailijaraamit</option>
-            <option value="&category=osoitepalvelu">Osoitepalvelu</option>
-            <option value="&category=tiedonsiirto">Tiedonsiirto</option>
-            <option value="&category=suoritusrekisteri">Suoritusrekisteri</option>
-            <option value="&category=rekisterointi">Rekisteröinti</option>
-            <option value="&category=organisaatio">Organisaatioiden hallintapalvelu</option>
-            <option value="&category=kjhh">Käyttäjähallinta</option>
-            <option value="&category=valintalaskenta">Valintalaskenta</option>
-            <option value="&category=valintaperusteet">Valintaperusteet</option>
-            <option value="&category=hakulomakkeenhallinta">Hakulomakkeen hallinta</option>
-            <option value="&category=koute">Koute</option>
-            <option value="&category=oti">Tutkintoon ilmoittautuminen</option>
-            <option value="&category=virkailijan-tyopoyta">Virkailijan työpöytä</option>
-            <option value="&category=eperusteet">ePerusteet</option>
-            <option value="&category=eperusteet-ylops">ePerusteet-ylops</option>
-            <option value="&category=eperusteet-amosaa">ePerusteet-amosaa</option>
-            <option value="&category=eperusteet-opintopolku">ePerusteet-opintopolku</option>
-            <option value="&category=henkilo-ui">Henkilö UI</option>
-            <option value="&category=koski">Koski</option>
-            <option value="&category=yki">Yleiset kielitutkinnot</option>
-            <option value="&category=ehoks">eHoks</option>
-            <option value="&category=varda-rekisterointi">Varda-rekisteröinti</option>
-            <option value="&category=oiva">Oiva</option>
-            <option value="&category=konfo">Konfo</option>
-            <option value="&category=varda-virkailija">Varda-virkailija</option>
-            <option value="&category=varda-public">Varda-public</option>
-            <option value="&category=varda-huoltaja">Varda-huoltaja</option>
-            </select>
-            </div>
-    
 
             <div>
-            <input type="checkbox" data-ng-model="model.force"> Pakotettu päivitys (kirjoittaa päälle vaikka olisi uudempi olemassa)<br/>
-            <input type="text" data-ng-model="model.copyFrom" placeholder="localisointi REST uri tähän"  width="80" />
+                Sovellus:
+
+                <select ng-model="model.copySubset" ng->
+                    <option value="">-- Valitse sovellus jonka käännökset kopioidaan --</option>
+                    <option value="&category=tarjonta">Tarjonta</option>
+                    <option value="&category=virkailijaraamit">Virkailijaraamit</option>
+                    <option value="&category=osoitepalvelu">Osoitepalvelu</option>
+                    <option value="&category=tiedonsiirto">Tiedonsiirto</option>
+                    <option value="&category=suoritusrekisteri">Suoritusrekisteri</option>
+                    <option value="&category=rekisterointi">Rekisteröinti</option>
+                    <option value="&category=organisaatio">Organisaatioiden hallintapalvelu</option>
+                    <option value="&category=kjhh">Käyttäjähallinta</option>
+                    <option value="&category=valintalaskenta">Valintalaskenta</option>
+                    <option value="&category=valintaperusteet">Valintaperusteet</option>
+                    <option value="&category=hakulomakkeenhallinta">Hakulomakkeen hallinta</option>
+                    <option value="&category=koute">Koute</option>
+                    <option value="&category=oti">Tutkintoon ilmoittautuminen</option>
+                    <option value="&category=virkailijan-tyopoyta">Virkailijan työpöytä</option>
+                    <option value="&category=eperusteet">ePerusteet</option>
+                    <option value="&category=eperusteet-ylops">ePerusteet-ylops</option>
+                    <option value="&category=eperusteet-amosaa">ePerusteet-amosaa</option>
+                    <option value="&category=eperusteet-opintopolku">ePerusteet-opintopolku</option>
+                    <option value="&category=henkilo-ui">Henkilö UI</option>
+                    <option value="&category=koski">Koski</option>
+                    <option value="&category=yki">Yleiset kielitutkinnot</option>
+                    <option value="&category=ehoks">eHoks</option>
+                    <option value="&category=varda-rekisterointi">Varda-rekisteröinti</option>
+                    <option value="&category=oiva">Oiva</option>
+                    <option value="&category=konfo">Konfo</option>
+                    <option value="&category=varda-virkailija">Varda-virkailija</option>
+                    <option value="&category=varda-public">Varda-public</option>
+                    <option value="&category=varda-huoltaja">Varda-huoltaja</option>
+                </select>
+            </div>
+
+
+            <div>
+                <input type="checkbox" data-ng-model="model.force"> Pakotettu päivitys (kirjoittaa päälle vaikka olisi
+                uudempi olemassa)<br/>
+                <input type="text" data-ng-model="model.copyFrom" placeholder="localisointi REST uri tähän" width="80"/>
             </div>
 
             {{ model.result}}
 
-            </div>
+        </div>
 
-            <div class="modal-footer">
+        <div class="modal-footer">
             <button class="btn btn-primary" ng-click="transferDialogCancel()">Peruuta</button>
-            <button class="btn btn-warning" ng-click="transferDialogOk()" ng-disabled="model.copyFrom == ''">Suorita kopiointi</button>
+            <button class="btn btn-warning" ng-click="transferDialogOk()" ng-disabled="model.copyFrom == ''">Suorita
+                kopiointi
+            </button>
+        </div>
+    </div>
+</script>
+
+<script type="text/ng-template" id="createNewLocalisationDialog.html">
+    <form name="$parent.createLocalisationForm" class="form-horizontal" novalidate>
+        <div class="modal-header">
+            <h3>Luo uusi käännös</h3>
+        </div>
+
+        <div class="modal-body">
+            <div class="control-group">
+                <label for="key" class="control-label">Avain*</label>
+                <div class="controls">
+                    <input name="key" type="text" data-ng-model="model.key" width="80" required/>
+                    <p class="help-block">Käännösavain, jonka avulla käännös tunnistetaan käyttöliittymässä.</p>
+                </div>
             </div>
+            <div class="control-group">
+                <label for="category" class="control-label">Kategoria*</label>
+                <div class="controls">
+                    <input name="category" type="text" data-ng-model="model.category" width="80" required/>
+                    <p class="help-block">Määrittelee kategorian, eli sovelluksen, johon käännös kuuluu.</p>
+                </div>
             </div>
-        </script>
-
-        <script type="text/ng-template" id="createNewLocalisationDialog.html">
-            <form name="$parent.createLocalisationForm" class="form-horizontal" novalidate>
-                <div class="modal-header">
-                    <h3>Luo uusi käännös</h3>
+            <div class="control-group">
+                <label for="locale" class="control-label">Kieli*</label>
+                <div class="controls">
+                    <input name="locale" type="text" data-ng-model="model.locale" width="80" minlength="2" maxlength="2"
+                           required/>
+                    <p class="help-block">Käännöksen kieli ilmaistuna kaksikirjaimisena kielitunnuksena.</p>
                 </div>
-
-                <div class="modal-body">
-                    <div class="control-group">
-                        <label for="key" class="control-label">Avain*</label>
-                        <div class="controls">
-                            <input name="key" type="text" data-ng-model="model.key"  width="80" required/>
-                            <p class="help-block">Käännösavain, jonka avulla käännös tunnistetaan käyttöliittymässä.</p>
-                        </div>
-                    </div>
-                    <div class="control-group">
-                        <label for="category" class="control-label">Kategoria*</label>
-                        <div class="controls">
-                            <input name="category" type="text" data-ng-model="model.category" width="80" required/>
-                            <p class="help-block">Määrittelee kategorian, eli sovelluksen, johon käännös kuuluu.</p>
-                        </div>
-                    </div>
-                    <div class="control-group">
-                        <label for="locale" class="control-label">Kieli*</label>
-                        <div class="controls">
-                            <input name="locale" type="text" data-ng-model="model.locale"  width="80" minlength="2" maxlength="2" required/>
-                            <p class="help-block">Käännöksen kieli ilmaistuna kaksikirjaimisena kielitunnuksena.</p>
-                        </div>
-                    </div>
-                    <div class="control-group">
-                        <label for="value" class="control-label">Käännösteksti*</label>
-                        <div class="controls">
-                            <input name="value" type="text" data-ng-model="model.value"  width="80" required/>
-                            <p class="help-block">Annettua avainta, kategoriaa ja kieltä vastaava käännösteksti.</p>
-                        </div>
-                    </div>
-                    
-                    
-                    </div>
+            </div>
+            <div class="control-group">
+                <label for="value" class="control-label">Käännösteksti*</label>
+                <div class="controls">
+                    <input name="value" type="text" data-ng-model="model.value" width="80" required/>
+                    <p class="help-block">Annettua avainta, kategoriaa ja kieltä vastaava käännösteksti.</p>
                 </div>
-
-                <div class="modal-footer">
-                <button class="btn" ng-click="createDialogCancel()"><span class="icon-remove"></span> Peruuta</button>
-                <button class="btn btn-primary" ng-click="createDialogOk()" ng-disabled="createLocalisationForm.$invalid"><span class="icon-ok"></span> Luo käännös</button>
-                </div>
-            </form>
-        </script>
+            </div>
 
 
-        <script type="text/ng-template" id="localisationLongTextDialog.html">
-            <div>
-            <div class="modal-header">
+        </div>
+        </div>
+
+        <div class="modal-footer">
+            <button class="btn" ng-click="createDialogCancel()"><span class="icon-remove"></span> Peruuta</button>
+            <button class="btn btn-primary" ng-click="createDialogOk()" ng-disabled="createLocalisationForm.$invalid">
+                <span class="icon-ok"></span> Luo käännös
+            </button>
+        </div>
+    </form>
+</script>
+
+
+<script type="text/ng-template" id="localisationLongTextDialog.html">
+    <div>
+        <div class="modal-header">
             <h3>Pitkän monirivisen tekstin muokkaaminen</h3>
-            </div>
+        </div>
 
-            <div class="modal-body">
+        <div class="modal-body">
 
             <textarea rows="10" cols="80" data-ng-model="model.longText"></textarea>
 
-            </div>
+        </div>
 
-            <div class="modal-footer">
-              <button class="btn btn-warning" ng-click="$dismiss(true)">CANCEL</button>
-              <button class="btn btn-warning" ng-click="$close(true)">OK</button>
-            </div>
-            </div>
-        </script>
-
-
-        <script>
-                    var init_counter = 0;
-                    var initFunction = function(id, xhr, status) {
-                        init_counter--;
-
-                        console.log("Got ready signal from: " + id);
-                        console.log("  status = ", status);
-                        console.log("  xhr = ", xhr);
-
-                        if (init_counter > 0) {
-                            console.log("Got ready signal from: '" + id + "' -- still waiting for " + init_counter + " requests.");
-                        } else {
-                            console.log("OK! That was the last request, init the app!");
-
-                            angular.element(document).ready(function() {
-                                angular.module('myApp', ['app']);
-                                angular.bootstrap(document, ['myApp']);
-                            });
-                        }
-                    };
+        <div class="modal-footer">
+            <button class="btn btn-warning" ng-click="$dismiss(true)">CANCEL</button>
+            <button class="btn btn-warning" ng-click="$close(true)">OK</button>
+        </div>
+    </div>
+</script>
 
 
-                    console.log('window.CONFIG.env.callerId=' + window.CONFIG.env.callerId)
+<script>
+    var init_counter = 0;
+    var initFunction = function (id, xhr, status) {
+        init_counter--;
 
-                    //
-                    // Get current users authorisation info (/cas/myroles)
-                    //
-                    var myrolesUrl = window.url("cas.myroles");
-                    init_counter++;
-                    jQuery.ajax(myrolesUrl, {
-                        dataType: "json",
-                        headers: {
-                          'Caller-id': window.CONFIG.env.callerId
-                        },
-                        success: function(xhr, status) {
-                            window.CONFIG.env["cas.myroles"] = xhr;
-                            initFunction("AUTHENTICATION", xhr, status);
-                        },
-                        error: function(xhr, status) {
-                            window.CONFIG.env["cas.myroles"] = [];
-                            initFunction("AUTHENTICATION FAILED", xhr, status);
-                        }
-                    });
+        console.log("Got ready signal from: " + id);
+        console.log("  status = ", status);
+        console.log("  xhr = ", xhr);
 
-                    //
-                    // Get current users authorisation info 
-                    var authorizeUrl = window.url("lokalisointi.authorize");
-                    init_counter++;
-                    jQuery.ajax(authorizeUrl, {
-                        dataType: "text",
-                        headers: {
-                            'Caller-id': window.CONFIG.env.callerId
-                        },
-                        xhrFields: {
-                          withCredentials: true
-                        },
-                        success: function(xhr, status) {
-                            initFunction("/authorize", xhr, status);
-                        },
-                        error: function(xhr, status) {
-                            initFunction("/authorize FAILED", xhr, status);
-                        }
-                    });
-        </script>
+        if (init_counter > 0) {
+            console.log("Got ready signal from: '" + id + "' -- still waiting for " + init_counter + " requests.");
+        } else {
+            console.log("OK! That was the last request, init the app!");
 
-    </body>
+            angular.element(document).ready(function () {
+                angular.module('myApp', ['app']);
+                angular.bootstrap(document, ['myApp']);
+            });
+        }
+    };
+
+
+    console.log('window.CONFIG.env.callerId=' + window.CONFIG.env.callerId)
+
+    //
+    // Get current users authorisation info (/cas/myroles)
+    //
+    var myrolesUrl = window.url("cas.myroles");
+    init_counter++;
+    jQuery.ajax(myrolesUrl, {
+        dataType: "json",
+        headers: {
+            'Caller-id': window.CONFIG.env.callerId
+        },
+        success: function (xhr, status) {
+            window.CONFIG.env["cas.myroles"] = xhr;
+            initFunction("AUTHENTICATION", xhr, status);
+        },
+        error: function (xhr, status) {
+            window.CONFIG.env["cas.myroles"] = [];
+            initFunction("AUTHENTICATION FAILED", xhr, status);
+        }
+    });
+
+    //
+    // Get current users authorisation info
+    var authorizeUrl = window.url("lokalisointi.authorize");
+    init_counter++;
+    jQuery.ajax(authorizeUrl, {
+        dataType: "text",
+        headers: {
+            'Caller-id': window.CONFIG.env.callerId
+        },
+        xhrFields: {
+            withCredentials: true
+        },
+        success: function (xhr, status) {
+            initFunction("/authorize", xhr, status);
+        },
+        error: function (xhr, status) {
+            initFunction("/authorize FAILED", xhr, status);
+        }
+    });
+</script>
+
+</body>
 </html>
