@@ -130,22 +130,22 @@
         <dependency>
             <groupId>com.mysema.querydsl</groupId>
             <artifactId>querydsl-apt</artifactId>
-            <version>3.1.0</version>
+            <version>3.7.3</version>
         </dependency>
         <dependency>
             <groupId>com.mysema.querydsl</groupId>
             <artifactId>querydsl-jpa</artifactId>
-            <version>3.1.0</version>
+            <version>3.7.3</version>
         </dependency>
         <dependency>
             <groupId>com.mysema.querydsl</groupId>
             <artifactId>querydsl-codegen</artifactId>
-            <version>3.1.0</version>
+            <version>3.7.3</version>
         </dependency>
         <dependency>
             <groupId>com.mysema.querydsl</groupId>
             <artifactId>querydsl-core</artifactId>
-            <version>3.1.0</version>
+            <version>3.7.3</version>
         </dependency>
 
 
