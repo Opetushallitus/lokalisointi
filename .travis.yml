@@ -32,9 +32,4 @@ script:
 - export BASE_IMAGE="baseimage-war-openjdk8:master"
 - ./ci-tools/common/pull-image.sh
 - ./ci-tools/build/build-war.sh $ARTIFACT_NAME
-
-deploy:
-  provider: script
-  script: ./ci-tools/build/upload-image.sh $ARTIFACT_NAME
-  on:
-    all_branches: true
+- ./ci-tools/build/upload-image.sh $ARTIFACT_NAME
