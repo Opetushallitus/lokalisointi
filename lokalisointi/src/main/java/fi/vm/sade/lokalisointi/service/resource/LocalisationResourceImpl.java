@@ -82,12 +82,14 @@ public class LocalisationResourceImpl implements LocalisationResource {
             if (query != null) {
                 l = localisationDao.findBy(query.getId(), query.getCategory(), query.getKey(), query.getLocale());
             } else {
-                l = localisationDao.findAll();
+                throw new WebApplicationException(400);
             }
 
             List<LocalisationRDTO> result = convert(l);
             LOG.debug("  --> result.size = {}", result.size());
             return result;
+        } catch (WebApplicationException webEx) {
+          throw webEx;
         } catch (Throwable ex) {
             LOG.error("failed", ex);
             throw new WebApplicationException(ex);
