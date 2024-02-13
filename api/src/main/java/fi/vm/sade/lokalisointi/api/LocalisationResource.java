@@ -63,7 +63,7 @@ public interface LocalisationResource {
     @Produces(MediaType.APPLICATION_JSON + ";charset=UTF-8")
     @ApiOperation(value = "Listaa lokalisaatiot kyselyn mukaan",
             notes = "Palauttaa kaikki kyselyn mukaiset lokalisaatiot listassa. Parametreina voi olla esim. 'category=tarjonta&locale=sv' jne. "
-            + "Tyhjä kysely palauttaa kaikki käännökset.",
+            + "Tyhjä kysely palauttaa 400 Bad Request virheen.",
             response = LocalisationRDTO.class)
     public List<LocalisationRDTO> getLocalisations(@QueryParam("") LocalisationRDTO query, @Context HttpServletResponse httpServletResponse);
 
