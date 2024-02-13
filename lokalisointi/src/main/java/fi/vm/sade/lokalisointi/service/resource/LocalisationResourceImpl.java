@@ -79,10 +79,10 @@ public class LocalisationResourceImpl implements LocalisationResource {
         try {
             List<Localisation> l;
 
-            if (query != null) {
-                l = localisationDao.findBy(query.getId(), query.getCategory(), query.getKey(), query.getLocale());
+            if (query == null || query.empty()) {
+              throw new WebApplicationException(400);
             } else {
-                throw new WebApplicationException(400);
+              l = localisationDao.findBy(query.getId(), query.getCategory(), query.getKey(), query.getLocale());
             }
 
             List<LocalisationRDTO> result = convert(l);
