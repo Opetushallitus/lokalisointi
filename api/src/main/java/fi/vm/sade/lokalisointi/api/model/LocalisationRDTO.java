@@ -181,4 +181,8 @@ public class LocalisationRDTO implements Serializable {
         this.accesscount = accesscount;
     }
 
+    public boolean empty() {
+      return _id == null && _createdBy == null && _modifiedBy == null && _locale == null
+          && _key == null && _value == null && _description == null && _category.equals(DEFAULT_CATEGORY);
+    }
 }
