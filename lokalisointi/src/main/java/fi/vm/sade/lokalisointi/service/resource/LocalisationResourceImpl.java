@@ -360,7 +360,9 @@ public class LocalisationResourceImpl implements LocalisationResource {
         }
 
         // If data contains last modified data then use it for last modification ts (so we can store even older data to db)
-        if (data.getModified() != null) {
+        // Pass modified=0 and force=false if you only want to add new keys without overwriting, 
+        // but use current time on modified when creating new from updateLocalisations
+        if (data.getModified() != null && data.getModified().getTime() != 0L) {
             t.setModified(data.getModified());
         } else {
             t.setModified(new Date());
