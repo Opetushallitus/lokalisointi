@@ -14,6 +14,9 @@
  */
 package fi.vm.sade.lokalisointi.service.resource;
 
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import com.sun.jersey.api.MessageException;
 import com.sun.jersey.api.NotFoundException;
 import fi.vm.sade.lokalisointi.api.LocalisationResource;
@@ -268,7 +271,40 @@ public class LocalisationResourceImpl implements LocalisationResource {
                 
         return tmp;
     }
-    
+
+    private List<LocalisationRDTO> convertJSON(JsonObject json, String category, String lang, String path) {
+        List<LocalisationRDTO> result = new ArrayList<>();
+        for (Map.Entry<String, JsonElement> entry : json.entrySet()) {
+            String key = entry.getKey();
+            JsonElement value = entry.getValue();
+            String newPath = path == null ? key : path + "." + key;
+            if (value.isJsonObject()) {
+                result.addAll(convertJSON(value.getAsJsonObject(), category, lang, newPath));
+            } else {
+                LocalisationRDTO loc = new LocalisationRDTO();
+                loc.setCategory(category);
+                loc.setLocale(lang);
+                loc.setKey(newPath);
+                loc.setValue(value.getAsString());
+                loc.setModified(new Date(0L));
+                loc.setForce(false);
+                result.add(loc);
+            }
+        }
+        return result;
+    }
+
+    // POST /localisation/create-new/{category}/{lang}
+    @Secured({ROLE_CRUD})
+    @Override
+    public List<Map> createNewLocalisations(String category, String lang, String data) {
+        JsonParser parser = new JsonParser();
+        JsonElement json = parser.parse(data);
+        List<LocalisationRDTO> localisations = convertJSON(json.getAsJsonObject(), category, lang, null);
+
+        return updateLocalisations(localisations);
+    }
+
     /**
      * Convert list of localisations to list of transferobjects.
      *

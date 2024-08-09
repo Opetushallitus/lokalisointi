@@ -131,9 +131,6 @@ public class LocalisationResourceImplTest {
         assertTrue("Should not find any!", dao.findAll().size() == 0);
     }
 
-
-
-
     private Localisation insertOne(String key, String locale) {
         Localisation l = new Localisation();
         l.setCategory("TEST");
