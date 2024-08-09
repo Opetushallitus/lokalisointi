@@ -138,9 +138,9 @@ public interface LocalisationResource {
     @Produces(MediaType.APPLICATION_JSON + ";charset=UTF-8")
     @Consumes(MediaType.APPLICATION_JSON + ";charset=UTF-8")
     @ApiOperation(value = "Päivitä lokalisaatiot.",
-            notes = "Massapäivitys lokalisaatioille, palauttaa kaikki lokalisaatiot kun valmis.",
-            response = LocalisationRDTO.class)
-    public List<Map> updateLocalisations(List<LocalisationRDTO> data);
+            notes = "Massapäivitys lokalisaatioille.",
+            response = MassOperationResult.class)
+    public List<MassOperationResult> updateLocalisations(List<LocalisationRDTO> data);
 
     /**
      * Mass creation of new localisations for app translation JSON. Doesn't overwrite existing localisations.
@@ -156,7 +156,7 @@ public interface LocalisationResource {
     @Consumes(MediaType.APPLICATION_JSON + ";charset=UTF-8")
     @ApiOperation(value = "Lokalisaatioiden luonti.",
             notes = "Tallentaa uudet (ei olemassa aiemmin) lokalisaatiot annetun kategorian, kielen ja sovelluksen JSON-käännöstiedoston perusteella.",
-            response = LocalisationRDTO.class)
-    public List<Map> createNewLocalisations(@PathParam("category") String category, @PathParam("lang") String lang, String data);
+            response = MassOperationResult.class)
+    public List<MassOperationResult> createNewLocalisations(@PathParam("category") String category, @PathParam("lang") String lang, String data);
     
 }

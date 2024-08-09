@@ -19,12 +19,12 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.sun.jersey.api.MessageException;
 import com.sun.jersey.api.NotFoundException;
+import fi.vm.sade.lokalisointi.api.MassOperationResult;
 import fi.vm.sade.lokalisointi.api.LocalisationResource;
 import fi.vm.sade.lokalisointi.api.model.LocalisationRDTO;
 import fi.vm.sade.lokalisointi.service.dao.LocalisationDao;
 import fi.vm.sade.lokalisointi.service.model.Localisation;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -220,12 +220,11 @@ public class LocalisationResourceImpl implements LocalisationResource {
     // POST /localisation/update
     @Secured({ROLE_CRUD})
     @Override
-    public List<Map> updateLocalisations(List<LocalisationRDTO> data) {
+    public List<MassOperationResult> updateLocalisations(List<LocalisationRDTO> data) {
         LOG.info("updateLocalisations({} kpl)", data != null ? data.size() : 0);
 
-        List<Map> tmp = new ArrayList<Map>();
-        Map result = new HashMap();
-        tmp.add(result);
+        List<MassOperationResult> tmp = new ArrayList<>();
+        MassOperationResult result = new MassOperationResult();
 
         int updated = 0;
         int created = 0;
@@ -264,10 +263,11 @@ public class LocalisationResourceImpl implements LocalisationResource {
             }
         }
             
-        result.put("status", "OK");
-        result.put("updated", updated);
-        result.put("created", created);
-        result.put("notModified", notModified);
+        result.status = "OK";
+        result.updated = updated;
+        result.created = created;
+        result.notModified = notModified;
+        tmp.add(result);
                 
         return tmp;
     }
@@ -297,7 +297,7 @@ public class LocalisationResourceImpl implements LocalisationResource {
     // POST /localisation/create-new/{category}/{lang}
     @Secured({ROLE_CRUD})
     @Override
-    public List<Map> createNewLocalisations(String category, String lang, String data) {
+    public List<MassOperationResult> createNewLocalisations(String category, String lang, String data) {
         JsonParser parser = new JsonParser();
         JsonElement json = parser.parse(data);
         List<LocalisationRDTO> localisations = convertJSON(json.getAsJsonObject(), category, lang, null);
