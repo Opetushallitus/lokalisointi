@@ -14,14 +14,17 @@
  */
 package fi.vm.sade.lokalisointi.service.resource;
 
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import com.sun.jersey.api.MessageException;
 import com.sun.jersey.api.NotFoundException;
+import fi.vm.sade.lokalisointi.api.MassOperationResult;
 import fi.vm.sade.lokalisointi.api.LocalisationResource;
 import fi.vm.sade.lokalisointi.api.model.LocalisationRDTO;
 import fi.vm.sade.lokalisointi.service.dao.LocalisationDao;
 import fi.vm.sade.lokalisointi.service.model.Localisation;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -217,12 +220,11 @@ public class LocalisationResourceImpl implements LocalisationResource {
     // POST /localisation/update
     @Secured({ROLE_CRUD})
     @Override
-    public List<Map> updateLocalisations(List<LocalisationRDTO> data) {
+    public List<MassOperationResult> updateLocalisations(List<LocalisationRDTO> data) {
         LOG.info("updateLocalisations({} kpl)", data != null ? data.size() : 0);
 
-        List<Map> tmp = new ArrayList<Map>();
-        Map result = new HashMap();
-        tmp.add(result);
+        List<MassOperationResult> tmp = new ArrayList<>();
+        MassOperationResult result = new MassOperationResult();
 
         int updated = 0;
         int created = 0;
@@ -261,14 +263,48 @@ public class LocalisationResourceImpl implements LocalisationResource {
             }
         }
             
-        result.put("status", "OK");
-        result.put("updated", updated);
-        result.put("created", created);
-        result.put("notModified", notModified);
+        result.status = "OK";
+        result.updated = updated;
+        result.created = created;
+        result.notModified = notModified;
+        tmp.add(result);
                 
         return tmp;
     }
-    
+
+    private List<LocalisationRDTO> convertJSON(JsonObject json, String category, String lang, String path) {
+        List<LocalisationRDTO> result = new ArrayList<>();
+        for (Map.Entry<String, JsonElement> entry : json.entrySet()) {
+            String key = entry.getKey();
+            JsonElement value = entry.getValue();
+            String newPath = path == null ? key : path + "." + key;
+            if (value.isJsonObject()) {
+                result.addAll(convertJSON(value.getAsJsonObject(), category, lang, newPath));
+            } else {
+                LocalisationRDTO loc = new LocalisationRDTO();
+                loc.setCategory(category);
+                loc.setLocale(lang);
+                loc.setKey(newPath);
+                loc.setValue(value.getAsString());
+                loc.setModified(new Date(0L));
+                loc.setForce(false);
+                result.add(loc);
+            }
+        }
+        return result;
+    }
+
+    // POST /localisation/create-new/{category}/{lang}
+    @Secured({ROLE_CRUD})
+    @Override
+    public List<MassOperationResult> createNewLocalisations(String category, String lang, String data) {
+        JsonParser parser = new JsonParser();
+        JsonElement json = parser.parse(data);
+        List<LocalisationRDTO> localisations = convertJSON(json.getAsJsonObject(), category, lang, null);
+
+        return updateLocalisations(localisations);
+    }
+
     /**
      * Convert list of localisations to list of transferobjects.
      *
@@ -360,7 +396,9 @@ public class LocalisationResourceImpl implements LocalisationResource {
         }
 
         // If data contains last modified data then use it for last modification ts (so we can store even older data to db)
-        if (data.getModified() != null) {
+        // Pass modified=0 and force=false if you only want to add new keys without overwriting, 
+        // but use current time on modified when creating new from updateLocalisations
+        if (data.getModified() != null && data.getModified().getTime() != 0L) {
             t.setModified(data.getModified());
         } else {
             t.setModified(new Date());
