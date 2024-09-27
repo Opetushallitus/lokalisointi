@@ -1,9 +1,0 @@
-{
-  "name": "lokalisointi",
-
-  "Makefile": "no",
-
-  "velka": "js-riipuvuudet git-repossa (packages.json käyttöön)",
-
-  "csrf": "front: ok, backend: ?"
-}

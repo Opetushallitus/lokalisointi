@@ -1,0 +1,31 @@
+host:
+  cas: {{host_cas}}
+  virkailija: {{host_virkailija}}
+cas-service:
+  service: https://${host.virkailija}/lokalisointi
+  send-renew: true
+  key: lokalisointi
+cas:
+  url: https://${host.cas}/cas
+  login: https://${host.cas}/cas/login
+  service:
+    lokalisointi: https://${host.virkailija}/lokalisointi
+spring:
+  datasource:
+    url: jdbc:postgresql://{{host_postgresql_lokalisointi}}:{{host_postgresql_lokalisointi_port}}/lokalisointi
+    username: {{postgres_app_user}}
+    password: {{host_postgresql_lokalisointi_app_password}}
+    hikari:
+      maximum-pool-size: {{host_postgresql_lokalisointi_max_active}}
+      connection-timeout: {{host_postgresql_lokalisointi_max_wait}}
+lokalisointi:
+  uses-ssl-proxy: true
+  public-cache-max-age-minutes: 10
+logging:
+  level:
+    root: info
+    # fi.vm.sade.lokalisointi: debug
+aws:
+  region: {{aws_region}}
+  bucket:
+    name: {{dokumenttipalvelu_aws_bucket_name}}
