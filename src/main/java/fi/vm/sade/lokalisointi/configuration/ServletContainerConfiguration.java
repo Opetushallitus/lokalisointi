@@ -24,10 +24,10 @@ public class ServletContainerConfiguration {
    */
   @Bean
   @ConditionalOnProperty("lokalisointi.uses-ssl-proxy")
-  public WebServerFactoryCustomizer sslProxyCustomizer() {
+  public WebServerFactoryCustomizer<?> sslProxyCustomizer() {
     return (WebServerFactory container) -> {
       if (container instanceof ConfigurableServletWebServerFactory) {
-        TomcatServletWebServerFactory tomcat = (TomcatServletWebServerFactory) container;
+        final TomcatServletWebServerFactory tomcat = (TomcatServletWebServerFactory) container;
         tomcat.addConnectorCustomizers(
             (Connector connector) -> {
               connector.setScheme("https");

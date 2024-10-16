@@ -15,7 +15,7 @@ public class CasProperties {
     return service;
   }
 
-  public void setService(String service) {
+  public void setService(final String service) {
     this.service = service;
   }
 
@@ -23,7 +23,7 @@ public class CasProperties {
     return sendRenew;
   }
 
-  public void setSendRenew(Boolean sendRenew) {
+  public void setSendRenew(final Boolean sendRenew) {
     this.sendRenew = sendRenew;
   }
 
@@ -31,7 +31,7 @@ public class CasProperties {
     return key;
   }
 
-  public void setKey(String key) {
+  public void setKey(final String key) {
     this.key = key;
   }
 
@@ -39,7 +39,7 @@ public class CasProperties {
     return fallbackUserDetailsProviderUrl;
   }
 
-  public void setFallbackUserDetailsProviderUrl(String fallbackUserDetailsProviderUrl) {
+  public void setFallbackUserDetailsProviderUrl(final String fallbackUserDetailsProviderUrl) {
     this.fallbackUserDetailsProviderUrl = fallbackUserDetailsProviderUrl;
   }
 

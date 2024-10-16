@@ -4,23 +4,24 @@
 * spring-boot
 * spring-security
 
+Lokalisointipalvelun roolit
+
+* toimii Tolgee Cloudin julkaisemien lokalisointitiedostojen jakelijana Opintopolun "vanhassa" formaatissa
+    * Tolgee julkaisee lokalisointitiedostot QA:n S3:een
+* mahdollistaa lokalisointitiedostojen kopioinnin eri ympäristöjen välillä
+* mahdollistaa ympäristökohtaisten "yliajojen" tallentamisen
+
 ## Ajaminen paikallisesti:
 
-### PostgreSQL
+### PostgreSQL & localstack
 
-Kontin luonti käy komennolla:
-
-```shell
-cd scripts/postgres-docker
-docker build -t lokalisointi-postgres .
-docker volume create lokalisointi_pgdata
-```
-
-Kontin ajaminen onnistuu komennolla:
+Postgresql ja localstack lähtevät käyntiin docker composella:
 
 ```shell
-docker run --rm --name lokalisointi-postgres -p 5432:5432 --volume lokalisointi_pgdata:/var/lib/postgresql/data -e POSTGRES_PASSWORD=lokalisointi lokalisointi-postgres
+docker compose up
 ```
+
+Ja itse sovellus komennolla:
 
 ```shell
 mvn spring-boot:run

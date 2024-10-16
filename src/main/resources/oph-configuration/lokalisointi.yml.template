@@ -25,3 +25,7 @@ logging:
   level:
     root: info
     # fi.vm.sade.lokalisointi: debug
+aws:
+  region: {{aws_region}}
+  bucket:
+    name: {{dokumenttipalvelu_aws_bucket_name}}

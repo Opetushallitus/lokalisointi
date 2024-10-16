@@ -12,6 +12,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 import org.springframework.core.annotation.Order;
 import org.springframework.core.env.Environment;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.cas.ServiceProperties;
 import org.springframework.security.cas.authentication.CasAuthenticationProvider;
@@ -36,19 +37,19 @@ import org.springframework.security.web.savedrequest.HttpSessionRequestCache;
 @EnableWebSecurity
 public class SecurityConfiguration {
   private static final Logger LOG = LoggerFactory.getLogger(SecurityConfiguration.class);
-  private CasProperties casProperties;
-  private Environment environment;
+  private final CasProperties casProperties;
+  private final Environment environment;
 
   @Autowired
   public SecurityConfiguration(final CasProperties casProperties, final Environment environment) {
     this.casProperties = casProperties;
     this.environment = environment;
-    LOG.info("CAS props: " + casProperties);
+    LOG.info("CAS props: {}", casProperties);
   }
 
   @Bean
   public ServiceProperties serviceProperties() {
-    ServiceProperties serviceProperties = new ServiceProperties();
+    final ServiceProperties serviceProperties = new ServiceProperties();
     serviceProperties.setService(casProperties.getService() + "/j_spring_cas_security_check");
     serviceProperties.setSendRenew(casProperties.getSendRenew());
     serviceProperties.setAuthenticateAllArtifacts(true);
@@ -57,7 +58,7 @@ public class SecurityConfiguration {
 
   @Bean
   public CasAuthenticationProvider casAuthenticationProvider() {
-    CasAuthenticationProvider casAuthenticationProvider = new CasAuthenticationProvider();
+    final CasAuthenticationProvider casAuthenticationProvider = new CasAuthenticationProvider();
     casAuthenticationProvider.setAuthenticationUserDetailsService(new OphUserDetailsServiceImpl());
     casAuthenticationProvider.setServiceProperties(serviceProperties());
     casAuthenticationProvider.setTicketValidator(ticketValidator());
@@ -67,7 +68,7 @@ public class SecurityConfiguration {
 
   @Bean
   public TicketValidator ticketValidator() {
-    Cas20ProxyTicketValidator ticketValidator =
+    final Cas20ProxyTicketValidator ticketValidator =
         new Cas20ProxyTicketValidator(environment.getRequiredProperty("cas.url"));
     ticketValidator.setAcceptAnyProxy(true);
     return ticketValidator;
@@ -76,7 +77,7 @@ public class SecurityConfiguration {
   @Bean
   public CasAuthenticationFilter casAuthenticationFilter(
       final AuthenticationManager authenticationManager) {
-    CasAuthenticationFilter casAuthenticationFilter = new CasAuthenticationFilter();
+    final CasAuthenticationFilter casAuthenticationFilter = new CasAuthenticationFilter();
     casAuthenticationFilter.setAuthenticationManager(authenticationManager);
     casAuthenticationFilter.setFilterProcessesUrl("/j_spring_cas_security_check");
     return casAuthenticationFilter;
@@ -84,14 +85,15 @@ public class SecurityConfiguration {
 
   @Bean
   public SingleSignOutFilter singleSignOutFilter() {
-    SingleSignOutFilter singleSignOutFilter = new SingleSignOutFilter();
+    final SingleSignOutFilter singleSignOutFilter = new SingleSignOutFilter();
     singleSignOutFilter.setIgnoreInitConfiguration(true);
     return singleSignOutFilter;
   }
 
   @Bean
   public CasAuthenticationEntryPoint casAuthenticationEntryPoint() {
-    CasAuthenticationEntryPoint casAuthenticationEntryPoint = new CasAuthenticationEntryPoint();
+    final CasAuthenticationEntryPoint casAuthenticationEntryPoint =
+        new CasAuthenticationEntryPoint();
     casAuthenticationEntryPoint.setLoginUrl(environment.getRequiredProperty("cas.login"));
     casAuthenticationEntryPoint.setServiceProperties(serviceProperties());
     return casAuthenticationEntryPoint;
@@ -109,7 +111,7 @@ public class SecurityConfiguration {
       final SecurityContextRepository securityContextRepository,
       final AuthenticationEntryPoint authenticationEntryPoint)
       throws Exception {
-    HttpSessionRequestCache requestCache = new HttpSessionRequestCache();
+    final HttpSessionRequestCache requestCache = new HttpSessionRequestCache();
     requestCache.setMatchingRequestParameterName(null);
     http.headers(HeadersConfigurer::disable)
         .csrf(CsrfConfigurer::disable)
@@ -118,6 +120,7 @@ public class SecurityConfiguration {
             (authz) ->
                 authz
                     .requestMatchers(
+                        HttpMethod.GET,
                         "/buildversion.txt",
                         "/actuator/health",
                         "/v3/api-docs",
@@ -126,7 +129,9 @@ public class SecurityConfiguration {
                         "/swagger/**",
                         "/swagger-ui/**",
                         "/swagger-ui.html",
-                        "/webjars/swagger-ui/**")
+                        "/webjars/swagger-ui/**",
+                        "/api/v1/localisation",
+                        "/cxf/rest/v1/localisation")
                     .permitAll()
                     .anyRequest()
                     .authenticated())
@@ -143,7 +148,7 @@ public class SecurityConfiguration {
 
   @Bean
   public AuthenticationManager authenticationManager(final HttpSecurity http) throws Exception {
-    AuthenticationManagerBuilder authenticationManagerBuilder =
+    final AuthenticationManagerBuilder authenticationManagerBuilder =
         http.getSharedObject(AuthenticationManagerBuilder.class);
     return authenticationManagerBuilder.authenticationProvider(casAuthenticationProvider()).build();
   }

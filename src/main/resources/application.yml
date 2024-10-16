@@ -4,7 +4,7 @@ spring:
   main:
     banner-mode: off
   profiles:
-    active: default
+    active: default,dev
   session:
     store-type: jdbc
   datasource:
@@ -69,3 +69,8 @@ cas:
   login: https://${host.cas}/cas/login
   service:
     lokalisointi: https://${host.virkailija}/lokalisointi
+
+aws:
+  region: eu-west-1
+  bucket:
+    name: opintopolku-pallero-dokumenttipalvelu

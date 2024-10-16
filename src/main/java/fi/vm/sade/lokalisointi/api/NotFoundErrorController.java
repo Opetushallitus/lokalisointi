@@ -14,7 +14,7 @@ public class NotFoundErrorController implements ErrorController {
   private static final String ERROR_PATH = "/error";
 
   @RequestMapping(value = ERROR_PATH)
-  Map<String, Object> handleError(WebRequest request) {
+  Map<String, Object> handleError(final WebRequest request) {
     return new DefaultErrorAttributes()
         .getErrorAttributes(request, ErrorAttributeOptions.defaults());
   }
