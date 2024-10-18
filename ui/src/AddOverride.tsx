@@ -1,5 +1,6 @@
 import React, {FC, useEffect, useState} from "react"
 import {
+  Autocomplete,
   FormControl,
   FormLabel,
   IconButton,
@@ -19,13 +20,13 @@ interface Props {
 
 const AddOverride: FC<Props> = ({close, uiConfig, showMessage}) => {
   const [availableNamespaces, setAvailableNamespaces] = useState<string[]>([])
-  const [namespace, setNamespace] = useState<string>("")
+  const [namespace, setNamespace] = useState<string | undefined>(undefined)
   const [key, setKey] = useState<string>("")
   const [locale, setLocale] = useState<string>("")
   const [value, setValue] = useState<string>("")
   useEffect(() => {
     if (uiConfig?.currentEnvironment && showMessage) {
-      fetch(`/lokalisointi/api/v1/copy/available-namespaces?source=${uiConfig?.currentEnvironment}`, {
+      fetch(`/lokalisointi/api/v1/override/available-namespaces?source=${uiConfig?.currentEnvironment}`, {
         method: "GET"
       }).then(async (res) => {
         const body = await res.json()
@@ -44,7 +45,7 @@ const AddOverride: FC<Props> = ({close, uiConfig, showMessage}) => {
         "Content-Type": "application/json"
       },
       credentials: "same-origin",
-      body: JSON.stringify({namespace, locale, key, value})
+      body: JSON.stringify({namespace: namespace, locale, key, value})
     })
       .then(async (res) => {
         const body = await res.json()
@@ -52,7 +53,7 @@ const AddOverride: FC<Props> = ({close, uiConfig, showMessage}) => {
           showMessage(`Yliajon tallentaminen ei onnistunut: ${JSON.stringify(body)}`)
           return
         }
-        setNamespace("")
+        setNamespace(undefined)
         setLocale("")
         setKey("")
         setValue("")
@@ -65,12 +66,32 @@ const AddOverride: FC<Props> = ({close, uiConfig, showMessage}) => {
       <TableCell>
         <FormControl variant="filled" fullWidth>
           <FormLabel htmlFor="namespace">nimiavaruus</FormLabel>
-          <Select id="namespace" variant="outlined" value={namespace} size="small"
-                  onChange={(e) => setNamespace(e.target.value)}>
-            {availableNamespaces.map((
-              (ns, i) => <MenuItem value={ns} key={i}>{ns}</MenuItem>)
+          <Autocomplete
+            id="namespace"
+            freeSolo
+            disableClearable
+            value={namespace}
+            onChange={(_, value) => {
+              setNamespace(value)
+            }}
+            options={availableNamespaces.map((option) => option)}
+            renderInput={(params) => (
+              <TextField
+                {...params}
+                variant="outlined"
+                size="small"
+                onChange={(e) => {
+                  setNamespace(e.target.value)
+                }}
+                slotProps={{
+                  input: {
+                    ...params.InputProps,
+                    type: 'search',
+                  },
+                }}
+              />
             )}
-          </Select>
+          />
         </FormControl>
       </TableCell>
       <TableCell>

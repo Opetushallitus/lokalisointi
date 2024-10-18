@@ -2,8 +2,10 @@ package fi.vm.sade.lokalisointi.api;
 
 import fi.vm.sade.lokalisointi.model.Localisation;
 import fi.vm.sade.lokalisointi.model.LocalisationOverride;
+import fi.vm.sade.lokalisointi.model.OphEnvironment;
 import fi.vm.sade.lokalisointi.model.Status;
 import fi.vm.sade.lokalisointi.storage.Database;
+import fi.vm.sade.lokalisointi.storage.S3;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
 import org.apache.commons.lang3.tuple.ImmutablePair;
@@ -18,9 +20,7 @@ import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
-import java.util.Collection;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -31,10 +31,12 @@ import static fi.vm.sade.lokalisointi.api.LocalisationController.ROLE_UPDATE;
 @RequestMapping("/api/v1/override")
 public class OverrideController extends ControllerBase {
   private static final Logger LOG = LoggerFactory.getLogger(OverrideController.class);
+  private final S3 s3;
   private final Database database;
 
   @Autowired
-  public OverrideController(Database database) {
+  public OverrideController(final S3 s3, final Database database) {
+    this.s3 = s3;
     this.database = database;
   }
 
@@ -89,5 +91,19 @@ public class OverrideController extends ControllerBase {
             .filter(Optional::isPresent)
             .map(Optional::get)
             .collect(Collectors.toMap(ImmutablePair::getLeft, ImmutablePair::getRight)));
+  }
+
+  @Operation(
+      summary =
+          "Find available namespaces for given source environment, includes also namespaces used in overrides")
+  @GetMapping("/available-namespaces")
+  @Secured({ROLE_UPDATE, ROLE_CRUD})
+  public ResponseEntity<Collection<String>> availableNamespaces(
+      @RequestParam("source") final OphEnvironment source) {
+    final Set<String> s3Namespaces = s3.availableNamespaces(source);
+    final Set<String> overrideNamespaces = database.availableNamespaces();
+    return ResponseEntity.ok(
+        Stream.concat(s3Namespaces.stream(), overrideNamespaces.stream())
+            .collect(Collectors.toSet()));
   }
 }

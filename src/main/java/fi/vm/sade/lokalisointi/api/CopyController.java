@@ -11,7 +11,9 @@ import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
+import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 
 import static fi.vm.sade.lokalisointi.api.LocalisationController.ROLE_CRUD;
 import static fi.vm.sade.lokalisointi.api.LocalisationController.ROLE_UPDATE;
@@ -38,7 +40,7 @@ public class CopyController extends ControllerBase {
   @Operation(summary = "Find available namespaces for given source environment")
   @GetMapping("/available-namespaces")
   @Secured({ROLE_UPDATE, ROLE_CRUD})
-  public ResponseEntity<List<String>> availableNamespaces(
+  public ResponseEntity<Collection<String>> availableNamespaces(
       @RequestParam("source") final OphEnvironment source) {
     return ResponseEntity.ok(s3.availableNamespaces(source));
   }

@@ -79,11 +79,13 @@ public class LocalisationController extends ControllerBase implements Initializi
         key,
         locale,
         cache);
+    final Collection<Localisation> localisationsFromS3 =
+        s3.find(namespace != null ? namespace : category, locale, key);
     final Collection<Localisation> localisations =
         id != null
             ? database.getById(id)
             : database.withOverrides(
-                s3.find(namespace != null ? namespace : category, locale, key));
+                localisationsFromS3, namespace != null ? namespace : category, locale, key);
     return ResponseEntity.ok()
         .cacheControl(
             Boolean.FALSE.equals(cache)

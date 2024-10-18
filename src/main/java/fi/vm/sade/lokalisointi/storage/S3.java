@@ -71,13 +71,11 @@ public class S3 {
     }
   }
 
-  public List<String> availableNamespaces(final OphEnvironment source) {
+  public Set<String> availableNamespaces(final OphEnvironment source) {
     // TODO hae käännöstiedostot käyttäen sourcea
     return dokumenttipalvelu.find(List.of(LOKALISOINTI_TAG)).stream()
         .flatMap(this::transformToLocalisationStream)
         .map(Localisation::getNamespace)
-        .collect(Collectors.toSet())
-        .stream()
-        .toList();
+        .collect(Collectors.toSet());
   }
 }

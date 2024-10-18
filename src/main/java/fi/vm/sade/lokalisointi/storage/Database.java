@@ -13,6 +13,9 @@ import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
 
 import static java.util.stream.Collectors.groupingBy;
@@ -58,10 +61,17 @@ public class Database {
     }
   }
 
-  public Collection<Localisation> withOverrides(final Collection<Localisation> localisations) {
+  public Collection<Localisation> withOverrides(
+      final Collection<Localisation> localisations,
+      final String namespace,
+      final String locale,
+      final String key) {
     final Map<ImmutableTriple<String, String, String>, List<LocalisationOverride>>
         indexedOverrides =
             StreamSupport.stream(template.findAll(LocalisationOverride.class).spliterator(), false)
+                .filter(l -> namespace == null || l.getNamespace().equals(namespace))
+                .filter(l -> locale == null || l.getLocale().equals(locale))
+                .filter(l -> key == null || l.getKey().equals(key))
                 .collect(
                     groupingBy(
                         localisationOverride ->
@@ -69,17 +79,42 @@ public class Database {
                                 localisationOverride.getNamespace(),
                                 localisationOverride.getLocale(),
                                 localisationOverride.getKey())));
-    return localisations.stream()
-        .map(
-            localisation -> {
-              final ImmutableTriple<String, String, String> key =
-                  uniqueKey(
-                      localisation.getNamespace(), localisation.getLocale(), localisation.getKey());
-              if (indexedOverrides.containsKey(key)) {
-                return indexedOverrides.get(key).getFirst().toLocalisation();
-              }
-              return localisation;
-            })
+
+    // replace localisations with overrides
+    final List<Localisation> overriddenLocalisations =
+        localisations.stream()
+            .map(
+                localisation -> {
+                  final ImmutableTriple<String, String, String> uKey =
+                      uniqueKey(
+                          localisation.getNamespace(),
+                          localisation.getLocale(),
+                          localisation.getKey());
+                  if (indexedOverrides.containsKey(uKey)) {
+                    return indexedOverrides.get(uKey).getFirst().toLocalisation();
+                  }
+                  return localisation;
+                })
+            .toList();
+    final Map<ImmutableTriple<String, String, String>, List<Localisation>> indexedLocalisations =
+        overriddenLocalisations.stream()
+            .collect(
+                groupingBy(
+                    localisation ->
+                        uniqueKey(
+                            localisation.getNamespace(),
+                            localisation.getLocale(),
+                            localisation.getKey())));
+
+    final Set<ImmutableTriple<String, String, String>> nonOverridingLocalisationOverrides =
+        indexedOverrides.keySet();
+    nonOverridingLocalisationOverrides.removeAll(indexedLocalisations.keySet());
+
+    // return also non-overriding localisation overrides
+    return Stream.concat(
+            overriddenLocalisations.stream(),
+            nonOverridingLocalisationOverrides.stream()
+                .map(k -> indexedOverrides.get(k).getFirst().toLocalisation()))
         .toList();
   }
 
@@ -106,5 +141,11 @@ public class Database {
   public Collection<LocalisationOverride> find() {
     return StreamSupport.stream(template.findAll(LocalisationOverride.class).spliterator(), false)
         .toList();
+  }
+
+  public Set<String> availableNamespaces() {
+    return StreamSupport.stream(template.findAll(LocalisationOverride.class).spliterator(), false)
+        .map(LocalisationOverride::getNamespace)
+        .collect(Collectors.toSet());
   }
 }
