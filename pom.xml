@@ -195,6 +195,31 @@
                     <target>21</target>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>3.4.1</version>
+                <executions>
+                    <execution>
+                        <id>npm-run-build</id>
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>exec</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <executable>npm</executable>
+                    <workingDirectory>ui</workingDirectory>
+                    <arguments>
+                        <argument>run</argument>
+                        <argument>build</argument>
+                    </arguments>
+                    <environmentVariables>
+                        <BUILD_PATH>../target/classes/static/secured</BUILD_PATH>
+                    </environmentVariables>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
 
@@ -210,6 +235,14 @@
                 <enabled>true</enabled>
                 <updatePolicy>daily</updatePolicy>
                 <checksumPolicy>warn</checksumPolicy>
+            </snapshots>
+        </repository>
+        <repository>
+            <id>oph-sade-artifactory-snapshots</id>
+            <name>oph-sade-artifactory-snapshots</name>
+            <url>https://artifactory.opintopolku.fi/artifactory/oph-sade-snapshot-local</url>
+            <snapshots>
+                <enabled>true</enabled>
             </snapshots>
         </repository>
     </repositories>

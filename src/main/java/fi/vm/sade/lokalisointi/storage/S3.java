@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import fi.vm.sade.lokalisointi.model.CopyLocalisations;
 import fi.vm.sade.lokalisointi.model.Localisation;
+import fi.vm.sade.lokalisointi.model.OphEnvironment;
 import fi.vm.sade.valinta.dokumenttipalvelu.Dokumenttipalvelu;
 import fi.vm.sade.valinta.dokumenttipalvelu.dto.ObjectEntity;
 import fi.vm.sade.valinta.dokumenttipalvelu.dto.ObjectMetadata;
@@ -13,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.*;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 @Repository
@@ -67,5 +69,15 @@ public class S3 {
     } catch (final Exception ex) {
       throw new RuntimeException(ex);
     }
+  }
+
+  public List<String> availableNamespaces(final OphEnvironment source) {
+    // TODO hae käännöstiedostot käyttäen sourcea
+    return dokumenttipalvelu.find(List.of(LOKALISOINTI_TAG)).stream()
+        .flatMap(this::transformToLocalisationStream)
+        .map(Localisation::getNamespace)
+        .collect(Collectors.toSet())
+        .stream()
+        .toList();
   }
 }
