@@ -12,4 +12,4 @@ CREATE TABLE IF NOT EXISTS localisation_override (
     updated_by TEXT NOT NULL
 );
 
-CREATE UNIQUE INDEX IF NOT EXISTS i_localization_uniq_check ON localisation_override (namespace, localisation_key, locale);
+CREATE UNIQUE INDEX IF NOT EXISTS localisation_unique_key_check ON localisation_override (namespace, localisation_key, locale);

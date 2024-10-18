@@ -6,22 +6,30 @@ import fi.vm.sade.lokalisointi.model.Status;
 import fi.vm.sade.lokalisointi.storage.Database;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
+import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.relational.core.conversion.DbActionExecutionException;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 import java.util.Collection;
+import java.util.Map;
+import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import static fi.vm.sade.lokalisointi.api.LocalisationController.ROLE_CRUD;
 import static fi.vm.sade.lokalisointi.api.LocalisationController.ROLE_UPDATE;
 
 @RestController
 @RequestMapping("/api/v1/override")
-public class OverrideController {
+public class OverrideController extends ControllerBase {
   private static final Logger LOG = LoggerFactory.getLogger(OverrideController.class);
   private final Database database;
 
@@ -63,5 +71,23 @@ public class OverrideController {
   public ResponseEntity<Status> delete(@PathVariable final Integer id) {
     database.deleteOverride(id);
     return ResponseEntity.ok(new Status("OK"));
+  }
+
+  @ResponseStatus(HttpStatus.BAD_REQUEST)
+  @ExceptionHandler({
+    DbActionExecutionException.class,
+    IllegalArgumentException.class,
+    HttpMessageNotReadableException.class
+  })
+  public Map<String, ?> handleUserErrors(final RuntimeException ex) {
+    return Map.of(
+        "error",
+        Stream.of(
+                Optional.of(new ImmutablePair<>("message", ex.getMessage())),
+                Optional.ofNullable(ex.getCause())
+                    .map(c -> new ImmutablePair<>("cause", c.getMessage())))
+            .filter(Optional::isPresent)
+            .map(Optional::get)
+            .collect(Collectors.toMap(ImmutablePair::getLeft, ImmutablePair::getRight)));
   }
 }

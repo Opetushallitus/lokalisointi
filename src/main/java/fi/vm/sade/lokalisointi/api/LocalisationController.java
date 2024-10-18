@@ -21,7 +21,7 @@ import java.util.Collection;
 
 @RestController
 @RequestMapping({"/api/v1/localisation", "/cxf/rest/v1/localisation"})
-public class LocalisationController implements InitializingBean {
+public class LocalisationController extends ControllerBase implements InitializingBean {
   public static final String ROLE_LOKALISOINTI = "ROLE_APP_LOKALISOINTI";
   public static final String ROLE_READ = "ROLE_APP_LOKALISOINTI_READ";
   public static final String ROLE_UPDATE = "ROLE_APP_LOKALISOINTI_READ_UPDATE";

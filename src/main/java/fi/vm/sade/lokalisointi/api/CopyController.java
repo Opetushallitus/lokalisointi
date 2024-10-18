@@ -18,7 +18,7 @@ import static fi.vm.sade.lokalisointi.api.LocalisationController.ROLE_UPDATE;
 
 @RestController
 @RequestMapping("/api/v1/copy")
-public class CopyController {
+public class CopyController extends ControllerBase {
   private final S3 s3;
 
   @Autowired

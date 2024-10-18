@@ -12,7 +12,7 @@ import java.util.Arrays;
 
 @RestController
 @RequestMapping("/api/v1/ui-config")
-public class UIConfigController {
+public class UIConfigController extends ControllerBase {
   @Value("${ENV_NAME:pallero}")
   private String envName;
 

@@ -1,0 +1,114 @@
+import React, {FC, useEffect, useState} from "react"
+import {
+  FormControl,
+  FormLabel,
+  IconButton,
+  MenuItem,
+  Select,
+  TableCell,
+  TableRow, TextField, Tooltip
+} from "@mui/material"
+import {UIConfig} from "./types"
+import {Cancel, Save} from "@mui/icons-material"
+
+interface Props {
+  close: () => void,
+  uiConfig?: UIConfig,
+  showMessage: (message: React.ReactNode) => void
+}
+
+const AddOverride: FC<Props> = ({close, uiConfig, showMessage}) => {
+  const [availableNamespaces, setAvailableNamespaces] = useState<string[]>([])
+  const [namespace, setNamespace] = useState<string>("")
+  const [key, setKey] = useState<string>("")
+  const [locale, setLocale] = useState<string>("")
+  const [value, setValue] = useState<string>("")
+  useEffect(() => {
+    if (uiConfig?.currentEnvironment && showMessage) {
+      fetch(`/lokalisointi/api/v1/copy/available-namespaces?source=${uiConfig?.currentEnvironment}`, {
+        method: "GET"
+      }).then(async (res) => {
+        const body = await res.json()
+        if (!res.ok) {
+          showMessage("Nimiavaruuksia ei saatu ladattua. Yritä myöhemmin uudelleen.")
+          return
+        }
+        setAvailableNamespaces(body)
+      })
+    }
+  }, [uiConfig?.currentEnvironment, showMessage])
+  const save = () => {
+    fetch("/lokalisointi/api/v1/override", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      credentials: "same-origin",
+      body: JSON.stringify({namespace, locale, key, value})
+    })
+      .then(async (res) => {
+        const body = await res.json()
+        if (!res.ok) {
+          showMessage(`Yliajon tallentaminen ei onnistunut: ${JSON.stringify(body)}`)
+          return
+        }
+        setNamespace("")
+        setLocale("")
+        setKey("")
+        setValue("")
+        close()
+      })
+  }
+  return (
+    <TableRow>
+      <TableCell></TableCell>
+      <TableCell>
+        <FormControl variant="filled" fullWidth>
+          <FormLabel htmlFor="namespace">nimiavaruus</FormLabel>
+          <Select id="namespace" variant="outlined" value={namespace} size="small"
+                  onChange={(e) => setNamespace(e.target.value)}>
+            {availableNamespaces.map((
+              (ns, i) => <MenuItem value={ns} key={i}>{ns}</MenuItem>)
+            )}
+          </Select>
+        </FormControl>
+      </TableCell>
+      <TableCell>
+        <FormControl fullWidth>
+          <FormLabel htmlFor="locale">kieli</FormLabel>
+          <Select id="locale" variant="outlined" value={locale} size="small"
+                  onChange={(e) => setLocale(e.target.value)}>
+            <MenuItem value="fi">fi</MenuItem>
+            <MenuItem value="sv">sv</MenuItem>
+            <MenuItem value="en">en</MenuItem>
+          </Select>
+        </FormControl>
+      </TableCell>
+      <TableCell>
+        <FormControl fullWidth>
+          <FormLabel htmlFor="key">avain</FormLabel>
+          <TextField id="key" variant="outlined" size="small" value={key}
+                     onChange={(e) => setKey(e.target.value)}/>
+        </FormControl>
+      </TableCell>
+      <TableCell>
+        <FormControl fullWidth>
+          <FormLabel htmlFor="value">arvo</FormLabel>
+          <TextField id="value" variant="outlined" size="small" value={value}
+                     onChange={(e) => setValue(e.target.value)}/>
+        </FormControl>
+      </TableCell>
+      <TableCell colSpan={5} sx={{verticalAlign: "bottom"}}>
+        <Tooltip title="tallenna">
+          <IconButton onClick={save} disabled={!namespace || !key || !locale || !value}
+                      color="primary"><Save/></IconButton>
+        </Tooltip>
+        <Tooltip title="peruuta">
+          <IconButton onClick={close} color="secondary"><Cancel/></IconButton>
+        </Tooltip>
+      </TableCell>
+    </TableRow>
+  )
+}
+
+export default AddOverride
