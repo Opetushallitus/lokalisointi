@@ -24,8 +24,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import static fi.vm.sade.lokalisointi.api.LocalisationController.ROLE_CRUD;
-import static fi.vm.sade.lokalisointi.api.LocalisationController.ROLE_UPDATE;
+import static fi.vm.sade.lokalisointi.api.LocalisationController.*;
 
 @RestController
 @RequestMapping("/api/v1/override")
@@ -42,7 +41,7 @@ public class OverrideController extends ControllerBase {
 
   @Operation(summary = "Get all localisation overrides")
   @GetMapping
-  @Secured({ROLE_UPDATE, ROLE_CRUD})
+  @Secured({ROLE_LOKALISOINTI})
   public ResponseEntity<Collection<LocalisationOverride>> find() {
     return ResponseEntity.ok(database.find());
   }
@@ -69,38 +68,19 @@ public class OverrideController extends ControllerBase {
 
   @Operation(summary = "Delete localisation override")
   @DeleteMapping("/{id}")
-  @Secured({ROLE_UPDATE, ROLE_CRUD})
+  @Secured({ROLE_CRUD})
   public ResponseEntity<Status> delete(@PathVariable final Integer id) {
     database.deleteOverride(id);
     return ResponseEntity.ok(new Status("OK"));
   }
 
-  @ResponseStatus(HttpStatus.BAD_REQUEST)
-  @ExceptionHandler({
-    DbActionExecutionException.class,
-    IllegalArgumentException.class,
-    HttpMessageNotReadableException.class
-  })
-  public Map<String, ?> handleUserErrors(final RuntimeException ex) {
-    return Map.of(
-        "error",
-        Stream.of(
-                Optional.of(new ImmutablePair<>("message", ex.getMessage())),
-                Optional.ofNullable(ex.getCause())
-                    .map(c -> new ImmutablePair<>("cause", c.getMessage())))
-            .filter(Optional::isPresent)
-            .map(Optional::get)
-            .collect(Collectors.toMap(ImmutablePair::getLeft, ImmutablePair::getRight)));
-  }
-
   @Operation(
       summary =
-          "Find available namespaces for given source environment, includes also namespaces used in overrides")
+          "Find available namespaces in this environment, includes also namespaces used in overrides")
   @GetMapping("/available-namespaces")
   @Secured({ROLE_UPDATE, ROLE_CRUD})
-  public ResponseEntity<Collection<String>> availableNamespaces(
-      @RequestParam("source") final OphEnvironment source) {
-    final Set<String> s3Namespaces = s3.availableNamespaces(source);
+  public ResponseEntity<Collection<String>> availableNamespaces() {
+    final Set<String> s3Namespaces = s3.availableNamespaces(null);
     final Set<String> overrideNamespaces = database.availableNamespaces();
     return ResponseEntity.ok(
         Stream.concat(s3Namespaces.stream(), overrideNamespaces.stream())

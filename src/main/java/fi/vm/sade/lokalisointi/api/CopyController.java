@@ -5,15 +5,19 @@ import fi.vm.sade.lokalisointi.model.OphEnvironment;
 import fi.vm.sade.lokalisointi.model.Status;
 import fi.vm.sade.lokalisointi.storage.S3;
 import io.swagger.v3.oas.annotations.Operation;
+import jakarta.servlet.ServletOutputStream;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
+import java.io.OutputStream;
+import java.net.URISyntaxException;
 import java.security.Principal;
 import java.util.Collection;
-import java.util.List;
-import java.util.Set;
+import java.util.zip.ZipOutputStream;
 
 import static fi.vm.sade.lokalisointi.api.LocalisationController.ROLE_CRUD;
 import static fi.vm.sade.lokalisointi.api.LocalisationController.ROLE_UPDATE;
@@ -32,16 +36,29 @@ public class CopyController extends ControllerBase {
   @PostMapping
   @Secured({ROLE_UPDATE, ROLE_CRUD})
   public ResponseEntity<Status> copyLocalisations(
-      @RequestBody final CopyLocalisations body, final Principal user) {
-    s3.copyLocalisations(body, user.getName());
+      @RequestBody final CopyLocalisations copyRequest, final Principal user)
+      throws URISyntaxException {
+    s3.copyLocalisations(copyRequest, user.getName());
     return ResponseEntity.badRequest().body(new Status("Not implemented"));
   }
 
   @Operation(summary = "Find available namespaces for given source environment")
   @GetMapping("/available-namespaces")
-  @Secured({ROLE_UPDATE, ROLE_CRUD})
   public ResponseEntity<Collection<String>> availableNamespaces(
-      @RequestParam("source") final OphEnvironment source) {
+      @RequestParam(value = "source", required = false) final OphEnvironment source) {
     return ResponseEntity.ok(s3.availableNamespaces(source));
+  }
+
+  @Operation(
+      summary =
+          "Produces a zip of localisation files from this environment, to be copied to another environment")
+  @GetMapping(value = "/localisation-files", produces = "application/octet-stream")
+  public void localisationFiles(
+      @RequestParam(value = "namespaces", required = false) final Collection<String> namespaces,
+      final HttpServletResponse response)
+      throws IOException {
+    final ServletOutputStream out = response.getOutputStream();
+    s3.getLocalisationFilesZip(namespaces, out);
+    out.flush();
   }
 }

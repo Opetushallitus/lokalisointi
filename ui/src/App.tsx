@@ -43,7 +43,7 @@ export default function App() {
           <CopyLocalisations uiConfig={uiConfig} showMessage={showMessage}/>
         </Grid>
         <Grid size={12}>
-          <LocalisationOverrides uiConfig={uiConfig} showMessage={showMessage}/>
+          <LocalisationOverrides showMessage={showMessage}/>
         </Grid>
       </Grid>
       {messages.map((message, i) => (

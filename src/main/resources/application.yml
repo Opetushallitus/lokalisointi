@@ -48,6 +48,11 @@ lokalisointi:
   uses-ssl-proxy: false
   disable-same-site-cookie: false
   public-cache-max-age-minutes: 10
+  baseurls:
+    pallero: https://virkalija.testiopintopolku.fi
+    untuva: https://virkailija.untuvaopintopolku.fi
+    hahtuva: https://virkailija.hahtuvaopintopolku.fi
+    sade: https://virkailija.opintopolku.fi
 logging:
   level:
     root: info

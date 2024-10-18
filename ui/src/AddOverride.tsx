@@ -14,19 +14,18 @@ import {Cancel, Save} from "@mui/icons-material"
 
 interface Props {
   close: () => void,
-  uiConfig?: UIConfig,
   showMessage: (message: React.ReactNode) => void
 }
 
-const AddOverride: FC<Props> = ({close, uiConfig, showMessage}) => {
+const AddOverride: FC<Props> = ({close, showMessage}) => {
   const [availableNamespaces, setAvailableNamespaces] = useState<string[]>([])
   const [namespace, setNamespace] = useState<string | undefined>(undefined)
   const [key, setKey] = useState<string>("")
   const [locale, setLocale] = useState<string>("")
   const [value, setValue] = useState<string>("")
   useEffect(() => {
-    if (uiConfig?.currentEnvironment && showMessage) {
-      fetch(`/lokalisointi/api/v1/override/available-namespaces?source=${uiConfig?.currentEnvironment}`, {
+    if (showMessage) {
+      fetch("/lokalisointi/api/v1/override/available-namespaces", {
         method: "GET"
       }).then(async (res) => {
         const body = await res.json()
@@ -37,7 +36,7 @@ const AddOverride: FC<Props> = ({close, uiConfig, showMessage}) => {
         setAvailableNamespaces(body)
       })
     }
-  }, [uiConfig?.currentEnvironment, showMessage])
+  }, [showMessage])
   const save = () => {
     fetch("/lokalisointi/api/v1/override", {
       method: "POST",

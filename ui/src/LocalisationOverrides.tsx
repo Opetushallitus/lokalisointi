@@ -23,11 +23,10 @@ import {Add, Delete, Person} from "@mui/icons-material"
 import {LocalisationOverride, UIConfig} from "./types"
 
 interface Props {
-  uiConfig?: UIConfig,
   showMessage: (message: React.ReactNode) => void
 }
 
-const LocalisationOverrides: FC<Props> = ({uiConfig, showMessage}) => {
+const LocalisationOverrides: FC<Props> = ({showMessage}) => {
   const [overrides, setOverrides] = useState<LocalisationOverride[]>([])
   const [addDialogOpen, setAddDialogOpen] = useState<boolean>(false)
   const [deleteDialogId, setDeleteDialogId] = useState<number | undefined>(undefined)
@@ -136,7 +135,7 @@ const LocalisationOverrides: FC<Props> = ({uiConfig, showMessage}) => {
                 <AddOverride close={() => {
                   setAddDialogOpen(false)
                   loadOverrides()
-                }} uiConfig={uiConfig} showMessage={showMessage}/>
+                }} showMessage={showMessage}/>
               )}
             </TableBody>
           </Table>

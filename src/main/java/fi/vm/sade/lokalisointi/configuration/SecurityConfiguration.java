@@ -131,7 +131,9 @@ public class SecurityConfiguration {
                         "/swagger-ui.html",
                         "/webjars/swagger-ui/**",
                         "/api/v1/localisation",
-                        "/cxf/rest/v1/localisation")
+                        "/cxf/rest/v1/localisation",
+                        "/api/v1/copy/localisation-files",
+                        "/api/v1/copy/available-namespaces")
                     .permitAll()
                     .anyRequest()
                     .authenticated())
