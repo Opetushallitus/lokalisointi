@@ -3,6 +3,7 @@ package fi.vm.sade.lokalisointi.api;
 import fi.vm.sade.lokalisointi.model.*;
 import fi.vm.sade.lokalisointi.storage.Database;
 import fi.vm.sade.lokalisointi.storage.S3;
+import fi.vm.sade.lokalisointi.storage.Tolgee;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import org.slf4j.Logger;
@@ -16,6 +17,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.time.Duration;
 import java.time.temporal.ChronoUnit;
 import java.util.Collection;
@@ -33,13 +35,18 @@ public class LocalisationController extends ControllerBase implements Initializi
   @Value("${lokalisointi.public-cache-max-age-minutes:5}")
   private Integer cacheMaxAgeMinutes;
 
+  @Value("${ENV_NAME:pallero}")
+  private String envName;
+
   private final S3 s3;
   private final Database database;
+  private final Tolgee tolgee;
 
   @Autowired
-  public LocalisationController(final S3 s3, final Database database) {
+  public LocalisationController(final S3 s3, final Database database, final Tolgee tolgee) {
     this.s3 = s3;
     this.database = database;
+    this.tolgee = tolgee;
   }
 
   public void afterPropertiesSet() {
@@ -100,9 +107,42 @@ public class LocalisationController extends ControllerBase implements Initializi
   @PostMapping("/update")
   @Secured({ROLE_UPDATE, ROLE_CRUD})
   public ResponseEntity<MassUpdateResult> update(
-      @RequestBody final Collection<Localisation> localisations) {
+      @RequestBody final Collection<Localisation> localisations, final Principal user) {
     final MassUpdateResult result = new MassUpdateResult();
-    result.setStatus("Not implemented");
-    return ResponseEntity.badRequest().body(result);
+    result.setStatus("OK");
+    for (final Localisation localisation : localisations) {
+      if (localisation.getId() != null) {
+        // id should always refer to (existing) localisation override
+        final Localisation existing =
+            database.getById(localisation.getId()).stream().findFirst().orElse(null);
+        if (existing != null) {
+          if (existing.getNamespace().equals(localisation.getNamespace())
+              && existing.getKey().equals(localisation.getKey())
+              && existing.getLocale().equals(localisation.getLocale())
+              && existing.getValue().equals(localisation.getValue())) {
+            result.incNotModified();
+          } else {
+            database.updateOverride(localisation.getId(), localisation, user.getName());
+            result.incUpdated();
+          }
+        } else {
+          database.saveOverride(localisation, user.getName());
+          result.incCreated();
+        }
+      } else if (envName != null
+          && OphEnvironment.valueOf(envName).equals(OphEnvironment.pallero)) {
+        // in test environment save localisation to Tolgee
+        if (tolgee.importKey(localisation)) {
+          result.incCreated();
+        } else {
+          result.incNotModified();
+        }
+      } else {
+        // otherwise create new localisation override
+        database.saveOverride(localisation, user.getName());
+        result.incCreated();
+      }
+    }
+    return ResponseEntity.ok().body(result);
   }
 }

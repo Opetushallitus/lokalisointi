@@ -10,10 +10,7 @@ import org.springframework.data.jdbc.core.JdbcAggregateTemplate;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDateTime;
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
@@ -77,8 +74,8 @@ public class Database {
                         localisationOverride ->
                             uniqueKey(
                                 localisationOverride.getNamespace(),
-                                localisationOverride.getLocale(),
-                                localisationOverride.getKey())));
+                                localisationOverride.getKey(),
+                                localisationOverride.getLocale())));
 
     // replace localisations with overrides
     final List<Localisation> overriddenLocalisations =
@@ -88,27 +85,26 @@ public class Database {
                   final ImmutableTriple<String, String, String> uKey =
                       uniqueKey(
                           localisation.getNamespace(),
-                          localisation.getLocale(),
-                          localisation.getKey());
+                          localisation.getKey(),
+                          localisation.getLocale());
                   if (indexedOverrides.containsKey(uKey)) {
                     return indexedOverrides.get(uKey).getFirst().toLocalisation();
                   }
                   return localisation;
                 })
             .toList();
-    final Map<ImmutableTriple<String, String, String>, List<Localisation>> indexedLocalisations =
-        overriddenLocalisations.stream()
-            .collect(
-                groupingBy(
-                    localisation ->
-                        uniqueKey(
-                            localisation.getNamespace(),
-                            localisation.getLocale(),
-                            localisation.getKey())));
 
     final Set<ImmutableTriple<String, String, String>> nonOverridingLocalisationOverrides =
-        indexedOverrides.keySet();
-    nonOverridingLocalisationOverrides.removeAll(indexedLocalisations.keySet());
+        new HashSet<>(indexedOverrides.keySet());
+    nonOverridingLocalisationOverrides.removeAll(
+        overriddenLocalisations.stream()
+            .map(
+                localisation ->
+                    uniqueKey(
+                        localisation.getNamespace(),
+                        localisation.getKey(),
+                        localisation.getLocale()))
+            .collect(Collectors.toSet()));
 
     // return also non-overriding localisation overrides
     return Stream.concat(
@@ -119,8 +115,8 @@ public class Database {
   }
 
   private ImmutableTriple<String, String, String> uniqueKey(
-      final String namespace, final String locale, final String key) {
-    return new ImmutableTriple<>(namespace, locale, key);
+      final String namespace, final String key, final String locale) {
+    return new ImmutableTriple<>(namespace, key, locale);
   }
 
   public void deleteOverride(final Integer id) {

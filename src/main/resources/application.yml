@@ -53,6 +53,10 @@ lokalisointi:
     untuva: https://virkailija.untuvaopintopolku.fi
     hahtuva: https://virkailija.hahtuvaopintopolku.fi
     sade: https://virkailija.opintopolku.fi
+tolgee:
+  baseurl: https://app.tolgee.io
+  apikey: ${TOLGEE_API_KEY:none}
+  projectid: 9994
 logging:
   level:
     root: info

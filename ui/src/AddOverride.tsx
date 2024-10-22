@@ -45,7 +45,7 @@ const AddOverride: FC<Props> = ({close, showMessage}) => {
         "Content-Type": "application/json"
       },
       credentials: "same-origin",
-      body: JSON.stringify({namespace: namespace, locale, key, value})
+      body: JSON.stringify({namespace: namespace, locale: locale, key: key, value: value})
     })
       .then(async (res) => {
         const body = await res.json()
@@ -54,8 +54,8 @@ const AddOverride: FC<Props> = ({close, showMessage}) => {
           return
         }
         setNamespace(undefined)
-        setLocale("")
         setKey("")
+        setLocale("")
         setValue("")
         close()
       })
