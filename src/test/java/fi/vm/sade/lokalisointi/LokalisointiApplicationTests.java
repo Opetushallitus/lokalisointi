@@ -5,6 +5,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import fi.vm.sade.lokalisointi.configuration.DevConfiguration;
 import fi.vm.sade.lokalisointi.model.Localisation;
+import fi.vm.sade.lokalisointi.storage.Database;
 import fi.vm.sade.valinta.dokumenttipalvelu.Dokumenttipalvelu;
 import io.netty.handler.ssl.util.InsecureTrustManagerFactory;
 import lombok.SneakyThrows;
@@ -53,6 +54,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+import static fi.vm.sade.lokalisointi.configuration.SecurityConfiguration.nonAuthenticatedRoutes;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.notNullValue;
 import static org.junit.jupiter.api.Assertions.*;
@@ -71,7 +73,7 @@ import static org.testcontainers.containers.localstack.LocalStackContainer.Servi
 @ComponentScan("fi.vm.sade.lokalisointi")
 class LokalisointiApplicationTests {
   @BeforeEach
-  public void resetBucketContents() throws IOException, InterruptedException {
+  public void reset() throws IOException, InterruptedException {
     LOCAL_STACK.execInContainer(
         "awslocal", "s3", "rm", "s3://" + BUCKET_NAME, "--recursive", "--include", "'*'");
     final S3AsyncClientBuilder clientBuilder =
@@ -90,6 +92,7 @@ class LokalisointiApplicationTests {
                     .connectionTimeout(Duration.ofSeconds(60))
                     .maxConcurrency(100));
     DevConfiguration.addLocalisationFiles(dokumenttipalvelu, clientBuilder, BUCKET_NAME);
+    database.deleteAllOverrides();
   }
 
   @Test
@@ -182,6 +185,7 @@ class LokalisointiApplicationTests {
   }
 
   @Autowired private Dokumenttipalvelu dokumenttipalvelu;
+  @Autowired private Database database;
 
   @BeforeAll
   static void createBucket() throws IOException, InterruptedException {
@@ -233,27 +237,7 @@ class LokalisointiApplicationTests {
       return http.headers(AbstractHttpConfigurer::disable)
           .csrf(AbstractHttpConfigurer::disable)
           .securityMatcher("/**")
-          .authorizeHttpRequests(
-              (authz) ->
-                  authz
-                      .requestMatchers(
-                          HttpMethod.GET,
-                          "/buildversion.txt",
-                          "/actuator/health",
-                          "/v3/api-docs",
-                          "/v3/api-docs/**",
-                          "/swagger",
-                          "/swagger/**",
-                          "/swagger-ui/**",
-                          "/swagger-ui.html",
-                          "/webjars/swagger-ui/**",
-                          "/cxf/rest/v1/localisation",
-                          "/api/v1/localisation",
-                          "/api/v1/copy/localisation-files",
-                          "/api/v1/copy/available-namespaces")
-                      .permitAll()
-                      .anyRequest()
-                      .authenticated())
+          .authorizeHttpRequests(nonAuthenticatedRoutes())
           .build();
     }
   }

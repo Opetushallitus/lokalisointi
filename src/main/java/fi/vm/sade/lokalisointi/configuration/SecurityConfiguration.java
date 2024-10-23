@@ -17,10 +17,12 @@ import org.springframework.security.cas.ServiceProperties;
 import org.springframework.security.cas.authentication.CasAuthenticationProvider;
 import org.springframework.security.cas.web.CasAuthenticationEntryPoint;
 import org.springframework.security.cas.web.CasAuthenticationFilter;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configurers.AuthorizeHttpRequestsConfigurer;
 import org.springframework.security.config.annotation.web.configurers.CsrfConfigurer;
 import org.springframework.security.config.annotation.web.configurers.HeadersConfigurer;
 import org.springframework.security.web.AuthenticationEntryPoint;
@@ -101,6 +103,31 @@ public class SecurityConfiguration {
     return new HttpSessionSecurityContextRepository();
   }
 
+  public static Customizer<
+          AuthorizeHttpRequestsConfigurer<HttpSecurity>.AuthorizationManagerRequestMatcherRegistry>
+      nonAuthenticatedRoutes() {
+    return (authz) ->
+        authz
+            .requestMatchers(
+                HttpMethod.GET,
+                "/buildversion.txt",
+                "/actuator/health",
+                "/v3/api-docs",
+                "/v3/api-docs/**",
+                "/swagger",
+                "/swagger/**",
+                "/swagger-ui/**",
+                "/swagger-ui.html",
+                "/webjars/swagger-ui/**",
+                "/cxf/rest/v1/localisation",
+                "/api/v1/localisation",
+                "/api/v1/copy/localisation-files",
+                "/api/v1/copy/available-namespaces")
+            .permitAll()
+            .anyRequest()
+            .authenticated();
+  }
+
   @Bean
   public SecurityFilterChain filterChain(
       final HttpSecurity http,
@@ -111,27 +138,7 @@ public class SecurityConfiguration {
     http.headers(HeadersConfigurer::disable)
         .csrf(CsrfConfigurer::disable)
         .securityMatcher("/**")
-        .authorizeHttpRequests(
-            (authz) ->
-                authz
-                    .requestMatchers(
-                        HttpMethod.GET,
-                        "/buildversion.txt",
-                        "/actuator/health",
-                        "/v3/api-docs",
-                        "/v3/api-docs/**",
-                        "/swagger",
-                        "/swagger/**",
-                        "/swagger-ui/**",
-                        "/swagger-ui.html",
-                        "/webjars/swagger-ui/**",
-                        "/cxf/rest/v1/localisation",
-                        "/api/v1/localisation",
-                        "/api/v1/copy/localisation-files",
-                        "/api/v1/copy/available-namespaces")
-                    .permitAll()
-                    .anyRequest()
-                    .authenticated())
+        .authorizeHttpRequests(nonAuthenticatedRoutes())
         .addFilterAt(casAuthenticationFilter, CasAuthenticationFilter.class)
         .addFilterBefore(singleSignOutFilter(), CasAuthenticationFilter.class)
         .securityContext(

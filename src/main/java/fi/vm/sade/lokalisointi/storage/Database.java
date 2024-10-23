@@ -144,4 +144,8 @@ public class Database {
         .map(LocalisationOverride::getNamespace)
         .collect(Collectors.toSet());
   }
+
+  public void deleteAllOverrides() {
+    template.deleteAll(LocalisationOverride.class);
+  }
 }
