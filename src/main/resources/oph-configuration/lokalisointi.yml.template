@@ -18,6 +18,8 @@ spring:
     hikari:
       maximum-pool-size: {{host_postgresql_lokalisointi_max_active}}
       connection-timeout: {{host_postgresql_lokalisointi_max_wait}}
+  profiles:
+    active: default
 lokalisointi:
   uses-ssl-proxy: true
   public-cache-max-age-minutes: 10

@@ -16,7 +16,7 @@ import static fi.vm.sade.lokalisointi.api.LocalisationController.ROLE_LOKALISOIN
 @RestController
 @RequestMapping("/api/v1/ui-config")
 public class UIConfigController extends ControllerBase {
-  @Value("${ENV_NAME:pallero}")
+  @Value("${lokalisointi.envname}")
   private String envName;
 
   @GetMapping

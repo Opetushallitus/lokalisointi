@@ -35,7 +35,7 @@ public class LocalisationController extends ControllerBase implements Initializi
   @Value("${lokalisointi.public-cache-max-age-minutes:5}")
   private Integer cacheMaxAgeMinutes;
 
-  @Value("${ENV_NAME:pallero}")
+  @Value("${lokalisointi.envname}")
   private String envName;
 
   private final S3 s3;
@@ -51,6 +51,7 @@ public class LocalisationController extends ControllerBase implements Initializi
 
   public void afterPropertiesSet() {
     LOG.info("cacheMaxAgeMinutes: {}", cacheMaxAgeMinutes);
+    LOG.info("envName: {}", envName);
   }
 
   @Operation(summary = "Query localisations")

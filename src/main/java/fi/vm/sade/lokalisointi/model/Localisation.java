@@ -9,11 +9,13 @@ import lombok.Data;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @AllArgsConstructor
 public class Localisation {
-  private final Integer id;
+  private Integer id;
   private String namespace;
   private String key;
   private String locale;
   private String value;
+
+  public Localisation() {}
 
   @Schema(description = "Alias for namespace, this is for backwards compatibility")
   public String getCategory() {

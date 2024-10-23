@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
-import org.springframework.core.annotation.Order;
 import org.springframework.core.env.Environment;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -28,11 +27,9 @@ import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.context.HttpSessionSecurityContextRepository;
 import org.springframework.security.web.context.SecurityContextRepository;
-import org.springframework.security.web.savedrequest.HttpSessionRequestCache;
 
 @Profile({"default", "dev"})
 @Configuration
-@Order(2)
 @EnableMethodSecurity(securedEnabled = true)
 @EnableWebSecurity
 public class SecurityConfiguration {
@@ -111,8 +108,6 @@ public class SecurityConfiguration {
       final SecurityContextRepository securityContextRepository,
       final AuthenticationEntryPoint authenticationEntryPoint)
       throws Exception {
-    final HttpSessionRequestCache requestCache = new HttpSessionRequestCache();
-    requestCache.setMatchingRequestParameterName(null);
     http.headers(HeadersConfigurer::disable)
         .csrf(CsrfConfigurer::disable)
         .securityMatcher("/**")

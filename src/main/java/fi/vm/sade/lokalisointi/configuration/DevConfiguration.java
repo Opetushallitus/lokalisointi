@@ -75,33 +75,35 @@ public class DevConfiguration {
 
     dokumenttipalvelu.listObjectsMaxKeys = 5;
 
-    addLocalisationFiles(dokumenttipalvelu, clientBuilder);
+    addLocalisationFiles(dokumenttipalvelu, clientBuilder, BUCKET_NAME);
 
     return dokumenttipalvelu;
   }
 
-  private void addLocalisationFiles(
-      final Dokumenttipalvelu dokumenttipalvelu, final S3AsyncClientBuilder clientBuilder)
+  public static void addLocalisationFiles(
+      final Dokumenttipalvelu dokumenttipalvelu,
+      final S3AsyncClientBuilder clientBuilder,
+      final String bucketName)
       throws FileNotFoundException {
     // recreate bucket
     try (final S3AsyncClient client = clientBuilder.build()) {
       try {
         client
-            .listObjects(ListObjectsRequest.builder().bucket(BUCKET_NAME).build())
+            .listObjects(ListObjectsRequest.builder().bucket(bucketName).build())
             .join()
             .contents()
             .forEach(
                 o -> {
                   client
                       .deleteObject(
-                          DeleteObjectRequest.builder().bucket(BUCKET_NAME).key(o.key()).build())
+                          DeleteObjectRequest.builder().bucket(bucketName).key(o.key()).build())
                       .join();
                 });
-        client.deleteBucket(DeleteBucketRequest.builder().bucket(BUCKET_NAME).build()).join();
+        client.deleteBucket(DeleteBucketRequest.builder().bucket(bucketName).build()).join();
       } catch (final Exception e) {
         LOG.warn(e.getMessage());
       }
-      client.createBucket(CreateBucketRequest.builder().bucket(BUCKET_NAME).build()).join();
+      client.createBucket(CreateBucketRequest.builder().bucket(bucketName).build()).join();
     }
     // add example localisation files
     dokumenttipalvelu

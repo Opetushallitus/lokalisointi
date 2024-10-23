@@ -31,7 +31,7 @@ public class PersistenceConfiguration extends AbstractJdbcConfiguration {
   }
 
   @Bean
-  @Profile("!dev")
+  @Profile({"default"})
   public Dokumenttipalvelu dokumenttipalvelu(
       @Value("${aws.region}") final String region,
       @Value("${aws.bucket.name}") final String bucketName) {

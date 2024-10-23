@@ -47,7 +47,7 @@ public class S3 {
   @Value("${lokalisointi.baseurls.sade}")
   private String baseUrlSade;
 
-  @Value("${ENV_NAME}")
+  @Value("${lokalisointi.envname}")
   private String envName;
 
   private final RestClient.Builder restClientBuilder;
