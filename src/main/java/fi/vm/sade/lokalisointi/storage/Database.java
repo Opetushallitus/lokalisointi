@@ -6,6 +6,7 @@ import org.apache.commons.lang3.tuple.ImmutableTriple;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Profile;
 import org.springframework.data.jdbc.core.JdbcAggregateTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -18,30 +19,30 @@ import java.util.stream.StreamSupport;
 import static java.util.stream.Collectors.groupingBy;
 
 @Repository
+@Profile("!test")
 public class Database {
   private static final Logger LOG = LoggerFactory.getLogger(Database.class);
-  private final JdbcAggregateTemplate template;
+  protected final JdbcAggregateTemplate template;
 
   @Autowired
   protected Database(final JdbcAggregateTemplate template) {
     this.template = template;
   }
 
-  public Localisation saveOverride(final Localisation localisation, final String createdBy) {
+  public LocalisationOverride saveOverride(
+      final Localisation localisation, final String createdBy) {
     LOG.debug("Saving localisation override: {}", localisation);
-    return template
-        .insert(
-            new LocalisationOverride(
-                localisation.getNamespace(),
-                localisation.getLocale(),
-                localisation.getKey(),
-                localisation.getValue(),
-                createdBy,
-                createdBy))
-        .toLocalisation();
+    return template.insert(
+        new LocalisationOverride(
+            localisation.getNamespace(),
+            localisation.getLocale(),
+            localisation.getKey(),
+            localisation.getValue(),
+            createdBy,
+            createdBy));
   }
 
-  public Localisation updateOverride(
+  public LocalisationOverride updateOverride(
       final Integer id, final Localisation localisation, final String updatedBy) {
     final LocalisationOverride existing = template.findById(id, LocalisationOverride.class);
     LOG.debug("Updating existing localisation override with id {}: {}", id, existing);
@@ -52,7 +53,7 @@ public class Database {
       existing.setValue(localisation.getValue());
       existing.setUpdatedBy(updatedBy);
       existing.setUpdated(LocalDateTime.now());
-      return template.update(existing).toLocalisation();
+      return template.update(existing);
     } else {
       return saveOverride(localisation, updatedBy);
     }
@@ -143,9 +144,5 @@ public class Database {
     return StreamSupport.stream(template.findAll(LocalisationOverride.class).spliterator(), false)
         .map(LocalisationOverride::getNamespace)
         .collect(Collectors.toSet());
-  }
-
-  public void deleteAllOverrides() {
-    template.deleteAll(LocalisationOverride.class);
   }
 }

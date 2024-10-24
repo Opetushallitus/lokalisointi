@@ -49,7 +49,7 @@ public class OverrideController extends ControllerBase {
   @Operation(summary = "Create localisation override")
   @PostMapping
   @Secured({ROLE_UPDATE, ROLE_CRUD})
-  public ResponseEntity<Localisation> create(
+  public ResponseEntity<LocalisationOverride> create(
       @Valid @RequestBody final Localisation localisation, final Principal user) {
     LOG.info("Creating localisation override: {}", localisation);
     return ResponseEntity.ok(database.saveOverride(localisation, user.getName()));
@@ -58,7 +58,7 @@ public class OverrideController extends ControllerBase {
   @Operation(summary = "Update localisation override")
   @PostMapping("/{id}")
   @Secured({ROLE_UPDATE, ROLE_CRUD})
-  public ResponseEntity<Localisation> update(
+  public ResponseEntity<LocalisationOverride> update(
       @PathVariable final Integer id,
       @RequestBody final Localisation localisation,
       final Principal user) {

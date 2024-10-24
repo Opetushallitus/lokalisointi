@@ -2,6 +2,10 @@ package fi.vm.sade.lokalisointi.configuration;
 
 import fi.vm.sade.valinta.dokumenttipalvelu.Dokumenttipalvelu;
 import io.netty.handler.ssl.util.InsecureTrustManagerFactory;
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.filefilter.DirectoryFileFilter;
+import org.apache.commons.io.filefilter.IOFileFilter;
+import org.apache.commons.io.filefilter.RegexFileFilter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Bean;
@@ -17,11 +21,14 @@ import software.amazon.awssdk.services.s3.model.*;
 import software.amazon.awssdk.services.s3.presigner.S3Presigner;
 
 import javax.net.ssl.SSLException;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.time.Duration;
+import java.util.Arrays;
+import java.util.Optional;
 
 import static fi.vm.sade.lokalisointi.storage.S3.LOKALISOINTI_TAG;
 
@@ -88,6 +95,7 @@ public class DevConfiguration {
     // recreate bucket
     try (final S3AsyncClient client = clientBuilder.build()) {
       try {
+        LOG.info("Recreating bucket {}", bucketName);
         client
             .listObjects(ListObjectsRequest.builder().bucket(bucketName).build())
             .join()
@@ -106,19 +114,35 @@ public class DevConfiguration {
       client.createBucket(CreateBucketRequest.builder().bucket(bucketName).build()).join();
     }
     // add example localisation files
-    dokumenttipalvelu
-        .putObject(
-            String.format("t-%s/example/fi.json", LOKALISOINTI_TAG),
-            "fi.json",
-            "application/json",
-            new FileInputStream("src/test/resources/example/fi.json"))
-        .join();
-    dokumenttipalvelu
-        .putObject(
-            String.format("t-%s/example/en.json", LOKALISOINTI_TAG),
-            "en.json",
-            "application/json",
-            new FileInputStream("src/test/resources/example/en.json"))
-        .join();
+    for (final File namespaceDenotingDirectoryHandle :
+        FileUtils.listFilesAndDirs(
+            new File("src/test/resources/localisations"),
+            new RegexFileFilter("^(.*?)"),
+            DirectoryFileFilter.INSTANCE)) {
+      if (namespaceDenotingDirectoryHandle.isDirectory()) {
+        final File[] localeFiles = namespaceDenotingDirectoryHandle.listFiles();
+        if (localeFiles != null) {
+          for (final File localeFile : localeFiles) {
+            if (localeFile.isFile()) {
+              LOG.info(
+                  "Adding localization file: {}/{}",
+                  namespaceDenotingDirectoryHandle.getName(),
+                  localeFile.getName());
+              dokumenttipalvelu
+                  .putObject(
+                      String.format(
+                          "t-%s/%s/%s",
+                          LOKALISOINTI_TAG,
+                          namespaceDenotingDirectoryHandle.getName(),
+                          localeFile.getName()),
+                      localeFile.getName(),
+                      "application/json",
+                      new FileInputStream(localeFile))
+                  .join();
+            }
+          }
+        }
+      }
+    }
   }
 }

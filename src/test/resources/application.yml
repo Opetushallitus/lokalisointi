@@ -38,7 +38,7 @@ springdoc:
 server:
   servlet:
     context-path: /lokalisointi
-  port: 8080
+  port: 10080
   tomcat:
     threads:
       max: 20

@@ -27,6 +27,8 @@ public class LocalisationOverride {
   @NonNull private String updatedBy;
   @NonNull private LocalDateTime updated;
 
+  public LocalisationOverride() {}
+
   public LocalisationOverride(
       @NonNull final String namespace,
       @NonNull final String locale,

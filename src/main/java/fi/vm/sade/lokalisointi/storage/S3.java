@@ -2,6 +2,8 @@ package fi.vm.sade.lokalisointi.storage;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.json.JsonMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import fi.vm.sade.lokalisointi.model.CopyLocalisations;
 import fi.vm.sade.lokalisointi.model.Localisation;
 import fi.vm.sade.lokalisointi.model.OphEnvironment;
@@ -176,7 +178,7 @@ public class S3 {
 
   private Stream<Localisation> transformToLocalisationStream(final ObjectMetadata metadata) {
     try {
-      final ObjectMapper mapper = new ObjectMapper();
+      final ObjectMapper mapper = JsonMapper.builder().addModule(new JavaTimeModule()).build();
       final ObjectEntity objectEntity = dokumenttipalvelu.get(metadata.key);
       final List<String> splittedObjectKey =
           Arrays.stream(metadata.key.split("/"))

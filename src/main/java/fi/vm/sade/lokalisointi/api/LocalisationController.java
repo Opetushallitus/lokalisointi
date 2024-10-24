@@ -121,12 +121,15 @@ public class LocalisationController extends ControllerBase implements Initializi
               && existing.getKey().equals(localisation.getKey())
               && existing.getLocale().equals(localisation.getLocale())
               && existing.getValue().equals(localisation.getValue())) {
+            LOG.info("Localisation not changed - not updating: {}", localisation);
             result.incNotModified();
           } else {
+            LOG.info("Updating localisation: {}", localisation);
             database.updateOverride(localisation.getId(), localisation, user.getName());
             result.incUpdated();
           }
         } else {
+          LOG.info("Creating new localisation override: {}", localisation);
           database.saveOverride(localisation, user.getName());
           result.incCreated();
         }
@@ -134,12 +137,15 @@ public class LocalisationController extends ControllerBase implements Initializi
           && OphEnvironment.valueOf(envName).equals(OphEnvironment.pallero)) {
         // in test environment save localisation to Tolgee
         if (tolgee.importKey(localisation)) {
+          LOG.info("Imported localisation to Tolgee: {}", localisation);
           result.incCreated();
         } else {
+          LOG.info("Bypassed localisation import to Tolgee: {}", localisation);
           result.incNotModified();
         }
       } else {
         // otherwise create new localisation override
+        LOG.info("Creating new localisation override: {}", localisation);
         database.saveOverride(localisation, user.getName());
         result.incCreated();
       }

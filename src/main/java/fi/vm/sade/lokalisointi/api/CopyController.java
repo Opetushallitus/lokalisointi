@@ -49,7 +49,7 @@ public class CopyController extends ControllerBase {
   @Operation(
       summary =
           "Produces a zip of localisation files from this environment, to be copied to another environment")
-  @GetMapping(value = "/localisation-files", produces = "application/octet-stream")
+  @GetMapping(value = "/localisation-files", produces = MediaType.APPLICATION_OCTET_STREAM_VALUE)
   public ResponseEntity<byte[]> localisationFiles(
       @RequestParam(value = "namespaces", required = false) final Collection<String> namespaces)
       throws IOException {

@@ -30,6 +30,10 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.context.HttpSessionSecurityContextRepository;
 import org.springframework.security.web.context.SecurityContextRepository;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Stream;
+
 @Profile({"default", "dev"})
 @Configuration
 @EnableMethodSecurity(securedEnabled = true)
@@ -105,24 +109,27 @@ public class SecurityConfiguration {
 
   public static Customizer<
           AuthorizeHttpRequestsConfigurer<HttpSecurity>.AuthorizationManagerRequestMatcherRegistry>
-      nonAuthenticatedRoutes() {
+      nonAuthenticatedRoutes(final String... additionalPaths) {
+    final Stream<String> additional = Arrays.stream(additionalPaths);
+    final Stream<String> common =
+        Stream.of(
+            "/buildversion.txt",
+            "/actuator/health",
+            "/v3/api-docs",
+            "/v3/api-docs/**",
+            "/swagger",
+            "/swagger/**",
+            "/swagger-ui/**",
+            "/swagger-ui.html",
+            "/webjars/swagger-ui/**",
+            "/cxf/rest/v1/localisation",
+            "/api/v1/localisation",
+            "/api/v1/copy/localisation-files",
+            "/api/v1/copy/available-namespaces");
+    final List<String> allPaths = Stream.concat(common, additional).toList();
     return (authz) ->
         authz
-            .requestMatchers(
-                HttpMethod.GET,
-                "/buildversion.txt",
-                "/actuator/health",
-                "/v3/api-docs",
-                "/v3/api-docs/**",
-                "/swagger",
-                "/swagger/**",
-                "/swagger-ui/**",
-                "/swagger-ui.html",
-                "/webjars/swagger-ui/**",
-                "/cxf/rest/v1/localisation",
-                "/api/v1/localisation",
-                "/api/v1/copy/localisation-files",
-                "/api/v1/copy/available-namespaces")
+            .requestMatchers(HttpMethod.GET, allPaths.toArray(String[]::new))
             .permitAll()
             .anyRequest()
             .authenticated();
