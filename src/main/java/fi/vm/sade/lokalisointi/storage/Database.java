@@ -19,7 +19,6 @@ import java.util.stream.StreamSupport;
 import static java.util.stream.Collectors.groupingBy;
 
 @Repository
-@Profile("!test")
 public class Database {
   private static final Logger LOG = LoggerFactory.getLogger(Database.class);
   protected final JdbcAggregateTemplate template;
