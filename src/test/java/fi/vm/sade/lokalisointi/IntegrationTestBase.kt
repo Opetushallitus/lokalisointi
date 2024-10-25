@@ -82,9 +82,9 @@ abstract class IntegrationTestBase {
 
     @SpringBootConfiguration
     @EnableWebSecurity
-    internal open class TestConfiguration {
+    internal class TestConfiguration {
         @Bean
-        open fun dokumenttipalvelu(): Dokumenttipalvelu {
+        fun dokumenttipalvelu(): Dokumenttipalvelu {
             // re-wire dokumenttipalvelu with localstack
             val dokumenttipalvelu: Dokumenttipalvelu =
                 object : Dokumenttipalvelu(LOCAL_STACK.region, BUCKET_NAME) {
@@ -126,8 +126,7 @@ abstract class IntegrationTestBase {
         }
 
         @Bean
-        @Throws(Exception::class)
-        open fun filterChain(http: HttpSecurity): SecurityFilterChain {
+        fun filterChain(http: HttpSecurity): SecurityFilterChain {
             return http.headers { obj: HeadersConfigurer<HttpSecurity> -> obj.disable() }
                 .csrf { obj: CsrfConfigurer<HttpSecurity> -> obj.disable() }
                 .securityMatcher("/**")
@@ -145,9 +144,6 @@ abstract class IntegrationTestBase {
     @RequestMapping("/lokalisointi/api/v1/copy")
     internal class CopyControllerInUntuvaEnvironment {
         @GetMapping(value = ["/localisation-files"], produces = [MediaType.APPLICATION_OCTET_STREAM_VALUE])
-        @Throws(
-            IOException::class
-        )
         fun mockLocalisationArchive(
             @RequestParam(value = "namespaces", required = false) namespaces: Collection<String?>?
         ): ResponseEntity<ByteArray> {
@@ -186,7 +182,6 @@ abstract class IntegrationTestBase {
 
         @JvmStatic
         @BeforeAll
-        @Throws(IOException::class, InterruptedException::class)
         fun createBucket(): Unit {
             LOCAL_STACK.execInContainer("awslocal", "s3", "mb", "s3://$BUCKET_NAME")
         }

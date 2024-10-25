@@ -20,15 +20,13 @@ import software.amazon.awssdk.http.nio.netty.NettyNioAsyncHttpClient
 import software.amazon.awssdk.regions.Region
 import software.amazon.awssdk.services.s3.S3AsyncClient
 import java.io.ByteArrayInputStream
-import java.io.IOException
 import java.time.Duration
-import java.util.stream.Collectors
 import java.util.zip.ZipEntry
 import java.util.zip.ZipInputStream
+import kotlin.test.assertEquals
 
 class ApiTests : IntegrationTestBase() {
     @BeforeEach
-    @Throws(IOException::class)
     fun reset() {
         val clientBuilder =
             S3AsyncClient.builder()
@@ -48,11 +46,10 @@ class ApiTests : IntegrationTestBase() {
                         .connectionTimeout(Duration.ofSeconds(60))
                         .maxConcurrency(100))
         DevConfiguration.addLocalisationFiles(dokumenttipalvelu, clientBuilder, BUCKET_NAME)
-        database.find().forEach { override -> database.deleteOverride(override.id) }
+        database.find().forEach { override -> database.deleteOverride(override.id!!) }
     }
 
     @Test
-    @Throws(Exception::class)
     fun testGetLocalisationsWorksWithoutAuthentication() {
         mvc.perform(
             MockMvcRequestBuilders.get("/api/v1/localisation")
@@ -70,8 +67,26 @@ class ApiTests : IntegrationTestBase() {
             )
     }
 
+    @WithMockUser("1.2.246.562.24.00000000001")
     @Test
-    @Throws(Exception::class)
+    fun testGetLocalisationsWorksWithTrailingSlash() {
+        mvc.perform(
+            MockMvcRequestBuilders.get("/api/v1/localisation/")
+                .accept(MediaType.APPLICATION_JSON)
+        )
+            .andExpect(MockMvcResultMatchers.status().is2xxSuccessful())
+            .andExpect(
+                MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON)
+            )
+            .andExpect(
+                MockMvcResultMatchers.jsonPath(
+                    "$.length()",
+                    Matchers.`is`(8)
+                )
+            )
+    }
+
+    @Test
     fun testGetLocalisationsWithCategoryAndNamespaceReturnsError() {
         mvc.perform(
             MockMvcRequestBuilders.get("/api/v1/localisation?category=foobar&namespace=example")
@@ -88,7 +103,6 @@ class ApiTests : IntegrationTestBase() {
     }
 
     @Test
-    @Throws(Exception::class)
     fun testGetLocalisationsFilterByNamespace() {
         mvc.perform(
             MockMvcRequestBuilders.get("/api/v1/localisation?namespace=example").accept(MediaType.APPLICATION_JSON)
@@ -99,7 +113,6 @@ class ApiTests : IntegrationTestBase() {
     }
 
     @Test
-    @Throws(Exception::class)
     fun testGetLocalisationsFilterByCategory() {
         mvc.perform(
             MockMvcRequestBuilders.get("/api/v1/localisation?category=lokalisointi").accept(MediaType.APPLICATION_JSON)
@@ -110,7 +123,6 @@ class ApiTests : IntegrationTestBase() {
     }
 
     @Test
-    @Throws(Exception::class)
     fun testGetLocalisationsFilterByNamespaceAndKey() {
         mvc.perform(
             MockMvcRequestBuilders.get("/api/v1/localisation?namespace=example&key=create.item")
@@ -122,7 +134,6 @@ class ApiTests : IntegrationTestBase() {
     }
 
     @Test
-    @Throws(Exception::class)
     fun testGetLocalisationsFilterByNamespaceAndKeyAndLocale() {
         mvc.perform(
             MockMvcRequestBuilders.get("/api/v1/localisation?namespace=example&key=create.item&locale=fi")
@@ -134,7 +145,6 @@ class ApiTests : IntegrationTestBase() {
     }
 
     @Test
-    @Throws(Exception::class)
     fun testGetLocalisationsReturnsCacheHeaderByDefault() {
         mvc.perform(MockMvcRequestBuilders.get("/api/v1/localisation").accept(MediaType.APPLICATION_JSON))
             .andExpect(MockMvcResultMatchers.status().is2xxSuccessful())
@@ -143,7 +153,6 @@ class ApiTests : IntegrationTestBase() {
     }
 
     @Test
-    @Throws(Exception::class)
     fun testGetLocalisationsWithCacheFalse() {
         mvc.perform(MockMvcRequestBuilders.get("/api/v1/localisation?cache=false").accept(MediaType.APPLICATION_JSON))
             .andExpect(MockMvcResultMatchers.status().is2xxSuccessful())
@@ -153,7 +162,6 @@ class ApiTests : IntegrationTestBase() {
 
     @WithMockUser("1.2.246.562.24.00000000001")
     @Test
-    @Throws(Exception::class)
     fun testAddOverride() {
         addLocalisationOverride("foobar", "testi", "fi", "Testi")
         val mvcResult =
@@ -168,7 +176,6 @@ class ApiTests : IntegrationTestBase() {
                 mvcResult.response.contentAsString
             )
         val override: LocalisationOverride = localisationOverrides.first()
-        Assertions.assertTrue(localisationOverrides.stream().findFirst().isPresent)
         Assertions.assertNotNull(override.id)
         Assertions.assertEquals("foobar", override.namespace)
         Assertions.assertEquals("testi", override.key)
@@ -193,7 +200,6 @@ class ApiTests : IntegrationTestBase() {
 
     @WithMockUser("1.2.246.562.24.00000000001")
     @Test
-    @Throws(Exception::class)
     fun testUpdateOverride() {
         val override = addLocalisationOverride("foobar", "testi", "fi", "Testi")
         override.value = "Muokattu"
@@ -210,7 +216,6 @@ class ApiTests : IntegrationTestBase() {
 
     @WithMockUser("1.2.246.562.24.00000000001")
     @Test
-    @Throws(Exception::class)
     fun testDeleteOverride() {
         val override = addLocalisationOverride("foobar", "testi", "fi", "Testi")
         mvc.perform(
@@ -227,7 +232,6 @@ class ApiTests : IntegrationTestBase() {
 
     @WithMockUser("1.2.246.562.24.00000000001")
     @Test
-    @Throws(Exception::class)
     fun testSavingLocalisationOverrideOverridesPublishedLocalisation() {
         addLocalisationOverride("example", "testi", "fi", "Testi")
         addLocalisationOverride("example", "testi", "en", "Test")
@@ -242,21 +246,19 @@ class ApiTests : IntegrationTestBase() {
             objectMapper.readValue(
                 mvcResult.response.contentAsByteArray
             )
-        val localisation =
-            localisations.stream()
+        val testiLocalisations =
+            localisations
                 .filter { l: Localisation ->
                     l.namespace == "example"
                             && l.key == "testi"
                             && l.locale == "fi"
                 }
-                .findFirst()
-        Assertions.assertTrue(localisation.isPresent)
-        Assertions.assertEquals("Testi", localisation.get().value)
+        assertEquals(1, testiLocalisations.size)
+        Assertions.assertEquals("Testi", testiLocalisations.first().value)
     }
 
     @WithMockUser("1.2.246.562.24.00000000001")
     @Test
-    @Throws(Exception::class)
     fun testGetLocalisationsReturnsNonOverridingOverrides() {
         addLocalisationOverride("foobar", "fookey", "fi", "Testi")
         val mvcResult =
@@ -270,16 +272,14 @@ class ApiTests : IntegrationTestBase() {
             objectMapper.readValue(
                 mvcResult.response.contentAsByteArray
             )
-        val localisation =
-            localisations.stream()
+        val l =
+            localisations
                 .filter { l: Localisation ->
                     l.namespace == "foobar"
                             && l.key == "fookey"
                             && l.locale == "fi"
                 }
-                .findFirst()
-        Assertions.assertTrue(localisation.isPresent)
-        val l = localisation.get()
+                .first()
         Assertions.assertNotNull(l.id)
         Assertions.assertEquals("foobar", l.namespace)
         Assertions.assertEquals("fookey", l.key)
@@ -288,7 +288,6 @@ class ApiTests : IntegrationTestBase() {
     }
 
     @Test
-    @Throws(Exception::class)
     fun testGetLocalisationFilesArchive() {
         val mvcResult =
             mvc.perform(
@@ -308,16 +307,15 @@ class ApiTests : IntegrationTestBase() {
             }
 
             Assertions.assertFalse(zipEntries.isEmpty())
-            Assertions.assertTrue(zipEntries.stream().anyMatch { e: ZipEntry -> e.name == "lokalisointi/fi.json" })
-            Assertions.assertTrue(zipEntries.stream().anyMatch { e: ZipEntry -> e.name == "lokalisointi/en.json" })
-            Assertions.assertTrue(zipEntries.stream().anyMatch { e: ZipEntry -> e.name == "example/fi.json" })
-            Assertions.assertTrue(zipEntries.stream().anyMatch { e: ZipEntry -> e.name == "example/en.json" })
+            Assertions.assertTrue(zipEntries.find { e: ZipEntry -> e.name == "lokalisointi/fi.json" } != null)
+            Assertions.assertTrue(zipEntries.find { e: ZipEntry -> e.name == "lokalisointi/en.json" } != null)
+            Assertions.assertTrue(zipEntries.find { e: ZipEntry -> e.name == "example/fi.json" } != null)
+            Assertions.assertTrue(zipEntries.find { e: ZipEntry -> e.name == "example/en.json" } != null)
         }
     }
 
     @WithMockUser("1.2.246.562.24.00000000001")
     @Test
-    @Throws(Exception::class)
     fun testGetAvailableNamespacesForOverrides() {
         addLocalisationOverride("foofoo", "fookey", "fi", "Testi")
         val mvcResult =
@@ -334,7 +332,6 @@ class ApiTests : IntegrationTestBase() {
 
     @WithMockUser("1.2.246.562.24.00000000001")
     @Test
-    @Throws(Exception::class)
     fun testGetAvailableNamespacesForCopyWithoutSource() {
         addLocalisationOverride("foofaa", "fookey", "fi", "Testi")
         val mvcResult =
@@ -350,7 +347,6 @@ class ApiTests : IntegrationTestBase() {
     }
 
     @Test
-    @Throws(Exception::class)
     fun testGetAvailableNamespacesForCopyWithSource() {
         val mvcResult =
             mvc.perform(
@@ -367,7 +363,6 @@ class ApiTests : IntegrationTestBase() {
 
     @WithMockUser("1.2.246.562.24.00000000001")
     @Test
-    @Throws(Exception::class)
     fun testCopyAllLocalisationsFromAnotherEnvironment() {
         mvc.perform(
             MockMvcRequestBuilders.post("/api/v1/copy")
@@ -388,17 +383,16 @@ class ApiTests : IntegrationTestBase() {
             objectMapper.readValue(result.response.contentAsByteArray)
         Assertions.assertEquals(
             setOf("example", "foobar", "lorem"),
-            localisations.stream().map { obj: Localisation -> obj.namespace }.collect(Collectors.toSet())
+            localisations.map { obj: Localisation -> obj.namespace }.toSet()
         )
         Assertions.assertEquals(
             setOf("testi", "create.item", "test-item", "localisation-1"),
-            localisations.stream().map { obj: Localisation -> obj.key }.collect(Collectors.toSet())
+            localisations.map { obj: Localisation -> obj.key }.toSet()
         )
     }
 
     @WithMockUser("1.2.246.562.24.00000000001")
     @Test
-    @Throws(Exception::class)
     fun testCopySelectedLocalisationsFromAnotherEnvironment() {
         mvc.perform(
             MockMvcRequestBuilders.post("/api/v1/copy")
@@ -423,17 +417,16 @@ class ApiTests : IntegrationTestBase() {
             objectMapper.readValue(result.response.contentAsByteArray)
         Assertions.assertEquals(
             setOf("example", "lokalisointi", "lorem"),
-            localisations.stream().map { obj: Localisation -> obj.namespace }.collect(Collectors.toSet())
+            localisations.map { obj: Localisation -> obj.namespace }.toSet()
         )
         Assertions.assertEquals(
             setOf("testi", "create.item", "localisation", "localisation-1"),
-            localisations.stream().map { obj: Localisation -> obj.key }.collect(Collectors.toSet())
+            localisations.map { obj: Localisation -> obj.key }.toSet()
         )
     }
 
     @WithMockUser("1.2.246.562.24.00000000001")
     @Test
-    @Throws(Exception::class)
     fun testGetUiConfig() {
         mvc.perform(MockMvcRequestBuilders.get("/api/v1/ui-config").accept(MediaType.APPLICATION_JSON))
             .andExpect(MockMvcResultMatchers.status().is2xxSuccessful())
@@ -447,7 +440,6 @@ class ApiTests : IntegrationTestBase() {
             )
     }
 
-    @Throws(Exception::class)
     fun addLocalisationOverride(
         namespace: String, key: String, locale: String, value: String
     ): LocalisationOverride {
@@ -486,4 +478,6 @@ class ApiTests : IntegrationTestBase() {
             result.response.contentAsByteArray
         )
     }
+
+    // TODO Tolgee tests
 }
