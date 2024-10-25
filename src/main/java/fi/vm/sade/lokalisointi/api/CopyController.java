@@ -5,21 +5,22 @@ import fi.vm.sade.lokalisointi.model.OphEnvironment;
 import fi.vm.sade.lokalisointi.model.Status;
 import fi.vm.sade.lokalisointi.storage.S3;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.method.annotation.StreamingResponseBody;
 
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.security.Principal;
 import java.util.Collection;
-import java.util.zip.ZipOutputStream;
 
 import static fi.vm.sade.lokalisointi.api.LocalisationController.ROLE_CRUD;
 import static fi.vm.sade.lokalisointi.api.LocalisationController.ROLE_UPDATE;
 
+@Tag(name = "copy", description = "Copy localisations between environments")
 @RestController
 @RequestMapping("/api/v1/copy")
 public class CopyController extends ControllerBase {
@@ -34,9 +35,9 @@ public class CopyController extends ControllerBase {
   @PostMapping
   @Secured({ROLE_UPDATE, ROLE_CRUD})
   public ResponseEntity<Status> copyLocalisations(
-      @RequestBody final CopyLocalisations copyRequest, final Principal user) {
+      @RequestBody final CopyLocalisations copyRequest, final Principal user) throws IOException {
     s3.copyLocalisations(copyRequest, user.getName());
-    return ResponseEntity.badRequest().body(new Status("Not implemented"));
+    return ResponseEntity.ok().body(new Status("OK"));
   }
 
   @Operation(summary = "Find available namespaces for given source environment")
@@ -50,16 +51,11 @@ public class CopyController extends ControllerBase {
       summary =
           "Produces a zip of localisation files from this environment, to be copied to another environment")
   @GetMapping(value = "/localisation-files", produces = MediaType.APPLICATION_OCTET_STREAM_VALUE)
-  public ResponseEntity<byte[]> localisationFiles(
-      @RequestParam(value = "namespaces", required = false) final Collection<String> namespaces)
-      throws IOException {
-    final ByteArrayOutputStream out = new ByteArrayOutputStream();
-    s3.getLocalisationFilesZip(namespaces, out);
-    final byte[] bytes = out.toByteArray();
-    out.close();
+  public ResponseEntity<StreamingResponseBody> localisationFiles(
+      @RequestParam(value = "namespaces", required = false) final Collection<String> namespaces) {
     return ResponseEntity.ok()
         .contentType(MediaType.APPLICATION_OCTET_STREAM)
         .header("Content-Disposition", "attachment; filename=localisations.zip")
-        .body(bytes);
+        .body(s3.getLocalisationFilesZip(namespaces));
   }
 }

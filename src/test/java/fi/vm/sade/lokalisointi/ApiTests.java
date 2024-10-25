@@ -5,7 +5,6 @@ import fi.vm.sade.lokalisointi.configuration.DevConfiguration;
 import fi.vm.sade.lokalisointi.model.Localisation;
 import fi.vm.sade.lokalisointi.model.LocalisationOverride;
 import io.netty.handler.ssl.util.InsecureTrustManagerFactory;
-import org.apache.commons.io.FileUtils;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.MediaType;
@@ -19,16 +18,12 @@ import software.amazon.awssdk.services.s3.S3AsyncClient;
 import software.amazon.awssdk.services.s3.S3AsyncClientBuilder;
 
 import java.io.ByteArrayInputStream;
-import java.io.File;
 import java.io.IOException;
 import java.time.Duration;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.zip.ZipEntry;
-import java.util.zip.ZipFile;
+import java.util.zip.ZipInputStream;
 
 import static org.hamcrest.Matchers.is;
 import static org.junit.jupiter.api.Assertions.*;
@@ -263,13 +258,17 @@ public class ApiTests extends IntegrationTestBase {
                 get("/api/v1/copy/localisation-files").accept(MediaType.APPLICATION_OCTET_STREAM))
             .andExpect(status().is2xxSuccessful())
             .andExpect(content().contentType(MediaType.APPLICATION_OCTET_STREAM))
+            .andDo(MvcResult::getAsyncResult)
             .andReturn();
-    final File tempFile = File.createTempFile("localisation-files", "zip");
-    tempFile.deleteOnExit();
-    FileUtils.copyToFile(
-        new ByteArrayInputStream(mvcResult.getResponse().getContentAsByteArray()), tempFile);
-    try (final ZipFile zipArchive = new ZipFile(tempFile)) {
-      final Set<? extends ZipEntry> zipEntries = zipArchive.stream().collect(Collectors.toSet());
+    final ByteArrayInputStream inputStream =
+        new ByteArrayInputStream(mvcResult.getResponse().getContentAsByteArray());
+    try (final ZipInputStream zipArchive = new ZipInputStream(inputStream)) {
+      final List<ZipEntry> zipEntries = new ArrayList<>();
+      ZipEntry entry;
+      while ((entry = zipArchive.getNextEntry()) != null) {
+        zipEntries.add(entry);
+      }
+
       assertFalse(zipEntries.isEmpty());
       assertTrue(zipEntries.stream().anyMatch(e -> e.getName().equals("lokalisointi/fi.json")));
       assertTrue(zipEntries.stream().anyMatch(e -> e.getName().equals("lokalisointi/en.json")));
@@ -322,19 +321,58 @@ public class ApiTests extends IntegrationTestBase {
 
   @WithMockUser("1.2.246.562.24.00000000001")
   @Test
-  public void testCopyLocalisationsFromAnotherEnvironment() throws Exception {
+  public void testCopyAllLocalisationsFromAnotherEnvironment() throws Exception {
     mvc.perform(
             post("/api/v1/copy")
                 .accept(MediaType.APPLICATION_JSON)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsBytes(Map.of("source", "untuva"))))
-        .andExpect(status().isBadRequest())
-        .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-        .andExpect(jsonPath("$.status", is("Not implemented")));
-    mvc.perform(get("/api/v1/localisation").accept(MediaType.APPLICATION_JSON))
         .andExpect(status().is2xxSuccessful())
         .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-        .andExpect(jsonPath("$.length()", is(8)));
+        .andExpect(jsonPath("$.status", is("OK")));
+    final MvcResult result =
+        mvc.perform(get("/api/v1/localisation").accept(MediaType.APPLICATION_JSON))
+            .andExpect(status().is2xxSuccessful())
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+            .andExpect(jsonPath("$.length()", is(8)))
+            .andReturn();
+    final List<Localisation> localisations =
+        objectMapper.readValue(result.getResponse().getContentAsByteArray(), listOfLocalisations);
+    assertEquals(
+        Set.of("example", "foobar", "lorem"),
+        localisations.stream().map(Localisation::getNamespace).collect(Collectors.toSet()));
+    assertEquals(
+        Set.of("testi", "create.item", "test-item", "localisation-1"),
+        localisations.stream().map(Localisation::getKey).collect(Collectors.toSet()));
+  }
+
+  @WithMockUser("1.2.246.562.24.00000000001")
+  @Test
+  public void testCopySelectedLocalisationsFromAnotherEnvironment() throws Exception {
+    mvc.perform(
+            post("/api/v1/copy")
+                .accept(MediaType.APPLICATION_JSON)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(
+                    objectMapper.writeValueAsBytes(
+                        Map.of("source", "untuva", "namespaces", Set.of("example", "lorem")))))
+        .andExpect(status().is2xxSuccessful())
+        .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+        .andExpect(jsonPath("$.status", is("OK")));
+    final MvcResult result =
+        mvc.perform(get("/api/v1/localisation").accept(MediaType.APPLICATION_JSON))
+            .andExpect(status().is2xxSuccessful())
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+            .andExpect(jsonPath("$.length()", is(8)))
+            .andReturn();
+    final List<Localisation> localisations =
+        objectMapper.readValue(result.getResponse().getContentAsByteArray(), listOfLocalisations);
+    assertEquals(
+        Set.of("example", "lokalisointi", "lorem"),
+        localisations.stream().map(Localisation::getNamespace).collect(Collectors.toSet()));
+    assertEquals(
+        Set.of("testi", "create.item", "localisation", "localisation-1"),
+        localisations.stream().map(Localisation::getKey).collect(Collectors.toSet()));
   }
 
   @WithMockUser("1.2.246.562.24.00000000001")

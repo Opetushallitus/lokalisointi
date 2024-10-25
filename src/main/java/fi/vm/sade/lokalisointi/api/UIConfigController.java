@@ -2,6 +2,7 @@ package fi.vm.sade.lokalisointi.api;
 
 import fi.vm.sade.lokalisointi.model.OphEnvironment;
 import fi.vm.sade.lokalisointi.model.UIConfig;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
@@ -13,6 +14,7 @@ import java.util.Arrays;
 
 import static fi.vm.sade.lokalisointi.api.LocalisationController.ROLE_LOKALISOINTI;
 
+@Tag(name = "ui-config", description = "Query user interface configuration")
 @RestController
 @RequestMapping("/api/v1/ui-config")
 public class UIConfigController extends ControllerBase {

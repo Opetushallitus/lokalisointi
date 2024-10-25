@@ -10,6 +10,7 @@ import fi.vm.sade.lokalisointi.model.OphEnvironment;
 import fi.vm.sade.valinta.dokumenttipalvelu.Dokumenttipalvelu;
 import fi.vm.sade.valinta.dokumenttipalvelu.dto.ObjectEntity;
 import fi.vm.sade.valinta.dokumenttipalvelu.dto.ObjectMetadata;
+import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,15 +18,16 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.client.RestClient;
+import org.springframework.web.servlet.mvc.method.annotation.StreamingResponseBody;
 import org.springframework.web.util.DefaultUriBuilderFactory;
 import org.springframework.web.util.UriBuilder;
 
-import java.io.IOException;
-import java.io.OutputStream;
+import java.io.*;
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import java.util.zip.ZipEntry;
+import java.util.zip.ZipInputStream;
 import java.util.zip.ZipOutputStream;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON;
@@ -114,11 +116,13 @@ public class S3 {
     return Collections.emptySet();
   }
 
-  public void copyLocalisations(final CopyLocalisations copyRequest, final String username) {
+  public void copyLocalisations(final CopyLocalisations copyRequest, final String username)
+      throws IOException {
     LOG.info(
-        "Copying localisations from {}, namespaces: {}",
+        "Copying localisations from {}, namespaces: {}, initiated by: {}",
         copyRequest.getSource(),
-        copyRequest.getNamespaces());
+        copyRequest.getNamespaces(),
+        username);
     if (copyRequest.getSource().equals(OphEnvironment.valueOf(envName))) {
       LOG.info("Trying to copy localisations from current environment - aborting");
       return;
@@ -139,12 +143,53 @@ public class S3 {
             .accept(APPLICATION_OCTET_STREAM)
             .retrieve()
             .body(byte[].class);
-    // TODO read body as zip and unzip it, then save files to s3
+    if (body != null) {
+      byte[] buffer = new byte[1024];
+      final List<ZipEntry> entries = new ArrayList<>();
+      try (final ZipInputStream zipArchive = new ZipInputStream(new ByteArrayInputStream(body))) {
+        ZipEntry entry;
+        while ((entry = zipArchive.getNextEntry()) != null) {
+          entries.add(entry);
+          final String[] name = entry.getName().split("/");
+          final String namespace = name[0], localeFilename = name[1];
+          LOG.info("Writing localisation file {} to S3", entry.getName());
+          final File tempFile = File.createTempFile("localisation-file", "json");
+          final FileOutputStream fos = new FileOutputStream(tempFile);
+          int len;
+          while ((len = zipArchive.read(buffer)) > 0) {
+            fos.write(buffer, 0, len);
+          }
+          fos.close();
+          dokumenttipalvelu
+              .putObject(
+                  String.format("t-%s/%s/%s", LOKALISOINTI_TAG, namespace, localeFilename),
+                  localeFilename,
+                  "application/json",
+                  new FileInputStream(tempFile))
+              .join();
+          tempFile.delete();
+        }
+      }
+      if (copyRequest.getNamespaces() == null || copyRequest.getNamespaces().isEmpty()) {
+        final Set<String> newEntries =
+            entries.stream()
+                .map(e -> String.format("t-%s/%s", LOKALISOINTI_TAG, e.getName()))
+                .collect(Collectors.toSet());
+        final Set<String> keysToBeDeleted =
+            new HashSet<>(
+                dokumenttipalvelu.find(List.of(LOKALISOINTI_TAG)).stream()
+                    .map(m -> m.key)
+                    .toList());
+        keysToBeDeleted.removeAll(newEntries);
+        for (final String key : keysToBeDeleted) {
+          LOG.info("Deleting localisation file {}", key);
+          dokumenttipalvelu.delete(key);
+        }
+      }
+    }
   }
 
-  public ZipOutputStream getLocalisationFilesZip(
-      final Collection<String> namespaces, final OutputStream outputStream) throws IOException {
-    final ZipOutputStream out = new ZipOutputStream(outputStream);
+  public StreamingResponseBody getLocalisationFilesZip(final Collection<String> namespaces) {
     final List<ObjectMetadata> withMatchingNamespaces =
         dokumenttipalvelu.find(List.of(LOKALISOINTI_TAG)).stream()
             .filter(
@@ -159,21 +204,22 @@ public class S3 {
                   return namespaces.contains(splittedObjectKey.getFirst());
                 })
             .toList();
-    for (final ObjectMetadata metadata : withMatchingNamespaces) {
-      final ObjectEntity objectEntity = dokumenttipalvelu.get(metadata.key);
-      final List<String> splittedObjectKey =
-          Arrays.stream(metadata.key.split("/"))
-              .filter(s -> !s.equals(String.format("t-%s", LOKALISOINTI_TAG)))
-              .toList();
-      final String namespace = splittedObjectKey.getFirst();
-      final String filename = splittedObjectKey.getLast();
-      out.putNextEntry(new ZipEntry(String.format("%s/%s", namespace, filename)));
-      final byte[] bytes = objectEntity.entity.readAllBytes();
-      out.write(bytes, 0, bytes.length);
-      out.closeEntry();
-    }
-    out.finish();
-    return out;
+    return outputStream -> {
+      final ZipOutputStream out = new ZipOutputStream(outputStream);
+      for (final ObjectMetadata metadata : withMatchingNamespaces) {
+        final ObjectEntity objectEntity = dokumenttipalvelu.get(metadata.key);
+        final List<String> splittedObjectKey =
+            Arrays.stream(metadata.key.split("/"))
+                .filter(s -> !s.equals(String.format("t-%s", LOKALISOINTI_TAG)))
+                .toList();
+        final String namespace = splittedObjectKey.getFirst();
+        final String filename = splittedObjectKey.getLast();
+        out.putNextEntry(new ZipEntry(String.format("%s/%s", namespace, filename)));
+        IOUtils.copy(objectEntity.entity, out);
+        out.closeEntry();
+      }
+      out.finish();
+    };
   }
 
   private Stream<Localisation> transformToLocalisationStream(final ObjectMetadata metadata) {

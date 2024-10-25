@@ -26,10 +26,7 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.stereotype.Repository;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.testcontainers.containers.PostgreSQLContainer;
 import org.testcontainers.containers.localstack.LocalStackContainer;
 import org.testcontainers.containers.wait.strategy.DockerHealthcheckWaitStrategy;
@@ -67,7 +64,7 @@ public abstract class IntegrationTestBase {
 
   @Container
   static final LocalStackContainer LOCAL_STACK =
-      new LocalStackContainer(DockerImageName.parse("localstack/localstack:s3-latest"))
+      new LocalStackContainer(DockerImageName.parse("localstack/localstack:3"))
           .withServices(S3)
           .waitingFor(new DockerHealthcheckWaitStrategy());
 
@@ -87,6 +84,7 @@ public abstract class IntegrationTestBase {
               "spring.datasource.username=" + POSTGRESQL_CONTAINER.getUsername(),
               "spring.datasource.password=" + POSTGRESQL_CONTAINER.getPassword(),
               "cas-service.service=http://localhost:10080/lokalisointi",
+              // mocking for "untuva" source environment
               "lokalisointi.baseurls.untuva=http://localhost:10080/lokalisointi")
           .applyTo(configurableApplicationContext.getEnvironment());
     }
@@ -166,13 +164,20 @@ public abstract class IntegrationTestBase {
 
   @RestController
   @RequestMapping("/lokalisointi/api/v1/copy")
-  static class CopyControllerInAnotherEnvironment {
+  static class CopyControllerInUntuvaEnvironment {
     @GetMapping(value = "/localisation-files", produces = MediaType.APPLICATION_OCTET_STREAM_VALUE)
-    public ResponseEntity<byte[]> mockLocalisationArchive() throws IOException {
+    public ResponseEntity<byte[]> mockLocalisationArchive(
+        @RequestParam(value = "namespaces", required = false) final Collection<String> namespaces)
+        throws IOException {
+      final String pathname =
+          namespaces == null || namespaces.isEmpty()
+              ? "src/test/resources/localisations.zip"
+              : "src/test/resources/localisations-example.zip";
+
       return ResponseEntity.ok()
           .contentType(MediaType.APPLICATION_OCTET_STREAM)
           .header("Content-Disposition", "attachment; filename=localisations.zip")
-          .body(FileUtils.readFileToByteArray(new File("src/test/resources/localisations.zip")));
+          .body(FileUtils.readFileToByteArray(new File(pathname)));
     }
 
     @GetMapping("/available-namespaces")

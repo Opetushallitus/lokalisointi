@@ -6,6 +6,7 @@ import fi.vm.sade.lokalisointi.storage.S3;
 import fi.vm.sade.lokalisointi.storage.Tolgee;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -22,6 +23,7 @@ import java.time.Duration;
 import java.time.temporal.ChronoUnit;
 import java.util.Collection;
 
+@Tag(name = "localisation", description = "Query localisations")
 @RestController
 @RequestMapping({"/api/v1/localisation", "/cxf/rest/v1/localisation"})
 public class LocalisationController extends ControllerBase implements InitializingBean {
@@ -104,7 +106,10 @@ public class LocalisationController extends ControllerBase implements Initializi
         .body(localisations);
   }
 
-  @Operation(summary = "TODO mass update")
+  @Operation(
+      summary = "Create/update localisations",
+      description =
+          "Creates or updates localisations. In test environment tries to import new localisation keys to Tolgee, in another environments tries to create/update localisation overrides.")
   @PostMapping("/update")
   @Secured({ROLE_UPDATE, ROLE_CRUD})
   public ResponseEntity<MassUpdateResult> update(

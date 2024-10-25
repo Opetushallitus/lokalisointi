@@ -7,6 +7,7 @@ import fi.vm.sade.lokalisointi.model.Status;
 import fi.vm.sade.lokalisointi.storage.Database;
 import fi.vm.sade.lokalisointi.storage.S3;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.slf4j.Logger;
@@ -26,6 +27,7 @@ import java.util.stream.Stream;
 
 import static fi.vm.sade.lokalisointi.api.LocalisationController.*;
 
+@Tag(name = "override", description = "Manage localisation overrides")
 @RestController
 @RequestMapping("/api/v1/override")
 public class OverrideController extends ControllerBase {
