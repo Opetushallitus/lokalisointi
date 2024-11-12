@@ -9,4 +9,5 @@ import java.util.Collection;
 public class UIConfig {
   @NonNull private final Collection<OphEnvironment> sourceEnvironments;
   @NonNull private final OphEnvironment currentEnvironment;
+  @NonNull private final String virkalijaBaseUrl;
 }

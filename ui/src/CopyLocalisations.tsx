@@ -1,6 +1,5 @@
 import React, {useState, FC} from "react"
 import {
-  Button,
   FormControl,
   FormHelperText,
   FormLabel,
@@ -10,6 +9,8 @@ import {
 } from "@mui/material"
 import Typography from "@mui/material/Typography"
 import {UIConfig} from "./types"
+import {OphButton, OphSelect} from "@opetushallitus/oph-design-system"
+import {useTranslate} from "@tolgee/react"
 
 interface Props {
   uiConfig?: UIConfig,
@@ -27,14 +28,14 @@ const CopyLocalisations: FC<Props> = ({uiConfig, showMessage}) => {
     "hahtuva": "Hahtuva",
     "sade": "Tuotanto"
   }))
-
+  const {t} = useTranslate()
   const loadAvailableNamespaces = (sourceEnvironment: string) => {
     fetch(`/lokalisointi/api/v1/copy/available-namespaces?source=${sourceEnvironment}`, {
       method: "GET"
     }).then(async (res) => {
       const body = await res.json()
       if (!res.ok) {
-        showMessage("Nimiavaruuksia ei saatu ladattua. Yritä myöhemmin uudelleen.")
+        showMessage(t("namespaces-could-not-be-loaded", "Nimiavaruuksia ei saatu ladattua. Yritä myöhemmin uudelleen."))
         return
       }
       setAvailableNamespaces(body)
@@ -52,7 +53,9 @@ const CopyLocalisations: FC<Props> = ({uiConfig, showMessage}) => {
     }).then(async (res) => {
       const body = await res.json()
       if (!res.ok) {
-        showMessage(`Käännösten kopioiminen ei onnistunut: ${JSON.stringify(body)}`)
+        showMessage(t("copy-translations-failed", `Käännösten kopioiminen ei onnistunut: {body}`, {
+          body: JSON.stringify(body)
+        }))
         return
       }
       setResponse(JSON.stringify(res))
@@ -61,28 +64,29 @@ const CopyLocalisations: FC<Props> = ({uiConfig, showMessage}) => {
   return (
     <Grid container spacing={3}>
       <Grid size={12}>
-        <Typography variant="h4">Käännösten kopiointi ympäristöstä toiseen</Typography>
+        <Typography
+          variant="h4">{t("copy-translations-title", "Käännösten kopiointi ympäristöstä toiseen")}</Typography>
       </Grid>
       <Grid size={4}>
         <FormControl variant="filled" fullWidth>
-          <FormLabel htmlFor="copy-source">lähdeympäristö</FormLabel>
-          <Select id="copy-source" variant="outlined" value={source} size="small"
-                  onChange={(e) => {
-                    const value = e.target.value
-                    setSource(value)
-                    loadAvailableNamespaces(value)
-                  }}>
-            {uiConfig?.sourceEnvironments?.map(
-              (environment, i) => <MenuItem value={environment} key={i}>{envNames.get(environment)}</MenuItem>
-            )}
-          </Select>
-          <FormHelperText>käännökset kopioidaan lähdeympäristöstä ympäristöön&nbsp;
-            {envNames.get(uiConfig!.currentEnvironment!)}</FormHelperText>
+          <FormLabel htmlFor="copy-source">{t("copy-source", "lähdeympäristö")}</FormLabel>
+          <OphSelect id="copy-source" value={source} size="small"
+                     onChange={(e) => {
+                       const value = e.target.value
+                       setSource(value)
+                       loadAvailableNamespaces(value)
+                     }}
+                     options={uiConfig?.sourceEnvironments?.map(
+                       (environment, i) => ({label: envNames.get(environment) ?? environment, value: environment})
+                     ) ?? []}/>
+          <FormHelperText>{t("copy-source-help", "käännökset kopioidaan lähdeympäristöstä ympäristöön {target}", {
+            target: envNames.get(uiConfig!.currentEnvironment!)
+          })}</FormHelperText>
         </FormControl>
       </Grid>
       <Grid size={4}>
         <FormControl variant="filled" fullWidth>
-          <FormLabel htmlFor="copy-namespaces">kopioitavat nimiavaruudet</FormLabel>
+          <FormLabel htmlFor="copy-namespaces">{t("copy-namespaces", "kopioitavat nimiavaruudet")}</FormLabel>
           <Select id="copy-namespaces" variant="outlined" value={namespaces} size="small"
                   onChange={(e) => setNamespaces(e.target.value as string[])}
                   multiple disabled={availableNamespaces.length === 0}>
@@ -90,12 +94,12 @@ const CopyLocalisations: FC<Props> = ({uiConfig, showMessage}) => {
               (ns, i) => <MenuItem value={ns} key={i}>{ns}</MenuItem>)
             )}
           </Select>
-          <FormHelperText>jätä valitsematta mitään jos kopioidaan kaikki nimiavaruudet</FormHelperText>
+          <FormHelperText>{t("copy-namespaces-help", "jätä valitsematta mitään jos kopioidaan kaikki nimiavaruudet")}</FormHelperText>
         </FormControl>
       </Grid>
       <Grid size={4}>
-        <Button fullWidth variant="contained" onClick={copy} color="primary" disabled={!source}
-                sx={(theme) => ({mt: theme.spacing(3)})}>Kopioi</Button>
+        <OphButton fullWidth variant="contained" onClick={copy} color="primary" disabled={!source}
+                   sx={(theme) => ({mt: theme.spacing(3)})}>{t("copy", "Kopioi")}</OphButton>
       </Grid>
       <Grid size={12}>
         {!!response && <Typography variant="body1">{response}</Typography>}

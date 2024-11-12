@@ -21,12 +21,16 @@ public class UIConfigController extends ControllerBase {
   @Value("${lokalisointi.envname}")
   private String envName;
 
+  @Value("${host.virkailija}")
+  private String hostVirkailija;
+
   @GetMapping
   @Secured({ROLE_LOKALISOINTI})
   public ResponseEntity<UIConfig> uiConfig() {
     return ResponseEntity.ok(
         new UIConfig(
             Arrays.stream(OphEnvironment.values()).filter(e -> !e.name().equals(envName)).toList(),
-            OphEnvironment.valueOf(envName)));
+            OphEnvironment.valueOf(envName),
+            String.format("https://%s", hostVirkailija)));
   }
 }

@@ -4,14 +4,14 @@ import {
   FormControl,
   FormLabel,
   IconButton,
-  MenuItem,
-  Select,
   TableCell,
   TableRow,
   TextField,
   Tooltip
 } from "@mui/material"
 import {Cancel, Save} from "@mui/icons-material"
+import {OphSelect} from "@opetushallitus/oph-design-system"
+import {useTranslate} from "@tolgee/react"
 
 interface Props {
   close: () => void,
@@ -24,20 +24,21 @@ const AddOverride: FC<Props> = ({close, showMessage}) => {
   const [key, setKey] = useState<string>("")
   const [locale, setLocale] = useState<string>("")
   const [value, setValue] = useState<string>("")
+  const {t} = useTranslate()
   useEffect(() => {
-    if (showMessage) {
+    if (showMessage && t) {
       fetch("/lokalisointi/api/v1/override/available-namespaces", {
         method: "GET"
       }).then(async (res) => {
         const body = await res.json()
         if (!res.ok) {
-          showMessage("Nimiavaruuksia ei saatu ladattua. Yritä myöhemmin uudelleen.")
+          showMessage(t("namespaces-could-not-be-loaded", "Nimiavaruuksia ei saatu ladattua. Yritä myöhemmin uudelleen."))
           return
         }
         setAvailableNamespaces(body)
       })
     }
-  }, [showMessage])
+  }, [showMessage, t])
   const save = () => {
     fetch("/lokalisointi/api/v1/override", {
       method: "POST",
@@ -50,7 +51,9 @@ const AddOverride: FC<Props> = ({close, showMessage}) => {
       .then(async (res) => {
         const body = await res.json()
         if (!res.ok) {
-          showMessage(`Yliajon tallentaminen ei onnistunut: ${JSON.stringify(body)}`)
+          showMessage(t("override-save-failed", "Yliajon tallentaminen ei onnistunut: {body}", {
+            body: JSON.stringify(body)
+          }))
           return
         }
         setNamespace(undefined)
@@ -65,7 +68,7 @@ const AddOverride: FC<Props> = ({close, showMessage}) => {
       <TableCell></TableCell>
       <TableCell>
         <FormControl variant="filled" fullWidth>
-          <FormLabel htmlFor="namespace">nimiavaruus</FormLabel>
+          <FormLabel htmlFor="namespace">{t("column-namespace", "nimiavaruus")}</FormLabel>
           <Autocomplete
             id="namespace"
             freeSolo
@@ -96,36 +99,37 @@ const AddOverride: FC<Props> = ({close, showMessage}) => {
       </TableCell>
       <TableCell>
         <FormControl fullWidth>
-          <FormLabel htmlFor="key">avain</FormLabel>
+          <FormLabel htmlFor="key">{t("column-key", "avain")}</FormLabel>
           <TextField id="key" variant="outlined" size="small" value={key}
                      onChange={(e) => setKey(e.target.value)}/>
         </FormControl>
       </TableCell>
       <TableCell>
         <FormControl fullWidth>
-          <FormLabel htmlFor="locale">kieli</FormLabel>
-          <Select id="locale" variant="outlined" value={locale} size="small"
-                  onChange={(e) => setLocale(e.target.value)}>
-            <MenuItem value="fi">fi</MenuItem>
-            <MenuItem value="sv">sv</MenuItem>
-            <MenuItem value="en">en</MenuItem>
-          </Select>
+          <FormLabel htmlFor="locale">{t("column-locale", "kieli")}</FormLabel>
+          <OphSelect id="locale" value={locale} size="small"
+                     onChange={(e) => setLocale(e.target.value)}
+                     options={[
+                       {label: "fi", value: "fi"},
+                       {label: "sv", value: "sv"},
+                       {label: "en", value: "en"}
+                     ]}/>
         </FormControl>
       </TableCell>
       <TableCell>
         <FormControl fullWidth>
-          <FormLabel htmlFor="value">arvo</FormLabel>
+          <FormLabel htmlFor="value">{t("column-value", "arvo")}</FormLabel>
           <TextField id="value" value={value} multiline size="small" variant="outlined"
                      onChange={(e: ChangeEvent<HTMLTextAreaElement>) =>
                        setValue(e.target.value)}/>
         </FormControl>
       </TableCell>
       <TableCell colSpan={5} sx={{verticalAlign: "bottom"}}>
-        <Tooltip title="tallenna">
+        <Tooltip title={t("save", "tallenna")}>
           <IconButton onClick={save} disabled={!namespace || !key || !locale || !value}
                       color="primary"><Save/></IconButton>
         </Tooltip>
-        <Tooltip title="peruuta">
+        <Tooltip title={t("cancel", "peruuta")}>
           <IconButton onClick={close}><Cancel/></IconButton>
         </Tooltip>
       </TableCell>
