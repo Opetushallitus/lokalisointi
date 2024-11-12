@@ -39,9 +39,9 @@ const LocalisationOverrides: FC<Props> = ({showMessage}) => {
   const [addDialogOpen, setAddDialogOpen] = useState<boolean>(false)
   const [deleteDialogId, setDeleteDialogId] = useState<number>(0)
   const [editLocalisation, setEditLocalisation] = useState<LocalisationOverride | null>(null)
-  const {t} = useTranslate()
+  const {t: translate} = useTranslate()
   const loadOverrides = useCallback(() => {
-    if (showMessage && t) {
+    if (showMessage && translate) {
       fetch("/lokalisointi/api/v1/override", {
         method: "GET",
         credentials: "same-origin"
@@ -49,7 +49,7 @@ const LocalisationOverrides: FC<Props> = ({showMessage}) => {
         .then(async (res) => {
           const body = await res.json()
           if (!res.ok) {
-            showMessage(t("loading-overrides-failed", "Yliajojen lataaminen ei onnistunut: {body}", {
+            showMessage(translate("loading-overrides-failed", {
               body: JSON.stringify(body)
             }))
             return
@@ -57,7 +57,7 @@ const LocalisationOverrides: FC<Props> = ({showMessage}) => {
           setOverrides(sortBy(body, ["namespace", "key", "locale"]))
         })
     }
-  }, [showMessage, t])
+  }, [showMessage, translate])
   useEffect(() => {
     loadOverrides()
   }, [loadOverrides, showMessage])
@@ -69,7 +69,7 @@ const LocalisationOverrides: FC<Props> = ({showMessage}) => {
       .then(async (res) => {
         const body = await res.json()
         if (!res.ok) {
-          showMessage(t("delete-override-failed", "Yliajon poistaminen ei onnistunut: {body}", {
+          showMessage(translate("delete-override-failed", {
             body: JSON.stringify(body)
           }))
           return
@@ -102,7 +102,7 @@ const LocalisationOverrides: FC<Props> = ({showMessage}) => {
       }).then(async (res) => {
         const body = await res.json()
         if (!res.ok) {
-          showMessage(t("save-override-failed", "Yliajon tallentaminen ei onnistunut: {body}", {
+          showMessage(translate("save-override-failed", {
             body: JSON.stringify(body)
           }))
           return
@@ -115,25 +115,26 @@ const LocalisationOverrides: FC<Props> = ({showMessage}) => {
   return (
     <Grid container spacing={3}>
       <Grid size={12}>
-        <Typography variant="h4">{t("overrides-title", "Käännösten yliajot")}</Typography>
+        <Typography variant="h2">{translate("overrides-title", "Käännösten yliajot")}</Typography>
       </Grid>
       <Grid size={12}>
-        <Typography variant="body1">{t("overrides-info", "Yliajojen kuvausteksti")}</Typography>
+        <Typography variant="body1">{translate("overrides-info", "Yliajojen kuvausteksti")}</Typography>
       </Grid>
       <Grid size={12}>
-        <TableContainer component={Paper}>
-          <Table sx={{minWidth: 650}} aria-label={t("override-listing", "listaus käännösten yliajoista")}>
+        <TableContainer component={Paper} elevation={0}>
+          <Table sx={{minWidth: 650}} aria-label={translate("override-listing", "listaus käännösten yliajoista")}
+                 size="small">
             <TableHead>
               <TableRow>
-                <TableCell>{t("override-id", "tunniste")}</TableCell>
-                <TableCell width="10%">{t("override-namespace", "nimiavaruus")}</TableCell>
-                <TableCell width="20%">{t("override-key", "avain")}</TableCell>
-                <TableCell width="7%">{t("override-locale", "kieli")}</TableCell>
-                <TableCell width="30%">{t("override-value", "arvo")}</TableCell>
-                <TableCell>{t("override-created", "luontiaika")}</TableCell>
-                <TableCell>{t("override-created-by", "luonut")}</TableCell>
-                <TableCell>{t("override-updated", "päivitysaika")}</TableCell>
-                <TableCell>{t("override-updated-by", "päivittänyt")}</TableCell>
+                <TableCell>{translate("override-id", "tunniste")}</TableCell>
+                <TableCell width="10%">{translate("override-namespace", "nimiavaruus")}</TableCell>
+                <TableCell width="20%">{translate("override-key", "avain")}</TableCell>
+                <TableCell width="7%">{translate("override-locale", "kieli")}</TableCell>
+                <TableCell width="30%">{translate("override-value", "arvo")}</TableCell>
+                <TableCell>{translate("override-created", "luontiaika")}</TableCell>
+                <TableCell>{translate("override-created-by", "luonut")}</TableCell>
+                <TableCell>{translate("override-updated", "päivitysaika")}</TableCell>
+                <TableCell>{translate("override-updated-by", "päivittänyt")}</TableCell>
                 <TableCell></TableCell>
               </TableRow>
             </TableHead>
@@ -163,18 +164,19 @@ const LocalisationOverrides: FC<Props> = ({showMessage}) => {
                           inputProps={{'aria-label': 'arvo'}}
                         />
                         <Divider sx={{height: 20, m: 0.5}} orientation="vertical"/>
-                        <IconButton type="button" sx={{p: '8px'}} aria-label={t("save", "tallenna")} size="small"
+                        <IconButton type="button" sx={{p: '8px'}} aria-label={translate("save", "tallenna")}
+                                    size="small"
                                     disabled={editLocalisation.value === overrides.find(o => o.id === override.id)?.value}
                                     onClick={saveOverride(override.id)} color="primary">
                           <Save/>
                         </IconButton>
-                        <IconButton sx={{p: '6px'}} aria-label={t("cancel", "peruuta")} size="small"
+                        <IconButton sx={{p: '6px'}} aria-label={translate("cancel", "peruuta")} size="small"
                                     onClick={editDialogClose}>
                           <Cancel/>
                         </IconButton>
                       </Paper>
                     ) : (
-                      <Editable aria-label={t("editable", "muokattavissa")} tabIndex={0}
+                      <Editable aria-label={translate("editable", "muokattavissa")} tabIndex={0}
                                 onClick={() => setEditLocalisation(override)}
                                 onKeyDown={(e) => {
                                   if (e.key === 'Enter' || e.key === ' ') {
@@ -198,22 +200,22 @@ const LocalisationOverrides: FC<Props> = ({showMessage}) => {
                     </Tooltip>
                   </TableCell>
                   <TableCell>
-                    <Tooltip title={t("delete", "poista")}>
+                    <Tooltip title={translate("delete", "poista")}>
                       <IconButton onClick={() => setDeleteDialogId(override.id)}><Delete/></IconButton>
                     </Tooltip>
                   </TableCell>
                 </TableRow>
               ))}
-              {!overrides && (
+              {(!overrides || overrides.length === 0) && (
                 <TableRow>
-                  <TableCell colSpan={10}>{t("no-overrides", "Ei yliajoja")}</TableCell>
+                  <TableCell colSpan={10} align="center">{translate("no-overrides", "Ei yliajoja")}</TableCell>
                 </TableRow>
               )}
 
               {!addDialogOpen ? (
                 <TableRow>
-                  <TableCell colSpan={10} align="center">
-                    <Tooltip title={t("add-new-override", "lisää uusi")}>
+                  <TableCell colSpan={10} align="center" sx={{borderBottom: "none"}}>
+                    <Tooltip title={translate("add-new-override", "lisää uusi")}>
                       <IconButton onClick={() => {
                         setAddDialogOpen(true)
                       }}><Add/></IconButton>
@@ -235,17 +237,17 @@ const LocalisationOverrides: FC<Props> = ({showMessage}) => {
               aria-labelledby="delete-dialog-title"
               aria-describedby="delete-dialog-description">
         <DialogTitle id="delete-dialog-title">
-          {t("delete-override-title", "Poista yliajo?")}
+          {translate("delete-override-title", "Poista yliajo?")}
         </DialogTitle>
         <DialogContent>
           <DialogContentText id="delete-dialog-description">
-            {t("delete-override-description", "Haluatko varmasti poistaa käännöksen yliajon?")}
+            {translate("delete-override-description", "Haluatko varmasti poistaa käännöksen yliajon?")}
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <OphButton onClick={deleteDialogClose}>{t("delete-cancel", "Peruuta")}</OphButton>
+          <OphButton onClick={deleteDialogClose}>{translate("delete-cancel", "Peruuta")}</OphButton>
           <OphButton onClick={() => deleteOverride(deleteDialogId!)} autoFocus>
-            {t("delete-action", "Poista")}
+            {translate("delete-action", "Poista")}
           </OphButton>
         </DialogActions>
       </Dialog>

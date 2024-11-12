@@ -125,7 +125,8 @@ public class SecurityConfiguration {
             "/cxf/rest/v1/localisation",
             "/api/v1/localisation",
             "/api/v1/copy/localisation-files",
-            "/api/v1/copy/available-namespaces");
+            "/api/v1/copy/available-namespaces",
+            "/me.json");
     final List<String> allPaths = Stream.concat(common, additional).toList();
     return (authz) ->
         authz

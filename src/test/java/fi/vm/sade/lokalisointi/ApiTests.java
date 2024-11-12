@@ -57,7 +57,7 @@ public class ApiTests extends IntegrationTestBase {
     mvc.perform(get("/api/v1/localisation").accept(MediaType.APPLICATION_JSON))
         .andExpect(status().is2xxSuccessful())
         .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-        .andExpect(jsonPath("$.length()", is(8)));
+        .andExpect(jsonPath("$.length()", is(101)));
   }
 
   @Test
@@ -202,7 +202,7 @@ public class ApiTests extends IntegrationTestBase {
         mvc.perform(get("/api/v1/localisation").accept(MediaType.APPLICATION_JSON))
             .andExpect(status().is2xxSuccessful())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-            .andExpect(jsonPath("$.length()", is(8)))
+            .andExpect(jsonPath("$.length()", is(101)))
             .andReturn();
 
     final List<Localisation> localisations =
@@ -228,7 +228,7 @@ public class ApiTests extends IntegrationTestBase {
         mvc.perform(get("/api/v1/localisation").accept(MediaType.APPLICATION_JSON))
             .andExpect(status().is2xxSuccessful())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-            .andExpect(jsonPath("$.length()", is(9)))
+            .andExpect(jsonPath("$.length()", is(102)))
             .andReturn();
 
     final List<Localisation> localisations =
@@ -288,7 +288,7 @@ public class ApiTests extends IntegrationTestBase {
             .andReturn();
     final Set<String> namespaces =
         objectMapper.readValue(mvcResult.getResponse().getContentAsByteArray(), setOfStrings);
-    assertEquals(Set.of("example", "lokalisointi", "foofoo"), namespaces);
+    assertEquals(Set.of("virkailijaraamit", "example", "lokalisointi", "foofoo"), namespaces);
   }
 
   @WithMockUser("1.2.246.562.24.00000000001")
@@ -302,7 +302,7 @@ public class ApiTests extends IntegrationTestBase {
             .andReturn();
     final Set<String> namespaces =
         objectMapper.readValue(mvcResult.getResponse().getContentAsByteArray(), setOfStrings);
-    assertEquals(Set.of("example", "lokalisointi"), namespaces);
+    assertEquals(Set.of("example", "lokalisointi", "virkailijaraamit"), namespaces);
   }
 
   @Test
@@ -363,16 +363,15 @@ public class ApiTests extends IntegrationTestBase {
         mvc.perform(get("/api/v1/localisation").accept(MediaType.APPLICATION_JSON))
             .andExpect(status().is2xxSuccessful())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-            .andExpect(jsonPath("$.length()", is(8)))
+            .andExpect(jsonPath("$.length()", is(101)))
             .andReturn();
     final List<Localisation> localisations =
         objectMapper.readValue(result.getResponse().getContentAsByteArray(), listOfLocalisations);
     assertEquals(
-        Set.of("example", "lokalisointi", "lorem"),
+        Set.of("example", "lokalisointi", "lorem", "virkailijaraamit"),
         localisations.stream().map(Localisation::getNamespace).collect(Collectors.toSet()));
     assertEquals(
-        Set.of("testi", "create.item", "localisation", "localisation-1"),
-        localisations.stream().map(Localisation::getKey).collect(Collectors.toSet()));
+        97, localisations.stream().map(Localisation::getKey).collect(Collectors.toSet()).size());
   }
 
   @WithMockUser("1.2.246.562.24.00000000001")

@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "private": true,
   "homepage": "/lokalisointi/secured",
-  "proxy": "http://localhost:8080",
   "dependencies": {
     "@babel/core": "^7.16.0",
     "@emotion/react": "^11.13.3",

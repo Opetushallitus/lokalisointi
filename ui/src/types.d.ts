@@ -1,7 +1,6 @@
 export interface UIConfig {
   sourceEnvironments?: string[]
   currentEnvironment?: string
-  virkalijaBaseUrl?: string
 }
 
 export interface LocalisationOverride {

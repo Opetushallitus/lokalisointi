@@ -61,6 +61,7 @@ tolgee:
 logging:
   level:
     root: info
+    org.apache.catalina.core.ContainerBase: trace
     fi.vm.sade.lokalisointi: debug
 
 # TODO siirrä nämä templateen
