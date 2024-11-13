@@ -1,5 +1,3 @@
-DROP TABLE IF EXISTS localisation;
-
 CREATE TABLE IF NOT EXISTS localisation_override (
     id SERIAL NOT NULL,
     namespace VARCHAR(100) NOT NULL,
