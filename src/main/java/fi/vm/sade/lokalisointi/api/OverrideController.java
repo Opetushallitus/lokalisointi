@@ -2,21 +2,16 @@ package fi.vm.sade.lokalisointi.api;
 
 import fi.vm.sade.lokalisointi.model.Localisation;
 import fi.vm.sade.lokalisointi.model.LocalisationOverride;
-import fi.vm.sade.lokalisointi.model.OphEnvironment;
 import fi.vm.sade.lokalisointi.model.Status;
 import fi.vm.sade.lokalisointi.storage.Database;
 import fi.vm.sade.lokalisointi.storage.S3;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
-import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.relational.core.conversion.DbActionExecutionException;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 

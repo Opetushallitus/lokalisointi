@@ -18,7 +18,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
-import java.security.Principal;
 import java.time.Duration;
 import java.time.temporal.ChronoUnit;
 import java.util.Collection;
@@ -107,52 +106,26 @@ public class LocalisationController extends ControllerBase implements Initializi
   }
 
   @Operation(
-      summary = "Create/update localisations",
+      summary = "Create localisations",
       description =
-          "Creates or updates localisations. In test environment tries to import new localisation keys to Tolgee, in another environments tries to create/update localisation overrides.")
+          "Creates new localisations. In test (master data) environment tries to import new localisation keys to Tolgee, in another environments discards updates and returns bad request.")
   @PostMapping("/update")
   @Secured({ROLE_UPDATE, ROLE_CRUD})
   public ResponseEntity<MassUpdateResult> update(
-      @RequestBody final Collection<Localisation> localisations, final Principal user) {
+      @RequestBody final Collection<Localisation> localisations) {
     final MassUpdateResult result = new MassUpdateResult();
     result.setStatus("OK");
+    if (envName != null && !OphEnvironment.valueOf(envName).equals(OphEnvironment.pallero)) {
+      result.setStatus("Failure");
+      result.setNotModified(localisations.size());
+      return ResponseEntity.badRequest().body(result);
+    }
     for (final Localisation localisation : localisations) {
-      if (localisation.getId() != null) {
-        // id should always refer to (existing) localisation override
-        final Localisation existing =
-            database.getById(localisation.getId()).stream().findFirst().orElse(null);
-        if (existing != null) {
-          if (existing.getNamespace().equals(localisation.getNamespace())
-              && existing.getKey().equals(localisation.getKey())
-              && existing.getLocale().equals(localisation.getLocale())
-              && existing.getValue().equals(localisation.getValue())) {
-            LOG.info("Localisation not changed - not updating: {}", localisation);
-            result.incNotModified();
-          } else {
-            LOG.info("Updating localisation: {}", localisation);
-            database.updateOverride(localisation.getId(), localisation, user.getName());
-            result.incUpdated();
-          }
-        } else {
-          LOG.info("Creating new localisation override: {}", localisation);
-          database.saveOverride(localisation, user.getName());
-          result.incCreated();
-        }
-      } else if (envName != null
-          && OphEnvironment.valueOf(envName).equals(OphEnvironment.pallero)) {
-        // in test environment save localisation to Tolgee
-        if (tolgee.importKey(localisation)) {
-          LOG.info("Imported localisation to Tolgee: {}", localisation);
-          result.incCreated();
-        } else {
-          LOG.info("Bypassed localisation import to Tolgee: {}", localisation);
-          result.incNotModified();
-        }
-      } else {
-        // otherwise create new localisation override
-        LOG.info("Creating new localisation override: {}", localisation);
-        database.saveOverride(localisation, user.getName());
+      if (localisation.getId() == null && tolgee.importKey(localisation)) {
         result.incCreated();
+      } else {
+        LOG.info("Bypassed localisation update: {}", localisation);
+        result.incNotModified();
       }
     }
     return ResponseEntity.ok().body(result);

@@ -48,14 +48,14 @@ lokalisointi:
   public-cache-max-age-minutes: 10
   baseurls:
     pallero: https://virkalija.testiopintopolku.fi
-    untuva: https://virkailija.untuvaopintopolku.fi
+    untuva: http://localhost:10080/lokalisointi
     hahtuva: https://virkailija.hahtuvaopintopolku.fi
     sade: https://virkailija.opintopolku.fi
   envname: pallero
 tolgee:
-  baseurl: https://app.tolgee.io
-  apikey: ${TOLGEE_API_KEY:none}
-  projectid: 9994
+  baseurl: http://localhost:10080/lokalisointi/tolgee
+  apikey: testkey
+  projectid: 11100
 logging:
   level:
     root: info

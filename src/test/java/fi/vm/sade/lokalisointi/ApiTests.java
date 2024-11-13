@@ -384,6 +384,37 @@ public class ApiTests extends IntegrationTestBase {
         .andExpect(jsonPath("$.sourceEnvironments", is(List.of("untuva", "hahtuva", "sade"))));
   }
 
+  @WithMockUser("1.2.246.562.24.00000000001")
+  @Test
+  public void testLocalisationUpdate() throws Exception {
+    mvc.perform(
+            post("/api/v1/localisation/update")
+                .accept(MediaType.APPLICATION_JSON)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(
+                    objectMapper.writeValueAsBytes(
+                        List.of(
+                            new Localisation(null, "example", "key1", "fi", "Avain 1"),
+                            new Localisation(null, "example", "key2", "fi", "Avain 2")))))
+        .andExpect(status().is2xxSuccessful())
+        .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+        .andExpect(jsonPath("$.created", is(2)));
+  }
+
+  @Test
+  public void testLocalisationUpdateRequiresAuthentication() throws Exception {
+    mvc.perform(
+            post("/api/v1/localisation/update")
+                .accept(MediaType.APPLICATION_JSON)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(
+                    objectMapper.writeValueAsBytes(
+                        List.of(
+                            new Localisation(null, "example", "key1", "fi", "Avain 1"),
+                            new Localisation(null, "example", "key2", "fi", "Avain 2")))))
+        .andExpect(status().isForbidden());
+  }
+
   LocalisationOverride addLocalisationOverride(
       final String namespace, final String key, final String locale, final String value)
       throws Exception {

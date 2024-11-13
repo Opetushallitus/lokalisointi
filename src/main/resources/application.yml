@@ -57,7 +57,7 @@ lokalisointi:
 tolgee:
   baseurl: https://app.tolgee.io
   apikey: ${TOLGEE_API_KEY:none}
-  projectid: 9994
+  projectid: 11100
 logging:
   level:
     root: info

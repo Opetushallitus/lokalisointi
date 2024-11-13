@@ -30,8 +30,7 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.context.HttpSessionSecurityContextRepository;
 import org.springframework.security.web.context.SecurityContextRepository;
 
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Stream;
 
 @Profile({"default", "dev"})
@@ -109,9 +108,10 @@ public class SecurityConfiguration {
 
   public static Customizer<
           AuthorizeHttpRequestsConfigurer<HttpSecurity>.AuthorizationManagerRequestMatcherRegistry>
-      nonAuthenticatedRoutes(final String... additionalPaths) {
-    final Stream<String> additional = Arrays.stream(additionalPaths);
-    final Stream<String> common =
+      nonAuthenticatedRoutes(
+          final Collection<String> additionalGetPaths,
+          final Collection<String> additionalPostPaths) {
+    final Stream<String> commonGet =
         Stream.of(
             "/buildversion.txt",
             "/actuator/health",
@@ -127,13 +127,18 @@ public class SecurityConfiguration {
             "/api/v1/copy/localisation-files",
             "/api/v1/copy/available-namespaces",
             "/me.json");
-    final List<String> allPaths = Stream.concat(common, additional).toList();
-    return (authz) ->
-        authz
-            .requestMatchers(HttpMethod.GET, allPaths.toArray(String[]::new))
-            .permitAll()
-            .anyRequest()
-            .authenticated();
+    final List<String> allPaths = Stream.concat(commonGet, additionalGetPaths.stream()).toList();
+    return (authz) -> {
+      final AuthorizeHttpRequestsConfigurer<HttpSecurity>.AuthorizationManagerRequestMatcherRegistry
+          registry =
+              authz.requestMatchers(HttpMethod.GET, allPaths.toArray(String[]::new)).permitAll();
+      if (!additionalPostPaths.isEmpty()) {
+        registry
+            .requestMatchers(HttpMethod.POST, additionalPostPaths.toArray(String[]::new))
+            .permitAll();
+      }
+      registry.anyRequest().authenticated();
+    };
   }
 
   @Bean
@@ -146,7 +151,8 @@ public class SecurityConfiguration {
     http.headers(HeadersConfigurer::disable)
         .csrf(CsrfConfigurer::disable)
         .securityMatcher("/**")
-        .authorizeHttpRequests(nonAuthenticatedRoutes())
+        .authorizeHttpRequests(
+            nonAuthenticatedRoutes(Collections.emptyList(), Collections.emptyList()))
         .addFilterAt(casAuthenticationFilter, CasAuthenticationFilter.class)
         .addFilterBefore(singleSignOutFilter(), CasAuthenticationFilter.class)
         .securityContext(

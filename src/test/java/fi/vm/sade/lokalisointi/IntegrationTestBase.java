@@ -6,6 +6,10 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import fi.vm.sade.lokalisointi.model.LocalisationOverride;
 import fi.vm.sade.lokalisointi.storage.Database;
 import fi.vm.sade.valinta.dokumenttipalvelu.Dokumenttipalvelu;
+import jakarta.validation.Valid;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NonNull;
 import org.junit.jupiter.api.BeforeAll;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringBootConfiguration;
@@ -44,8 +48,7 @@ import software.amazon.awssdk.services.s3.presigner.S3Presigner;
 import java.io.File;
 import java.io.IOException;
 import java.time.Duration;
-import java.util.Collection;
-import java.util.Set;
+import java.util.*;
 
 import static fi.vm.sade.lokalisointi.configuration.SecurityConfiguration.nonAuthenticatedRoutes;
 import static org.testcontainers.containers.localstack.LocalStackContainer.Service.S3;
@@ -82,10 +85,7 @@ public abstract class IntegrationTestBase {
       TestPropertyValues.of(
               "spring.datasource.url=" + POSTGRESQL_CONTAINER.getJdbcUrl(),
               "spring.datasource.username=" + POSTGRESQL_CONTAINER.getUsername(),
-              "spring.datasource.password=" + POSTGRESQL_CONTAINER.getPassword(),
-              "cas-service.service=http://localhost:10080/lokalisointi",
-              // mocking for "untuva" source environment
-              "lokalisointi.baseurls.untuva=http://localhost:10080/lokalisointi")
+              "spring.datasource.password=" + POSTGRESQL_CONTAINER.getPassword())
           .applyTo(configurableApplicationContext.getEnvironment());
     }
   }
@@ -145,8 +145,10 @@ public abstract class IntegrationTestBase {
           .securityMatcher("/**")
           .authorizeHttpRequests(
               nonAuthenticatedRoutes(
-                  "/lokalisointi/api/v1/copy/available-namespaces",
-                  "/lokalisointi/api/v1/copy/localisation-files"))
+                  List.of(
+                      "/lokalisointi/api/v1/copy/available-namespaces",
+                      "/lokalisointi/api/v1/copy/localisation-files"),
+                  List.of("/tolgee/v2/projects/{projectId}/keys/import-resolvable")))
           .build();
     }
   }
@@ -160,6 +162,33 @@ public abstract class IntegrationTestBase {
     public void deleteAllOverrides() {
       template.deleteAll(LocalisationOverride.class);
     }
+  }
+
+  @Data
+  @AllArgsConstructor
+  static class TolgeeTranslation {
+    @NonNull private String text;
+    @NonNull private String resolution;
+
+    public TolgeeTranslation() {}
+  }
+
+  @Data
+  @AllArgsConstructor
+  static class TolgeeKey {
+    @NonNull private String name;
+    @NonNull private String namespace;
+    @NonNull private Map<String, TolgeeTranslation> translations;
+
+    public TolgeeKey() {}
+  }
+
+  @Data
+  @AllArgsConstructor
+  static class TolgeeImport {
+    @NonNull private Collection<TolgeeKey> keys;
+
+    public TolgeeImport() {}
   }
 
   @RestController
@@ -183,6 +212,24 @@ public abstract class IntegrationTestBase {
     @GetMapping("/available-namespaces")
     public ResponseEntity<Collection<String>> mockAvailableNamespaces() {
       return ResponseEntity.ok(Set.of("lokalisointi", "esimerkki"));
+    }
+  }
+
+  @RestController
+  @RequestMapping("/tolgee/v2/projects/{projectId}/keys")
+  static class TolgeeMock {
+    @PostMapping("/import-resolvable")
+    public ResponseEntity<Map<String, ?>> tolgeeImportResolvable(
+        @RequestHeader("X-API-Key") final String apiKey,
+        @PathVariable String projectId,
+        @Valid @RequestBody final TolgeeImport body) {
+      if (projectId == null || !projectId.equals("11100")) {
+        return ResponseEntity.badRequest().build();
+      }
+      if (apiKey == null || !apiKey.equals("testkey")) {
+        return ResponseEntity.status(401).build();
+      }
+      return ResponseEntity.ok(Map.of("keys", body.getKeys()));
     }
   }
 }

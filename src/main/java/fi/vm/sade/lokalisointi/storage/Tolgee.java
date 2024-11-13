@@ -62,8 +62,9 @@ public class Tolgee {
       return true;
     } catch (final HttpClientErrorException e) {
       LOG.warn(
-          "Localisation {} was not imported to Tolgee: ({}) {}",
+          "Localisation {} was not imported to Tolgee ({}): ({}) {}",
           localisation,
+          baseUrl,
           e.getStatusCode(),
           e.getResponseBodyAsString());
       return false;
