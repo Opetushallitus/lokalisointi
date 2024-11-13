@@ -1,4 +1,4 @@
-import React, {ChangeEvent, FC, useCallback, useEffect, useState} from "react"
+import React, {ChangeEvent, useCallback, useEffect, useState} from "react"
 import {
   Dialog,
   DialogActions,
@@ -19,12 +19,12 @@ import {
   Typography
 } from "@mui/material"
 import dayjs from "dayjs"
-import AddOverride from "./AddOverride"
-import {Add, Cancel, Delete, Person, Save} from "@mui/icons-material"
-import {LocalisationOverride} from "./types"
 import sortBy from "lodash.sortby"
+import {Add, Cancel, Delete, Person, Save} from "@mui/icons-material"
 import {OphButton} from "@opetushallitus/oph-design-system"
 import {useTranslate} from "@tolgee/react"
+import {AddOverride} from "./AddOverride"
+import {LocalisationOverride} from "./types"
 
 interface Props {
   showMessage: (message: React.ReactNode) => void
@@ -34,7 +34,7 @@ const Editable = styled(Typography)({
   cursor: "pointer"
 })
 
-const LocalisationOverrides: FC<Props> = ({showMessage}) => {
+export const LocalisationOverrides: React.FC<Props> = ({showMessage}) => {
   const [overrides, setOverrides] = useState<LocalisationOverride[]>([])
   const [addDialogOpen, setAddDialogOpen] = useState<boolean>(false)
   const [deleteDialogId, setDeleteDialogId] = useState<number>(0)
@@ -254,5 +254,3 @@ const LocalisationOverrides: FC<Props> = ({showMessage}) => {
     </Grid>
   )
 }
-
-export default LocalisationOverrides

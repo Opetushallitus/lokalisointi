@@ -1,4 +1,4 @@
-import React, {ChangeEvent, FC, useEffect, useState} from "react"
+import React, {ChangeEvent, useEffect, useState} from "react"
 import {
   Autocomplete,
   FormControl,
@@ -18,7 +18,7 @@ interface Props {
   showMessage: (message: React.ReactNode) => void
 }
 
-const AddOverride: FC<Props> = ({close, showMessage}) => {
+export const AddOverride: React.FC<Props> = ({close, showMessage}) => {
   const [availableNamespaces, setAvailableNamespaces] = useState<string[]>([])
   const [namespace, setNamespace] = useState<string | undefined>(undefined)
   const [key, setKey] = useState<string>("")
@@ -136,5 +136,3 @@ const AddOverride: FC<Props> = ({close, showMessage}) => {
     </TableRow>
   )
 }
-
-export default AddOverride

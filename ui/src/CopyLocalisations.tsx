@@ -1,4 +1,4 @@
-import React, {useState, FC} from "react"
+import React, {useState} from "react"
 import {
   FormControl,
   FormHelperText,
@@ -17,7 +17,7 @@ interface Props {
   showMessage: (message: React.ReactNode) => void
 }
 
-const CopyLocalisations: FC<Props> = ({uiConfig, showMessage}) => {
+export const CopyLocalisations: React.FC<Props> = ({uiConfig, showMessage}) => {
   const [source, setSource] = useState<string>("")
   const [availableNamespaces, setAvailableNamespaces] = useState<string[]>([])
   const [namespaces, setNamespaces] = useState<string[]>([])
@@ -107,5 +107,3 @@ const CopyLocalisations: FC<Props> = ({uiConfig, showMessage}) => {
     </Grid>
   )
 }
-
-export default CopyLocalisations
