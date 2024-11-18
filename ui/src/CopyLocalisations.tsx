@@ -22,12 +22,6 @@ export const CopyLocalisations: React.FC<Props> = ({uiConfig, showMessage}) => {
   const [availableNamespaces, setAvailableNamespaces] = useState<string[]>([])
   const [namespaces, setNamespaces] = useState<string[]>([])
   const [response, setResponse] = useState<string>("")
-  const envNames: Map<string, string> = new Map(Object.entries({
-    "pallero": "Testi (master data)",
-    "untuva": "Untuva",
-    "hahtuva": "Hahtuva",
-    "sade": "Tuotanto"
-  }))
   const {t: translate} = useTranslate()
   const loadAvailableNamespaces = (sourceEnvironment: string) => {
     fetch(`/lokalisointi/api/v1/copy/available-namespaces?source=${sourceEnvironment}`, {
@@ -77,10 +71,13 @@ export const CopyLocalisations: React.FC<Props> = ({uiConfig, showMessage}) => {
                        loadAvailableNamespaces(value)
                      }}
                      options={uiConfig.sourceEnvironments?.map(
-                       (environment, i) => ({label: envNames.get(environment) ?? environment, value: environment})
+                       (environment, _) => ({
+                         label: translate(`env-${environment}`, environment),
+                         value: environment
+                       })
                      ) ?? []}/>
           <FormHelperText>{translate("copy-source-help", "käännökset kopioidaan lähdeympäristöstä ympäristöön {target}", {
-            target: !!uiConfig.currentEnvironment ? envNames.get(uiConfig.currentEnvironment) : "-"
+            target: !!uiConfig.currentEnvironment ? translate(`env-${uiConfig.currentEnvironment}`, uiConfig.currentEnvironment) : "-"
           })}</FormHelperText>
         </FormControl>
       </Grid>
