@@ -156,8 +156,19 @@ public class S3 {
         ZipEntry entry;
         while ((entry = zipArchive.getNextEntry()) != null) {
           entries.add(entry);
-          final String[] name = entry.getName().split("/");
-          final String namespace = name[0], localeFilename = name[1];
+          final String[] pathAndName = entry.getName().split("/");
+          String namespace = null, localeFilename = null;
+          if (pathAndName.length == 2) {
+            namespace = pathAndName[0];
+            localeFilename = pathAndName[1];
+          } else if (pathAndName.length == 1) {
+            localeFilename = pathAndName[0];
+          } else {
+            throw new RuntimeException(
+                """
+                    Error parsing file name from localisation zip archive: %s"""
+                    .formatted(entry));
+          }
           LOG.info("Writing localisation file {} to S3", entry.getName());
           final File tempFile = File.createTempFile("localisation-file", "json");
           final FileOutputStream fos = new FileOutputStream(tempFile);
@@ -166,12 +177,12 @@ public class S3 {
             fos.write(buffer, 0, len);
           }
           fos.close();
+          final String key =
+              namespace != null
+                  ? String.format("t-%s/%s/%s", LOKALISOINTI_TAG, namespace, localeFilename)
+                  : String.format("t-%s/%s", LOKALISOINTI_TAG, localeFilename);
           dokumenttipalvelu
-              .putObject(
-                  String.format("t-%s/%s/%s", LOKALISOINTI_TAG, namespace, localeFilename),
-                  localeFilename,
-                  "application/json",
-                  new FileInputStream(tempFile))
+              .putObject(key, localeFilename, "application/json", new FileInputStream(tempFile))
               .join();
           tempFile.delete();
         }
@@ -207,7 +218,8 @@ public class S3 {
                       Arrays.stream(metadata.key.split("/"))
                           .filter(s -> !s.equals(String.format("t-%s", LOKALISOINTI_TAG)))
                           .toList();
-                  return namespaces.contains(splittedObjectKey.getFirst());
+                  return namespaces.contains(
+                      splittedObjectKey.size() > 1 ? splittedObjectKey.getFirst() : null);
                 })
             .toList();
     return outputStream -> {
@@ -218,9 +230,11 @@ public class S3 {
             Arrays.stream(metadata.key.split("/"))
                 .filter(s -> !s.equals(String.format("t-%s", LOKALISOINTI_TAG)))
                 .toList();
-        final String namespace = splittedObjectKey.getFirst();
+        final String namespace = splittedObjectKey.size() > 1 ? splittedObjectKey.getFirst() : null;
         final String filename = splittedObjectKey.getLast();
-        out.putNextEntry(new ZipEntry(String.format("%s/%s", namespace, filename)));
+        final String entryName =
+            namespace != null ? String.format("%s/%s", namespace, filename) : filename;
+        out.putNextEntry(new ZipEntry(entryName));
         IOUtils.copy(objectEntity.entity, out);
         out.closeEntry();
       }

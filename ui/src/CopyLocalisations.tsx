@@ -88,7 +88,7 @@ export const CopyLocalisations: React.FC<Props> = ({uiConfig, showMessage}) => {
                   onChange={(e) => setNamespaces(e.target.value as string[])}
                   multiple disabled={availableNamespaces.length === 0}>
             {availableNamespaces.map((
-              (ns, i) => <MenuItem value={ns} key={i}>{ns}</MenuItem>)
+              (ns, i) => <MenuItem value={ns} key={i}>{ns ?? '<none>'}</MenuItem>)
             )}
           </Select>
           <FormHelperText>{translate("copy-namespaces-help", "jätä valitsematta mitään jos kopioidaan kaikki nimiavaruudet")}</FormHelperText>

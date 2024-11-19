@@ -126,7 +126,7 @@ export const AddOverride: React.FC<Props> = ({close, showMessage}) => {
       </TableCell>
       <TableCell colSpan={5} sx={{verticalAlign: "bottom"}}>
         <Tooltip title={translate("save", "tallenna")}>
-          <IconButton onClick={save} disabled={!namespace || !key || !locale || !value}
+          <IconButton onClick={save} disabled={!key || !locale || !value}
                       color="primary"><Save/></IconButton>
         </Tooltip>
         <Tooltip title={translate("cancel", "peruuta")}>

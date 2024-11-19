@@ -284,10 +284,15 @@ public class ApiTests extends IntegrationTestBase {
       }
 
       assertFalse(zipEntries.isEmpty());
-      assertTrue(zipEntries.stream().anyMatch(e -> e.getName().equals("lokalisointi/fi.json")));
-      assertTrue(zipEntries.stream().anyMatch(e -> e.getName().equals("lokalisointi/en.json")));
-      assertTrue(zipEntries.stream().anyMatch(e -> e.getName().equals("example/fi.json")));
-      assertTrue(zipEntries.stream().anyMatch(e -> e.getName().equals("example/en.json")));
+      assertEquals(
+          Set.of(
+              "lokalisointi/fi.json",
+              "lokalisointi/en.json",
+              "example/fi.json",
+              "example/en.json",
+              "virkailijaraamit/fi.json",
+              "fi.json"),
+          zipEntries.stream().map(ZipEntry::getName).collect(Collectors.toSet()));
     }
   }
 
@@ -302,7 +307,7 @@ public class ApiTests extends IntegrationTestBase {
             .andReturn();
     final Set<String> namespaces =
         objectMapper.readValue(mvcResult.getResponse().getContentAsByteArray(), setOfStrings);
-    assertEquals(setOf(null, "virkailijaraamit", "example", "lokalisointi", "foofoo"), namespaces);
+    assertEquals(Set.of("virkailijaraamit", "example", "lokalisointi", "foofoo"), namespaces);
   }
 
   @WithMockUser("1.2.246.562.24.00000000001")
@@ -369,7 +374,7 @@ public class ApiTests extends IntegrationTestBase {
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(
                     objectMapper.writeValueAsBytes(
-                        Map.of("source", "untuva", "namespaces", Set.of("example", "lorem")))))
+                        Map.of("source", "untuva", "namespaces", setOf("example", "lorem", null)))))
         .andExpect(status().is2xxSuccessful())
         .andExpect(content().contentType(MediaType.APPLICATION_JSON))
         .andExpect(jsonPath("$.status", is("OK")));

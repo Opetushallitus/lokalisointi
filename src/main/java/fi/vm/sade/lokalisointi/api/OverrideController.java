@@ -81,6 +81,7 @@ public class OverrideController extends ControllerBase {
     final Set<String> overrideNamespaces = database.availableNamespaces();
     return ResponseEntity.ok(
         Stream.concat(s3Namespaces.stream(), overrideNamespaces.stream())
+            .filter(Objects::nonNull)
             .collect(Collectors.toSet()));
   }
 }
