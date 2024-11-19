@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor(access = AccessLevel.PRIVATE, onConstructor = @__(@PersistenceCreator))
 public class LocalisationOverride {
   private @Id @With Integer id;
-  @NonNull private String namespace;
+  private String namespace;
   @NonNull private String locale;
 
   @Column("localisation_key")
@@ -30,7 +30,7 @@ public class LocalisationOverride {
   public LocalisationOverride() {}
 
   public LocalisationOverride(
-      @NonNull final String namespace,
+      final String namespace,
       @NonNull final String locale,
       @NonNull final String key,
       @NonNull final String value,

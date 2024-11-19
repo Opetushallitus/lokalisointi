@@ -10,7 +10,7 @@ import org.springframework.web.context.request.WebRequest;
 import java.util.Map;
 
 @RestController
-public class NotFoundErrorController implements ErrorController {
+public class CustomErrorController implements ErrorController {
   private static final String ERROR_PATH = "/error";
 
   @RequestMapping(value = ERROR_PATH)

@@ -4,8 +4,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.json.JsonMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import fi.vm.sade.lokalisointi.model.LocalisationOverride;
+import fi.vm.sade.lokalisointi.storage.ExtendedDokumenttipalvelu;
 import fi.vm.sade.lokalisointi.storage.Database;
-import fi.vm.sade.valinta.dokumenttipalvelu.Dokumenttipalvelu;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -90,7 +90,7 @@ public abstract class IntegrationTestBase {
     }
   }
 
-  @Autowired Dokumenttipalvelu dokumenttipalvelu;
+  @Autowired ExtendedDokumenttipalvelu dokumenttipalvelu;
   @Autowired TestDatabase database;
 
   @BeforeAll
@@ -102,40 +102,37 @@ public abstract class IntegrationTestBase {
   @EnableWebSecurity
   static class TestConfiguration {
     @Bean
-    public Dokumenttipalvelu dokumenttipalvelu() {
+    public ExtendedDokumenttipalvelu dokumenttipalvelu() {
       // re-wire dokumenttipalvelu with localstack
-      final Dokumenttipalvelu dokumenttipalvelu =
-          new Dokumenttipalvelu(LOCAL_STACK.getRegion(), BUCKET_NAME) {
-            @Override
-            public S3AsyncClient getClient() {
-              return S3AsyncClient.builder()
-                  .endpointOverride(LOCAL_STACK.getEndpointOverride(S3))
-                  .credentialsProvider(
-                      StaticCredentialsProvider.create(
-                          AwsBasicCredentials.create(
-                              LOCAL_STACK.getAccessKey(), LOCAL_STACK.getSecretKey())))
-                  .region(Region.of(LOCAL_STACK.getRegion()))
-                  .httpClientBuilder(
-                      NettyNioAsyncHttpClient.builder()
-                          .connectionTimeout(Duration.ofSeconds(60))
-                          .maxConcurrency(100))
-                  .build();
-            }
+      return new ExtendedDokumenttipalvelu(LOCAL_STACK.getRegion(), BUCKET_NAME) {
+        @Override
+        public S3AsyncClient getClient() {
+          return S3AsyncClient.builder()
+              .endpointOverride(LOCAL_STACK.getEndpointOverride(S3))
+              .credentialsProvider(
+                  StaticCredentialsProvider.create(
+                      AwsBasicCredentials.create(
+                          LOCAL_STACK.getAccessKey(), LOCAL_STACK.getSecretKey())))
+              .region(Region.of(LOCAL_STACK.getRegion()))
+              .httpClientBuilder(
+                  NettyNioAsyncHttpClient.builder()
+                      .connectionTimeout(Duration.ofSeconds(60))
+                      .maxConcurrency(100))
+              .build();
+        }
 
-            @Override
-            public S3Presigner getPresigner() {
-              return S3Presigner.builder()
-                  .region(Region.of(LOCAL_STACK.getRegion()))
-                  .endpointOverride(LOCAL_STACK.getEndpointOverride(S3))
-                  .credentialsProvider(
-                      StaticCredentialsProvider.create(
-                          AwsBasicCredentials.create(
-                              LOCAL_STACK.getAccessKey(), LOCAL_STACK.getSecretKey())))
-                  .build();
-            }
-          };
-      dokumenttipalvelu.listObjectsMaxKeys = 5;
-      return dokumenttipalvelu;
+        @Override
+        public S3Presigner getPresigner() {
+          return S3Presigner.builder()
+              .region(Region.of(LOCAL_STACK.getRegion()))
+              .endpointOverride(LOCAL_STACK.getEndpointOverride(S3))
+              .credentialsProvider(
+                  StaticCredentialsProvider.create(
+                      AwsBasicCredentials.create(
+                          LOCAL_STACK.getAccessKey(), LOCAL_STACK.getSecretKey())))
+              .build();
+        }
+      };
     }
 
     @Bean

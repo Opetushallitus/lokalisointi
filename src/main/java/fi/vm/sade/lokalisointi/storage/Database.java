@@ -67,7 +67,10 @@ public class Database {
     final Map<ImmutableTriple<String, String, String>, List<LocalisationOverride>>
         indexedOverrides =
             StreamSupport.stream(template.findAll(LocalisationOverride.class).spliterator(), false)
-                .filter(l -> namespace == null || l.getNamespace().equals(namespace))
+                .filter(
+                    l ->
+                        namespace == null
+                            || (l.getNamespace() != null && l.getNamespace().equals(namespace)))
                 .filter(l -> locale == null || l.getLocale().equals(locale))
                 .filter(l -> key == null || l.getKey().equals(key))
                 .collect(

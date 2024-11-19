@@ -126,6 +126,9 @@ public class SecurityConfiguration {
             "/api/v1/localisation",
             "/api/v1/copy/localisation-files",
             "/api/v1/copy/available-namespaces",
+            "/api/v1/tolgee/*.json",
+            "/api/v1/tolgee/*/*.json",
+            "/error",
             "/me.json");
     final List<String> allPaths = Stream.concat(commonGet, additionalGetPaths.stream()).toList();
     return (authz) -> {

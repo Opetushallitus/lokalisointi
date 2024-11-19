@@ -1,6 +1,6 @@
 CREATE TABLE IF NOT EXISTS localisation_override (
     id SERIAL NOT NULL,
-    namespace VARCHAR(100) NOT NULL,
+    namespace VARCHAR(100),
     localisation_key VARCHAR(200) NOT NULL,
     locale CHAR(2) NOT NULL,
     localisation_value TEXT NOT NULL,

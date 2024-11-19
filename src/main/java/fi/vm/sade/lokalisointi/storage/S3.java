@@ -7,7 +7,6 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import fi.vm.sade.lokalisointi.model.CopyLocalisations;
 import fi.vm.sade.lokalisointi.model.Localisation;
 import fi.vm.sade.lokalisointi.model.OphEnvironment;
-import fi.vm.sade.valinta.dokumenttipalvelu.Dokumenttipalvelu;
 import fi.vm.sade.valinta.dokumenttipalvelu.dto.ObjectEntity;
 import fi.vm.sade.valinta.dokumenttipalvelu.dto.ObjectMetadata;
 import org.apache.commons.io.IOUtils;
@@ -21,8 +20,12 @@ import org.springframework.web.client.RestClient;
 import org.springframework.web.servlet.mvc.method.annotation.StreamingResponseBody;
 import org.springframework.web.util.DefaultUriBuilderFactory;
 import org.springframework.web.util.UriBuilder;
+import software.amazon.awssdk.core.ResponseInputStream;
+import software.amazon.awssdk.services.s3.model.GetObjectResponse;
+import software.amazon.awssdk.services.s3.model.HeadObjectResponse;
 
 import java.io.*;
+import java.time.Instant;
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -37,7 +40,7 @@ import static org.springframework.http.MediaType.APPLICATION_OCTET_STREAM;
 public class S3 {
   private static final Logger LOG = LoggerFactory.getLogger(S3.class);
   public static final String LOKALISOINTI_TAG = "lokalisointi";
-  private final Dokumenttipalvelu dokumenttipalvelu;
+  private final ExtendedDokumenttipalvelu dokumenttipalvelu;
 
   @Value("${lokalisointi.baseurls.pallero}")
   private String baseUrlPallero;
@@ -66,7 +69,7 @@ public class S3 {
   }
 
   @Autowired
-  public S3(final Dokumenttipalvelu dokumenttipalvelu) {
+  public S3(final ExtendedDokumenttipalvelu dokumenttipalvelu) {
     this.dokumenttipalvelu = dokumenttipalvelu;
     this.restClientBuilder =
         RestClient.builder().requestFactory(new HttpComponentsClientHttpRequestFactory());
@@ -78,7 +81,10 @@ public class S3 {
         "Finding localisations with: namespace {}, locale {}, key {}", namespace, locale, key);
     return dokumenttipalvelu.find(List.of(LOKALISOINTI_TAG)).stream()
         .flatMap(this::transformToLocalisationStream)
-        .filter(l -> namespace == null || l.getNamespace().equals(namespace))
+        .filter(
+            l ->
+                namespace == null
+                    || (l.getNamespace() != null && l.getNamespace().equals(namespace)))
         .filter(l -> locale == null || l.getLocale().equals(locale))
         .filter(l -> key == null || l.getKey().equals(key))
         .toList();
@@ -94,7 +100,7 @@ public class S3 {
                     Arrays.stream(metadata.key.split("/"))
                         .filter(s -> !s.equals(String.format("t-%s", LOKALISOINTI_TAG)))
                         .toList();
-                return splittedObjectKey.getFirst();
+                return splittedObjectKey.size() > 1 ? splittedObjectKey.getFirst() : null;
               })
           .collect(Collectors.toSet());
     }
@@ -238,12 +244,32 @@ public class S3 {
               localisationKey ->
                   new Localisation(
                       null,
-                      splittedObjectKey.getFirst(),
+                      splittedObjectKey.size() > 1 ? splittedObjectKey.getFirst() : null,
                       localisationKey,
                       splittedObjectKey.getLast().split("\\.")[0],
                       localisations.get(localisationKey)));
     } catch (final Exception ex) {
       throw new RuntimeException(ex);
     }
+  }
+
+  public ResponseInputStream<GetObjectResponse> getLocalisationFile(
+      final String namespace,
+      final String locale,
+      final String ifNoneMatch,
+      final Instant ifModifiedSince) {
+    final String key =
+        namespace != null && !namespace.isEmpty()
+            ? String.format("t-%s/%s/%s.json", LOKALISOINTI_TAG, namespace, locale)
+            : String.format("t-%s/%s.json", LOKALISOINTI_TAG, locale);
+    return dokumenttipalvelu.getObject(key, ifNoneMatch, ifModifiedSince);
+  }
+
+  public HeadObjectResponse getLocalisationFileHead(final String namespace, final String locale) {
+    final String key =
+        namespace != null && !namespace.isEmpty()
+            ? String.format("t-%s/%s/%s.json", LOKALISOINTI_TAG, namespace, locale)
+            : String.format("t-%s/%s.json", LOKALISOINTI_TAG, locale);
+    return dokumenttipalvelu.getHead(key);
   }
 }

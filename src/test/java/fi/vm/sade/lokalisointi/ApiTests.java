@@ -5,6 +5,7 @@ import fi.vm.sade.lokalisointi.configuration.DevConfiguration;
 import fi.vm.sade.lokalisointi.model.Localisation;
 import fi.vm.sade.lokalisointi.model.LocalisationOverride;
 import io.netty.handler.ssl.util.InsecureTrustManagerFactory;
+import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.MediaType;
@@ -26,6 +27,7 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
 import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.notNullValue;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
@@ -57,7 +59,7 @@ public class ApiTests extends IntegrationTestBase {
     mvc.perform(get("/api/v1/localisation").accept(MediaType.APPLICATION_JSON))
         .andExpect(status().is2xxSuccessful())
         .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-        .andExpect(jsonPath("$.length()", is(101)));
+        .andExpect(jsonPath("$.length()", is(102)));
   }
 
   @Test
@@ -198,11 +200,12 @@ public class ApiTests extends IntegrationTestBase {
   public void testSavingLocalisationOverrideOverridesPublishedLocalisation() throws Exception {
     addLocalisationOverride("example", "testi", "fi", "Testi");
     addLocalisationOverride("example", "testi", "en", "Test");
+    addLocalisationOverride(null, "root-key", "fi", "Test value");
     final MvcResult mvcResult =
         mvc.perform(get("/api/v1/localisation").accept(MediaType.APPLICATION_JSON))
             .andExpect(status().is2xxSuccessful())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-            .andExpect(jsonPath("$.length()", is(101)))
+            .andExpect(jsonPath("$.length()", is(102)))
             .andReturn();
 
     final List<Localisation> localisations =
@@ -218,6 +221,16 @@ public class ApiTests extends IntegrationTestBase {
             .findFirst();
     assertTrue(localisation.isPresent());
     assertEquals("Testi", localisation.get().getValue());
+    final Optional<Localisation> rootLocalisation =
+        localisations.stream()
+            .filter(
+                l ->
+                    l.getNamespace() == null
+                        && l.getKey().equals("root-key")
+                        && l.getLocale().equals("fi"))
+            .findFirst();
+    assertTrue(rootLocalisation.isPresent());
+    assertEquals("Test value", rootLocalisation.get().getValue());
   }
 
   @WithMockUser("1.2.246.562.24.00000000001")
@@ -228,7 +241,7 @@ public class ApiTests extends IntegrationTestBase {
         mvc.perform(get("/api/v1/localisation").accept(MediaType.APPLICATION_JSON))
             .andExpect(status().is2xxSuccessful())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-            .andExpect(jsonPath("$.length()", is(102)))
+            .andExpect(jsonPath("$.length()", is(103)))
             .andReturn();
 
     final List<Localisation> localisations =
@@ -238,7 +251,8 @@ public class ApiTests extends IntegrationTestBase {
         localisations.stream()
             .filter(
                 l ->
-                    l.getNamespace().equals("foobar")
+                    l.getNamespace() != null
+                        && l.getNamespace().equals("foobar")
                         && l.getKey().equals("fookey")
                         && l.getLocale().equals("fi"))
             .findFirst();
@@ -288,7 +302,7 @@ public class ApiTests extends IntegrationTestBase {
             .andReturn();
     final Set<String> namespaces =
         objectMapper.readValue(mvcResult.getResponse().getContentAsByteArray(), setOfStrings);
-    assertEquals(Set.of("virkailijaraamit", "example", "lokalisointi", "foofoo"), namespaces);
+    assertEquals(setOf(null, "virkailijaraamit", "example", "lokalisointi", "foofoo"), namespaces);
   }
 
   @WithMockUser("1.2.246.562.24.00000000001")
@@ -302,7 +316,7 @@ public class ApiTests extends IntegrationTestBase {
             .andReturn();
     final Set<String> namespaces =
         objectMapper.readValue(mvcResult.getResponse().getContentAsByteArray(), setOfStrings);
-    assertEquals(Set.of("example", "lokalisointi", "virkailijaraamit"), namespaces);
+    assertEquals(setOf(null, "example", "lokalisointi", "virkailijaraamit"), namespaces);
   }
 
   @Test
@@ -363,15 +377,15 @@ public class ApiTests extends IntegrationTestBase {
         mvc.perform(get("/api/v1/localisation").accept(MediaType.APPLICATION_JSON))
             .andExpect(status().is2xxSuccessful())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-            .andExpect(jsonPath("$.length()", is(101)))
+            .andExpect(jsonPath("$.length()", is(102)))
             .andReturn();
     final List<Localisation> localisations =
         objectMapper.readValue(result.getResponse().getContentAsByteArray(), listOfLocalisations);
     assertEquals(
-        Set.of("example", "lokalisointi", "lorem", "virkailijaraamit"),
+        setOf(null, "example", "lokalisointi", "lorem", "virkailijaraamit"),
         localisations.stream().map(Localisation::getNamespace).collect(Collectors.toSet()));
     assertEquals(
-        97, localisations.stream().map(Localisation::getKey).collect(Collectors.toSet()).size());
+        98, localisations.stream().map(Localisation::getKey).collect(Collectors.toSet()).size());
   }
 
   @WithMockUser("1.2.246.562.24.00000000001")
@@ -415,6 +429,57 @@ public class ApiTests extends IntegrationTestBase {
         .andExpect(status().isForbidden());
   }
 
+  @Test
+  public void testGetLocalisationInTolgeeFormat() throws Exception {
+    final MvcResult result =
+        mvc.perform(
+                get("/api/v1/tolgee/example/fi.json").accept(MediaType.APPLICATION_OCTET_STREAM))
+            .andExpect(status().is2xxSuccessful())
+            .andExpect(header().string("Cache-Control", "max-age=600, public"))
+            .andExpect(header().string("Last-Modified", notNullValue()))
+            .andExpect(header().string("eTag", notNullValue()))
+            .andExpect(content().contentType(MediaType.APPLICATION_OCTET_STREAM))
+            .andReturn();
+    final String cacheControl = result.getResponse().getHeader("Cache-Control");
+    final String eTag = result.getResponse().getHeader("eTag");
+    final String lastModified = result.getResponse().getHeader("Last-Modified");
+    mvc.perform(
+            get("/api/v1/tolgee/example/fi.json")
+                .accept(MediaType.APPLICATION_OCTET_STREAM)
+                .header("If-None-Match", eTag))
+        .andExpect(status().is(304))
+        .andExpect(header().string("Cache-Control", cacheControl))
+        .andExpect(header().string("ETag", eTag))
+        .andExpect(header().string("Last-Modified", lastModified));
+    mvc.perform(
+            get("/api/v1/tolgee/example/fi.json")
+                .accept(MediaType.APPLICATION_OCTET_STREAM)
+                .header("If-Modified-Since", lastModified))
+        .andExpect(status().is(304))
+        .andExpect(header().string("Cache-Control", cacheControl))
+        .andExpect(header().string("ETag", eTag))
+        .andExpect(header().string("Last-Modified", lastModified));
+    mvc.perform(
+            get("/api/v1/tolgee/example/fi.json")
+                .accept(MediaType.APPLICATION_OCTET_STREAM)
+                .header("If-Modified-Since", lastModified)
+                .header("If-None-Match", eTag))
+        .andExpect(status().is(304))
+        .andExpect(header().string("Cache-Control", cacheControl))
+        .andExpect(header().string("ETag", eTag))
+        .andExpect(header().string("Last-Modified", lastModified));
+  }
+
+  @Test
+  public void testGetRootLocalisationInTolgeeFormat() throws Exception {
+    mvc.perform(get("/api/v1/tolgee/fi.json").accept(MediaType.APPLICATION_OCTET_STREAM))
+        .andExpect(status().is2xxSuccessful())
+        .andExpect(header().string("Cache-Control", "max-age=600, public"))
+        .andExpect(header().string("Last-Modified", notNullValue()))
+        .andExpect(header().string("eTag", notNullValue()))
+        .andExpect(content().contentType(MediaType.APPLICATION_OCTET_STREAM));
+  }
+
   LocalisationOverride addLocalisationOverride(
       final String namespace, final String key, final String locale, final String value)
       throws Exception {
@@ -425,20 +490,30 @@ public class ApiTests extends IntegrationTestBase {
                     .contentType(MediaType.APPLICATION_JSON)
                     .content(
                         objectMapper.writeValueAsBytes(
-                            Map.of(
-                                "namespace",
-                                namespace,
-                                "key",
-                                key,
-                                "locale",
-                                locale,
-                                "value",
-                                value))))
+                            mapOf(
+                                ImmutablePair.of("namespace", namespace),
+                                ImmutablePair.of("key", key),
+                                ImmutablePair.of("locale", locale),
+                                ImmutablePair.of("value", value)))))
             .andExpect(status().is2xxSuccessful())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON))
             .andReturn();
     return objectMapper.readValue(
         result.getResponse().getContentAsByteArray(), localisationOverrideType);
+  }
+
+  @SafeVarargs
+  private <T> Set<T> setOf(final T... values) {
+    return Arrays.stream(values).collect(Collectors.toSet());
+  }
+
+  @SafeVarargs
+  private <K, V> Map<K, V> mapOf(final ImmutablePair<K, V>... pairs) {
+    final Map<K, V> map = new HashMap<>();
+    for (final ImmutablePair<K, V> pair : pairs) {
+      map.put(pair.getLeft(), pair.getRight());
+    }
+    return map;
   }
 
   final TypeReference<List<Localisation>> listOfLocalisations = new TypeReference<>() {};

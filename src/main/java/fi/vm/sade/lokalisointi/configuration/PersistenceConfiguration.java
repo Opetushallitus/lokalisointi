@@ -1,6 +1,6 @@
 package fi.vm.sade.lokalisointi.configuration;
 
-import fi.vm.sade.valinta.dokumenttipalvelu.Dokumenttipalvelu;
+import fi.vm.sade.lokalisointi.storage.ExtendedDokumenttipalvelu;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -32,9 +32,9 @@ public class PersistenceConfiguration extends AbstractJdbcConfiguration {
 
   @Bean
   @Profile({"default"})
-  public Dokumenttipalvelu dokumenttipalvelu(
+  public ExtendedDokumenttipalvelu dokumenttipalvelu(
       @Value("${aws.region}") final String region,
       @Value("${aws.bucket.name}") final String bucketName) {
-    return new Dokumenttipalvelu(region, bucketName);
+    return new ExtendedDokumenttipalvelu(region, bucketName);
   }
 }
