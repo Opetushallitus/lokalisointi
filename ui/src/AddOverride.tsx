@@ -6,39 +6,39 @@ import {
   IconButton,
   TableCell,
   TableRow,
-  TextField,
-  Tooltip
+  TextField
 } from "@mui/material"
 import {Cancel, Save} from "@mui/icons-material"
 import {OphSelect} from "@opetushallitus/oph-design-system"
 import {useTranslate} from "@tolgee/react"
+import {useSnackbar} from "notistack"
 
 interface Props {
   close: () => void,
-  showMessage: (message: React.ReactNode) => void
 }
 
-export const AddOverride: React.FC<Props> = ({close, showMessage}) => {
+export const AddOverride: React.FC<Props> = ({close}) => {
   const [availableNamespaces, setAvailableNamespaces] = useState<string[]>([])
   const [namespace, setNamespace] = useState<string | undefined>(undefined)
   const [key, setKey] = useState<string>("")
   const [locale, setLocale] = useState<string>("")
   const [value, setValue] = useState<string>("")
-  const {t: translate} = useTranslate()
+  const {t} = useTranslate()
+  const {enqueueSnackbar} = useSnackbar()
   useEffect(() => {
-    if (showMessage && translate) {
+    if (enqueueSnackbar && t) {
       fetch("/lokalisointi/api/v1/override/available-namespaces", {
         method: "GET"
       }).then(async (res) => {
         const body = await res.json()
         if (!res.ok) {
-          showMessage(translate("namespaces-could-not-be-loaded", "Nimiavaruuksia ei saatu ladattua. Yritä myöhemmin uudelleen."))
+          enqueueSnackbar(t("namespaces-could-not-be-loaded", "Nimiavaruuksia ei saatu ladattua. Yritä myöhemmin uudelleen."), {variant: "error"})
           return
         }
         setAvailableNamespaces(body)
       })
     }
-  }, [showMessage, translate])
+  }, [enqueueSnackbar, t])
   const save = () => {
     fetch("/lokalisointi/api/v1/override", {
       method: "POST",
@@ -51,9 +51,9 @@ export const AddOverride: React.FC<Props> = ({close, showMessage}) => {
       .then(async (res) => {
         const body = await res.json()
         if (!res.ok) {
-          showMessage(translate("override-save-failed", {
+          enqueueSnackbar(t("override-save-failed", {
             body: JSON.stringify(body)
-          }))
+          }), {variant: "error"})
           return
         }
         setNamespace(undefined)
@@ -68,7 +68,7 @@ export const AddOverride: React.FC<Props> = ({close, showMessage}) => {
       <TableCell></TableCell>
       <TableCell>
         <FormControl variant="filled" fullWidth>
-          <FormLabel htmlFor="namespace">{translate("column-namespace", "nimiavaruus")}</FormLabel>
+          <FormLabel htmlFor="namespace">{t("column-namespace", "nimiavaruus")}</FormLabel>
           <Autocomplete
             id="namespace"
             freeSolo
@@ -99,14 +99,14 @@ export const AddOverride: React.FC<Props> = ({close, showMessage}) => {
       </TableCell>
       <TableCell>
         <FormControl fullWidth>
-          <FormLabel htmlFor="key">{translate("column-key", "avain")}</FormLabel>
+          <FormLabel htmlFor="key">{t("column-key", "avain")}</FormLabel>
           <TextField id="key" variant="outlined" size="small" value={key}
                      onChange={(e) => setKey(e.target.value)}/>
         </FormControl>
       </TableCell>
       <TableCell>
         <FormControl fullWidth>
-          <FormLabel htmlFor="locale">{translate("column-locale", "kieli")}</FormLabel>
+          <FormLabel htmlFor="locale">{t("column-locale", "kieli")}</FormLabel>
           <OphSelect id="locale" value={locale} size="small"
                      onChange={(e) => setLocale(e.target.value)}
                      options={[
@@ -118,20 +118,16 @@ export const AddOverride: React.FC<Props> = ({close, showMessage}) => {
       </TableCell>
       <TableCell>
         <FormControl fullWidth>
-          <FormLabel htmlFor="value">{translate("column-value", "arvo")}</FormLabel>
+          <FormLabel htmlFor="value">{t("column-value", "arvo")}</FormLabel>
           <TextField id="value" value={value} multiline size="small" variant="outlined"
                      onChange={(e: ChangeEvent<HTMLTextAreaElement>) =>
                        setValue(e.target.value)}/>
         </FormControl>
       </TableCell>
       <TableCell colSpan={5} sx={{verticalAlign: "bottom"}}>
-        <Tooltip title={translate("save", "tallenna")}>
-          <IconButton onClick={save} disabled={!key || !locale || !value}
-                      color="primary"><Save/></IconButton>
-        </Tooltip>
-        <Tooltip title={translate("cancel", "peruuta")}>
-          <IconButton onClick={close}><Cancel/></IconButton>
-        </Tooltip>
+        <IconButton onClick={save} disabled={!key || !locale || !value}
+                    color="primary" title={t("save", "tallenna")}><Save/></IconButton>
+        <IconButton onClick={close} title={t("cancel", "peruuta")}><Cancel/></IconButton>
       </TableCell>
     </TableRow>
   )

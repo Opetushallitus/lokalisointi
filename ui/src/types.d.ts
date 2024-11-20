@@ -14,8 +14,3 @@ export interface LocalisationOverride {
   updated: string
   updatedBy: string
 }
-
-export interface Message {
-  message: React.ReactNode
-  id: string
-}
