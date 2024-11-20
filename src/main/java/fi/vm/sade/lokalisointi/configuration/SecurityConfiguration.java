@@ -29,6 +29,7 @@ import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.context.HttpSessionSecurityContextRepository;
 import org.springframework.security.web.context.SecurityContextRepository;
+import org.springframework.security.web.savedrequest.HttpSessionRequestCache;
 
 import java.util.*;
 import java.util.stream.Stream;
@@ -151,6 +152,8 @@ public class SecurityConfiguration {
       final SecurityContextRepository securityContextRepository,
       final AuthenticationEntryPoint authenticationEntryPoint)
       throws Exception {
+    final HttpSessionRequestCache requestCache = new HttpSessionRequestCache();
+    requestCache.setMatchingRequestParameterName(null);
     http.headers(HeadersConfigurer::disable)
         .csrf(CsrfConfigurer::disable)
         .securityMatcher("/**")
@@ -163,7 +166,8 @@ public class SecurityConfiguration {
                 securityContext
                     .requireExplicitSave(true)
                     .securityContextRepository(securityContextRepository))
-        .exceptionHandling(e -> e.authenticationEntryPoint(authenticationEntryPoint));
+        .exceptionHandling(e -> e.authenticationEntryPoint(authenticationEntryPoint))
+        .requestCache(cache -> cache.requestCache(requestCache));
     return http.build();
   }
 
