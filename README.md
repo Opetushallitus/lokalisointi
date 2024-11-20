@@ -35,3 +35,5 @@ Ja itse sovellus komennolla:
 ```shell
 mvn spring-boot:run
 ```
+
+Avaa sovellus selaimessa: http://localhost:8080/lokalisointi/secured/index.html
