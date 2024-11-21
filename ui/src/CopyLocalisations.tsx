@@ -5,8 +5,6 @@ import {
   DialogContent,
   DialogContentText,
   DialogTitle,
-  FormControl,
-  FormLabel,
   Grid2 as Grid,
   IconButton,
   List,
@@ -95,7 +93,7 @@ export const CopyLocalisations: React.FC<Props> = ({uiConfig}) => {
                      loadAvailableNamespaces(value)
                    }}
                    options={uiConfig.sourceEnvironments?.map(
-                     (environment, _) => ({
+                     (environment) => ({
                        label: t(`env-${environment}`, environment),
                        value: environment
                      })

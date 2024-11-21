@@ -9,7 +9,7 @@ import {UI} from "./UI"
 import {Loading} from "./Loading"
 import {OphLanguage} from "@opetushallitus/oph-design-system"
 
-require("dayjs/locale/fi")
+import "dayjs/locale/fi"
 
 dayjs.locale("fi")
 dayjs.extend(LocalizedFormat)

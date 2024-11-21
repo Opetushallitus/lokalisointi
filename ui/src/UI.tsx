@@ -60,6 +60,7 @@ const SuccessAlert =
       </SnackbarContent>
     )
   })
+SuccessAlert.displayName = "SuccessAlert"
 const ErrorAlert =
   React.forwardRef<HTMLDivElement, AlertProps>(({id, message, ...other}, ref) => {
     return (
@@ -68,6 +69,7 @@ const ErrorAlert =
       </SnackbarContent>
     )
   })
+ErrorAlert.displayName = "ErrorAlert"
 
 export const UI: React.FC<UIProps> = ({uiConfig}) => {
   return (
