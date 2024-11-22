@@ -23,7 +23,11 @@ public abstract class ControllerBase {
     HttpMediaTypeNotAcceptableException.class,
     MethodArgumentTypeMismatchException.class
   })
-  public Map<String, ?> handleUserErrors(final Throwable ex) {
+  public Map<String, ?> handleUserErrors(final Throwable e) {
+    return parseError(e);
+  }
+
+  protected Map<String, ?> parseError(final Throwable ex) {
     return Map.of(
         "error",
         Stream.of(
