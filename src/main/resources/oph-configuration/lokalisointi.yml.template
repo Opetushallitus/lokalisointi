@@ -23,6 +23,8 @@ spring:
 lokalisointi:
   uses-ssl-proxy: true
   public-cache-max-age-minutes: 10
+tolgee:
+  slug: {{lokalisointi_tolgee_slug}}
 logging:
   level:
     root: info

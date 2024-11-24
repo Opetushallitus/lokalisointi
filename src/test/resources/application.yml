@@ -56,6 +56,7 @@ tolgee:
   baseurl: http://localhost:10080/lokalisointi/tolgee
   apikey: testkey
   projectid: 11100
+  slug: abcd
 logging:
   level:
     root: info

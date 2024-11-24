@@ -7,6 +7,7 @@ import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.filefilter.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
@@ -37,6 +38,9 @@ public class DevConfiguration {
   private static final String BUCKET_REGION = "eu-west-1";
   private static final String DEV_ACCESS_KEY_ID = "LSIAQAAAAAAVNCBMPNSG";
   private static final String DEV_SECRET_KEY = "test";
+
+  @Value("${tolgee.slug}")
+  private String tolgeeSlug;
 
   @Bean
   public ExtendedDokumenttipalvelu dokumenttipalvelu()
@@ -76,7 +80,7 @@ public class DevConfiguration {
           }
         };
 
-    addLocalisationFiles(dokumenttipalvelu, clientBuilder, BUCKET_NAME);
+    addLocalisationFiles(dokumenttipalvelu, clientBuilder, BUCKET_NAME, tolgeeSlug);
 
     return dokumenttipalvelu;
   }
@@ -84,7 +88,8 @@ public class DevConfiguration {
   public static void addLocalisationFiles(
       final Dokumenttipalvelu dokumenttipalvelu,
       final S3AsyncClientBuilder clientBuilder,
-      final String bucketName)
+      final String bucketName,
+      final String slug)
       throws FileNotFoundException {
     // recreate bucket
     try (final S3AsyncClient client = clientBuilder.build()) {
@@ -122,7 +127,7 @@ public class DevConfiguration {
                 LOG.info("Adding root localization file: {}", localeFile.getName());
                 dokumenttipalvelu
                     .putObject(
-                        String.format("t-%s/%s", LOKALISOINTI_TAG, localeFile.getName()),
+                        String.format("t-%s/%s/%s", LOKALISOINTI_TAG, slug, localeFile.getName()),
                         localeFile.getName(),
                         "application/json",
                         new FileInputStream(localeFile))
@@ -133,8 +138,8 @@ public class DevConfiguration {
                 dokumenttipalvelu
                     .putObject(
                         String.format(
-                            "t-%s/%s/%s",
-                            LOKALISOINTI_TAG, fileHandle.getName(), localeFile.getName()),
+                            "t-%s/%s/%s/%s",
+                            LOKALISOINTI_TAG, slug, fileHandle.getName(), localeFile.getName()),
                         localeFile.getName(),
                         "application/json",
                         new FileInputStream(localeFile))

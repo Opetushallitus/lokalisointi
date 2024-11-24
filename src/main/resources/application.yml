@@ -62,6 +62,7 @@ tolgee:
   baseurl: https://app.tolgee.io
   apikey: ${TOLGEE_API_KEY:none}
   projectid: 11100
+  slug: abcd
 logging:
   level:
     root: info

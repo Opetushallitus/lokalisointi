@@ -57,6 +57,9 @@ public class S3 {
   @Value("${lokalisointi.envname}")
   private String envName;
 
+  @Value("${tolgee.slug}")
+  private String tolgeeSlug;
+
   private final RestClient.Builder restClientBuilder;
 
   private String virkailijaBaseUrl(final OphEnvironment env) {
@@ -99,6 +102,7 @@ public class S3 {
                 final List<String> splittedObjectKey =
                     Arrays.stream(metadata.key.split("/"))
                         .filter(s -> !s.equals(String.format("t-%s", LOKALISOINTI_TAG)))
+                        .filter(s -> !s.equals(tolgeeSlug))
                         .toList();
                 return splittedObjectKey.size() > 1 ? splittedObjectKey.getFirst() : null;
               })
@@ -179,8 +183,9 @@ public class S3 {
           fos.close();
           final String key =
               namespace != null
-                  ? String.format("t-%s/%s/%s", LOKALISOINTI_TAG, namespace, localeFilename)
-                  : String.format("t-%s/%s", LOKALISOINTI_TAG, localeFilename);
+                  ? String.format(
+                      "t-%s/%s/%s/%s", LOKALISOINTI_TAG, tolgeeSlug, namespace, localeFilename)
+                  : String.format("t-%s/%s/%s", LOKALISOINTI_TAG, tolgeeSlug, localeFilename);
           dokumenttipalvelu
               .putObject(key, localeFilename, "application/json", new FileInputStream(tempFile))
               .join();
@@ -190,7 +195,7 @@ public class S3 {
       if (copyRequest.getNamespaces() == null || copyRequest.getNamespaces().isEmpty()) {
         final Set<String> newEntries =
             entries.stream()
-                .map(e -> String.format("t-%s/%s", LOKALISOINTI_TAG, e.getName()))
+                .map(e -> String.format("t-%s/%s/%s", LOKALISOINTI_TAG, tolgeeSlug, e.getName()))
                 .collect(Collectors.toSet());
         final Set<String> keysToBeDeleted =
             new HashSet<>(
@@ -217,6 +222,7 @@ public class S3 {
                   final List<String> splittedObjectKey =
                       Arrays.stream(metadata.key.split("/"))
                           .filter(s -> !s.equals(String.format("t-%s", LOKALISOINTI_TAG)))
+                          .filter(s -> !s.equals(tolgeeSlug))
                           .toList();
                   return namespaces.contains(
                       splittedObjectKey.size() > 1 ? splittedObjectKey.getFirst() : null);
@@ -229,6 +235,7 @@ public class S3 {
         final List<String> splittedObjectKey =
             Arrays.stream(metadata.key.split("/"))
                 .filter(s -> !s.equals(String.format("t-%s", LOKALISOINTI_TAG)))
+                .filter(s -> !s.equals(tolgeeSlug))
                 .toList();
         final String namespace = splittedObjectKey.size() > 1 ? splittedObjectKey.getFirst() : null;
         final String filename = splittedObjectKey.getLast();
@@ -249,6 +256,7 @@ public class S3 {
       final List<String> splittedObjectKey =
           Arrays.stream(metadata.key.split("/"))
               .filter(s -> !s.equals(String.format("t-%s", LOKALISOINTI_TAG)))
+              .filter(s -> !s.equals(tolgeeSlug))
               .toList();
 
       final TypeReference<Map<String, String>> typeRef = new TypeReference<>() {};
@@ -268,22 +276,24 @@ public class S3 {
   }
 
   public ResponseInputStream<GetObjectResponse> getLocalisationFile(
+      final String slug,
       final String namespace,
       final String locale,
       final String ifNoneMatch,
       final Instant ifModifiedSince) {
     final String key =
         namespace != null && !namespace.isEmpty()
-            ? String.format("t-%s/%s/%s.json", LOKALISOINTI_TAG, namespace, locale)
-            : String.format("t-%s/%s.json", LOKALISOINTI_TAG, locale);
+            ? String.format("t-%s/%s/%s/%s.json", LOKALISOINTI_TAG, slug, namespace, locale)
+            : String.format("t-%s/%s/%s.json", LOKALISOINTI_TAG, slug, locale);
     return dokumenttipalvelu.getObject(key, ifNoneMatch, ifModifiedSince);
   }
 
-  public HeadObjectResponse getLocalisationFileHead(final String namespace, final String locale) {
+  public HeadObjectResponse getLocalisationFileHead(
+      final String slug, final String namespace, final String locale) {
     final String key =
         namespace != null && !namespace.isEmpty()
-            ? String.format("t-%s/%s/%s.json", LOKALISOINTI_TAG, namespace, locale)
-            : String.format("t-%s/%s.json", LOKALISOINTI_TAG, locale);
+            ? String.format("t-%s/%s/%s/%s.json", LOKALISOINTI_TAG, slug, namespace, locale)
+            : String.format("t-%s/%s/%s.json", LOKALISOINTI_TAG, slug, locale);
     return dokumenttipalvelu.getHead(key);
   }
 }
