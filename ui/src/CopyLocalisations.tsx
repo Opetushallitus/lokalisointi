@@ -45,7 +45,7 @@ export const CopyLocalisations: React.FC<Props> = ({uiConfig}) => {
         enqueueSnackbar(t("namespaces-could-not-be-loaded", "Nimiavaruuksia ei saatu ladattua. Yritä myöhemmin uudelleen."), {variant: "error"})
         return
       }
-      setAvailableNamespaces(body)
+      setAvailableNamespaces(body.sort())
     }).catch(err => console.log(`Error fetching available namespaces: ${err}`))
   }
 
@@ -84,9 +84,15 @@ export const CopyLocalisations: React.FC<Props> = ({uiConfig}) => {
         <OphTypography
           variant="h2">{t("copy-translations-title", "Käännösten kopiointi ympäristöstä toiseen")}</OphTypography>
       </Grid>
-      <Grid size={4}>
+      <Grid size={12}>
         <OphTypography variant="label">{t("copy-source", "lähdeympäristö")}</OphTypography>
+        <OphTypography variant="body2">
+          {t("copy-source-help", "käännökset kopioidaan lähdeympäristöstä ympäristöön {target}", {
+            target: !!uiConfig.currentEnvironment ? t(`env-${uiConfig.currentEnvironment}`, uiConfig.currentEnvironment) : "-"
+          })}
+        </OphTypography>
         <OphSelect id="copy-source" value={source} fullWidth size="small"
+                   sx={theme => ({mt: theme.spacing(0.5)})}
                    onChange={(e) => {
                      const value = e.target.value
                      setSource(value)
@@ -98,36 +104,29 @@ export const CopyLocalisations: React.FC<Props> = ({uiConfig}) => {
                        value: environment
                      })
                    ) ?? []}/>
-        <OphTypography variant="body2">
-          {t("copy-source-help", "käännökset kopioidaan lähdeympäristöstä ympäristöön {target}", {
-            target: !!uiConfig.currentEnvironment ? t(`env-${uiConfig.currentEnvironment}`, uiConfig.currentEnvironment) : "-"
-          })}
-        </OphTypography>
       </Grid>
-      <Grid size={4}>
+      <Grid size={12}>
         <OphTypography variant="label">
           {t("copy-namespaces", "Kopioitavat nimiavaruudet")}
         </OphTypography>
-        <OphButton fullWidth variant="outlined" disabled={!availableNamespaces} size="large"
-                   onClick={() => setChooseNamespacesModalOpen(true)}>
-          {t("choose-namespaces", "Valitse")}
-        </OphButton>
         {selectedNamespaces.length > 0 ? (
-          <OphTypography component="div" variant="body2" sx={theme => ({mt: theme.spacing(1.25)})}>
+          <OphTypography component="div" variant="body2">
             {t("chosen-namespaces", "Valittuna {namespaces}", {
               namespaces: selectedNamespaces.join(", ")
             })}
           </OphTypography>
-        ) : <OphTypography component="div" variant="body2"
-                           sx={theme => ({mt: theme.spacing(1.25)})}>
+        ) : <OphTypography component="div" variant="body2">
           {t("default-all-namespaces", "Oletuksena valittuna on kaikki nimiavaruudet")}
         </OphTypography>}
+        <OphButton fullWidth variant="outlined" disabled={!availableNamespaces} size="large"
+                   onClick={() => setChooseNamespacesModalOpen(true)} sx={theme => ({mt: theme.spacing(0.5)})}>
+          {t("choose-namespaces", "Valitse")}
+        </OphButton>
       </Grid>
-      <Grid size={4}>
+      <Grid size={12} display="flex" justifyContent="end" flexDirection="column">
         <OphButton fullWidth variant="contained" onClick={copy} color="primary" size="large"
                    disabled={!source || !availableNamespaces}
-                   startIcon={<ContentCopy/>}
-                   sx={(theme) => ({mt: theme.spacing(3)})}>
+                   startIcon={<ContentCopy/>}>
           {t("copy", "Kopioi")}
         </OphButton>
       </Grid>

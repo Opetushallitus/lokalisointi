@@ -20,30 +20,38 @@ interface ContentProps {
 const Content: React.FC<ContentProps> = ({uiConfig}) => {
   const {t} = useTranslate()
   return (
-    <Container maxWidth="xl" sx={theme => ({mt: theme.spacing(4)})}>
-      <Paper elevation={0} sx={theme => ({p: theme.spacing(4)})}>
-        <Grid container spacing={3}>
-          <Grid size={12}>
-            <OphTypography variant="h2">{t("main-title", "Käännösten hallinta")}</OphTypography>
-          </Grid>
-          <Grid size={8}>
-            <OphTypography
-              variant="body1">{t("general-info-text", "Käännöksiä lisätään, muokataan ja poistetaan Tolgeessa, ulkoisessa käännöstenhallintapalvelussa. Tolgee julkaisee käännöstiedostot testiympäristöön, josta ne kopioidaan muihin ympäristöihin alla olevan kopiointitoiminnon avulla.")}</OphTypography>
-          </Grid>
-          <Grid size={4}>
-            <Button href="https://app.tolgee.io" variant="contained" color="primary" fullWidth
-                    target="_blank" startIcon={<OpenInNewIcon/>}>
-              {t("edit-translations", "Muokkaa käännöksiä")}
-            </Button>
-          </Grid>
+    <Container maxWidth="xl">
+      <Grid container spacing={4} sx={theme => ({mt: theme.spacing(4)})}>
+        <Grid size={{sm: 12, md: 7}}>
+          <Paper elevation={0} sx={theme => ({p: theme.spacing(4)})}>
+            <Grid container spacing={3}>
+              <Grid size={12}>
+                <OphTypography variant="h2">{t("main-title", "Käännösten hallinta")}</OphTypography>
+              </Grid>
+              <Grid size={12}>
+                <OphTypography
+                  variant="body1">{t("general-info-text", "Käännöksiä lisätään, muokataan ja poistetaan Tolgeessa, ulkoisessa käännöstenhallintapalvelussa. Tolgee julkaisee käännöstiedostot testiympäristöön, josta ne kopioidaan muihin ympäristöihin alla olevan kopiointitoiminnon avulla.")}</OphTypography>
+              </Grid>
+              <Grid size={12}>
+                <Button href="https://app.tolgee.io" variant="contained" color="primary"
+                        target="_blank" startIcon={<OpenInNewIcon/>}>
+                  {t("edit-translations", "Muokkaa käännöksiä")}
+                </Button>
+              </Grid>
+            </Grid>
+          </Paper>
         </Grid>
-      </Paper>
-      <Paper elevation={0} sx={theme => ({p: theme.spacing(4), mt: theme.spacing(4)})}>
-        <CopyLocalisations uiConfig={uiConfig}/>
-      </Paper>
-      <Paper elevation={0} sx={theme => ({p: theme.spacing(4), mt: theme.spacing(4)})}>
-        <LocalisationOverrides/>
-      </Paper>
+        <Grid size={{sm: 12, md: 5}}>
+          <Paper elevation={0} sx={theme => ({p: theme.spacing(4)})}>
+            <CopyLocalisations uiConfig={uiConfig}/>
+          </Paper>
+        </Grid>
+        <Grid size={12}>
+          <Paper elevation={0} sx={theme => ({p: theme.spacing(4)})}>
+            <LocalisationOverrides/>
+          </Paper>
+        </Grid>
+      </Grid>
     </Container>
   )
 }
