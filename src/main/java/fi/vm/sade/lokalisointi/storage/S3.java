@@ -83,12 +83,13 @@ public class S3 {
     LOG.debug(
         "Finding localisations with: namespace {}, locale {}, key {}", namespace, locale, key);
     return dokumenttipalvelu.find(List.of(LOKALISOINTI_TAG)).stream()
-        .flatMap(this::transformToLocalisationStream)
         .filter(
-            l ->
+            o ->
                 namespace == null
-                    || (l.getNamespace() != null && l.getNamespace().equals(namespace)))
-        .filter(l -> locale == null || l.getLocale().equals(locale))
+                    || o.key.startsWith(
+                        String.format("t-%s/%s/%s/", LOKALISOINTI_TAG, tolgeeSlug, namespace)))
+        .filter(o -> locale == null || o.key.endsWith(String.format("/%s.json", locale)))
+        .flatMap(this::transformToLocalisationStream)
         .filter(l -> key == null || l.getKey().equals(key))
         .toList();
   }
