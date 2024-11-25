@@ -8,6 +8,8 @@ Lokalisointipalvelun roolit
 
 * toimii Tolgee Cloudin julkaisemien lokalisointitiedostojen jakelijana Opintopolun "vanhassa" formaatissa
     * Tolgee julkaisee lokalisointitiedostot QA:n S3:een
+* Julkaisee myös Tolgee-formaatin mukaiset lokalisointitiedostot polussa /lokalisointi/tolgee/{slug}[/{namespace}]
+  /{locale}.json
 * mahdollistaa lokalisointitiedostojen kopioinnin eri ympäristöjen välillä
 * mahdollistaa ympäristökohtaisten "yliajojen" tallentamisen
 

@@ -26,9 +26,13 @@ import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.concurrent.CompletionException;
 
+/**
+ * Publishes localisation files in Tolgee format. In the future, can be replaced by configuring
+ * CloudFront to point directly to S3 for Tolgee localisation files.
+ */
 @Tag(name = "tolgee", description = "Get localisations in Tolgee format")
 @RestController
-@RequestMapping("/api/v1/tolgee")
+@RequestMapping("/tolgee")
 public class TolgeeController extends ControllerBase {
   private static final Logger LOG = LoggerFactory.getLogger(TolgeeController.class);
   private final S3 s3;

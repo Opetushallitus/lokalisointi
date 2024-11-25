@@ -442,9 +442,7 @@ public class ApiTests extends IntegrationTestBase {
   @Test
   public void testGetLocalisationInTolgeeFormat() throws Exception {
     final MvcResult result =
-        mvc.perform(
-                get("/api/v1/tolgee/abcd/example/fi.json")
-                    .accept(MediaType.APPLICATION_OCTET_STREAM))
+        mvc.perform(get("/tolgee/abcd/example/fi.json").accept(MediaType.APPLICATION_OCTET_STREAM))
             .andExpect(status().is2xxSuccessful())
             .andExpect(header().string("Cache-Control", "max-age=600, public"))
             .andExpect(header().string("Last-Modified", notNullValue()))
@@ -455,7 +453,7 @@ public class ApiTests extends IntegrationTestBase {
     final String eTag = result.getResponse().getHeader("eTag");
     final String lastModified = result.getResponse().getHeader("Last-Modified");
     mvc.perform(
-            get("/api/v1/tolgee/abcd/example/fi.json")
+            get("/tolgee/abcd/example/fi.json")
                 .accept(MediaType.APPLICATION_OCTET_STREAM)
                 .header("If-None-Match", eTag))
         .andExpect(status().is(304))
@@ -463,7 +461,7 @@ public class ApiTests extends IntegrationTestBase {
         .andExpect(header().string("ETag", eTag))
         .andExpect(header().string("Last-Modified", lastModified));
     mvc.perform(
-            get("/api/v1/tolgee/abcd/example/fi.json")
+            get("/tolgee/abcd/example/fi.json")
                 .accept(MediaType.APPLICATION_OCTET_STREAM)
                 .header("If-Modified-Since", lastModified))
         .andExpect(status().is(304))
@@ -471,7 +469,7 @@ public class ApiTests extends IntegrationTestBase {
         .andExpect(header().string("ETag", eTag))
         .andExpect(header().string("Last-Modified", lastModified));
     mvc.perform(
-            get("/api/v1/tolgee/abcd/example/fi.json")
+            get("/tolgee/abcd/example/fi.json")
                 .accept(MediaType.APPLICATION_OCTET_STREAM)
                 .header("If-Modified-Since", lastModified)
                 .header("If-None-Match", eTag))
@@ -483,7 +481,7 @@ public class ApiTests extends IntegrationTestBase {
 
   @Test
   public void testGetRootLocalisationInTolgeeFormat() throws Exception {
-    mvc.perform(get("/api/v1/tolgee/abcd/fi.json").accept(MediaType.APPLICATION_OCTET_STREAM))
+    mvc.perform(get("/tolgee/abcd/fi.json").accept(MediaType.APPLICATION_OCTET_STREAM))
         .andExpect(status().is2xxSuccessful())
         .andExpect(header().string("Cache-Control", "max-age=600, public"))
         .andExpect(header().string("Last-Modified", notNullValue()))
