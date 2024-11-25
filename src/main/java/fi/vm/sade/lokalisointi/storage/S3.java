@@ -261,16 +261,18 @@ public class S3 {
               .toList();
 
       final TypeReference<Map<String, String>> typeRef = new TypeReference<>() {};
-      final Map<String, String> localisations = mapper.readValue(objectEntity.entity, typeRef);
-      return localisations.keySet().stream()
-          .map(
-              localisationKey ->
-                  new Localisation(
-                      null,
-                      splittedObjectKey.size() > 1 ? splittedObjectKey.getFirst() : null,
-                      localisationKey,
-                      splittedObjectKey.getLast().split("\\.")[0],
-                      localisations.get(localisationKey)));
+      try (final InputStreamReader reader = new InputStreamReader(objectEntity.entity)) {
+        final Map<String, String> localisations = mapper.readValue(reader, typeRef);
+        return localisations.keySet().stream()
+            .map(
+                localisationKey ->
+                    new Localisation(
+                        null,
+                        splittedObjectKey.size() > 1 ? splittedObjectKey.getFirst() : null,
+                        localisationKey,
+                        splittedObjectKey.getLast().split("\\.")[0],
+                        localisations.get(localisationKey)));
+      }
     } catch (final Exception ex) {
       throw new RuntimeException(ex);
     }
