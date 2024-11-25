@@ -24,6 +24,7 @@ spring:
     out-of-order: false
     # Only for initial production release, set false afterward
     baseline-on-migrate: false
+    validate-on-migrate: false
   management:
     endpoints:
       enabled-by-default: false
