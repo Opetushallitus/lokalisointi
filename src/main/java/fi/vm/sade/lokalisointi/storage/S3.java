@@ -12,6 +12,7 @@ import fi.vm.sade.valinta.dokumenttipalvelu.dto.ObjectMetadata;
 import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
@@ -37,7 +38,7 @@ import static org.springframework.http.MediaType.APPLICATION_JSON;
 import static org.springframework.http.MediaType.APPLICATION_OCTET_STREAM;
 
 @Repository
-public class S3 {
+public class S3 implements InitializingBean {
   private static final Logger LOG = LoggerFactory.getLogger(S3.class);
   public static final String LOKALISOINTI_TAG = "lokalisointi";
   private final ExtendedDokumenttipalvelu dokumenttipalvelu;
@@ -69,6 +70,11 @@ public class S3 {
       case hahtuva -> baseUrlHahtuva;
       case sade -> baseUrlSade;
     };
+  }
+
+  @Override
+  public void afterPropertiesSet() throws Exception {
+    LOG.info("tolgeeSlug: {}", tolgeeSlug);
   }
 
   @Autowired
