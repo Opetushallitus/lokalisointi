@@ -1,0 +1,6 @@
+{
+  "projectId":11100,
+  "format": "JSON_TOLGEE",
+  "patterns": ["src/**/*.tsx"],
+  "defaultNamespace": "lokalisointi"
+}

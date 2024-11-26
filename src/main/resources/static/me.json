@@ -1,0 +1,14 @@
+{
+  "uid": "testitestinen",
+  "oid": "1.2.246.562.24.10000000001",
+  "firstName": "Testi",
+  "lastName": "Testinen",
+  "groups": [
+    "APP_LOKALISOINTI",
+    "APP_LOKALISOINTI_CRUD",
+    "APP_LOKALISOINTI_CRUD_1.2.246.562.10.00000000001",
+    "LANG_fi",
+    "VIRKAILIJA"
+  ],
+  "lang": "fi"
+}

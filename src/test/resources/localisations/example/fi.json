@@ -1,0 +1,5 @@
+{
+  "create.item": "Luo esine",
+  "delete.item": "Poista esine",
+  "testi": "Arvo '{{actual}}' ei ole sallittu. Sallitut arvot: {{expected}}"
+}
