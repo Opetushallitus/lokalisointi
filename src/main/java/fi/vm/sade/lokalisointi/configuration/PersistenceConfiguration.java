@@ -15,12 +15,14 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.data.jdbc.repository.config.AbstractJdbcConfiguration;
 import org.springframework.data.jdbc.repository.config.EnableJdbcRepositories;
 import org.springframework.data.relational.core.mapping.event.RelationalEvent;
+import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
 @EnableJdbcRepositories
 @EnableTransactionManagement
 @EnableCaching
+@EnableScheduling
 public class PersistenceConfiguration extends AbstractJdbcConfiguration {
   private static final Logger LOG = LoggerFactory.getLogger(PersistenceConfiguration.class);
 

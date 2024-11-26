@@ -46,6 +46,7 @@ lokalisointi:
   uses-ssl-proxy: false
   disable-same-site-cookie: false
   public-cache-max-age-minutes: 10
+  find-cache-ttl-ms: 600000
   baseurls:
     pallero: https://virkalija.testiopintopolku.fi
     untuva: http://localhost:10080/lokalisointi
