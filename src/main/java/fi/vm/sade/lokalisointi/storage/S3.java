@@ -9,7 +9,6 @@ import fi.vm.sade.lokalisointi.model.Localisation;
 import fi.vm.sade.lokalisointi.model.OphEnvironment;
 import fi.vm.sade.valinta.dokumenttipalvelu.dto.ObjectEntity;
 import fi.vm.sade.valinta.dokumenttipalvelu.dto.ObjectMetadata;
-import lombok.Getter;
 import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,7 +22,6 @@ import org.springframework.web.servlet.mvc.method.annotation.StreamingResponseBo
 import org.springframework.web.util.DefaultUriBuilderFactory;
 import org.springframework.web.util.UriBuilder;
 import software.amazon.awssdk.core.ResponseInputStream;
-import software.amazon.awssdk.core.exception.SdkException;
 import software.amazon.awssdk.services.s3.model.GetObjectResponse;
 import software.amazon.awssdk.services.s3.model.HeadObjectResponse;
 
@@ -92,7 +90,7 @@ public class S3 implements InitializingBean {
       final String namespace, final String locale, final String key) {
     LOG.debug(
         "Finding localisations with: namespace {}, locale {}, key {}", namespace, locale, key);
-    return dokumenttipalvelu.find(List.of(LOKALISOINTI_TAG)).parallelStream()
+    return dokumenttipalvelu.cachedFind(List.of(LOKALISOINTI_TAG)).parallelStream()
         .filter(
             o ->
                 namespace == null
@@ -107,7 +105,7 @@ public class S3 implements InitializingBean {
   public Set<String> availableNamespaces(final OphEnvironment source) {
     if (source == null) {
       // if source is not given, return namespaces from this environment
-      return dokumenttipalvelu.find(List.of(LOKALISOINTI_TAG)).stream()
+      return dokumenttipalvelu.cachedFind(List.of(LOKALISOINTI_TAG)).stream()
           .map(
               metadata -> {
                 final List<String> splittedObjectKey =
@@ -193,7 +191,7 @@ public class S3 implements InitializingBean {
           }
           fos.close();
           final String key =
-              namespace != null
+              namespace != null && !namespace.isEmpty()
                   ? String.format(
                       "t-%s/%s/%s/%s", LOKALISOINTI_TAG, tolgeeSlug, namespace, localeFilename)
                   : String.format("t-%s/%s/%s", LOKALISOINTI_TAG, tolgeeSlug, localeFilename);
@@ -251,7 +249,9 @@ public class S3 implements InitializingBean {
         final String namespace = splittedObjectKey.size() > 1 ? splittedObjectKey.getFirst() : null;
         final String filename = splittedObjectKey.getLast();
         final String entryName =
-            namespace != null ? String.format("%s/%s", namespace, filename) : filename;
+            namespace != null && !namespace.isEmpty()
+                ? String.format("%s/%s", namespace, filename)
+                : filename;
         out.putNextEntry(new ZipEntry(entryName));
         IOUtils.copy(objectEntity.entity, out);
         out.closeEntry();
@@ -260,30 +260,9 @@ public class S3 implements InitializingBean {
     };
   }
 
-  protected Retryable<ObjectEntity> getS3Object(final String key) {
-    try {
-      return Retryable.of(dokumenttipalvelu.get(key));
-    } catch (final RuntimeException e) {
-      final Throwable ex = e.getCause() != null ? e.getCause() : e;
-      if (ex instanceof SdkException sdkException && sdkException.retryable()) {
-        return Retryable.retryable();
-      }
-      throw e;
-    }
-  }
-
   protected Stream<Localisation> transformToLocalisationStream(final ObjectMetadata metadata) {
     try {
-      final int maxRetries = 2;
-      int retryCount = 0;
-      Retryable<ObjectEntity> s3Object = getS3Object(metadata.key);
-      while (retryCount++ < maxRetries && s3Object.isRetryable()) {
-        s3Object = getS3Object(metadata.key);
-      }
-      final ObjectEntity objectEntity = s3Object.getObject();
-      if (objectEntity == null) {
-        throw new RuntimeException("Could not retrieve object with key %s".formatted(metadata.key));
-      }
+      final ObjectEntity objectEntity = dokumenttipalvelu.get(metadata.key);
 
       final List<String> splittedObjectKey =
           Arrays.stream(metadata.key.split("/"))
@@ -329,24 +308,5 @@ public class S3 implements InitializingBean {
             ? String.format("t-%s/%s/%s/%s.json", LOKALISOINTI_TAG, slug, namespace, locale)
             : String.format("t-%s/%s/%s.json", LOKALISOINTI_TAG, slug, locale);
     return dokumenttipalvelu.getHead(key);
-  }
-
-  @Getter
-  protected static class Retryable<T> {
-    private final T object;
-    private final boolean retryable;
-
-    private Retryable(final T t, final boolean retryable) {
-      this.object = t;
-      this.retryable = retryable;
-    }
-
-    public static <T> Retryable<T> of(final T object) {
-      return new Retryable<>(object, false);
-    }
-
-    public static <T> Retryable<T> retryable() {
-      return new Retryable<>(null, true);
-    }
   }
 }

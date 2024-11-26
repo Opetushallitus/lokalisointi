@@ -26,10 +26,6 @@ import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.concurrent.CompletionException;
 
-/**
- * Publishes localisation files in Tolgee format. In the future, can be replaced by configuring
- * CloudFront to point directly to S3 for Tolgee localisation files.
- */
 @Tag(name = "tolgee", description = "Get localisations in Tolgee format")
 @RestController
 @RequestMapping("/tolgee")

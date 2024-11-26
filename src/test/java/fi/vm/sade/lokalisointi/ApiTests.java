@@ -8,7 +8,9 @@ import io.netty.handler.ssl.util.InsecureTrustManagerFactory;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cache.CacheManager;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MvcResult;
@@ -37,6 +39,8 @@ public class ApiTests extends IntegrationTestBase {
   @Value("${tolgee.slug}")
   private String tolgeeSlug;
 
+  @Autowired private CacheManager cacheManager;
+
   @BeforeEach
   public void reset() throws IOException {
     final S3AsyncClientBuilder clientBuilder =
@@ -57,6 +61,12 @@ public class ApiTests extends IntegrationTestBase {
     DevConfiguration.addLocalisationFiles(
         dokumenttipalvelu, clientBuilder, BUCKET_NAME, tolgeeSlug);
     database.deleteAllOverrides();
+    cacheManager
+        .getCacheNames()
+        .forEach(
+            name -> {
+              cacheManager.getCache(name).clear();
+            });
   }
 
   @Test
