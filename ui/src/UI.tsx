@@ -42,7 +42,7 @@ const Content: React.FC<ContentProps> = ({uiConfig}) => {
           </Paper>
         </Grid>
         <Grid size={{sm: 12, md: 5}}>
-          <Paper elevation={0} sx={theme => ({p: theme.spacing(4)})}>
+          <Paper elevation={0} sx={theme => ({p: theme.spacing(4), position: "relative"})}>
             <CopyLocalisations uiConfig={uiConfig}/>
           </Paper>
         </Grid>
