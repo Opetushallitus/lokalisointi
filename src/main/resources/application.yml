@@ -92,6 +92,7 @@ logging:
     org.apache.catalina.core.ContainerBase: trace
     fi.vm.sade.lokalisointi: debug
     fi.vm.sade.dokumenttipalvelu: warn
+    fi.vm.sade.lokalisointi.storage.ExtendedDokumenttipalvelu: warn
 
 # TODO siirrä nämä templateen
 host:

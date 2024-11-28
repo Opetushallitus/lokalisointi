@@ -58,6 +58,6 @@ public class ExtendedDokumenttipalvelu extends Dokumenttipalvelu {
   @CacheEvict(value = "find", allEntries = true)
   @Scheduled(fixedRateString = "${lokalisointi.find-cache-ttl-ms}")
   public void emptyFindCache() {
-    LOG.info("Emptying find cache");
+    LOG.debug("Emptying find cache");
   }
 }
