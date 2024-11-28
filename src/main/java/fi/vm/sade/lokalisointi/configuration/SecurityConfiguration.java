@@ -6,7 +6,9 @@ import org.apereo.cas.client.validation.Cas20ProxyTicketValidator;
 import org.apereo.cas.client.validation.TicketValidator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
@@ -23,6 +25,7 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AuthorizeHttpRequestsConfigurer;
+import org.springframework.security.config.annotation.web.configurers.CorsConfigurer;
 import org.springframework.security.config.annotation.web.configurers.CsrfConfigurer;
 import org.springframework.security.config.annotation.web.configurers.HeadersConfigurer;
 import org.springframework.security.web.AuthenticationEntryPoint;
@@ -30,6 +33,8 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.context.HttpSessionSecurityContextRepository;
 import org.springframework.security.web.context.SecurityContextRepository;
 import org.springframework.security.web.savedrequest.HttpSessionRequestCache;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import java.util.*;
 import java.util.stream.Stream;
@@ -38,16 +43,29 @@ import java.util.stream.Stream;
 @Configuration
 @EnableMethodSecurity(securedEnabled = true)
 @EnableWebSecurity
-public class SecurityConfiguration {
+public class SecurityConfiguration implements InitializingBean {
   private static final Logger LOG = LoggerFactory.getLogger(SecurityConfiguration.class);
   private final CasProperties casProperties;
   private final Environment environment;
+
+  @Value("${lokalisointi.cors.allow-origin}")
+  private String allowOrigin;
+
+  private String[] allowOrigins = {};
 
   @Autowired
   public SecurityConfiguration(final CasProperties casProperties, final Environment environment) {
     this.casProperties = casProperties;
     this.environment = environment;
     LOG.info("CAS props: {}", casProperties);
+  }
+
+  @Override
+  public void afterPropertiesSet() throws Exception {
+    if (allowOrigin != null) {
+      allowOrigins = Arrays.stream(allowOrigin.split(",")).map(String::trim).toArray(String[]::new);
+      LOG.info("Allow origins: {}", Arrays.toString(allowOrigins));
+    }
   }
 
   @Bean
@@ -145,6 +163,34 @@ public class SecurityConfiguration {
     };
   }
 
+  public static Customizer<CorsConfigurer<HttpSecurity>> getCorsConfigurerCustomizer(
+      final String[] allowOrigins) {
+    return httpSecurityCorsConfigurer -> {
+      final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+      final CorsConfiguration config = new CorsConfiguration();
+      config.setAllowedOrigins(Arrays.asList(allowOrigins));
+      config.setAllowCredentials(true);
+      config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS", "HEAD"));
+      config.setAllowedHeaders(
+          List.of(
+              "X-PINGOTHER",
+              "Origin",
+              "X-Requested-With",
+              "Content-Type",
+              "Accept",
+              "Caller-Id",
+              "clientSubSystemCode",
+              "CSRF",
+              "ID"));
+      config.setMaxAge(1728000L);
+
+      source.registerCorsConfiguration("/api/v1/localisation**", config);
+      source.registerCorsConfiguration("/cxf/rest/v1/localisation**", config);
+      source.registerCorsConfiguration("/tolgee/**", config);
+      httpSecurityCorsConfigurer.configurationSource(source);
+    };
+  }
+
   @Bean
   public SecurityFilterChain filterChain(
       final HttpSecurity http,
@@ -156,6 +202,7 @@ public class SecurityConfiguration {
     requestCache.setMatchingRequestParameterName(null);
     http.headers(HeadersConfigurer::disable)
         .csrf(CsrfConfigurer::disable)
+        .cors(getCorsConfigurerCustomizer(allowOrigins))
         .securityMatcher("/**")
         .authorizeHttpRequests(
             nonAuthenticatedRoutes(Collections.emptyList(), Collections.emptyList()))

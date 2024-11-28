@@ -60,6 +60,27 @@ lokalisointi:
     hahtuva: https://virkailija.hahtuvaopintopolku.fi
     sade: https://virkailija.opintopolku.fi
   envname: ${ENV_NAME:pallero}
+  cors:
+    allow-origin: |
+      https://virkailija.hahtuvaopintopolku.fi,
+      https://virkailija.opintopolku.fi,
+      https://virkailija.untuvaopintopolku.fi,
+      https://virkailija.testiopintopolku.fi,
+      https://dev.koski.opintopolku.fi,
+      https://qa.koski.testiopintopolku.fi,
+      https://extra.koski.opintopolku.fi,
+      https://valssi-qa.rahtiapp.fi,
+      https://valssi-test-1.rahtiapp.fi,
+      https://valssi-test-2.rahtiapp.fi,
+      https://valssi-test-1.2.rahtiapp.fi,
+      https://valssi-test-2.2.rahtiapp.fi,
+      https://valssi.rahtiapp.fi,
+      https://qa-valssi.karvi.fi,
+      https://qa-valssivastaus.karvi.fi,
+      https://valssi.karvi.fi,
+      https://valssivastaus.karvi.fi,
+      https://localhost:3000,
+      http://localhost:3000
 tolgee:
   baseurl: https://app.tolgee.io
   apikey: ${TOLGEE_API_KEY:none}

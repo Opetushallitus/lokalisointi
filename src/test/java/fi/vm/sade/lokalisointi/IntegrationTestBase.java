@@ -11,7 +11,11 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NonNull;
 import org.junit.jupiter.api.BeforeAll;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringBootConfiguration;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -50,6 +54,7 @@ import java.io.IOException;
 import java.time.Duration;
 import java.util.*;
 
+import static fi.vm.sade.lokalisointi.configuration.SecurityConfiguration.getCorsConfigurerCustomizer;
 import static fi.vm.sade.lokalisointi.configuration.SecurityConfiguration.nonAuthenticatedRoutes;
 import static org.testcontainers.containers.localstack.LocalStackContainer.Service.S3;
 
@@ -100,7 +105,23 @@ public abstract class IntegrationTestBase {
 
   @SpringBootConfiguration
   @EnableWebSecurity
-  static class TestConfiguration {
+  static class TestConfiguration implements InitializingBean {
+    private static final Logger LOG = LoggerFactory.getLogger(TestConfiguration.class);
+
+    @Value("${lokalisointi.cors.allow-origin}")
+    private String allowOrigin;
+
+    private String[] allowOrigins = {};
+
+    @Override
+    public void afterPropertiesSet() throws Exception {
+      if (allowOrigin != null) {
+        allowOrigins =
+            Arrays.stream(allowOrigin.split(",")).map(String::trim).toArray(String[]::new);
+        LOG.info("Allow origins: {}", Arrays.toString(allowOrigins));
+      }
+    }
+
     @Bean
     public ExtendedDokumenttipalvelu dokumenttipalvelu() {
       // re-wire dokumenttipalvelu with localstack
@@ -140,6 +161,7 @@ public abstract class IntegrationTestBase {
       return http.headers(AbstractHttpConfigurer::disable)
           .csrf(AbstractHttpConfigurer::disable)
           .securityMatcher("/**")
+          .cors(getCorsConfigurerCustomizer(allowOrigins))
           .authorizeHttpRequests(
               nonAuthenticatedRoutes(
                   List.of(

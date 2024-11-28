@@ -70,11 +70,57 @@ public class ApiTests extends IntegrationTestBase {
   }
 
   @Test
-  public void getGetLocalisationsWorksWithoutAuthentication() throws Exception {
+  public void testGetLocalisationsWorksWithoutAuthentication() throws Exception {
     mvc.perform(get("/api/v1/localisation").accept(MediaType.APPLICATION_JSON))
         .andExpect(status().is2xxSuccessful())
         .andExpect(content().contentType(MediaType.APPLICATION_JSON))
         .andExpect(jsonPath("$.length()", is(102)));
+  }
+
+  @Test
+  public void testGetLocalisationsCors() throws Exception {
+    mvc.perform(
+            options("/api/v1/localisation")
+                .accept(MediaType.APPLICATION_JSON)
+                .header("Origin", "http://localhost:3000")
+                .header("Access-Control-Request-Method", "GET")
+                .header("Access-Control-Request-Headers", "Caller-Id")
+                .header("Caller-Id", "test"))
+        .andExpect(status().is2xxSuccessful())
+        .andExpect(header().string("Access-Control-Allow-Origin", "http://localhost:3000"))
+        .andExpect(
+            header().string("Access-Control-Allow-Methods", "GET,POST,PUT,DELETE,OPTIONS,HEAD"))
+        .andExpect(header().string("Access-Control-Allow-Headers", "Caller-Id"));
+
+    mvc.perform(
+            options("/cxf/rest/v1/localisation")
+                .accept(MediaType.APPLICATION_JSON)
+                .contentType(MediaType.APPLICATION_JSON)
+                .header("Origin", "https://localhost:3000")
+                .header("Access-Control-Request-Method", "POST")
+                .header("Access-Control-Request-Headers", "X-PINGOTHER")
+                .header("X-PINGOTHER", "test"))
+        .andExpect(status().is2xxSuccessful())
+        .andExpect(header().string("Access-Control-Allow-Origin", "https://localhost:3000"))
+        .andExpect(
+            header().string("Access-Control-Allow-Methods", "GET,POST,PUT,DELETE,OPTIONS,HEAD"))
+        .andExpect(header().string("Access-Control-Allow-Headers", "X-PINGOTHER"));
+
+    mvc.perform(
+            options("/tolgee/abcd/fi.json")
+                .accept(MediaType.APPLICATION_JSON)
+                .contentType(MediaType.APPLICATION_JSON)
+                .header("Origin", "https://virkailija.testiopintopolku.fi")
+                .header("Access-Control-Request-Method", "PUT")
+                .header("Access-Control-Request-Headers", "clientSubSystemCode")
+                .header("clientSubSystemCode", "test"))
+        .andExpect(status().is2xxSuccessful())
+        .andExpect(
+            header()
+                .string("Access-Control-Allow-Origin", "https://virkailija.testiopintopolku.fi"))
+        .andExpect(
+            header().string("Access-Control-Allow-Methods", "GET,POST,PUT,DELETE,OPTIONS,HEAD"))
+        .andExpect(header().string("Access-Control-Allow-Headers", "clientSubSystemCode"));
   }
 
   @Test
