@@ -181,7 +181,7 @@ export const CopyLocalisations: React.FC<Props> = ({uiConfig}) => {
                             inputProps={{'aria-labelledby': labelId}}
                           />
                         </ListItemIcon>
-                        <ListItemText id={labelId} primary={ns}/>
+                        <ListItemText id={labelId} primary={ns || t("without-namespace", "[ilman nimiavaruutta]")}/>
                       </ListItemButton>
 
                     </ListItem>
