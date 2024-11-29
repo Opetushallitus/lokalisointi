@@ -240,21 +240,24 @@ public class S3 implements InitializingBean {
     return outputStream -> {
       final ZipOutputStream out = new ZipOutputStream(outputStream);
       for (final ObjectMetadata metadata : withMatchingNamespaces) {
-        final ObjectEntity objectEntity = dokumenttipalvelu.get(metadata.key);
-        final List<String> splittedObjectKey =
-            Arrays.stream(metadata.key.split("/"))
-                .filter(s -> !s.equals(String.format("t-%s", LOKALISOINTI_TAG)))
-                .filter(s -> !s.equals(tolgeeSlug))
-                .toList();
-        final String namespace = splittedObjectKey.size() > 1 ? splittedObjectKey.getFirst() : null;
-        final String filename = splittedObjectKey.getLast();
-        final String entryName =
-            namespace != null && !namespace.isEmpty()
-                ? String.format("%s/%s", namespace, filename)
-                : filename;
-        out.putNextEntry(new ZipEntry(entryName));
-        IOUtils.copy(objectEntity.entity, out);
-        out.closeEntry();
+        if (!metadata.key.endsWith("/")) {
+          final ObjectEntity objectEntity = dokumenttipalvelu.get(metadata.key);
+          final List<String> splittedObjectKey =
+              Arrays.stream(metadata.key.split("/"))
+                  .filter(s -> !s.equals(String.format("t-%s", LOKALISOINTI_TAG)))
+                  .filter(s -> !s.equals(tolgeeSlug))
+                  .toList();
+          final String namespace =
+              splittedObjectKey.size() > 1 ? splittedObjectKey.getFirst() : null;
+          final String filename = splittedObjectKey.getLast();
+          final String entryName =
+              namespace != null && !namespace.isEmpty()
+                  ? String.format("%s/%s", namespace, filename)
+                  : filename;
+          out.putNextEntry(new ZipEntry(entryName));
+          IOUtils.copy(objectEntity.entity, out);
+          out.closeEntry();
+        }
       }
       out.finish();
     };
