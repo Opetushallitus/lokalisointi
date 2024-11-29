@@ -41,6 +41,9 @@ springdoc:
 server:
   servlet:
     context-path: /lokalisointi
+    session:
+      cookie:
+        name: JSESSIONID
   port: 8080
   tomcat:
     threads:
