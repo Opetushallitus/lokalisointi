@@ -26,6 +26,7 @@ lokalisointi:
   find-cache-ttl-ms: 600000
 tolgee:
   slug: {{lokalisointi_tolgee_slug}}
+  apikey: {{tolgee_api_key}}
 logging:
   level:
     root: info

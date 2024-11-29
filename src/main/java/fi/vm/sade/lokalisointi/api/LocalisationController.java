@@ -108,14 +108,14 @@ public class LocalisationController extends ControllerBase implements Initializi
   @Operation(
       summary = "Create localisations",
       description =
-          "Creates new localisations. In test (master data) environment tries to import new localisation keys to Tolgee, in another environments discards updates and returns bad request.")
+          "Creates new localisations. In test environments tries to import new localisation keys to Tolgee, in production environment discards updates and returns bad request.")
   @PostMapping("/update")
   @Secured({ROLE_UPDATE, ROLE_CRUD})
   public ResponseEntity<MassUpdateResult> update(
       @RequestBody final Collection<Localisation> localisations) {
     final MassUpdateResult result = new MassUpdateResult();
     result.setStatus("OK");
-    if (envName != null && !OphEnvironment.valueOf(envName).equals(OphEnvironment.pallero)) {
+    if (envName != null && OphEnvironment.valueOf(envName).equals(OphEnvironment.sade)) {
       result.setStatus("Failure");
       result.setNotModified(localisations.size());
       return ResponseEntity.badRequest().body(result);
