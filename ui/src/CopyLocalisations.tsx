@@ -73,12 +73,13 @@ export const CopyLocalisations: React.FC<Props> = ({uiConfig}) => {
         enqueueSnackbar(t("copy-translations-failed", {
           body: JSON.stringify(body)
         }), {variant: "error"})
+        setLoading(false)
         return
       }
       setSource("")
       setAvailableNamespaces(undefined)
       setSelectedNamespaces([])
-      enqueueSnackbar(JSON.stringify(res), {variant: "success"})
+      enqueueSnackbar(t("copy-translations-ok", "Kopiointi tehty"), {variant: "success"})
       setLoading(false)
     })
   }
