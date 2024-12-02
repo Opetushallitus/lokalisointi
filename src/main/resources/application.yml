@@ -106,7 +106,7 @@ host:
 cas-service:
   # https://${host.virkailija}/lokalisointi
   service: http://localhost:8080/lokalisointi
-  send-renew: true
+  send-renew: false
   key: lokalisointi
 cas:
   url: https://${host.cas}/cas

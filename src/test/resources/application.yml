@@ -89,7 +89,7 @@ host:
   virkailija: virkailija.testiopintopolku.fi
 cas-service:
   service: http://localhost:8080/lokalisointi
-  send-renew: true
+  send-renew: false
   key: lokalisointi
 cas:
   url: https://${host.cas}/cas
