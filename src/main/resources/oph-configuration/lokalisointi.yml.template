@@ -3,7 +3,7 @@ host:
   virkailija: {{host_virkailija}}
 cas-service:
   service: https://${host.virkailija}/lokalisointi
-  send-renew: true
+  send-renew: false
   key: lokalisointi
 cas:
   url: https://${host.cas}/cas
