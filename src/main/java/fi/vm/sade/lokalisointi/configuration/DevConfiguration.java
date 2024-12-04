@@ -3,11 +3,17 @@ package fi.vm.sade.lokalisointi.configuration;
 import fi.vm.sade.lokalisointi.storage.ExtendedDokumenttipalvelu;
 import fi.vm.sade.valinta.dokumenttipalvelu.Dokumenttipalvelu;
 import io.netty.handler.ssl.util.InsecureTrustManagerFactory;
+import org.apache.catalina.valves.rewrite.RewriteValve;
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.IOUtils;
 import org.apache.commons.io.filefilter.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory;
+import org.springframework.boot.web.server.WebServerFactory;
+import org.springframework.boot.web.server.WebServerFactoryCustomizer;
+import org.springframework.boot.web.servlet.server.ConfigurableServletWebServerFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
@@ -20,11 +26,10 @@ import software.amazon.awssdk.services.s3.S3AsyncClientBuilder;
 import software.amazon.awssdk.services.s3.model.*;
 import software.amazon.awssdk.services.s3.presigner.S3Presigner;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
+import java.io.*;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.nio.file.Files;
 import java.time.Duration;
 
 import static fi.vm.sade.lokalisointi.storage.S3.LOKALISOINTI_TAG;
@@ -32,7 +37,7 @@ import static fi.vm.sade.lokalisointi.storage.S3.LOKALISOINTI_TAG;
 /** Changes S3 endpoint to localstack, adds example localisation files to S3 bucket. */
 @Configuration
 @Profile("dev")
-public class DevConfiguration {
+public class DevConfiguration implements WebServerFactoryCustomizer<TomcatServletWebServerFactory> {
   private static final Logger LOG = LoggerFactory.getLogger(DevConfiguration.class);
   private static final String BUCKET_NAME = "opintopolku-local-dokumenttipalvelu";
   private static final String BUCKET_REGION = "eu-west-1";
@@ -41,6 +46,32 @@ public class DevConfiguration {
 
   @Value("${tolgee.slug}")
   private String tolgeeSlug;
+
+  /** Redirect calls to /virkailija-raamit to QA when running with dev profile */
+  @Override
+  public void customize(final TomcatServletWebServerFactory tomcat) {
+    try {
+      // Using Tomcat's engine valve (outside Spring container) for rewrites, so need to create
+      // config directory manually
+      final File tempDirectory = Files.createTempDirectory("tomcat").toFile();
+      tempDirectory.deleteOnExit();
+      new File(tempDirectory, "conf/Tomcat").mkdirs();
+      tomcat.setBaseDirectory(tempDirectory);
+      final File target =
+          new File(
+              """
+          %s/conf/Tomcat/rewrite.config"""
+                  .formatted(tempDirectory.getAbsolutePath()));
+      LOG.info("Copying rewrite.config to: {}", target);
+      IOUtils.copy(
+          new FileInputStream("src/test/resources/rewrite.config"), new FileOutputStream(target));
+    } catch (IOException e) {
+      throw new RuntimeException(e);
+    }
+    final RewriteValve valve = new RewriteValve();
+    LOG.info("Adding rewrite valve: {}", valve);
+    tomcat.addEngineValves(valve);
+  }
 
   @Bean
   public ExtendedDokumenttipalvelu dokumenttipalvelu()

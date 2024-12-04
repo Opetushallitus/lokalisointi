@@ -260,6 +260,7 @@ public class S3 implements InitializingBean {
         }
       }
       out.finish();
+      out.close();
     };
   }
 

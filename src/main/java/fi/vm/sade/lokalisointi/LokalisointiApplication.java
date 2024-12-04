@@ -5,7 +5,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 public class LokalisointiApplication {
-
   public static void main(final String[] args) {
     SpringApplication.run(LokalisointiApplication.class, args);
   }
