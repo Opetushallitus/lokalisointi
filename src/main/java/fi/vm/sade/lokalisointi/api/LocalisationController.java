@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.*;
 import java.time.Duration;
 import java.time.temporal.ChronoUnit;
 import java.util.Collection;
+import java.util.Set;
 
 @Tag(name = "localisation", description = "Query localisations")
 @RestController
@@ -108,17 +109,19 @@ public class LocalisationController extends ControllerBase implements Initializi
   @Operation(
       summary = "Create localisations",
       description =
-          "Creates new localisations. In test environments tries to import new localisation keys to Tolgee, in production environment discards updates and returns bad request.")
+          "Creates new localisations. In qa & prod environments tries to import localisations to Tolgee, in other environments discards updates and returns 422 Unprocessable Content.")
   @PostMapping("/update")
   @Secured({ROLE_UPDATE, ROLE_CRUD})
   public ResponseEntity<MassUpdateResult> update(
       @RequestBody final Collection<Localisation> localisations) {
     final MassUpdateResult result = new MassUpdateResult();
     result.setStatus("OK");
-    if (envName != null && OphEnvironment.valueOf(envName).equals(OphEnvironment.sade)) {
+    if (envName != null
+        && Set.of(OphEnvironment.untuva, OphEnvironment.hahtuva)
+            .contains(OphEnvironment.valueOf(envName))) {
       result.setStatus("Failure");
       result.setNotModified(localisations.size());
-      return ResponseEntity.badRequest().body(result);
+      return ResponseEntity.status(422).body(result);
     }
     for (final Localisation localisation : localisations) {
       if (localisation.getId() == null && tolgee.importKey(localisation)) {
