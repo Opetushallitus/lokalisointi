@@ -4,10 +4,13 @@ import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Info;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.scheduling.annotation.EnableAsync;
+import org.springframework.web.servlet.config.annotation.AsyncSupportConfigurer;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
+@EnableAsync
 public class WebConfiguration implements WebMvcConfigurer {
   @Bean
   public OpenAPI lokalisointiAPI() {
@@ -21,4 +24,7 @@ public class WebConfiguration implements WebMvcConfigurer {
     registry.addRedirectViewController("/swagger", "/swagger-ui/index.html");
     registry.addRedirectViewController("/index.html", "/secured/index.html");
   }
+
+  @Override
+  public void configureAsyncSupport(final AsyncSupportConfigurer configurer) {}
 }
