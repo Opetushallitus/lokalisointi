@@ -6,13 +6,15 @@ import fi.vm.sade.lokalisointi.model.Status;
 import fi.vm.sade.lokalisointi.storage.S3;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.client.HttpClientErrorException;
+import org.springframework.web.client.HttpStatusCodeException;
 import org.springframework.web.servlet.mvc.method.annotation.StreamingResponseBody;
 
 import java.io.IOException;
@@ -27,6 +29,7 @@ import static fi.vm.sade.lokalisointi.api.LocalisationController.ROLE_UPDATE;
 @RestController
 @RequestMapping("/api/v1/copy")
 public class CopyController extends ControllerBase {
+  private static final Logger LOG = LoggerFactory.getLogger(CopyController.class);
   private final S3 s3;
 
   @Autowired
@@ -39,7 +42,16 @@ public class CopyController extends ControllerBase {
   @Secured({ROLE_UPDATE, ROLE_CRUD})
   public ResponseEntity<Status> copyLocalisations(
       @RequestBody final CopyLocalisations copyRequest, final Principal user) throws IOException {
-    s3.copyLocalisations(copyRequest, user.getName());
+    try {
+      s3.copyLocalisations(copyRequest, user.getName());
+    } catch (final HttpStatusCodeException e) {
+      LOG.warn(
+          """
+          Copying localisations failed: %s"""
+              .formatted(copyRequest),
+          e);
+      return ResponseEntity.internalServerError().body(new Status("Failed"));
+    }
     return ResponseEntity.ok().body(new Status("OK"));
   }
 
@@ -60,11 +72,5 @@ public class CopyController extends ControllerBase {
         .contentType(MediaType.APPLICATION_OCTET_STREAM)
         .header("Content-Disposition", "attachment; filename=localisations.zip")
         .body(s3.getLocalisationFilesZip(namespaces));
-  }
-
-  @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-  @ExceptionHandler({HttpClientErrorException.class})
-  public Map<String, ?> handleHttpClientErrors(final HttpClientErrorException e) {
-    return parseError(e);
   }
 }

@@ -6,7 +6,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.stereotype.Repository;
-import org.springframework.web.client.HttpClientErrorException;
+import org.springframework.web.client.HttpStatusCodeException;
 import org.springframework.web.client.RestClient;
 
 import java.util.Collections;
@@ -60,7 +60,7 @@ public class Tolgee {
           .retrieve()
           .toEntity(String.class);
       return true;
-    } catch (final HttpClientErrorException e) {
+    } catch (final HttpStatusCodeException e) {
       LOG.warn(
           "Localisation {} was not imported to Tolgee ({}): ({}) {}",
           localisation,
