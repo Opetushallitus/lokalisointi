@@ -81,8 +81,7 @@ tolgee:
   slug: abcd
 logging:
   level:
-    root: info
-    fi.vm.sade.lokalisointi: debug
+    root: error
 
 host:
   cas: virkailija.testiopintopolku.fi
