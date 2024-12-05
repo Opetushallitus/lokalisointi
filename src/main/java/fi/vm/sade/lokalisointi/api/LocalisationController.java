@@ -119,12 +119,14 @@ public class LocalisationController extends ControllerBase implements Initializi
     if (envName != null
         && Set.of(OphEnvironment.untuva, OphEnvironment.hahtuva)
             .contains(OphEnvironment.valueOf(envName))) {
+      LOG.info("Prevented attempt to update localisations in {}: {}", envName, localisations);
       result.setStatus("Failure");
       result.setNotModified(localisations.size());
       return ResponseEntity.status(422).body(result);
     }
     for (final Localisation localisation : localisations) {
       if (localisation.getId() == null && tolgee.importKey(localisation)) {
+        LOG.info("Imported localisation to Tolgee: {}", localisation);
         result.incCreated();
       } else {
         LOG.info("Bypassed localisation update: {}", localisation);
