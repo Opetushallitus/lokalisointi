@@ -333,6 +333,7 @@ public class ApiTests extends IntegrationTestBase {
                 get("/api/v1/copy/localisation-files").accept(MediaType.APPLICATION_OCTET_STREAM))
             .andExpect(status().is2xxSuccessful())
             .andExpect(content().contentType(MediaType.APPLICATION_OCTET_STREAM))
+            .andDo(MvcResult::getAsyncResult)
             .andReturn();
     final ByteArrayInputStream inputStream =
         new ByteArrayInputStream(mvcResult.getResponse().getContentAsByteArray());
