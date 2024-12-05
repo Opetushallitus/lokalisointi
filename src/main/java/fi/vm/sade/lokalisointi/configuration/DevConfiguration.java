@@ -11,9 +11,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory;
-import org.springframework.boot.web.server.WebServerFactory;
 import org.springframework.boot.web.server.WebServerFactoryCustomizer;
-import org.springframework.boot.web.servlet.server.ConfigurableServletWebServerFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
@@ -70,6 +68,7 @@ public class DevConfiguration implements WebServerFactoryCustomizer<TomcatServle
     }
     final RewriteValve valve = new RewriteValve();
     LOG.info("Adding rewrite valve: {}", valve);
+    valve.setAsyncSupported(true);
     tomcat.addEngineValves(valve);
   }
 

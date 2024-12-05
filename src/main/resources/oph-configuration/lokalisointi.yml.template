@@ -31,6 +31,8 @@ logging:
   level:
     root: info
     # fi.vm.sade.lokalisointi: debug
+logback:
+  access: true
 aws:
   region: {{aws_region}}
   bucket:
