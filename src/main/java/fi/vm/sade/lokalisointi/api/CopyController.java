@@ -14,7 +14,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.HttpStatusCodeException;
-import org.springframework.web.servlet.mvc.method.annotation.StreamingResponseBody;
 
 import java.io.IOException;
 import java.security.Principal;
@@ -64,11 +63,16 @@ public class CopyController extends ControllerBase {
       summary =
           "Produces a zip of localisation files from this environment, to be copied to another environment")
   @GetMapping(value = "/localisation-files", produces = MediaType.APPLICATION_OCTET_STREAM_VALUE)
-  public ResponseEntity<StreamingResponseBody> localisationFiles(
+  public ResponseEntity<byte[]> localisationFiles(
       @RequestParam(value = "namespaces", required = false) final Collection<String> namespaces) {
-    return ResponseEntity.ok()
-        .contentType(MediaType.APPLICATION_OCTET_STREAM)
-        .header("Content-Disposition", "attachment; filename=localisations.zip")
-        .body(s3.getLocalisationFilesZip(namespaces));
+    try {
+      return ResponseEntity.ok()
+          .contentType(MediaType.APPLICATION_OCTET_STREAM)
+          .header("Content-Disposition", "attachment; filename=localisations.zip")
+          .body(s3.getLocalisationFilesZip(namespaces));
+    } catch (final IOException e) {
+      LOG.warn("Error getting localisation files zip", e);
+      return ResponseEntity.internalServerError().build();
+    }
   }
 }

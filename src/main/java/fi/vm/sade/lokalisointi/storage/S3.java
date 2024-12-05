@@ -220,7 +220,7 @@ public class S3 implements InitializingBean {
     }
   }
 
-  public StreamingResponseBody getLocalisationFilesZip(final Collection<String> namespaces) {
+  public byte[] getLocalisationFilesZip(final Collection<String> namespaces) throws IOException {
     final List<ObjectMetadata> withMatchingNamespaces =
         dokumenttipalvelu.find(List.of(LOKALISOINTI_TAG)).stream()
             .filter(
@@ -237,31 +237,31 @@ public class S3 implements InitializingBean {
                       splittedObjectKey.size() > 1 ? splittedObjectKey.getFirst() : null);
                 })
             .toList();
-    return outputStream -> {
-      final ZipOutputStream out = new ZipOutputStream(outputStream);
-      for (final ObjectMetadata metadata : withMatchingNamespaces) {
-        if (!metadata.key.endsWith("/")) {
-          final ObjectEntity objectEntity = dokumenttipalvelu.get(metadata.key);
-          final List<String> splittedObjectKey =
-              Arrays.stream(metadata.key.split("/"))
-                  .filter(s -> !s.equals(String.format("t-%s", LOKALISOINTI_TAG)))
-                  .filter(s -> !s.equals(tolgeeSlug))
-                  .toList();
-          final String namespace =
-              splittedObjectKey.size() > 1 ? splittedObjectKey.getFirst() : null;
-          final String filename = splittedObjectKey.getLast();
-          final String entryName =
-              namespace != null && !namespace.isEmpty()
-                  ? String.format("%s/%s", namespace, filename)
-                  : filename;
-          out.putNextEntry(new ZipEntry(entryName));
-          IOUtils.copy(objectEntity.entity, out);
-          out.closeEntry();
-        }
+    final ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+    final ZipOutputStream out = new ZipOutputStream(outputStream);
+    for (final ObjectMetadata metadata : withMatchingNamespaces) {
+      if (!metadata.key.endsWith("/")) {
+        final ObjectEntity objectEntity = dokumenttipalvelu.get(metadata.key);
+        final List<String> splittedObjectKey =
+            Arrays.stream(metadata.key.split("/"))
+                .filter(s -> !s.equals(String.format("t-%s", LOKALISOINTI_TAG)))
+                .filter(s -> !s.equals(tolgeeSlug))
+                .toList();
+        final String namespace = splittedObjectKey.size() > 1 ? splittedObjectKey.getFirst() : null;
+        final String filename = splittedObjectKey.getLast();
+        final String entryName =
+            namespace != null && !namespace.isEmpty()
+                ? String.format("%s/%s", namespace, filename)
+                : filename;
+        out.putNextEntry(new ZipEntry(entryName));
+        IOUtils.copy(objectEntity.entity, out);
+        out.closeEntry();
       }
-      out.finish();
-      out.close();
-    };
+    }
+    out.finish();
+    final byte[] byteArray = outputStream.toByteArray();
+    outputStream.close();
+    return byteArray;
   }
 
   protected Stream<Localisation> transformToLocalisationStream(final ObjectMetadata metadata) {
