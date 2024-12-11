@@ -1,0 +1,22 @@
+version: "3"
+
+services:
+  localstack:
+    image: localstack/localstack:3
+    ports:
+      - "4567:4566"
+    environment:
+      - SERVICES=s3:4566
+      - HOSTNAME=localstack
+      - LOCALSTACK_HOST=localstack
+      - SKIP_SSL_CERT_DOWNLOAD=1
+  db:
+    build: scripts/postgres-docker/.
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_PASSWORD=lokalisointi
+    volumes:
+      - lokalisointi_pgdata:/var/lib/postgresql/data
+volumes:
+  lokalisointi_pgdata:

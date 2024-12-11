@@ -1,0 +1,98 @@
+spring:
+  application:
+    name: lokalisointi
+  main:
+    banner-mode: off
+  profiles:
+    active: test
+  session:
+    store-type: jdbc
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      maximum-pool-size: 10
+      connection-timeout: 10000
+      max-lifetime: 900000
+  flyway:
+    enabled: true
+    table: schema_version
+    out-of-order: false
+    baseline-on-migrate: false
+  management:
+    endpoints:
+      enabled-by-default: false
+    endpoint:
+      health:
+        enabled: true
+  security:
+    user:
+      password: testi
+springdoc:
+  show-actuator: false
+  paths-to-match: /api/**
+  api-docs:
+    enabled: true
+  swagger-ui:
+    enabled: true
+server:
+  servlet:
+    context-path: /lokalisointi
+  port: 10080
+  tomcat:
+    threads:
+      max: 20
+lokalisointi:
+  uses-ssl-proxy: false
+  disable-same-site-cookie: false
+  public-cache-max-age-minutes: 10
+  find-cache-ttl-ms: 60000
+  baseurls:
+    pallero: https://virkalija.testiopintopolku.fi
+    untuva: http://localhost:10080/lokalisointi
+    hahtuva: https://virkailija.hahtuvaopintopolku.fi
+    sade: https://virkailija.opintopolku.fi
+  envname: pallero
+  cors:
+    allow-origin: |
+      https://virkailija.hahtuvaopintopolku.fi,
+      https://virkailija.opintopolku.fi,
+      https://virkailija.untuvaopintopolku.fi,
+      https://virkailija.testiopintopolku.fi,
+      https://dev.koski.opintopolku.fi,
+      https://qa.koski.testiopintopolku.fi,
+      https://extra.koski.opintopolku.fi,
+      https://valssi-qa.rahtiapp.fi,
+      https://valssi-test-1.rahtiapp.fi,
+      https://valssi-test-2.rahtiapp.fi,
+      https://valssi-test-1.2.rahtiapp.fi,
+      https://valssi-test-2.2.rahtiapp.fi,
+      https://valssi.rahtiapp.fi,
+      https://qa-valssi.karvi.fi,
+      https://qa-valssivastaus.karvi.fi,
+      https://valssi.karvi.fi,
+      https://valssivastaus.karvi.fi,
+      https://localhost:3000,
+      http://localhost:3000
+tolgee:
+  baseurl: http://localhost:10080/lokalisointi/tolgee
+  apikey: testkey
+  projectid: 11100
+  slug: abcd
+logging:
+  level:
+    root: error
+
+host:
+  cas: virkailija.testiopintopolku.fi
+  virkailija: virkailija.testiopintopolku.fi
+cas-service:
+  service: http://localhost:8080/lokalisointi
+  send-renew: false
+  key: lokalisointi
+cas:
+  url: https://${host.cas}/cas
+  login: https://${host.cas}/cas/login
+  service:
+    lokalisointi: https://${host.virkailija}/lokalisointi
+

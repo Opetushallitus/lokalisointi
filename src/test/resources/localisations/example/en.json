@@ -1,0 +1,5 @@
+{
+  "create.item": "Create item",
+  "delete.item": "Delete item",
+  "testi": "Value '{{actual}}' is not allowed. Allowed values are: {{expected}}"
+}

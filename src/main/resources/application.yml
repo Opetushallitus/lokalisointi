@@ -1,0 +1,118 @@
+spring:
+  application:
+    name: lokalisointi
+  main:
+    banner-mode: off
+  profiles:
+    active: dev
+  session:
+    store-type: jdbc
+  datasource:
+    # jdbc:postgresql://{{host_postgresql_lokalisointi}}:{{host_postgresql_lokalisointi_port}}/lokalisointi
+    url: jdbc:postgresql://localhost/lokalisointi
+    username: lokalisointi_user
+    password: lokalisointi
+    type: com.zaxxer.hikari.HikariDataSource
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      maximum-pool-size: 10
+      connection-timeout: 10000
+      max-lifetime: 900000
+  flyway:
+    enabled: true
+    table: schema_version
+    out-of-order: false
+    # Only for initial production release, set false afterward
+    baseline-on-migrate: false
+    validate-on-migrate: false
+  management:
+    endpoints:
+      enabled-by-default: false
+    endpoint:
+      health:
+        enabled: true
+springdoc:
+  show-actuator: false
+  paths-to-match: /api/**,/tolgee/**
+  api-docs:
+    enabled: true
+  swagger-ui:
+    enabled: true
+server:
+  servlet:
+    context-path: /lokalisointi
+    session:
+      cookie:
+        name: JSESSIONID
+  port: 8080
+  tomcat:
+    threads:
+      max: 20
+  error:
+    whitelabel:
+      enabled: false
+    path: /error
+lokalisointi:
+  uses-ssl-proxy: false
+  disable-same-site-cookie: false
+  public-cache-max-age-minutes: 10
+  find-cache-ttl-ms: 60000
+  baseurls:
+    pallero: https://virkalija.testiopintopolku.fi
+    untuva: https://virkailija.untuvaopintopolku.fi
+    hahtuva: https://virkailija.hahtuvaopintopolku.fi
+    sade: https://virkailija.opintopolku.fi
+  envname: ${ENV_NAME:pallero}
+  cors:
+    allow-origin: |
+      https://virkailija.hahtuvaopintopolku.fi,
+      https://virkailija.opintopolku.fi,
+      https://virkailija.untuvaopintopolku.fi,
+      https://virkailija.testiopintopolku.fi,
+      https://dev.koski.opintopolku.fi,
+      https://qa.koski.testiopintopolku.fi,
+      https://extra.koski.opintopolku.fi,
+      https://valssi-qa.rahtiapp.fi,
+      https://valssi-test-1.rahtiapp.fi,
+      https://valssi-test-2.rahtiapp.fi,
+      https://valssi-test-1.2.rahtiapp.fi,
+      https://valssi-test-2.2.rahtiapp.fi,
+      https://valssi.rahtiapp.fi,
+      https://qa-valssi.karvi.fi,
+      https://qa-valssivastaus.karvi.fi,
+      https://valssi.karvi.fi,
+      https://valssivastaus.karvi.fi,
+      https://localhost:3000,
+      http://localhost:3000
+tolgee:
+  baseurl: https://app.tolgee.io
+  apikey: ${TOLGEE_API_KEY:none}
+  projectid: 11100
+  slug: abcd
+logging:
+  level:
+    root: info
+    fi.vm.sade.valinta.dokumenttipalvelu: warn
+    fi.vm.sade.lokalisointi.storage.ExtendedDokumenttipalvelu: warn
+
+# TODO siirrä nämä templateen
+host:
+  #{{host_cas}}
+  cas: virkailija.testiopintopolku.fi
+  #{{host_virkailija}}
+  virkailija: virkailija.testiopintopolku.fi
+cas-service:
+  # https://${host.virkailija}/lokalisointi
+  service: http://localhost:8080/lokalisointi
+  send-renew: false
+  key: lokalisointi
+cas:
+  url: https://${host.cas}/cas
+  login: https://${host.cas}/cas/login
+  service:
+    lokalisointi: https://${host.virkailija}/lokalisointi
+
+aws:
+  region: eu-west-1
+  bucket:
+    name: opintopolku-pallero-dokumenttipalvelu

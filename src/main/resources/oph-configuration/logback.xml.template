@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
+    {% raw %}
+    <appender name="APP" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <Append>true</Append>
+        <File>${user.home}/logs/oph-lokalisointi.log</File>
+        <encoder>
+            <pattern>%d{yyyy-MM-dd'T'HH:mm:ss.SSSX} %-5p {%X{user}} [%t] %-5p %c: %m%n</pattern>
+        </encoder>
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>DEBUG</level>
+        </filter>
+        <rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+            <maxIndex>20</maxIndex>
+            <FileNamePattern>${user.home}/logs/oph-lokalisointi.log.%i</FileNamePattern>
+        </rollingPolicy>
+        <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+            <MaxFileSize>10MB</MaxFileSize>
+        </triggeringPolicy>
+    </appender>
+    {% endraw %}
+
+    <!-- Standard logging -->
+    <root level="info">
+        <appender-ref ref="APP" />
+    </root>
+    <logger name="fi.vm.sade.valinta.dokumenttipalvelu" level="warn" />
+    <logger name="fi.vm.sade.lokalisointi.storage.ExtendedDokumenttipalvelu" level="warn" />
+    <logger name="org.springframework" level="warn" />
+    <logger name="org.springframework.boot.autoconfigure.security.AuthenticationManagerConfiguration" level="info" />
+
+</configuration>
