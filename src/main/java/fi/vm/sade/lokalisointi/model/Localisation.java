@@ -26,8 +26,43 @@ public class Localisation {
     this.namespace = category;
   }
 
-  @Schema(description = "This is for backwards compatibility, returns always 0")
+  @Schema(description = "This is for backwards compatibility, returns always null")
   public Integer getAccesscount() {
-    return 0;
+    return null;
+  }
+
+  @Schema(description = "This is for backwards compatibility, returns always null")
+  public String getAccessed() {
+    return null;
+  }
+
+  @Schema(description = "This is for backwards compatibility, returns always null")
+  public String getCreated() {
+    return null;
+  }
+
+  @Schema(description = "This is for backwards compatibility, returns always null")
+  public String getCreatedBy() {
+    return null;
+  }
+
+  @Schema(description = "This is for backwards compatibility, returns always null")
+  public String getModified() {
+    return null;
+  }
+
+  @Schema(description = "This is for backwards compatibility, returns always null")
+  public String getModifiedBy() {
+    return null;
+  }
+
+  @Schema(description = "This is for backwards compatibility, returns always null")
+  public String getDescription() {
+    return null;
+  }
+
+  @Schema(description = "This is for backwards compatibility, returns always null")
+  public Boolean getForce() {
+    return null;
   }
 }
