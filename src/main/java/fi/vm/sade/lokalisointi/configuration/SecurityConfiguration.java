@@ -33,6 +33,9 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.context.HttpSessionSecurityContextRepository;
 import org.springframework.security.web.context.SecurityContextRepository;
 import org.springframework.security.web.savedrequest.HttpSessionRequestCache;
+import org.springframework.session.config.SessionRepositoryCustomizer;
+import org.springframework.session.jdbc.JdbcIndexedSessionRepository;
+import org.springframework.session.jdbc.config.annotation.web.http.EnableJdbcHttpSession;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
@@ -43,6 +46,7 @@ import java.util.stream.Stream;
 @Configuration
 @EnableMethodSecurity(securedEnabled = true)
 @EnableWebSecurity
+@EnableJdbcHttpSession
 public class SecurityConfiguration implements InitializingBean {
   private static final Logger LOG = LoggerFactory.getLogger(SecurityConfiguration.class);
   private final CasProperties casProperties;
@@ -122,7 +126,24 @@ public class SecurityConfiguration implements InitializingBean {
 
   @Bean
   public HttpSessionSecurityContextRepository securityContextRepository() {
-    return new HttpSessionSecurityContextRepository();
+    final HttpSessionSecurityContextRepository contextRepository =
+        new HttpSessionSecurityContextRepository();
+
+    return contextRepository;
+  }
+
+  // korjaus vanhojen sessioiden varalle
+  private static final String GET_SESSION_QUERY =
+      """
+			SELECT S.PRIMARY_ID, S.SESSION_ID, S.CREATION_TIME, S.LAST_ACCESS_TIME, S.MAX_INACTIVE_INTERVAL, SA.ATTRIBUTE_NAME, SA.ATTRIBUTE_BYTES
+			FROM %TABLE_NAME% S
+			LEFT JOIN %TABLE_NAME%_ATTRIBUTES SA ON S.PRIMARY_ID = SA.SESSION_PRIMARY_ID
+			WHERE S.SESSION_ID = regexp_replace(?, '\\x00', '')
+			""";
+
+  @Bean
+  public SessionRepositoryCustomizer<JdbcIndexedSessionRepository> customizer() {
+    return (sessionRepository) -> sessionRepository.setGetSessionQuery(GET_SESSION_QUERY);
   }
 
   public static Customizer<
