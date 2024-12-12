@@ -1,5 +1,6 @@
 package fi.vm.sade.lokalisointi.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.PersistenceCreator;
@@ -23,9 +24,16 @@ public class LocalisationOverride {
   private String value;
 
   @NonNull private String createdBy;
-  @NonNull private LocalDateTime created;
+
+  @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+  @NonNull
+  private LocalDateTime created;
+
   @NonNull private String updatedBy;
-  @NonNull private LocalDateTime updated;
+
+  @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+  @NonNull
+  private LocalDateTime updated;
 
   public LocalisationOverride() {}
 
