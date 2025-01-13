@@ -82,6 +82,7 @@ lokalisointi:
       https://qa-valssivastaus.karvi.fi,
       https://valssi.karvi.fi,
       https://valssivastaus.karvi.fi,
+      https://localhost:3405,
       https://localhost:3000,
       http://localhost:3000
 tolgee:
