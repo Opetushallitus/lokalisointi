@@ -293,24 +293,22 @@ public class S3 implements InitializingBean {
   }
 
   public ResponseInputStream<GetObjectResponse> getLocalisationFile(
-      final String slug,
       final String namespace,
       final String locale,
       final String ifNoneMatch,
       final Instant ifModifiedSince) {
     final String key =
         namespace != null && !namespace.isEmpty()
-            ? String.format("t-%s/%s/%s/%s.json", LOKALISOINTI_TAG, slug, namespace, locale)
-            : String.format("t-%s/%s/%s.json", LOKALISOINTI_TAG, slug, locale);
+            ? String.format("t-%s/%s/%s/%s.json", LOKALISOINTI_TAG, tolgeeSlug, namespace, locale)
+            : String.format("t-%s/%s/%s.json", LOKALISOINTI_TAG, tolgeeSlug, locale);
     return dokumenttipalvelu.getObject(key, ifNoneMatch, ifModifiedSince);
   }
 
-  public HeadObjectResponse getLocalisationFileHead(
-      final String slug, final String namespace, final String locale) {
+  public HeadObjectResponse getLocalisationFileHead(final String namespace, final String locale) {
     final String key =
         namespace != null && !namespace.isEmpty()
-            ? String.format("t-%s/%s/%s/%s.json", LOKALISOINTI_TAG, slug, namespace, locale)
-            : String.format("t-%s/%s/%s.json", LOKALISOINTI_TAG, slug, locale);
+            ? String.format("t-%s/%s/%s/%s.json", LOKALISOINTI_TAG, tolgeeSlug, namespace, locale)
+            : String.format("t-%s/%s/%s.json", LOKALISOINTI_TAG, tolgeeSlug, locale);
     return dokumenttipalvelu.getHead(key);
   }
 }

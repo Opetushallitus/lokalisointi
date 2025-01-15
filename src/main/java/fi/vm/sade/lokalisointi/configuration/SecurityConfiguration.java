@@ -158,8 +158,8 @@ public class SecurityConfiguration implements InitializingBean {
             "/api/v1/localisation/",
             "/api/v1/copy/localisation-files",
             "/api/v1/copy/available-namespaces",
+            "/tolgee/*.json",
             "/tolgee/*/*.json",
-            "/tolgee/*/*/*.json",
             "/error",
             "/me.json");
     final List<String> allPaths = Stream.concat(commonGet, additionalGetPaths.stream()).toList();
