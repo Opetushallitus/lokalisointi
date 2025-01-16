@@ -49,14 +49,12 @@ public class TolgeeController extends ControllerBase {
         @ApiResponse(responseCode = "304", description = "Not modified"),
         @ApiResponse(responseCode = "400", description = "Bad request"),
       })
-  @GetMapping("/{slug}/{locale}.json")
+  @GetMapping("/{locale}.json")
   public ResponseEntity<StreamingResponseBody> rootLocalisation(
-      @Parameter(example = "2dfce2b80ca92938dacc631f231044cc") @PathVariable("slug")
-          final String slug,
       @Parameter(example = "fi") @PathVariable("locale") final String locale,
       @RequestHeader(value = "If-None-Match", required = false) final String ifNoneMatch,
       @RequestHeader(value = "If-Modified-Since", required = false) final Instant ifModifiedSince) {
-    return getResponse(slug, null, locale, ifNoneMatch, ifModifiedSince);
+    return getResponse(null, locale, ifNoneMatch, ifModifiedSince);
   }
 
   @Operation(
@@ -67,26 +65,23 @@ public class TolgeeController extends ControllerBase {
         @ApiResponse(responseCode = "304", description = "Not modified"),
         @ApiResponse(responseCode = "400", description = "Bad request")
       })
-  @GetMapping("/{slug}/{namespace}/{locale}.json")
+  @GetMapping("/{namespace}/{locale}.json")
   public ResponseEntity<StreamingResponseBody> namespaceLocalisation(
-      @Parameter(example = "2dfce2b80ca92938dacc631f231044cc") @PathVariable("slug")
-          final String slug,
       @Parameter(example = "virkailijaraamit") @PathVariable("namespace") final String namespace,
       @Parameter(example = "fi") @PathVariable("locale") final String locale,
       @RequestHeader(value = "If-None-Match", required = false) final String ifNoneMatch,
       @RequestHeader(value = "If-Modified-Since", required = false) final Instant ifModifiedSince) {
-    return getResponse(slug, namespace, locale, ifNoneMatch, ifModifiedSince);
+    return getResponse(namespace, locale, ifNoneMatch, ifModifiedSince);
   }
 
   private ResponseEntity<StreamingResponseBody> getResponse(
-      final String slug,
       final String namespace,
       final String locale,
       final String ifNoneMatch,
       final Instant ifModifiedSince) {
     try {
       final ResponseInputStream<GetObjectResponse> response =
-          s3.getLocalisationFile(slug, namespace, locale, ifNoneMatch, ifModifiedSince);
+          s3.getLocalisationFile(namespace, locale, ifNoneMatch, ifModifiedSince);
       final GetObjectResponse metadata = response.response();
       // FIXME lisää yliajot, vai tarvitaanko niitä tolgeen formaatin kanssa?
       return ResponseEntity.ok()
@@ -108,8 +103,7 @@ public class TolgeeController extends ControllerBase {
         return ResponseEntity.notFound().build();
       }
       if (e.getCause() instanceof S3Exception && ((S3Exception) e.getCause()).statusCode() == 304) {
-        final HeadObjectResponse headObjectResponse =
-            s3.getLocalisationFileHead(slug, namespace, locale);
+        final HeadObjectResponse headObjectResponse = s3.getLocalisationFileHead(namespace, locale);
         return ResponseEntity.status(304)
             // headers required by spec https://datatracker.ietf.org/doc/html/rfc7232#section-4.1
             .lastModified(headObjectResponse.lastModified())
