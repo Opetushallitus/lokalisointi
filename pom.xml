@@ -30,6 +30,12 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
+            <!-- aws sdk:sta tulee haavoittuvuuden sisältävä vanhempi versio -->
+            <dependency>
+                <groupId>io.netty</groupId>
+                <artifactId>netty-codec-http</artifactId>
+                <version>4.2.5.Final</version>
+            </dependency>
             <dependency>
                 <groupId>org.testcontainers</groupId>
                 <artifactId>testcontainers-bom</artifactId>
@@ -58,7 +64,7 @@
         <dependency>
             <groupId>fi.vm.sade.dokumenttipalvelu</groupId>
             <artifactId>dokumenttipalvelu</artifactId>
-            <version>6.12-SNAPSHOT</version>
+            <version>6.15-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>
