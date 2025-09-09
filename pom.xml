@@ -193,6 +193,17 @@
             <artifactId>tomcat</artifactId>
             <version>2.0.3</version>
         </dependency>
+        <!-- nämä eivät tule spring bootin mukana ja vaaditaan access logitukseen -->
+        <dependency>
+            <groupId>org.codehaus.janino</groupId>
+            <artifactId>janino</artifactId>
+            <version>3.1.12</version>
+        </dependency>
+        <dependency>
+            <groupId>org.codehaus.janino</groupId>
+            <artifactId>commons-compiler</artifactId>
+            <version>3.1.12</version>
+        </dependency>
 
         <!-- testing deps -->
         <dependency>
