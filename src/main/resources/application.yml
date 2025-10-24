@@ -69,6 +69,10 @@ lokalisointi:
       https://virkailija.opintopolku.fi,
       https://virkailija.untuvaopintopolku.fi,
       https://virkailija.testiopintopolku.fi,
+      https://hahtuvaopintopolku.fi,
+      https://opintopolku.fi,
+      https://untuvaopintopolku.fi,
+      https://testiopintopolku.fi,
       https://dev.koski.opintopolku.fi,
       https://qa.koski.testiopintopolku.fi,
       https://extra.koski.opintopolku.fi,
@@ -83,6 +87,7 @@ lokalisointi:
       https://valssi.karvi.fi,
       https://valssivastaus.karvi.fi,
       https://localhost:3405,
+      https://localhost:3777,
       https://localhost:3000,
       http://localhost:3000
 tolgee:
