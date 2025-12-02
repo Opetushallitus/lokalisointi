@@ -275,7 +275,7 @@
                 <version>3.4.1</version>
                 <executions>
                     <execution>
-                        <id>npm-run-build</id>
+                        <id>pnpm-run-build</id>
                         <phase>compile</phase>
                         <goals>
                             <goal>exec</goal>
@@ -283,7 +283,7 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <executable>npm</executable>
+                    <executable>pnpm</executable>
                     <workingDirectory>ui</workingDirectory>
                     <arguments>
                         <argument>run</argument>

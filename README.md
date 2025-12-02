@@ -6,9 +6,11 @@
 
 Lokalisointipalvelun roolit
 
-* toimii Tolgee Cloudin julkaisemien lokalisointitiedostojen jakelijana Opintopolun "vanhassa" formaatissa
+* toimii Tolgee Cloudin julkaisemien lokalisointitiedostojen jakelijana
+  Opintopolun "vanhassa" formaatissa
     * Tolgee julkaisee lokalisointitiedostot QA:n S3:een
-* Julkaisee myös Tolgee-formaatin mukaiset lokalisointitiedostot polussa /lokalisointi/tolgee/{slug}[/{namespace}]
+* Julkaisee myös Tolgee-formaatin mukaiset lokalisointitiedostot polussa
+  /lokalisointi/tolgee/{slug}[/{namespace}]
   /{locale}.json
 * mahdollistaa lokalisointitiedostojen kopioinnin eri ympäristöjen välillä
 * mahdollistaa ympäristökohtaisten "yliajojen" tallentamisen
@@ -25,10 +27,13 @@ docker compose up
 
 Käyttöliittymän kirjastot pitää asentaa ennen käynnistämistä:
 
+(odottaa NODE_AUTH_TOKEN-ympäristömuuttujan sisältävän sopivan tokenin Github
+Packagesiin)
+
 ```shell
 cd ui
 nvm use
-npm install
+pnpm install
 cd ..
 ```
 
