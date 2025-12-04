@@ -27,13 +27,19 @@ jobs:
           java-version: '21'
           distribution: 'temurin'
 
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10.24.0
+
       - uses: actions/setup-node@v4
         with:
           node-version-file: 'ui/.nvmrc'
       - name: Install UI dependencies
+        env:
+          NODE_AUTH_TOKEN: ${{ github.token }}
         run: |
           cd ui
-          npm ci
+          pnpm install
 
       - uses: szenius/set-timezone@v1.0
         with:

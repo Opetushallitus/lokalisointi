@@ -7,12 +7,13 @@ import {BackendFetch, FormatSimple, TolgeeProvider} from "@tolgee/react"
 import {UIConfig} from "./types"
 import {UI} from "./UI"
 import {Loading} from "./Loading"
-import {OphLanguage} from "@opetushallitus/oph-design-system"
 
 import "dayjs/locale/fi"
 
 dayjs.locale("fi")
 dayjs.extend(LocalizedFormat)
+
+type OphLanguage = 'fi' | 'sv' | 'en';
 
 interface TranslatedProps {
   lang: OphLanguage
@@ -20,7 +21,11 @@ interface TranslatedProps {
   children: React.ReactNode
 }
 
-const WithProviders: React.FC<TranslatedProps> = ({lang, uiConfig, children}) => {
+const WithProviders: React.FC<TranslatedProps> = ({
+                                                    lang,
+                                                    uiConfig,
+                                                    children
+                                                  }) => {
   const tolgeeChain = Tolgee()
     .use(FormatSimple())
     .use(BackendFetch({

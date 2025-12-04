@@ -1,5 +1,9 @@
 {
   "compilerOptions": {
+    "lib": [
+      "es2016",
+      "DOM"
+    ],
     "target": "ES5",
     "module": "ESNext",
     "moduleResolution": "Bundler",
