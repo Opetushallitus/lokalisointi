@@ -4,6 +4,11 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
+overrides:
+  path-to-regexp: 0.1.12
+  qs: 6.14.1
+  next: 15.5.9
+
 importers:
 
   .:
@@ -110,9 +115,6 @@ importers:
       mini-css-extract-plugin:
         specifier: ^2.4.5
         version: 2.9.4(webpack@5.103.0)
-      next:
-        specifier: 15.5.9
-        version: 15.5.9(@babel/core@7.28.5)(babel-plugin-macros@3.1.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       notistack:
         specifier: ^3.0.1
         version: 3.0.2(csstype@3.2.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -1851,7 +1853,7 @@ packages:
     resolution: {integrity: sha512-5yR7TefzuMfJtcvBCmIuDu7/sVz2UZIFuJvmFlwH+hiP7kMoXYkxw4q6O+V949QMucXgj93mdDsM1b+AuQbQhA==, tarball: https://npm.pkg.github.com/download/@opetushallitus/oph-design-system/1.1.0/58bf38df9d2511ae9de60c53dea30d0831825ad5}
     peerDependencies:
       '@mui/material': ^6 || ^7
-      next: ^14 || ^15
+      next: 15.5.9
       react: ^18 || ^19
     peerDependenciesMeta:
       next:
@@ -5130,8 +5132,8 @@ packages:
   pure-rand@6.1.0:
     resolution: {integrity: sha512-bVWawvoZoBYpp6yIoQtQXHZjmz35RSVHnUOTefl8Vcjr8snTPY1wnpSPMWekcFwbxI6gtmT7rSYPFvz71ldiOA==}
 
-  qs@6.13.0:
-    resolution: {integrity: sha512-+38qI9SOr8tfZ4QmJNplMUxqjbe7LKvvZgWdExBOmd+egZTtjLB67Gu0HRX3u/XOq7UU2Nx6nsjvS16Z9uwfpg==}
+  qs@6.14.1:
+    resolution: {integrity: sha512-4EK3+xJl8Ts67nLYNwqw/dsFVnCf+qR7RgXSK9jEEm9unao3njwMDdmsdvoKBKHzxd7tCYz5e5M+SnMjdtXGQQ==}
     engines: {node: '>=0.6'}
 
   queue-microtask@1.2.3:
@@ -7941,7 +7943,8 @@ snapshots:
     transitivePeerDependencies:
       - '@types/react'
 
-  '@next/env@15.5.9': {}
+  '@next/env@15.5.9':
+    optional: true
 
   '@next/swc-darwin-arm64@15.5.7':
     optional: true
@@ -8166,6 +8169,7 @@ snapshots:
   '@swc/helpers@0.5.15':
     dependencies:
       tslib: 2.8.1
+    optional: true
 
   '@tolgee/core@6.2.7': {}
 
@@ -8844,7 +8848,7 @@ snapshots:
       http-errors: 2.0.0
       iconv-lite: 0.4.24
       on-finished: 2.4.1
-      qs: 6.13.0
+      qs: 6.14.1
       raw-body: 2.5.2
       type-is: 1.6.18
       unpipe: 1.0.0
@@ -8969,7 +8973,8 @@ snapshots:
     dependencies:
       source-map: 0.6.1
 
-  client-only@0.0.1: {}
+  client-only@0.0.1:
+    optional: true
 
   cliui@8.0.1:
     dependencies:
@@ -9726,7 +9731,7 @@ snapshots:
       parseurl: 1.3.3
       path-to-regexp: 0.1.12
       proxy-addr: 2.0.7
-      qs: 6.13.0
+      qs: 6.14.1
       range-parser: 1.2.1
       safe-buffer: 5.2.1
       send: 0.19.0
@@ -10998,6 +11003,7 @@ snapshots:
     transitivePeerDependencies:
       - '@babel/core'
       - babel-plugin-macros
+    optional: true
 
   no-case@3.0.4:
     dependencies:
@@ -11685,6 +11691,7 @@ snapshots:
       nanoid: 3.3.11
       picocolors: 1.1.1
       source-map-js: 1.2.1
+    optional: true
 
   postcss@8.5.6:
     dependencies:
@@ -11735,7 +11742,7 @@ snapshots:
 
   pure-rand@6.1.0: {}
 
-  qs@6.13.0:
+  qs@6.14.1:
     dependencies:
       side-channel: 1.1.0
 
@@ -12373,6 +12380,7 @@ snapshots:
     optionalDependencies:
       '@babel/core': 7.28.5
       babel-plugin-macros: 3.1.0
+    optional: true
 
   stylehacks@7.0.7(postcss@8.5.6):
     dependencies:
