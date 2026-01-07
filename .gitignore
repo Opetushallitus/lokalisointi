@@ -35,3 +35,6 @@ build/
 ### UI ###
 ui/build
 ui/node_modules
+
+### Claude ###
+.claude/
