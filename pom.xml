@@ -58,7 +58,7 @@
         <dependency>
             <groupId>fi.vm.sade.dokumenttipalvelu</groupId>
             <artifactId>dokumenttipalvelu</artifactId>
-            <version>6.15-SNAPSHOT</version>
+            <version>6.16-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>
