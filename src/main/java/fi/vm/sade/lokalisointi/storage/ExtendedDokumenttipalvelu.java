@@ -6,7 +6,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
-import org.springframework.scheduling.annotation.Scheduled;
 import software.amazon.awssdk.core.ResponseInputStream;
 import software.amazon.awssdk.services.s3.model.GetObjectRequest;
 import software.amazon.awssdk.services.s3.model.GetObjectResponse;
@@ -50,13 +49,12 @@ public class ExtendedDokumenttipalvelu extends Dokumenttipalvelu {
         .join();
   }
 
-  @Cacheable("find")
+  @Cacheable(value = "find", sync = true)
   public Collection<ObjectMetadata> cachedFind(final Collection<String> terms) {
     return find(terms);
   }
 
   @CacheEvict(value = "find", allEntries = true)
-  @Scheduled(fixedRateString = "${lokalisointi.find-cache-ttl-ms}")
   public void emptyFindCache() {
     LOG.debug("Emptying find cache");
   }

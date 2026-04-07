@@ -16,6 +16,7 @@ import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.client.RestClient;
 import org.springframework.web.servlet.mvc.method.annotation.StreamingResponseBody;
@@ -76,6 +77,13 @@ public class S3 implements InitializingBean {
   @Override
   public void afterPropertiesSet() throws Exception {
     LOG.info("tolgeeSlug: {}", tolgeeSlug);
+  }
+
+  @Scheduled(fixedRateString = "${lokalisointi.find-cache-ttl-ms}")
+  public void refreshFindCache() {
+    LOG.debug("Refreshing find cache");
+    dokumenttipalvelu.emptyFindCache();
+    dokumenttipalvelu.cachedFind(List.of(LOKALISOINTI_TAG));
   }
 
   @Autowired
