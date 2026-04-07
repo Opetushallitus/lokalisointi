@@ -51,6 +51,7 @@ public class ExtendedDokumenttipalvelu extends Dokumenttipalvelu {
 
   @Cacheable(value = "find", sync = true)
   public Collection<ObjectMetadata> cachedFind(final Collection<String> terms) {
+    LOG.info("Searching for {}", terms);
     return find(terms);
   }
 

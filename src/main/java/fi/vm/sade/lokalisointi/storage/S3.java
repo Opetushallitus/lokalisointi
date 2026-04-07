@@ -81,7 +81,7 @@ public class S3 implements InitializingBean {
 
   @Scheduled(fixedRateString = "${lokalisointi.find-cache-ttl-ms}")
   public void refreshFindCache() {
-    LOG.debug("Refreshing find cache");
+    LOG.info("Refreshing find cache");
     dokumenttipalvelu.emptyFindCache();
     dokumenttipalvelu.cachedFind(List.of(LOKALISOINTI_TAG));
   }
