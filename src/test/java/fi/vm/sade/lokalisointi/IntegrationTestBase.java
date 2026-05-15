@@ -28,6 +28,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.jdbc.core.JdbcAggregateTemplate;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
@@ -105,6 +106,7 @@ public abstract class IntegrationTestBase {
 
   @SpringBootConfiguration
   @EnableWebSecurity
+  @EnableMethodSecurity(securedEnabled = true)
   static class TestConfiguration implements InitializingBean {
     private static final Logger LOG = LoggerFactory.getLogger(TestConfiguration.class);
 
