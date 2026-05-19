@@ -189,7 +189,7 @@ public class ApiTests extends IntegrationTestBase {
         .andExpect(header().string("Cache-Control", "no-cache"));
   }
 
-  @WithMockUser("1.2.246.562.24.00000000001")
+  @WithMockUser(username = "1.2.246.562.24.00000000001", roles = {"APP_LOKALISOINTI", "APP_LOKALISOINTI_READ_UPDATE", "APP_LOKALISOINTI_CRUD"})
   @Test
   public void testAddOverride() throws Exception {
     addLocalisationOverride("foobar", "testi", "fi", "Testi");
@@ -226,7 +226,7 @@ public class ApiTests extends IntegrationTestBase {
         .andExpect(jsonPath("$.value", is("Muokattu")));
   }
 
-  @WithMockUser("1.2.246.562.24.00000000001")
+  @WithMockUser(username = "1.2.246.562.24.00000000001", roles = {"APP_LOKALISOINTI", "APP_LOKALISOINTI_READ_UPDATE", "APP_LOKALISOINTI_CRUD"})
   @Test
   public void testUpdateOverride() throws Exception {
     final LocalisationOverride override = addLocalisationOverride("foobar", "testi", "fi", "Testi");
@@ -241,7 +241,7 @@ public class ApiTests extends IntegrationTestBase {
         .andExpect(jsonPath("$.value", is("Muokattu")));
   }
 
-  @WithMockUser("1.2.246.562.24.00000000001")
+  @WithMockUser(username = "1.2.246.562.24.00000000001", roles = {"APP_LOKALISOINTI", "APP_LOKALISOINTI_READ_UPDATE", "APP_LOKALISOINTI_CRUD"})
   @Test
   public void testDeleteOverride() throws Exception {
     final LocalisationOverride override = addLocalisationOverride("foobar", "testi", "fi", "Testi");
@@ -256,7 +256,7 @@ public class ApiTests extends IntegrationTestBase {
         .andExpect(jsonPath("$.length()", is(0)));
   }
 
-  @WithMockUser("1.2.246.562.24.00000000001")
+  @WithMockUser(username = "1.2.246.562.24.00000000001", roles = {"APP_LOKALISOINTI", "APP_LOKALISOINTI_READ_UPDATE", "APP_LOKALISOINTI_CRUD"})
   @Test
   public void testSavingLocalisationOverrideOverridesPublishedLocalisation() throws Exception {
     addLocalisationOverride("example", "testi", "fi", "Testi");
@@ -294,7 +294,7 @@ public class ApiTests extends IntegrationTestBase {
     assertEquals("Test value", rootLocalisation.get().getValue());
   }
 
-  @WithMockUser("1.2.246.562.24.00000000001")
+  @WithMockUser(username = "1.2.246.562.24.00000000001", roles = {"APP_LOKALISOINTI", "APP_LOKALISOINTI_READ_UPDATE", "APP_LOKALISOINTI_CRUD"})
   @Test
   public void testGetLocalisationsReturnsNonOverridingOverrides() throws Exception {
     addLocalisationOverride("foobar", "fookey", "fi", "Testi");
@@ -357,7 +357,7 @@ public class ApiTests extends IntegrationTestBase {
     }
   }
 
-  @WithMockUser("1.2.246.562.24.00000000001")
+  @WithMockUser(username = "1.2.246.562.24.00000000001", roles = {"APP_LOKALISOINTI", "APP_LOKALISOINTI_READ_UPDATE", "APP_LOKALISOINTI_CRUD"})
   @Test
   public void testGetAvailableNamespacesForOverrides() throws Exception {
     addLocalisationOverride("foofoo", "fookey", "fi", "Testi");
@@ -371,7 +371,7 @@ public class ApiTests extends IntegrationTestBase {
     assertEquals(Set.of("virkailijaraamit", "example", "lokalisointi", "foofoo"), namespaces);
   }
 
-  @WithMockUser("1.2.246.562.24.00000000001")
+  @WithMockUser(username = "1.2.246.562.24.00000000001", roles = {"APP_LOKALISOINTI", "APP_LOKALISOINTI_READ_UPDATE", "APP_LOKALISOINTI_CRUD"})
   @Test
   public void testGetAvailableNamespacesForCopyWithoutSource() throws Exception {
     addLocalisationOverride("foofaa", "fookey", "fi", "Testi");
@@ -399,7 +399,7 @@ public class ApiTests extends IntegrationTestBase {
     assertEquals(Set.of("esimerkki", "lokalisointi"), namespaces);
   }
 
-  @WithMockUser("1.2.246.562.24.00000000001")
+  @WithMockUser(username = "1.2.246.562.24.00000000001", roles = {"APP_LOKALISOINTI", "APP_LOKALISOINTI_READ_UPDATE", "APP_LOKALISOINTI_CRUD"})
   @Test
   public void testCopyAllLocalisationsFromAnotherEnvironment() throws Exception {
     mvc.perform(
@@ -426,7 +426,7 @@ public class ApiTests extends IntegrationTestBase {
         localisations.stream().map(Localisation::getKey).collect(Collectors.toSet()));
   }
 
-  @WithMockUser("1.2.246.562.24.00000000001")
+  @WithMockUser(username = "1.2.246.562.24.00000000001", roles = {"APP_LOKALISOINTI", "APP_LOKALISOINTI_READ_UPDATE", "APP_LOKALISOINTI_CRUD"})
   @Test
   public void testCopySelectedLocalisationsFromAnotherEnvironment() throws Exception {
     mvc.perform(
@@ -454,7 +454,7 @@ public class ApiTests extends IntegrationTestBase {
         98, localisations.stream().map(Localisation::getKey).collect(Collectors.toSet()).size());
   }
 
-  @WithMockUser("1.2.246.562.24.00000000001")
+  @WithMockUser(username = "1.2.246.562.24.00000000001", roles = {"APP_LOKALISOINTI", "APP_LOKALISOINTI_READ_UPDATE", "APP_LOKALISOINTI_CRUD"})
   @Test
   public void testGetUiConfig() throws Exception {
     mvc.perform(get("/api/v1/ui-config").accept(MediaType.APPLICATION_JSON))
@@ -464,7 +464,7 @@ public class ApiTests extends IntegrationTestBase {
         .andExpect(jsonPath("$.sourceEnvironments", is(List.of("untuva", "hahtuva", "sade"))));
   }
 
-  @WithMockUser("1.2.246.562.24.00000000001")
+  @WithMockUser(username = "1.2.246.562.24.00000000001", roles = {"APP_LOKALISOINTI", "APP_LOKALISOINTI_READ_UPDATE", "APP_LOKALISOINTI_CRUD"})
   @Test
   public void testLocalisationUpdate() throws Exception {
     mvc.perform(
@@ -543,6 +543,110 @@ public class ApiTests extends IntegrationTestBase {
         .andExpect(header().string("Last-Modified", notNullValue()))
         .andExpect(header().string("eTag", notNullValue()))
         .andExpect(content().contentType(MediaType.APPLICATION_OCTET_STREAM));
+  }
+
+  @Test
+  public void testGetOverridesRequiresAuthentication() throws Exception {
+    mvc.perform(get("/api/v1/override").accept(MediaType.APPLICATION_JSON))
+        .andExpect(status().isForbidden());
+  }
+
+  @Test
+  public void testCreateOverrideRequiresAuthentication() throws Exception {
+    mvc.perform(
+            post("/api/v1/override")
+                .accept(MediaType.APPLICATION_JSON)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(
+                    objectMapper.writeValueAsBytes(
+                        mapOf(
+                            ImmutablePair.of("namespace", "ns"),
+                            ImmutablePair.of("key", "k"),
+                            ImmutablePair.of("locale", "fi"),
+                            ImmutablePair.of("value", "v")))))
+        .andExpect(status().isForbidden());
+  }
+
+  @Test
+  public void testUpdateOverrideRequiresAuthentication() throws Exception {
+    mvc.perform(
+            post("/api/v1/override/1")
+                .accept(MediaType.APPLICATION_JSON)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(
+                    objectMapper.writeValueAsBytes(
+                        mapOf(
+                            ImmutablePair.of("namespace", "ns"),
+                            ImmutablePair.of("key", "k"),
+                            ImmutablePair.of("locale", "fi"),
+                            ImmutablePair.of("value", "v")))))
+        .andExpect(status().isForbidden());
+  }
+
+  @Test
+  public void testDeleteOverrideRequiresAuthentication() throws Exception {
+    mvc.perform(delete("/api/v1/override/1").accept(MediaType.APPLICATION_JSON))
+        .andExpect(status().isForbidden());
+  }
+
+  @Test
+  public void testGetOverrideNamespacesRequiresAuthentication() throws Exception {
+    mvc.perform(get("/api/v1/override/available-namespaces").accept(MediaType.APPLICATION_JSON))
+        .andExpect(status().isForbidden());
+  }
+
+  @Test
+  public void testCopyLocalisationsRequiresAuthentication() throws Exception {
+    mvc.perform(
+            post("/api/v1/copy")
+                .accept(MediaType.APPLICATION_JSON)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsBytes(Map.of("source", "untuva"))))
+        .andExpect(status().isForbidden());
+  }
+
+  @Test
+  public void testGetUiConfigRequiresAuthentication() throws Exception {
+    mvc.perform(get("/api/v1/ui-config").accept(MediaType.APPLICATION_JSON))
+        .andExpect(status().isForbidden());
+  }
+
+  @WithMockUser(username = "testuser", roles = {"APP_LOKALISOINTI", "APP_LOKALISOINTI_READ_UPDATE"})
+  @Test
+  public void testDeleteOverrideRequiresCrudRole() throws Exception {
+    mvc.perform(delete("/api/v1/override/1").accept(MediaType.APPLICATION_JSON))
+        .andExpect(status().isForbidden());
+  }
+
+  @WithMockUser(username = "testuser", roles = {"APP_LOKALISOINTI_CRUD"})
+  @Test
+  public void testListOverridesRequiresLokalisointiRole() throws Exception {
+    mvc.perform(get("/api/v1/override").accept(MediaType.APPLICATION_JSON))
+        .andExpect(status().isForbidden());
+  }
+
+  @WithMockUser(username = "testuser", roles = {"APP_LOKALISOINTI_READ_UPDATE"})
+  @Test
+  public void testGetUiConfigRequiresLokalisointiRole() throws Exception {
+    mvc.perform(get("/api/v1/ui-config").accept(MediaType.APPLICATION_JSON))
+        .andExpect(status().isForbidden());
+  }
+
+  @WithMockUser(username = "testuser", roles = {"APP_LOKALISOINTI"})
+  @Test
+  public void testCreateOverrideRequiresWriteRole() throws Exception {
+    mvc.perform(
+            post("/api/v1/override")
+                .accept(MediaType.APPLICATION_JSON)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(
+                    objectMapper.writeValueAsBytes(
+                        mapOf(
+                            ImmutablePair.of("namespace", "ns"),
+                            ImmutablePair.of("key", "k"),
+                            ImmutablePair.of("locale", "fi"),
+                            ImmutablePair.of("value", "v")))))
+        .andExpect(status().isForbidden());
   }
 
   LocalisationOverride addLocalisationOverride(

@@ -1,6 +1,6 @@
 package fi.vm.sade.lokalisointi.configuration;
 
-import org.springframework.boot.autoconfigure.cache.CacheManagerCustomizer;
+import org.springframework.boot.cache.autoconfigure.CacheManagerCustomizer;
 import org.springframework.cache.concurrent.ConcurrentMapCacheManager;
 import org.springframework.stereotype.Component;
 
