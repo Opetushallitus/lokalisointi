@@ -17,6 +17,6 @@ services:
     environment:
       - POSTGRES_PASSWORD=lokalisointi
     volumes:
-      - lokalisointi_pgdata:/var/lib/postgresql/data
+      - lokalisointi_pgdata:/var/lib/postgresql
 volumes:
   lokalisointi_pgdata:

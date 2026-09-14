@@ -161,7 +161,8 @@ public class SecurityConfiguration implements InitializingBean {
             "/tolgee/*.json",
             "/tolgee/*/*.json",
             "/error",
-            "/me.json");
+            "/me.json",
+            "/secured/manifest.json");
     final List<String> allPaths = Stream.concat(commonGet, additionalGetPaths.stream()).toList();
     return (authz) -> {
       final AuthorizeHttpRequestsConfigurer<HttpSecurity>.AuthorizationManagerRequestMatcherRegistry

@@ -32,12 +32,10 @@ public class WebConfiguration implements WebMvcConfigurer {
     registry.addResourceHandler("/swagger").addResourceLocations("redirect:/swagger-ui/index.html");
     registry.addResourceHandler("/index.html").addResourceLocations("redirect:/secured/index.html");
     registry.addResourceHandler("/secured/**").addResourceLocations("classpath:/static/secured/");
-    registry
-        .addResourceHandler("/buildversion.txt")
-        .addResourceLocations("classpath:/static/buildversion.txt");
+    registry.addResourceHandler("/buildversion.txt").addResourceLocations("classpath:/static/");
     if (env != null && Arrays.asList(env.getActiveProfiles()).contains("dev")) {
       LOG.info("Mounting /me.json in dev");
-      registry.addResourceHandler("/me.json").addResourceLocations("classpath:/static/me.json");
+      registry.addResourceHandler("/me.json").addResourceLocations("classpath:/static/");
     }
   }
 
