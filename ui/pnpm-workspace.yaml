@@ -1,7 +1,7 @@
 allowBuilds:
   core-js: false
   core-js-pure: false
-  sharp: set this to true or false
+  sharp: false
 
 minimumReleaseAge: 4320
 
